@@ -1,0 +1,8 @@
+/* 公共引入 */
+import Vue from "vue";
+import "./element";
+import "./support";
+import "@/utils/errorLog";
+import global from "./global";
+
+Vue.use(global);
