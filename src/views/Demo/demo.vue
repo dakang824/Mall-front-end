@@ -1,7 +1,7 @@
 <template>
   <div class="home page-bg-gray">
     <div class="home__box">
-      <img alt="Vue logo" src="../assets/logo.png" />
+      <img alt="Vue logo" src="@/assets/logo.png" />
       <demo msg="My is Demo" />
       <el-row>
         <el-button>默认按钮</el-button>
