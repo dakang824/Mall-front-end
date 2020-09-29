@@ -9,7 +9,7 @@
         <ul>
           <li>我的嗨厨</li>
           <li><router-link to="/cart">购物车</router-link></li>
-          <li>商家登录</li>
+          <li><router-link to="/login">商家登录</router-link></li>
         </ul>
       </div>
     </div>
