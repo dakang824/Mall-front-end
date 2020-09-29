@@ -3,12 +3,12 @@
     <div class="header__box w">
       <div class="header__box__left">
         <span>嗨，欢迎来嗨厨玩味</span>
-        <i>请登录</i>
+        <i><router-link to="/login">请登录</router-link></i>
       </div>
       <div class="header__box__right">
         <ul>
           <li>我的嗨厨</li>
-          <li>购物车</li>
+          <li><router-link to="/login">购物车</router-link></li>
           <li>商家登录</li>
         </ul>
       </div>
