@@ -8,7 +8,7 @@
       <div class="header__box__right">
         <ul>
           <li>我的嗨厨</li>
-          <li><router-link to="/login">购物车</router-link></li>
+          <li><router-link to="/cart">购物车</router-link></li>
           <li>商家登录</li>
         </ul>
       </div>

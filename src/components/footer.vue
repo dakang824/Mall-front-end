@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="footer__container w">
+    <div v-if="!hidden" class="footer__container w">
       <div class="footer__container__siteinfo">
         <ul class="c0">
           <h3 class="c1">新手上路</h3>
@@ -81,10 +81,22 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+  export default {
+    name: "Footer",
+    components: {},
+    props: {
+      hidden: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    created() {},
+    methods: {},
+  };
+</script>
 <style lang="scss" scoped>
   .footer {
-    margin-top: 160px;
     display: flex;
     flex-direction: column;
     align-items: center;
