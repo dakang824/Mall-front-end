@@ -7,9 +7,8 @@
           v-for="(item, index) in categoryList"
           :key="index"
           class="title"
-          @mousemove="onmouseover(index)"
+          @mouseenter="mouseenter(index)"
         >
-          <i></i>
           {{ item.name }}
           <i class="el-icon-arrow-right"></i>
         </div>
@@ -17,7 +16,10 @@
       <el-main class="category__right">
         <el-carousel trigger="click" height="400px">
           <el-carousel-item v-for="item in 4" :key="item">
-            <h3 class="small">{{ item }}</h3>
+            <el-image
+              :src="require('@/assets/imgs/img1.jpeg')"
+              fit="cover"
+            ></el-image>
           </el-carousel-item>
         </el-carousel>
         <ul v-show="show" class="category__right__child clearfix">
@@ -126,7 +128,7 @@
       };
     },
     methods: {
-      onmouseover(e) {
+      mouseenter(e) {
         this.show = true;
         this.current = e;
       },
@@ -141,6 +143,7 @@
     &__left {
       color: #fff;
       background: rgba(153, 153, 153, 1);
+
       .title {
         text-align: center;
         padding: 14px;
@@ -150,6 +153,9 @@
         cursor: pointer;
         justify-items: center;
         border-bottom: 1px solid #ccc;
+        &::before {
+          content: "";
+        }
         &:hover {
           background: rgba(153, 153, 153, 0.5);
           color: #333;
@@ -182,13 +188,8 @@
         }
       }
       .el-carousel__item {
-        h3 {
-          color: #475669;
-          font-size: 14px;
-          opacity: 0.75;
-          line-height: 400px;
-          margin: 0;
-          text-align: center;
+        .el-image {
+          height: 400px;
         }
       }
 
