@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view class="main"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -8,8 +8,6 @@
   @import "assets/scss/base.scss";
   #app {
     height: 100%;
-  }
-  .main {
     background: #ededed;
   }
 </style>
