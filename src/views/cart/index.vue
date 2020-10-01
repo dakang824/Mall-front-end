@@ -1,16 +1,7 @@
 <template>
-  <div class="cart">
+  <div class="cart w">
+    <CartHeader></CartHeader>
     <div class="cart__container w">
-      <div class="cart__container__header">
-        <Logo />
-        <el-steps :active="2" align-center process-status="wait">
-          <el-step title="我的购物车"></el-step>
-          <el-step title="确认订单"></el-step>
-          <el-step title="付款"></el-step>
-          <el-step title="支付成功"></el-step>
-        </el-steps>
-      </div>
-
       <div class="cart__container__main">
         <el-menu
           default-active="1"
@@ -82,7 +73,7 @@
               <span>3</span>
               件 合计（不含运费）:
               <div class="money">￥6098.00</div>
-              <el-button type="danger">结算</el-button>
+              <el-button type="danger" @click="handlePay">结算</el-button>
             </el-col>
           </el-row>
         </div>
@@ -92,11 +83,11 @@
 </template>
 
 <script>
-  import Logo from "@/components/logo.vue";
+  import CartHeader from "./components/cart-header.vue";
   export default {
-    name: "Login",
+    name: "Cart",
     components: {
-      Logo,
+      CartHeader,
     },
     data() {
       return {
@@ -132,7 +123,11 @@
       });
     },
     mounted() {},
-    methods: {},
+    methods: {
+      handlePay() {
+        this.$router.push({ path: "/pay" });
+      },
+    },
   };
 </script>
 
@@ -140,27 +135,6 @@
   @import "@/assets/scss/settings";
   .cart {
     &__container {
-      &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .el-steps {
-          width: 800px;
-          ::v-deep .is-finish {
-            .el-step__icon {
-              background: $error;
-              color: #fff;
-            }
-            &.el-step__title {
-              color: $color3;
-              font-weight: bold;
-            }
-            &.el-step__head {
-              border-color: $error;
-            }
-          }
-        }
-      }
       &__main {
         margin: 30px 0;
         background: #fff;
