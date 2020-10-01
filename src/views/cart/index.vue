@@ -1,6 +1,5 @@
 <template>
   <div class="cart">
-    <Header></Header>
     <div class="cart__container w">
       <div class="cart__container__header">
         <Logo />
@@ -89,21 +88,15 @@
         </div>
       </div>
     </div>
-
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
-  import Header from "@/components/header.vue";
-  import Footer from "@/components/footer.vue";
   import Logo from "@/components/logo.vue";
   export default {
     name: "Login",
     components: {
-      Footer,
       Logo,
-      Header,
     },
     data() {
       return {
