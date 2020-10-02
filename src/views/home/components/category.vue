@@ -1,28 +1,28 @@
 <!-- 首页类别 -->
 <template>
-  <div class="category w" @mouseleave="show = false">
+  <div class="category w" @mouseleave="handleMouseleave">
     <el-container>
-      <el-aside width="300px" class="category__left">
+      <el-aside width="335px" class="category__left">
         <div
           v-for="(item, index) in categoryList"
           :key="index"
-          class="title"
-          @mouseenter="mouseenter(index)"
+          :class="['title', { active: index === current }]"
+          @mouseenter="handleMouseenter(index)"
         >
           {{ item.name }}
           <i class="el-icon-arrow-right"></i>
         </div>
       </el-aside>
       <el-main class="category__right">
-        <el-carousel trigger="click" height="400px">
+        <el-carousel trigger="click" height="452px">
           <el-carousel-item v-for="item in 4" :key="item">
-            <!-- <el-image
-              :src="require('@/assets/imgs/img1.jpeg')"
+            <el-image
+              :src="require('@/assets/imgs/login-bg.png')"
               fit="cover"
-            ></el-image> -->
+            ></el-image>
           </el-carousel-item>
         </el-carousel>
-        <ul v-show="show" class="category__right__child clearfix">
+        <ul v-if="show" class="category__right__child clearfix">
           <li v-for="(item, index) in categoryList[current].child" :key="index">
             {{ item }}
           </li>
@@ -38,7 +38,7 @@
     data() {
       return {
         show: false,
-        current: 0,
+        current: null,
         categoryList: [
           {
             name: "蔬菜",
@@ -65,7 +65,7 @@
             ],
           },
           {
-            name: "蔬菜",
+            name: "海鲜水产",
             child: [
               "叶菜类",
               "豆制品",
@@ -77,7 +77,7 @@
             ],
           },
           {
-            name: "肉禽蛋",
+            name: "速冻食品",
             child: [
               "猪肉",
               "鸡鸭禽",
@@ -89,7 +89,7 @@
             ],
           },
           {
-            name: "蔬菜",
+            name: "粮油调味",
             child: [
               "叶菜类",
               "豆制品",
@@ -101,7 +101,7 @@
             ],
           },
           {
-            name: "肉禽蛋",
+            name: "菜系",
             child: [
               "猪肉",
               "鸡鸭禽",
@@ -113,7 +113,7 @@
             ],
           },
           {
-            name: "蔬菜",
+            name: "设备",
             child: [
               "叶菜类",
               "豆制品",
@@ -128,7 +128,11 @@
       };
     },
     methods: {
-      mouseenter(e) {
+      handleMouseleave() {
+        this.show = false;
+        this.current = null;
+      },
+      handleMouseenter(e) {
         this.show = true;
         this.current = e;
       },
@@ -137,28 +141,35 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/assets/scss/settings";
   .category {
-    display: flex;
-    justify-content: space-between;
-    &__left {
-      color: #fff;
-      background: rgba(153, 153, 153, 1);
+    color: $colorA;
+    font-size: $text-large;
+    margin-top: 10px;
+    ::v-deep .el-carousel__arrow {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    ::v-deep .el-carousel__arrow:hover {
+      background-color: #333;
+    }
 
+    &__left {
+      border: 2px solid $green;
+      margin-right: 10px;
       .title {
         text-align: center;
         padding: 14px;
-        background: rgba(153, 153, 153, 1);
-        display: flex;
-        justify-content: space-between;
+        background: #fff;
+        @include justify();
+        @include center-flex(y);
         cursor: pointer;
-        justify-items: center;
-        border-bottom: 1px solid #ccc;
         &::before {
           content: "";
         }
-        &:hover {
-          background: rgba(153, 153, 153, 0.5);
-          color: #333;
+        &:hover,
+        &.active {
+          background: $colorBg;
+          color: #fff;
         }
         .el-icon-arrow-right {
           font-size: 22px;
@@ -172,7 +183,7 @@
         position: absolute;
         top: 0;
         z-index: 99;
-        background: #fff;
+        background: $white;
         width: 50%;
         height: 100%;
         padding: 20px 0;
@@ -182,14 +193,15 @@
           float: left;
           text-align: center;
           &:hover {
-            background: rgba(153, 153, 153, 0.5);
+            background: $colorBg;
+            color: #fff;
             cursor: pointer;
           }
         }
       }
       .el-carousel__item {
         .el-image {
-          height: 400px;
+          height: 452px;
         }
       }
 

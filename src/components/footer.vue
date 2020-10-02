@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div v-if="!hidden" class="footer__container w">
+    <div v-if="false" class="footer__container w">
       <div class="footer__container__siteinfo">
         <ul class="c0">
           <h3 class="c1">新手上路</h3>

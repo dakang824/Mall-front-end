@@ -1,13 +1,18 @@
 <!-- 商品item -->
 <template>
   <div class="goods-item">
-    <el-card :body-style="{ padding: '0px' }">
-      <el-image
-        src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-      ></el-image>
-      <div class="footer">
-        <span class="title">好吃的汉堡</span>
-        <div type="text" class="money">￥1.50</div>
+    <el-card :body-style="{ padding: '0px' }" shadow="hover">
+      <el-image :src="model.img"></el-image>
+      <div class="box">
+        <span class="title">{{ model.title }}</span>
+        <div class="middle">
+          <span>评价{{ model.assess }}</span>
+          <span>收藏{{ model.collect }}</span>
+        </div>
+        <div class="footer">
+          <div type="text" class="money">￥{{ model.money }}</div>
+          <span>月销{{ model.sell }}笔</span>
+        </div>
       </div>
     </el-card>
   </div>
@@ -16,6 +21,14 @@
 <script>
   export default {
     components: {},
+    props: {
+      model: {
+        type: Object,
+        default: () => {
+          return {};
+        },
+      },
+    },
     data() {
       return {};
     },
@@ -23,22 +36,36 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/assets/scss/settings";
   .goods-item {
     .el-card {
-      width: 250px;
+      cursor: pointer;
+      width: 258px;
+      color: $color5;
+      font-size: 12px;
       .el-image {
-        width: 100%;
+        vertical-align: middle;
+        width: 258px;
       }
-      .footer {
+      .box {
         padding: 10px;
-        text-align: center;
         .title {
-          font-weight: 700;
+          font-size: $text-small;
+        }
+        .middle {
+          span {
+            margin-right: 10px;
+          }
         }
         .money {
-          color: #ff0000;
-          font-size: 15px;
+          color: $green;
+          font-size: $text-small;
           font-weight: bold;
+        }
+        .footer {
+          margin: 20px 0 0;
+          @include justify();
+          @include center-flex(y);
         }
       }
     }

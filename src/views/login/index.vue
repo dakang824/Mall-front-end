@@ -135,7 +135,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert("submit!");
+            this.$router.push("/");
           } else {
             console.log("error submit!!");
             return false;
@@ -245,7 +245,6 @@
           height: 62px;
           font-size: 16px;
           margin-top: 20px;
-          cursor: pointer;
         }
         ::v-deep .el-input-group__append {
           cursor: pointer;

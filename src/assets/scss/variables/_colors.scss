@@ -8,12 +8,15 @@ $error: #ff0000;
 $warning: #ffc105;
 $disabled: #aaa;
 
+$colorA: #1a1a1a;
+$color5: #5a5a5a;
+
 // 背景色，文本色，边框色，链接色
 //-----------------------------------------------------
 $colorText: #333 !default;
-$colorBg: #fff !default;
+$colorBg: #e3e4e5 !default;
 $colorBorder: #dbdbdb !default;
-$colorLink: #08c !default;
+$colorLink: $colorA !default;
 $colorPlaceholder: #999 !default; // input placeholder color
 $colorDisabled: (
   text: #999,
@@ -34,8 +37,9 @@ $color6: #666;
 $color9: #999;
 $colorC: #ccc;
 $colorF: #f5f5f5;
+
 $blue: #007aff !default;
 $orange: #ff9500 !default;
 $red: #ff3b30 !default;
-$green: #4cd964 !default;
+$green: #05b85e !default;
 $primary: #007aff !default;
