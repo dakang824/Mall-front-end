@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="footer__copyright">
-      上海趣意信息科技有限公司 版权所有 备案号
+      嗨厨玩味信息科技(上海)有限公司 版权所有 备案号
     </div>
   </div>
 </template>
@@ -110,10 +110,11 @@
     }
     &__copyright {
       color: #fff;
-      font-size: 13px;
+      font-size: 18px;
+      color: #1b1b1b;
       padding: 40px 0;
       text-align: center;
-      background: #34495e;
+      background: #fff;
       width: 100%;
     }
   }

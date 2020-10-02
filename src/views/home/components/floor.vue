@@ -4,10 +4,10 @@
     <div class="floor__title">{{ model }}</div>
     <el-container>
       <el-aside width="231px">
-        <el-image
+        <!-- <el-image
           :src="require('@/assets/imgs/img1.jpeg')"
           fit="cover"
-        ></el-image>
+        ></el-image> -->
       </el-aside>
       <el-main>
         <div v-for="(item, index) in 6" :key="index" class="goods-item">

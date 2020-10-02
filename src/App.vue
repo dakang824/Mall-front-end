@@ -8,6 +8,7 @@
   @import "assets/scss/base.scss";
   #app {
     height: 100%;
-    background: #ededed;
+    background: #e3e4e5;
+    font-family: Microsoft YaHei;
   }
 </style>

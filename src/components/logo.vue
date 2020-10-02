@@ -3,7 +3,7 @@
     <el-image
       fit="contain"
       class="logo__img"
-      src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+      :src="require('@/assets/imgs/logo.png')"
     ></el-image>
   </div>
 </template>
@@ -19,7 +19,7 @@
 
 <style lang="scss" scoped>
   .logo {
-    width: 180px;
+    width: 238px;
     &__img {
       vertical-align: middle;
     }

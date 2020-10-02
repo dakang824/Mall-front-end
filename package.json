@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@alicd/crui-address-multi-field": "0.0.18",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.36",

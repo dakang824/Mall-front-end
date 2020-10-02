@@ -16,10 +16,10 @@
       <el-main class="category__right">
         <el-carousel trigger="click" height="400px">
           <el-carousel-item v-for="item in 4" :key="item">
-            <el-image
+            <!-- <el-image
               :src="require('@/assets/imgs/img1.jpeg')"
               fit="cover"
-            ></el-image>
+            ></el-image> -->
           </el-carousel-item>
         </el-carousel>
         <ul v-show="show" class="category__right__child clearfix">
