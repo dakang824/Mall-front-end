@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-//-----------------------------------------------------  
+//-----------------------------------------------------
 // reset scss
 // 包括normalize，清零重置
 //-----------------------------------------------------
@@ -20,17 +20,17 @@ html {
 
 // 1. Remove default margin
 body {
+  min-height: 100%;
+  padding-top: env(safe-area-inset-top); //为导航栏+状态栏的高度 88px
+  padding-right: env(safe-area-inset-right); //如果未竖屏时为0
+  padding-bottom: env(safe-area-inset-bottom); //为底下圆弧的高度 34px
+  padding-left: env(safe-area-inset-left); //如果未竖屏时为0
   margin: 0; // 1
-  font-size: $fontSize;
   font-family: $fontFamily;
+  font-size: $fontSize;
   line-height: $fontLineHeight;
   color: $colorText;
   background-color: $colorBg;
-  min-height: 100%;
-  padding-top: env(safe-area-inset-top); //为导航栏+状态栏的高度 88px            
-  padding-left: env(safe-area-inset-left); //如果未竖屏时为0                
-  padding-right: env(safe-area-inset-right); //如果未竖屏时为0                
-  padding-bottom: env(safe-area-inset-bottom); //为底下圆弧的高度 34px
 }
 
 // HTML5 display definitions
@@ -89,11 +89,12 @@ template {
 // 3. Improve readability when focused and also mouse hovered in all browsers.
 
 a {
-  background: transparent; // 1
-  -webkit-text-decoration-skip: objects;
+  color: nth($colorLink, 1);
+
   /* 2 */
   text-decoration: none;
-  color: nth($colorLink, 1);
+  background: transparent; // 1
+  -webkit-text-decoration-skip: objects;
 
   &:active {
     outline: 0; // 3
@@ -107,11 +108,13 @@ a {
 // 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
 
 abbr[title] {
-  border-bottom: none;
   /* 1 */
   text-decoration: underline;
+
   /* 2 */
   text-decoration: underline dotted;
+  border-bottom: none;
+
   /* 2 */
 }
 
@@ -134,8 +137,8 @@ dfn {
 
 // Address styling not present in IE 8/9.
 mark {
-  background: #ff0;
   color: #000;
+  background: #ff0;
 }
 
 // Address inconsistent and variable font size in all browsers.
@@ -146,9 +149,9 @@ small {
 // Prevent `sub` and `sup` affecting `line-height` in all browsers.
 sub,
 sup {
+  position: relative;
   font-size: 75%;
   line-height: 0;
-  position: relative;
   vertical-align: baseline;
 }
 
@@ -165,9 +168,9 @@ sub {
 
 // 1. Remove border when inside `a` element in IE 8/9/10.
 img {
-  border: 0; // 1
-  vertical-align: middle;
   max-width: 100%;
+  vertical-align: middle;
+  border: 0; // 1
 }
 
 // Correct overflow not hidden in IE 9/10/11.
@@ -182,9 +185,9 @@ svg:not(:root) {
 // 2. Improve readability of pre-formatted text in all browsers.
 pre {
   overflow: auto; // 1
+  word-wrap: break-word; // 2
   white-space: pre; // 2
   white-space: pre-wrap; // 2
-  word-wrap: break-word; // 2
 }
 
 // 1. Address odd `em`-unit font size rendering in all browsers.
@@ -211,9 +214,9 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit; // 1
-  font: inherit; // 2
   margin: 0; // 3
+  font: inherit; // 2
+  color: inherit; // 1
   vertical-align: middle;
 }
 
@@ -259,8 +262,8 @@ input[type="submit"] {
 // Remove inner padding and border in Firefox 4+.
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-  border: 0;
   padding: 0;
+  border: 0;
 }
 
 // 1. Address Firefox 4+ setting `line-height` on `input` using `!important` in
@@ -307,9 +310,9 @@ input[type="search"]::-webkit-search-decoration {
 
 // Define consistent border, margin, and padding.
 fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
+  margin: 0 2px;
+  border: 1px solid #c0c0c0;
 }
 
 // 1. Correct the text wrapping in Edge and IE.
@@ -318,24 +321,30 @@ fieldset {
 //    `fieldset` elements in all browsers.
 legend {
   box-sizing: border-box;
-  /* 1 */
-  color: inherit;
+
   /* 2 */
   display: table;
+
   /* 1 */
   max-width: 100%;
+
   /* 1 */
   padding: 0;
+
+  /* 1 */
+  color: inherit;
+
   /* 3 */
   white-space: normal;
+
   /* 1 */
 }
 
 // 1. Remove default vertical scrollbar in IE 8/9/10/11.
 textarea {
   overflow: auto; // 1
-  resize: vertical;
   vertical-align: top;
+  resize: vertical;
 }
 
 // Don't inherit the `font-weight` (applied by a rule above).
@@ -393,8 +402,8 @@ textarea::-webkit-input-placeholder {
 //-----------------------------------------------------
 // Remove most spacing between table cells.
 table {
-  border-collapse: collapse;
   border-spacing: 0;
+  border-collapse: collapse;
 }
 
 td,
@@ -424,8 +433,8 @@ ol,
 li,
 dl,
 dd {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 ul,
@@ -437,8 +446,8 @@ ol {
 h1,
 h2,
 h3 {
-  line-height: 2;
   font-weight: normal;
+  line-height: 2;
 }
 
 h1 {

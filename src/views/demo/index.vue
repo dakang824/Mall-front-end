@@ -39,12 +39,14 @@
 <style lang="scss" scoped>
   .home {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     min-height: 100vh;
+
     &__box {
       text-align: center;
     }
+
     &__gap {
       padding: 15px;
     }

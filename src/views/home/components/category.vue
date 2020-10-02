@@ -142,63 +142,76 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .category {
-    color: $colorA;
-    font-size: $text-large;
     margin-top: 10px;
+    font-size: $text-large;
+    color: $colorA;
+
     ::v-deep .el-carousel__arrow {
       background-color: rgba(0, 0, 0, 0.5);
     }
+
     ::v-deep .el-carousel__arrow:hover {
       background-color: #333;
     }
 
     &__left {
-      border: 2px solid $green;
       margin-right: 10px;
+      border: 2px solid $green;
+
       .title {
-        text-align: center;
         padding: 14px;
+        text-align: center;
+        cursor: pointer;
         background: #fff;
+
         @include justify();
         @include center-flex(y);
-        cursor: pointer;
+
         &::before {
           content: "";
         }
+
         &:hover,
         &.active {
-          background: $colorBg;
           color: #fff;
+          background: $colorBg;
         }
+
         .el-icon-arrow-right {
           font-size: 22px;
         }
       }
     }
+
     &__right {
       position: relative;
       padding: 0;
+
       &__child {
         position: absolute;
         top: 0;
         z-index: 99;
-        background: $white;
         width: 50%;
         height: 100%;
         padding: 20px 0;
+        background: $white;
+
         li {
+          float: left;
           min-width: 33.333%;
           padding: 10px;
-          float: left;
           text-align: center;
+
           &:hover {
-            background: $colorBg;
             color: #fff;
             cursor: pointer;
+            background: $colorBg;
           }
         }
       }
+
       .el-carousel__item {
         .el-image {
           height: 452px;

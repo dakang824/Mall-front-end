@@ -22,6 +22,7 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .pay {
   }
 </style>

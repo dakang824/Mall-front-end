@@ -1,15 +1,15 @@
 @charset "UTF-8";
 
-//-----------------------------------------------------	
+//-----------------------------------------------------
 // helper scss
-//-----------------------------------------------------	
+//-----------------------------------------------------
 
 // 盒子模型栅格
 .ui-flex {
   display: flex;
 }
 
-.ui-flex__item{
+.ui-flex__item {
   flex: 1;
 }
 
@@ -104,12 +104,12 @@
 
 // 视觉隐藏元素但保持屏幕阅读器
 .ui-visually-hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
   position: absolute !important;
   width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
 }

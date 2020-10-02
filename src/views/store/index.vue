@@ -52,40 +52,49 @@
 </script>
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .store {
     .el-aside {
       margin: 10px 10px 0 0;
+
       ul {
         li {
-          padding: 16px 0;
-          text-align: center;
-          background: #fff;
-          font-size: $text-medium;
-          border-bottom: 1px dashed $colorBorder;
           box-sizing: border-box;
+          padding: 16px 0;
+          font-size: $text-medium;
+          text-align: center;
           cursor: pointer;
+          background: #fff;
+          border-bottom: 1px dashed $colorBorder;
+
           &.active {
-            border: 2px solid $green;
             color: #282828;
+            border: 2px solid $green;
           }
+
           &:last-child {
             border-bottom: 0;
           }
+
           &.title {
-            background: #5a5a5a;
             color: #fff;
+            background: #5a5a5a;
             border-bottom: 0;
           }
         }
       }
     }
+
     .el-main {
       padding: 0;
+
       ::v-deep .goods-card {
         margin-bottom: 10px;
+
         .box {
           > .goods-item {
             margin-right: 77px;
+
             &:nth-child(4n) {
               margin-right: 0;
             }

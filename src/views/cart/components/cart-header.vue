@@ -25,21 +25,26 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .cart-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
     .el-steps {
       width: 800px;
+
       ::v-deep .is-finish {
         .el-step__icon {
-          background: $error;
           color: #fff;
+          background: $error;
         }
+
         &.el-step__title {
-          color: $color3;
           font-weight: bold;
+          color: $color3;
         }
+
         &.el-step__head {
           border-color: $error;
         }

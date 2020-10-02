@@ -38,30 +38,36 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .search {
     @include center-flex(y);
-    background: $white;
+
     padding: 36px 0 39px 54px;
+    background: $white;
 
     &__input {
       width: 1126px;
       margin-left: 93px;
     }
+
     ::v-deep {
       .el-input {
         color: #a0a0a0;
+
         &__inner {
+          position: relative;
+          top: 1px;
           height: 80px;
           font-size: $text-small;
           border: 2px solid $green;
-          position: relative;
-          top: 1px;
         }
       }
+
       .el-input-group {
         &__append {
           padding: 0;
           border-color: transparent;
+
           .search {
             width: 239px;
             height: 80px;

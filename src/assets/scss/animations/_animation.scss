@@ -14,10 +14,11 @@
 //-----------------------------------------------------
 
 @mixin animation-fade-in($className: fade, $from: 0) {
-  $name: str-insert(In, $className, 0);
+  $name: str-insert(in, $className, 0);
 
   .#{$className}-in {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -25,10 +26,11 @@
 }
 
 @mixin animation-fade-out($className: fade, $to: 0) {
-  $name: str-insert(Out, $className, 0);
+  $name: str-insert(out, $className, 0);
 
   .#{$className}-out {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -39,10 +41,11 @@
 //-----------------------------------------------------
 
 @mixin animation-shrink-in($className: shrink, $from: 0.815) {
-  $name: str-insert(In, $className, 0);
+  $name: str-insert(in, $className, 0);
 
   .#{$className}-in {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -60,10 +63,11 @@
 }
 
 @mixin animation-shrink-out($className: shrink, $to: 1.185) {
-  $name: str-insert(Out, $className, 0);
+  $name: str-insert(out, $className, 0);
 
   .#{$className}-out {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -84,10 +88,11 @@
 //-----------------------------------------------------
 
 @mixin animation-down-in($className: down, $value: 100%) {
-  $name: str-insert(In, $className, 0);
+  $name: str-insert(in, $className, 0);
 
   .#{$className}-in {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -105,10 +110,11 @@
 }
 
 @mixin animation-down-out($className: down, $value: 100%) {
-  $name: str-insert(Out, $className, 0);
+  $name: str-insert(out, $className, 0);
 
   .#{$className}-out {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -129,10 +135,11 @@
 //-----------------------------------------------------
 
 @mixin animation-up-in($className: up, $value: -100%) {
-  $name: str-insert(In, $className, 0);
+  $name: str-insert(in, $className, 0);
 
   .#{$className}-in {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -150,10 +157,11 @@
 }
 
 @mixin animation-up-out($className: up, $value: -100%) {
-  $name: str-insert(Out, $className, 0);
+  $name: str-insert(out, $className, 0);
 
   .#{$className}-out {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -174,10 +182,11 @@
 //-----------------------------------------------------
 
 @mixin animation-left-in($className: left, $value: -100%) {
-  $name: str-insert(In, $className, 0);
+  $name: str-insert(in, $className, 0);
 
   .#{$className}-in {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -195,10 +204,11 @@
 }
 
 @mixin animation-left-out($className: left, $value: -100%) {
-  $name: str-insert(Out, $className, 0);
+  $name: str-insert(out, $className, 0);
 
   .#{$className}-out {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -219,10 +229,11 @@
 //-----------------------------------------------------
 
 @mixin animation-right-in($className: right, $value: 100%) {
-  $name: str-insert(In, $className, 0);
+  $name: str-insert(in, $className, 0);
 
   .#{$className}-in {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 
@@ -240,10 +251,11 @@
 }
 
 @mixin animation-right-out($className: right, $value: 100%) {
-  $name: str-insert(Out, $className, 0);
+  $name: str-insert(out, $className, 0);
 
   .#{$className}-out {
     animation-name: $name;
+
     @extend %animation-basic;
   }
 

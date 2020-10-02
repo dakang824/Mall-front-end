@@ -175,49 +175,58 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .address {
     .title {
+      margin: 30px 0 0;
       font-size: 18px;
       font-weight: bold;
-      margin: 30px 0 0;
     }
+
     .box {
       @include center-flex(y);
+
       flex-wrap: wrap;
+
       .card {
+        position: relative;
+        width: 240px;
+        padding: 15px 10px 10px;
+        margin-top: 20px;
+        margin-right: 20px;
         cursor: pointer;
         background: #fff;
-        width: 240px;
         border: 2px dashed $error;
-        padding: 15px 10px 10px;
-        position: relative;
-        margin-right: 20px;
-        margin-top: 20px;
+
         .el-tag {
-          border-radius: 0;
           position: absolute;
           top: 0;
           right: 0;
-          padding: 0 5px;
           height: 25px;
+          padding: 0 5px;
           line-height: 25px;
           border-color: transparent;
+          border-radius: 0;
         }
+
         .user {
-          font-weight: bold;
-          font-size: 15px;
-          border-bottom: 1px solid #eee;
           padding-bottom: 10px;
           margin-bottom: 10px;
+          font-size: 15px;
+          font-weight: bold;
+          border-bottom: 1px solid #eee;
         }
+
         p {
           font-size: 14px;
         }
+
         .footer {
-          color: #cc9900;
+          color: #c90;
+
           span {
-            padding: 10px 20px 0 0;
             display: inline-block;
+            padding: 10px 20px 0 0;
           }
         }
       }

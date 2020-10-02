@@ -162,65 +162,76 @@
     flex-direction: column;
     height: 100vh;
     background: #fff;
+
     &__logo {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 47px 0 36px;
+
       .right {
         .el-image {
           margin-right: 11px;
         }
+
         display: flex;
         align-items: center;
         font-size: 18px;
       }
     }
+
     &__main {
       flex: 1;
+
       .el-image {
         width: 100%;
         height: 100%;
       }
+
       .w {
         position: absolute;
-        height: 571px;
         top: 0;
-        left: 0;
         right: 0;
         bottom: 0;
-        margin: auto;
+        left: 0;
         display: flex;
         justify-content: flex-end;
+        height: 571px;
+        margin: auto;
       }
+
       .el-form {
-        border-radius: 4px;
-        width: 620px;
         right: 0;
-        background: rgba(255, 255, 255, 0.7);
+        width: 620px;
         padding: 0 77px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 4px;
+
         .icon {
-          min-width: 62px;
-          width: 62px;
-          height: 60px;
-          margin: auto;
-          left: 1px;
+          position: absolute;
           top: 0;
           bottom: 0;
-          padding: 0;
+          left: 1px;
           z-index: 1;
-          position: absolute;
+          width: 62px;
+          min-width: 62px;
+          height: 60px;
+          padding: 0;
+          margin: auto;
         }
+
         ::v-deep .el-form-item {
           &__content {
             height: 62px;
           }
+
           .el-input__inner {
             height: 62px;
-            text-indent: 62px;
             font-size: 18px;
+            text-indent: 62px;
             border-radius: 0;
           }
+
           .el-input-group--append {
             .el-input__inner {
               text-indent: 0;
@@ -229,57 +240,66 @@
         }
 
         &__title {
-          text-align: center;
           margin: 42px 0 33px;
           font-size: 24px;
+          text-align: center;
         }
+
         &__code {
           #s-canvas,
           .s-canvas {
-            vertical-align: bottom;
             height: 60px;
             overflow: hidden;
+            vertical-align: bottom;
           }
         }
+
         &__submit {
           width: 100%;
           height: 62px;
-          font-size: 16px;
           margin-top: 20px;
+          font-size: 16px;
         }
+
         ::v-deep .el-input-group__append {
-          cursor: pointer;
           padding: 0 0 0 20px;
-          border-color: transparent;
+          cursor: pointer;
           background-color: transparent;
+          border-color: transparent;
+
           .append {
-            border: 1px solid #dcdfe6;
             display: flex;
             align-items: center;
-            background-color: #fff;
+            padding: 0;
             color: #1e6a84;
             text-decoration: underline;
-            padding: 0;
+            background-color: #fff;
+            border: 1px solid #dcdfe6;
+
             span {
               padding: 0 20px;
             }
           }
         }
+
         &__other {
           display: flex;
           justify-content: flex-end;
           margin-top: 41px;
           font-size: 18px;
+
           li {
             padding-left: 26px;
             cursor: pointer;
           }
         }
+
         .el-form-item__content {
           margin-bottom: 20px;
         }
       }
     }
+
     &__footer {
       flex: 0.1;
     }

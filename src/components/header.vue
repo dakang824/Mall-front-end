@@ -43,39 +43,51 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .header {
     padding: $gap;
     font-size: $text-small;
     color: $colorA;
+
     &__box {
       @include justify();
       @include center-flex(y);
+
       &__left {
         @include center-flex(y);
+
         span {
           margin-right: 33px;
         }
+
         .avatar {
-          min-width: 54px;
           width: 54px;
+          min-width: 54px;
           height: 54px;
         }
+
         i {
           padding-left: 7px;
         }
       }
+
       &__right {
         ul {
           @include justify();
+
           li {
             margin-left: 30px;
+
             @include center-flex(y);
+
             .el-image {
               margin-right: 10px;
             }
+
             a {
               @include center-flex(y);
             }
+
             &:nth-child(2) {
               a {
                 padding: 0 35px;
@@ -83,9 +95,9 @@
 
               &::after,
               &::before {
-                content: "";
                 width: 2px;
                 height: 47px;
+                content: "";
                 background-color: #afafaf;
               }
             }

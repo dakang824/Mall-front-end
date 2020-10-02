@@ -42,7 +42,7 @@
                 <el-col :span="6">
                   <div class="table__main__item__store">
                     <el-image
-                      style="width: 100px; height: 100px"
+                      style="width: 100px; height: 100px;"
                       :src="item.src"
                       fit="contain"
                     ></el-image>
@@ -133,87 +133,105 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .cart {
     &__container {
       &__main {
         margin: 30px 0;
         background: #fff;
+
         .table__header {
           padding: 20px;
           text-align: center;
           border-bottom: 1px solid #eee;
         }
+
         .table__main {
           text-align: center;
+
           &__item {
-            background: #f2f2f2;
             padding: 15px 20px;
+            background: #f2f2f2;
             border-bottom: 1px dashed $colorC;
+
             .money {
-              color: $error;
               font-weight: bold;
+              color: $error;
             }
+
             .el-row {
               align-items: center;
             }
+
             &__store {
               display: flex;
               align-items: center;
               text-align: left;
+
               span {
                 padding-left: 15px;
               }
             }
           }
+
           &__store {
             display: flex;
             padding: 15px 20px;
+
             .title {
               margin-left: 30px;
             }
           }
         }
+
         .el-menu {
           ::v-deep .el-menu-item.is-active {
             color: $color3 !important;
           }
         }
       }
+
       &__footer {
         .el-row {
+          padding: 0 0 0 20px;
           margin-top: 20px;
           background: #f2f2f2;
-          padding: 0 0 0 20px;
+
           .del {
             margin: 0 0 0 15px;
           }
+
           .total {
             display: flex;
             align-items: center;
             justify-content: flex-end;
+
             span {
-              color: $error;
-              font-weight: bold;
               padding: 0 8px;
               font-size: 16px;
+              font-weight: bold;
+              color: $error;
             }
+
             .el-button {
-              margin-left: 20px;
-              border-radius: 0;
-              height: 50px;
-              width: 160px;
-              font-size: 20px;
               display: flex;
               align-items: center;
               justify-content: center;
+              width: 160px;
+              height: 50px;
+              margin-left: 20px;
+              font-size: 20px;
+              border-radius: 0;
             }
+
             .money {
-              color: $error;
-              font-weight: bold;
               font-size: 23px;
+              font-weight: bold;
+              color: $error;
             }
           }
         }
+
         .el-col {
           display: flex;
           align-items: center;

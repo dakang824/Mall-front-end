@@ -65,26 +65,34 @@
 </script>
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .goods-list {
     font-size: $text-medium;
+
     .el-breadcrumb {
       padding: 20px 0;
       font-size: $text-medium;
     }
+
     .screen {
       &__row {
         color: $colorC;
+
         @include center-flex(y);
+
         border-bottom: 1px dashed #ccc;
+
         &:last-child {
           border-color: transparent;
         }
+
         span {
           min-width: 150px;
+          padding: 10px 0;
           color: #808080;
           text-align: center;
-          padding: 10px 0;
         }
+
         ul {
           @include center-flex(y);
 
@@ -94,8 +102,10 @@
         }
       }
     }
+
     ::v-deep .goods-card {
       margin-bottom: 10px;
+
       .box {
         > .goods-item {
           &:nth-child(5n) {

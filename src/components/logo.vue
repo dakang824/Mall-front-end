@@ -36,6 +36,7 @@
 <style lang="scss" scoped>
   .logo {
     width: 238px;
+
     &__img {
       vertical-align: middle;
     }

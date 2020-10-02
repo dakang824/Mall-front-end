@@ -33,33 +33,38 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .store-tabs {
     margin: 10px 0;
     color: $colorC;
+
     .active {
-      background: $green;
       color: #fff;
+      background: $green;
     }
+
     ul {
       @include center-flex(y);
+
       li {
-        cursor: pointer;
+        position: relative;
         width: 139px;
         height: 51px;
         line-height: 51px;
         text-align: center;
-        position: relative;
+        cursor: pointer;
+
         &::after {
-          content: "";
-          height: 25px;
-          width: 1px;
-          background: #ccc;
-          display: block;
           position: absolute;
-          right: 0;
           top: 0;
+          right: 0;
           bottom: 0;
+          display: block;
+          width: 1px;
+          height: 25px;
           margin: auto;
+          content: "";
+          background: #ccc;
         }
       }
     }

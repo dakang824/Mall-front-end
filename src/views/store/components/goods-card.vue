@@ -134,14 +134,16 @@
   .goods-card {
     .box {
       padding: 30px 30px 0 30px;
+
       > .goods-item {
         margin-right: 65px;
         margin-bottom: 50px;
       }
     }
+
     ::v-deep .el-pagination {
-      text-align: center;
       padding-bottom: 50px;
+      text-align: center;
     }
   }
 </style>

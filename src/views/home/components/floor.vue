@@ -121,52 +121,66 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .floor {
-    margin: 10px auto;
     padding: 28px 36px;
+    margin: 10px auto;
+
     &__title {
+      padding-bottom: 16px;
       color: $color5;
+
       @include justify();
       @include center-flex(y);
-      padding-bottom: 16px;
+
       &__left {
         @include center-flex(y);
-        font-weight: bold;
+
         font-size: $text-large;
+        font-weight: bold;
         color: $green;
+
         span {
+          margin: 10px 6px 0;
           font-size: 14px;
           font-weight: initial;
-          margin: 10px 6px 0;
         }
+
         &::before {
-          content: "";
-          width: 3px;
           display: block;
-          background: $green;
+          width: 3px;
           height: 29px;
           margin-right: 14px;
+          content: "";
+          background: $green;
         }
       }
+
       &__right {
         font-size: $text-large;
+
         i {
           font-size: $text-small;
         }
       }
     }
+
     .el-aside {
       .el-image {
         vertical-align: middle;
+
         &:first-child {
           margin-bottom: 10px;
         }
       }
     }
+
     .el-main {
       padding: 0;
+
       > .goods-item {
         margin-left: 9px;
+
         &:nth-child(1),
         &:nth-child(2),
         &:nth-child(3),
