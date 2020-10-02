@@ -7,8 +7,10 @@
         <span>每日菜谱推荐</span>
       </div>
       <div class="floor__title__right">
-        更多
-        <i class="el-icon-d-arrow-right"></i>
+        <router-link to="/goods-list">
+          更多
+          <i class="el-icon-d-arrow-right"></i>
+        </router-link>
       </div>
     </div>
 
@@ -147,7 +149,6 @@
         }
       }
       &__right {
-        cursor: pointer;
         font-size: $text-large;
         i {
           font-size: $text-small;
