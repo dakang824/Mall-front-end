@@ -1,3 +1,4 @@
+<!-- 首页 -->
 <template>
   <div class="home">
     <Search></Search>
