@@ -25,7 +25,7 @@
               <el-col :span="2">操作</el-col>
             </el-row>
           </div>
-          <div v-for="(item, index) in 2" :key="index" class="table__main">
+          <div v-for="(it, ind) in 2" :key="ind" class="table__main">
             <div class="table__main__store">
               <el-checkbox></el-checkbox>
               <div class="title">店铺：壹只菜直营店</div>
@@ -42,7 +42,7 @@
                 <el-col :span="6">
                   <div class="table__main__item__store">
                     <el-image
-                      style="width: 100px; height: 100px;"
+                      style="width: 100px; height: 100px"
                       :src="item.src"
                       fit="contain"
                     ></el-image>

@@ -1,7 +1,12 @@
 <!-- 商品列表 -->
 <template>
   <div class="goods-list">
-    <Search></Search>
+    <div class="el-card">
+      <div class="header w">
+        <logo></logo>
+        <search></search>
+      </div>
+    </div>
     <div class="box w">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -22,7 +27,8 @@
 </template>
 
 <script>
-  import Search from "../home/components/search.vue";
+  import Logo from "@/components/logo.vue";
+  import Search from "@/components/search.vue";
   import StoreTabs from "../store/components/store-tabs.vue";
   import GoodsCard from "../store/components/goods-card.vue";
   export default {
@@ -31,6 +37,7 @@
       Search,
       StoreTabs,
       GoodsCard,
+      Logo,
     },
     data() {
       return {
@@ -69,6 +76,13 @@
   .goods-list {
     font-size: $text-medium;
 
+    .header {
+      @include center-flex(y);
+      .search {
+        margin-left: 93px;
+        padding: 36px 0 39px 54px;
+      }
+    }
     .el-breadcrumb {
       padding: 20px 0;
       font-size: $text-medium;

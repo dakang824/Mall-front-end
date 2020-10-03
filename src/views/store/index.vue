@@ -1,7 +1,7 @@
 <!-- 商铺 -->
 <template>
   <div class="store">
-    <Search></Search>
+    <StoreHeader></StoreHeader>
     <div class="box w">
       <el-container>
         <el-aside width="278px">
@@ -27,13 +27,13 @@
 </template>
 
 <script>
-  import Search from "./components/search.vue";
+  import StoreHeader from "./components/store-header.vue";
   import StoreTabs from "./components/store-tabs.vue";
   import GoodsCard from "./components/goods-card.vue";
   export default {
     name: "Store",
     components: {
-      Search,
+      StoreHeader,
       StoreTabs,
       GoodsCard,
     },

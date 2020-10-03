@@ -1,0 +1,123 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 搜索插件
+ * @Date: 2020-10-03 20:19:16
+ * @LastEditTime: 2020-10-03 23:17:26
+-->
+<template>
+  <div class="search" :class="'search--style' + type">
+    <div class="search__input">
+      <el-input
+        v-model="keyWord"
+        placeholder="请输入需要搜索的商品名称"
+        class="input-with-select"
+      >
+        <div slot="append">
+          <el-image
+            v-if="type === 1"
+            :src="require('@/assets/imgs/search-icon.png')"
+            class="search"
+            fit="cover"
+          ></el-image>
+
+          <div v-if="type === 2" class="append">
+            <div class="search">搜全站</div>
+            <div class="search black">搜本店</div>
+          </div>
+        </div>
+      </el-input>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    components: {},
+    props: {
+      type: {
+        type: Number,
+        default: 1,
+      },
+    },
+    data() {
+      return {
+        keyWord: "",
+      };
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+  @import "@/assets/scss/settings";
+  .search {
+    background: $white;
+    ::v-deep {
+      .el-input {
+        color: #a0a0a0;
+
+        &__inner {
+          position: relative;
+          top: 1px;
+          height: 80px;
+          font-size: $text-small;
+          border: 2px solid $green;
+        }
+      }
+
+      .el-input-group {
+        &__append {
+          padding: 0;
+          border-color: transparent;
+          background-color: transparent;
+
+          .search {
+            width: 239px;
+            height: 80px;
+            padding: 0;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    &.search--style1 {
+      .search__input {
+        width: 1126px;
+      }
+    }
+
+    &.search--style2 {
+      .search__input {
+        width: 393px;
+      }
+
+      ::v-deep {
+        .el-input-group {
+          @include center-flex(y);
+
+          &__append {
+            .append {
+              @include center-flex(y);
+            }
+
+            .search {
+              display: flex;
+              justify-content: center;
+              width: 184px;
+              min-width: 184px;
+              line-height: 80px;
+              margin-top: 2px;
+              font-size: $text-medium;
+              color: #fff;
+              cursor: pointer;
+              background: $green;
+
+              &.black {
+                background: #3f3f3f;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

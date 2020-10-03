@@ -1,3 +1,9 @@
+/*
+ * @Author: yukang 1172248038@qq.com
+ * @Description:
+ * @Date: 2020-10-02 21:24:48
+ * @LastEditTime: 2020-10-03 20:40:39
+ */
 module.exports = {
   extends: ["stylelint-config-standard", "stylelint-config-recess-order"],
   rules: {
