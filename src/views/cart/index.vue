@@ -2,12 +2,12 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 统一使用公共头部
  * @Date: 2020-10-03 23:25:04
- * @LastEditTime: 2020-10-04 19:07:56
+ * @LastEditTime: 2020-10-04 20:33:37
 -->
 <template>
   <div class="index">
     <CartHeader></CartHeader>
-    <router-view class="w"></router-view>
+    <router-view class="w main"></router-view>
   </div>
 </template>
 
@@ -27,4 +27,8 @@
   };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .main {
+    min-height: calc(100vh - 377px);
+  }
+</style>

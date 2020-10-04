@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-10-04 20:22:56
+ * @LastEditTime: 2020-10-04 20:30:38
 -->
 <!--  -->
 <template>
@@ -66,20 +66,19 @@
   export default {
     name: "PayResult",
     components: { PayType },
-    props: {
-      state: {
-        type: String,
-        default: "success", //两种状态 error success
-      },
-    },
     data() {
-      return {};
+      return {
+        state: "error", //两种状态 error success
+      };
     },
     computed: {
       getImg() {
         return require("@/assets/imgs/" +
           (this.state === "error" ? "pay-error.png" : "pay-success.png"));
       },
+    },
+    mounted() {
+      this.state = this.$route.query.state;
     },
   };
 </script>

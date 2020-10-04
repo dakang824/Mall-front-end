@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-04 19:12:55
+ * @LastEditTime: 2020-10-04 20:34:57
 -->
 <template>
   <div class="pay">
@@ -60,7 +60,10 @@
     created() {},
     methods: {
       handlePay() {
-        this.$router.push({ path: "/cart/pay-result" });
+        this.$router.push({
+          path: "/cart/pay-result",
+          query: { state: "error" },
+        });
       },
     },
   };
