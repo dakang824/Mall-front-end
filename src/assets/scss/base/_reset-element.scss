@@ -1,0 +1,12 @@
+.el-checkbox {
+  &__input.is-checked {
+    + .el-checkbox__label {
+      color: $green !important;
+    }
+    .el-checkbox__inner,
+    .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+      background-color: $green !important;
+      border-color: $green !important;
+    }
+  }
+}

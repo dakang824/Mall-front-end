@@ -1,13 +1,21 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 
+ * @Date: 2020-10-02 22:32:19
+ * @LastEditTime: 2020-10-04 13:36:48
+-->
 <!--  -->
 <template>
-  <div class="cart-header">
-    <Logo />
-    <el-steps :active="2" align-center process-status="wait">
-      <el-step title="我的购物车"></el-step>
-      <el-step title="确认订单"></el-step>
-      <el-step title="付款"></el-step>
-      <el-step title="支付成功"></el-step>
-    </el-steps>
+  <div class="cart-header el-card no-border-radius">
+    <div class="w">
+      <Logo />
+      <el-steps :active="2" align-center process-status="wait">
+        <el-step title="我的购物车"></el-step>
+        <el-step title="确认订单"></el-step>
+        <el-step title="付款"></el-step>
+        <el-step title="支付成功"></el-step>
+      </el-steps>
+    </div>
   </div>
 </template>
 
@@ -27,26 +35,53 @@
   @import "@/assets/scss/settings";
 
   .cart-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .el-steps {
-      width: 800px;
-
-      ::v-deep .is-finish {
-        .el-step__icon {
-          color: #fff;
-          background: $error;
+    .w {
+      @include justify();
+      @include center-flex(y);
+      padding: 26px 0;
+      .logo {
+        width: auto;
+        @include center-flex(y);
+        &::after {
+          display: block;
+          width: 1px;
+          height: 112px;
+          margin: 0 25px 0 46px;
+          content: "";
+          background: #ebebeb;
         }
+      }
+      .el-steps {
+        width: 850px;
+        position: relative;
+        right: -65px;
+        ::v-deep {
+          .el-step {
+            &.is-horizontal .el-step__line {
+              top: 0;
+              bottom: 0;
+              margin: auto;
+            }
+            .el-step__icon {
+              width: 60px;
+              height: 60px;
+              font-size: 20px;
+            }
+          }
+          .is-finish {
+            .el-step__icon {
+              color: #fff;
+              background: $green;
+            }
+            &.el-step__title {
+              font-weight: bold;
+              color: $color3;
+            }
 
-        &.el-step__title {
-          font-weight: bold;
-          color: $color3;
-        }
-
-        &.el-step__head {
-          border-color: $error;
+            &.el-step__head {
+              border-color: $green;
+            }
+          }
         }
       }
     }
