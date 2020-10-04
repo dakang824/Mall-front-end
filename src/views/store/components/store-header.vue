@@ -61,14 +61,17 @@
   .store-header {
     &.w {
       @include center-flex(y);
+
       position: relative;
       padding: 26px 0;
     }
 
     background: $white;
+
     &__left {
       @include center-flex(y);
     }
+
     .store-name {
       display: flex;
 
@@ -112,6 +115,7 @@
         background: $colorBorder;
       }
     }
+
     .search--style2 {
       position: absolute;
       right: 369px;

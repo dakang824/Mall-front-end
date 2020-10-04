@@ -78,11 +78,13 @@
 
     .header {
       @include center-flex(y);
+
       .search {
-        margin-left: 93px;
         padding: 36px 0 39px 54px;
+        margin-left: 93px;
       }
     }
+
     .el-breadcrumb {
       padding: 20px 0;
       font-size: $text-medium;

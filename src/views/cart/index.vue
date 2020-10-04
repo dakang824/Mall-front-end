@@ -42,7 +42,7 @@
                 <el-col :span="6">
                   <div class="table__main__item__store">
                     <el-image
-                      style="width: 100px; height: 100px"
+                      style="width: 100px; height: 100px;"
                       :src="item.src"
                       fit="contain"
                     ></el-image>

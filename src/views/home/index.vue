@@ -44,11 +44,13 @@
 </script>
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .header {
     @include center-flex(y);
+
     .search {
-      margin-left: 93px;
       padding: 36px 0 39px 54px;
+      margin-left: 93px;
     }
   }
 </style>

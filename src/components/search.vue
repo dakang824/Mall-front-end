@@ -49,8 +49,10 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .search {
     background: $white;
+
     ::v-deep {
       .el-input {
         color: #a0a0a0;
@@ -67,8 +69,8 @@
       .el-input-group {
         &__append {
           padding: 0;
-          border-color: transparent;
           background-color: transparent;
+          border-color: transparent;
 
           .search {
             width: 239px;
@@ -79,6 +81,7 @@
         }
       }
     }
+
     &.search--style1 {
       .search__input {
         width: 1126px;
@@ -104,9 +107,9 @@
               justify-content: center;
               width: 184px;
               min-width: 184px;
-              line-height: 80px;
               margin-top: 2px;
               font-size: $text-medium;
+              line-height: 80px;
               color: #fff;
               cursor: pointer;
               background: $green;
