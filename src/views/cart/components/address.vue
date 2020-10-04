@@ -1,7 +1,6 @@
 <!-- 收货地址 -->
 <template>
   <div class="address">
-    <div class="title">选择收货地址</div>
     <div class="box">
       <div
         v-for="(item, index) in model"
@@ -19,6 +18,9 @@
         </div>
       </div>
     </div>
+    <el-button type="primary" icon="el-icon-plus" class="btn">
+      使用新地址
+    </el-button>
 
     <el-dialog title="提示" :visible.sync="show" width="45%">
       <el-form
@@ -89,7 +91,7 @@
     components: {},
     data() {
       return {
-        show: true,
+        show: false,
         options: regionDataPlus,
         selectedOptions: [],
         formData: {
@@ -177,12 +179,6 @@
   @import "@/assets/scss/settings";
 
   .address {
-    .title {
-      margin: 30px 0 0;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
     .box {
       @include center-flex(y);
 
@@ -192,11 +188,10 @@
         position: relative;
         width: 240px;
         padding: 15px 10px 10px;
-        margin-top: 20px;
         margin-right: 20px;
         cursor: pointer;
         background: #fff;
-        border: 2px dashed $error;
+        border: 2px dashed $green;
 
         .el-tag {
           position: absolute;
@@ -230,6 +225,9 @@
           }
         }
       }
+    }
+    .btn {
+      margin-top: $padding;
     }
   }
 </style>

@@ -14,6 +14,10 @@ $limitWidth: $max-width + ($horizontal-padding-medium * 2);
 // 元素上下间距
 //-----------------------------------------------------
 $gap: 20px !default;
+$gap-small: 10px !default;
+
+// padding 边距
+$padding: 10px;
 
 // header,footer等的高度
 //-----------------------------------------------------
