@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-04 18:21:55
+ * @LastEditTime: 2020-10-04 18:44:09
 -->
 <template>
   <div class="pay">
@@ -22,21 +22,9 @@
           <component :is="item.name"></component>
         </div>
       </div>
-
       <div class="el-card footer">
-        <div class="box el-card__inner">
-          <div class="box__info">
-            <p>
-              实付款：
-              <span>
-                <i>¥</i>
-                90.00
-              </span>
-            </p>
-            <p>寄送至：上海 上海 市徐汇区龙华西路 585号15A1</p>
-            <p>收货人：张力 18917923688</p>
-          </div>
-          <el-image :src="require('@/assets/imgs/pay-submit.png')"></el-image>
+        <div class="el-card__inner">
+          <PayFooter></PayFooter>
         </div>
       </div>
     </div>
@@ -48,12 +36,14 @@
   import Address from "./components/address.vue";
   import PayGoodsItem from "./components/pay-goods-item.vue";
   import PayType from "./components/pay-type.vue";
+  import PayFooter from "./components/pay-footer.vue";
   export default {
     components: {
       CartHeader,
       Address,
       PayGoodsItem,
       PayType,
+      PayFooter,
     },
     data() {
       return {
@@ -93,34 +83,11 @@
       &__inner {
         padding: $padding;
       }
-    }
-    .footer {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: $padding;
-      .box {
-        &__info {
-          text-align: right;
-          width: 420px;
-          height: 227px;
-          border: 1px solid $green;
-          padding: 35px $gap;
-          p {
-            span {
-              i {
-                font-size: $text-medium;
-              }
-              font-size: 30px;
-              font-weight: bold;
-              color: $green;
-            }
-            &:nth-child(2) {
-              padding: $gap 0;
-            }
-          }
+      &.footer {
+        margin-bottom: $padding;
+        .el-card__inner {
+          padding-bottom: 0;
         }
-        text-align: right;
-        padding-bottom: 0;
       }
     }
   }
