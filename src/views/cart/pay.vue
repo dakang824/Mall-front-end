@@ -2,45 +2,39 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-04 18:44:09
+ * @LastEditTime: 2020-10-04 19:12:55
 -->
 <template>
   <div class="pay">
-    <CartHeader></CartHeader>
-
-    <div class="w">
-      <div v-for="(item, index) in cards" :key="index" class="el-card">
-        <el-menu
-          default-active="1"
-          class="el-menu-demo"
-          mode="horizontal"
-          active-text-color="#04B85D"
-        >
-          <el-menu-item index="1">{{ item.title }}</el-menu-item>
-        </el-menu>
-        <div class="el-card__inner">
-          <component :is="item.name"></component>
-        </div>
+    <div v-for="(item, index) in cards" :key="index" class="el-card">
+      <el-menu
+        default-active="1"
+        class="el-menu-demo"
+        mode="horizontal"
+        active-text-color="#04B85D"
+      >
+        <el-menu-item index="1">{{ item.title }}</el-menu-item>
+      </el-menu>
+      <div class="el-card__inner">
+        <component :is="item.name"></component>
       </div>
-      <div class="el-card footer">
-        <div class="el-card__inner">
-          <PayFooter></PayFooter>
-        </div>
+    </div>
+    <div class="el-card footer">
+      <div class="el-card__inner">
+        <PayFooter @click="handlePay"></PayFooter>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import CartHeader from "./components/cart-header.vue";
-  import Address from "./components/address.vue";
+  import PayAddress from "./components/pay-address.vue";
   import PayGoodsItem from "./components/pay-goods-item.vue";
   import PayType from "./components/pay-type.vue";
   import PayFooter from "./components/pay-footer.vue";
   export default {
     components: {
-      CartHeader,
-      Address,
+      PayAddress,
       PayGoodsItem,
       PayType,
       PayFooter,
@@ -49,7 +43,7 @@
       return {
         cards: [
           {
-            name: "Address",
+            name: "PayAddress",
             title: "选择收货地址",
           },
           {
@@ -64,6 +58,11 @@
       };
     },
     created() {},
+    methods: {
+      handlePay() {
+        this.$router.push({ path: "/cart/pay-result" });
+      },
+    },
   };
 </script>
 

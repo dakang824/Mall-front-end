@@ -1,6 +1,6 @@
 <!-- 收货地址 -->
 <template>
-  <div class="address">
+  <div class="pay-address">
     <div class="box">
       <div
         v-for="(item, index) in model"
@@ -178,7 +178,7 @@
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
 
-  .address {
+  .pay-address {
     .box {
       @include center-flex(y);
 
@@ -218,7 +218,7 @@
 
         .footer {
           color: #c90;
-
+          font-size: $text-x-small;
           span {
             display: inline-block;
             padding: 10px 20px 0 0;

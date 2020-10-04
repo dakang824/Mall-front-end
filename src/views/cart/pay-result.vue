@@ -1,0 +1,188 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 支付状态页
+ * @Date: 2020-09-28 21:12:51
+ * @LastEditTime: 2020-10-04 20:22:56
+-->
+<!--  -->
+<template>
+  <div class="pay-reuslt" :class="'pay-reuslt--' + state">
+    <div class="el-card">
+      <div class="pay-reuslt__title">
+        <el-image :src="getImg"></el-image>
+        尚未支付成功
+      </div>
+      <div class="pay-reuslt__result">
+        <div v-if="state === 'error'">
+          <p>
+            如果您已付款，可能因为交易量激增导致交易单延迟处理（最长数秒至数分钟）
+          </p>
+          <p>
+            您可稍后
+            <span>刷新页面</span>
+            或前往
+            <span>我的订单</span>
+            查看支付情况
+          </p>
+        </div>
+        <div v-if="state === 'success'">
+          <ul>
+            <li>收货地址: 上海 上海 徐汇区龙华西路585号15A1 张力 1891792368</li>
+            <li>
+              实付款：¥
+              <span>90.00</span>
+            </li>
+          </ul>
+          <p>
+            您可以：
+            <span>查看买到的宝贝</span>
+            <span>查看交易记录</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div v-if="state === 'error'" class="el-card error">
+      <p>以下交易单尚未支付成功，请尽快完成支付！</p>
+      <ul>
+        <li>
+          交易单号：
+          <span>39628432832743749087</span>
+        </li>
+        <li>
+          应付金额：
+          <span>¥90.00</span>
+        </li>
+      </ul>
+      <div class="box">
+        <PayType></PayType>
+        <el-image :src="require('@/assets/imgs/error-pay.png')"></el-image>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import PayType from "./components/pay-type.vue";
+  export default {
+    name: "PayResult",
+    components: { PayType },
+    props: {
+      state: {
+        type: String,
+        default: "success", //两种状态 error success
+      },
+    },
+    data() {
+      return {};
+    },
+    computed: {
+      getImg() {
+        return require("@/assets/imgs/" +
+          (this.state === "error" ? "pay-error.png" : "pay-success.png"));
+      },
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+  @import "@/assets/scss/settings";
+  .pay-reuslt {
+    font-size: $text-medium;
+    &__title {
+      color: #fff;
+      @include center-flex(y);
+      .el-image {
+        margin: $gap 28px;
+      }
+    }
+    &--error {
+      .pay-reuslt {
+        &__title {
+          background: $error;
+        }
+        &__result {
+          padding: 38px 128px;
+          p {
+            margin-bottom: 20px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+            span {
+              color: $green;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+    &--success {
+      .pay-reuslt {
+        &__title {
+          background: $green;
+        }
+        &__result {
+          padding: 38px 128px;
+          ul {
+            li {
+              @include center-flex(y);
+              &::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50px;
+                background: $black;
+                display: block;
+                margin-right: 10px;
+              }
+              margin-bottom: 20px;
+              &:last-child {
+                margin-bottom: 0;
+              }
+              span {
+                color: $green;
+              }
+            }
+          }
+          p {
+            margin: 50px 0 0 15px;
+            span {
+              color: $green;
+              margin-left: 40px;
+            }
+          }
+        }
+      }
+    }
+    .error {
+      p {
+        padding: 28px 30px;
+      }
+      ul {
+        @include center-flex(y);
+        padding-left: 75px;
+        border-bottom: solid 1px #e6e6e6;
+        padding-bottom: $padding;
+        li {
+          margin-right: 122px;
+          span {
+            color: $error;
+          }
+        }
+      }
+      .box {
+        padding: $padding;
+        text-align: right;
+        .el-image {
+          margin: 83px 0 51px;
+          cursor: pointer;
+        }
+      }
+    }
+    .el-card {
+      margin: $padding 0 0;
+      &:last-child {
+        margin-bottom: $padding;
+      }
+    }
+  }
+</style>

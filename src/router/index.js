@@ -1,3 +1,9 @@
+/*
+ * @Author: yukang 1172248038@qq.com
+ * @Description:
+ * @Date: 2020-09-16 23:23:12
+ * @LastEditTime: 2020-10-04 19:12:20
+ */
 import Vue from "vue";
 import VueRouter from "vue-router";
 
@@ -29,12 +35,26 @@ const routes = [
         path: "/cart",
         name: "Cart",
         component: () => import("@/views/cart/index.vue"),
+        redirect: "/cart/",
+        children: [
+          {
+            path: "/",
+            name: "Cart",
+            component: () => import("@/views/cart/cart.vue"),
+          },
+          {
+            path: "pay",
+            name: "Pay",
+            component: () => import("@/views/cart/pay.vue"),
+          },
+          {
+            path: "pay-result",
+            name: "PayResult",
+            component: () => import("@/views/cart/pay-result.vue"),
+          },
+        ],
       },
-      {
-        path: "pay",
-        name: "Pay",
-        component: () => import("@/views/cart/pay.vue"),
-      },
+
       {
         path: "/demo",
         name: "Demo",

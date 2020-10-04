@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确定订单
  * @Date: 2020-10-04 18:36:18
- * @LastEditTime: 2020-10-04 18:43:24
+ * @LastEditTime: 2020-10-04 19:10:38
 -->
 <template>
   <div class="footer">
@@ -18,7 +18,10 @@
         <p>寄送至：上海 上海 市徐汇区龙华西路 585号15A1</p>
         <p>收货人：张力 18917923688</p>
       </div>
-      <el-image :src="require('@/assets/imgs/pay-submit.png')"></el-image>
+      <el-image
+        :src="require('@/assets/imgs/pay-submit.png')"
+        @click="handleSubmit"
+      ></el-image>
     </div>
   </div>
 </template>
@@ -28,6 +31,11 @@
     components: {},
     data() {
       return {};
+    },
+    methods: {
+      handleSubmit() {
+        this.$emit("click");
+      },
     },
   };
 </script>
