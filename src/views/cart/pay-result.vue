@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-10-04 20:30:38
+ * @LastEditTime: 2020-10-04 20:36:17
 -->
 <!--  -->
 <template>
@@ -147,6 +147,8 @@
             span {
               color: $green;
               margin-left: 40px;
+              text-decoration: underline;
+              cursor: pointer;
             }
           }
         }

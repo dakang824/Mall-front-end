@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-10-04 19:12:20
+ * @LastEditTime: 2020-10-05 18:25:55
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -30,6 +30,11 @@ const routes = [
         path: "/store",
         name: "Store",
         component: () => import("@/views/store/index.vue"),
+      },
+      {
+        path: "/goods-detail",
+        name: "GoodsDetail",
+        component: () => import("@/views/goods/goods-detail.vue"),
       },
       {
         path: "/cart",

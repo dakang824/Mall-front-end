@@ -1,3 +1,9 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 
+ * @Date: 2020-10-02 22:32:19
+ * @LastEditTime: 2020-10-05 20:59:51
+-->
 <!-- 商铺 -->
 <template>
   <div class="store">
@@ -5,17 +11,7 @@
     <div class="box w">
       <el-container>
         <el-aside width="278px">
-          <ul>
-            <li class="title">店内分类</li>
-            <li
-              v-for="(item, index) in 7"
-              :key="index"
-              :class="{ active: index === current }"
-              @click="handleChange(index)"
-            >
-              分类{{ item }}
-            </li>
-          </ul>
+          <StoreAside></StoreAside>
         </el-aside>
         <el-main>
           <StoreTabs></StoreTabs>
@@ -29,25 +25,22 @@
 <script>
   import StoreHeader from "./components/store-header.vue";
   import StoreTabs from "./components/store-tabs.vue";
+  import StoreAside from "./components/store-aside.vue";
   import GoodsCard from "./components/goods-card.vue";
+
   export default {
     name: "Store",
     components: {
       StoreHeader,
       StoreTabs,
+      StoreAside,
       GoodsCard,
     },
     data() {
-      return {
-        current: 0,
-      };
+      return {};
     },
     created() {},
-    methods: {
-      handleChange(e) {
-        this.current = e;
-      },
-    },
+    methods: {},
   };
 </script>
 <style lang="scss" scoped>
@@ -56,33 +49,6 @@
   .store {
     .el-aside {
       margin: 10px 10px 0 0;
-
-      ul {
-        li {
-          box-sizing: border-box;
-          padding: 16px 0;
-          font-size: $text-medium;
-          text-align: center;
-          cursor: pointer;
-          background: #fff;
-          border-bottom: 1px dashed $colorBorder;
-
-          &.active {
-            color: #282828;
-            border: 2px solid $green;
-          }
-
-          &:last-child {
-            border-bottom: 0;
-          }
-
-          &.title {
-            color: #fff;
-            background: #5a5a5a;
-            border-bottom: 0;
-          }
-        }
-      }
     }
 
     .el-main {
