@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-05 22:27:40
+ * @LastEditTime: 2020-10-05 22:38:09
 -->
 <!-- 商品详情 -->
 <template>
@@ -12,7 +12,7 @@
       <el-container class="goods-detail__main">
         <el-main class="el-card">
           <div class="imgs">
-            <el-image :src="imgs[current]"></el-image>
+            <pic-zoom :url="imgs[current]" :scale="3"></pic-zoom>
             <div class="small">
               <swiper
                 ref="mySwiper"
@@ -161,6 +161,7 @@
 <script>
   import StoreHeader from "../store/components/store-header.vue";
   import StoreAside from "../store/components/store-aside.vue";
+  import PicZoom from "vue-piczoom";
   import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
   import "swiper/swiper-bundle.css";
   export default {
@@ -169,6 +170,7 @@
       Swiper,
       SwiperSlide,
       StoreAside,
+      PicZoom,
     },
     directives: {
       swiper: directive,
@@ -260,6 +262,11 @@
           require("@/assets/imgs/imgs3.png"),
           require("@/assets/imgs/imgs4.png"),
           require("@/assets/imgs/imgs5.png"),
+          require("@/assets/imgs/goods2.png"),
+          require("@/assets/imgs/imgs2.png"),
+          require("@/assets/imgs/imgs3.png"),
+          require("@/assets/imgs/imgs4.png"),
+          require("@/assets/imgs/imgs5.png"),
         ],
       };
     },
@@ -295,9 +302,15 @@
           display: flex;
           .imgs {
             width: 440px;
-            .el-image {
-              width: 440px;
-              height: 440px;
+            ::v-deep {
+              .magnifier-box {
+                img {
+                  width: 440px;
+                }
+                width: 440px;
+                height: 440px;
+                margin-bottom: $padding;
+              }
             }
             .small {
               .el-image {
