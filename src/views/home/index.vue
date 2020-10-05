@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 首页
  * @Date: 2020-09-28 21:15:23
- * @LastEditTime: 2020-10-03 20:56:30
+ * @LastEditTime: 2020-10-05 23:45:00
 -->
 <template>
   <div class="home">

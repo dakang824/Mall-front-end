@@ -1,6 +1,12 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 
+ * @Date: 2020-10-02 22:32:19
+ * @LastEditTime: 2020-10-05 23:45:11
+-->
 <!-- 商品item -->
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="handleGoDetail">
     <el-card :body-style="{ padding: '0px' }" shadow="hover">
       <el-image :src="model.img"></el-image>
       <div class="box">
@@ -31,6 +37,11 @@
     },
     data() {
       return {};
+    },
+    methods: {
+      handleGoDetail() {
+        this.$router.push({ path: "/goods-detail" });
+      },
     },
   };
 </script>
