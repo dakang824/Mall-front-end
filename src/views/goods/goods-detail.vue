@@ -104,40 +104,51 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .goods-detail {
     font-size: $text-medium;
+
     &__main {
       margin: $padding 0 $padding;
+
       .el-main {
-        margin-right: $padding;
         padding: $padding;
+        margin-right: $padding;
+
         &.el-card {
           display: flex;
 
           .info {
             flex: 1;
             margin-left: 24px;
+
             &__title {
               font-size: 22px;
               font-weight: bold;
             }
+
             &__money {
-              background: #e6e6e6;
-              margin: 9px 0 0 0;
               padding: 8px 5px;
+              margin: 9px 0 0 0;
+              background: #e6e6e6;
+
               i {
                 text-decoration: line-through;
               }
+
               span {
                 font-size: 28px;
-                color: $error;
                 font-weight: bold;
+                color: $error;
               }
             }
+
             &__sku {
               @include center-flex(y);
+
               flex-wrap: wrap;
               margin-top: 40px;
+
               ul {
                 display: flex;
                 flex-wrap: wrap;
@@ -145,58 +156,69 @@
                 li {
                   width: 103px;
                   height: 54px;
-                  border: 1px solid $color3;
-                  text-align: center;
-                  line-height: 54px;
                   margin-left: 12px;
+                  line-height: 54px;
+                  text-align: center;
                   cursor: pointer;
+                  border: 1px solid $color3;
+
                   &.active {
-                    border-color: $error;
                     color: $error;
+                    border-color: $error;
                   }
+
                   &.disable {
-                    opacity: 0.6;
                     cursor: not-allowed;
+                    opacity: 0.6;
                   }
                 }
               }
             }
+
             &__number {
               @include center-flex(y);
+
               flex-wrap: wrap;
               margin-top: 40px;
+
               span {
                 margin-left: 60px;
               }
+
               ::v-deep {
                 .el-input-number {
                   width: 189px;
                   margin: 0 8px 0 30px;
+
                   &__increase,
                   &__decrease {
                     border: 1px solid $color3;
                     border-radius: 0;
                   }
+
                   .el-input__inner {
                     width: 139px;
                     height: 54px;
+                    font-size: $text-medium;
                     border-color: $color3;
                     border-radius: 0;
-                    font-size: $text-medium;
                   }
                 }
               }
             }
+
             .btns {
               margin: 40px 15px 0 40px;
+
               @include center-flex(y);
+
               .el-button {
                 width: 333px;
-                background: $green;
                 height: 69px;
+                margin-right: 10px;
                 font-size: 22px;
                 color: #fff;
-                margin-right: 10px;
+                background: $green;
                 border-radius: 0;
               }
             }
@@ -204,6 +226,7 @@
         }
       }
     }
+
     &__info {
       .el-main {
         padding: 0;

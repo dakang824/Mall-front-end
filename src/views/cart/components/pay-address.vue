@@ -217,8 +217,9 @@
         }
 
         .footer {
-          color: #c90;
           font-size: $text-x-small;
+          color: #c90;
+
           span {
             display: inline-block;
             padding: 10px 20px 0 0;
@@ -226,6 +227,7 @@
         }
       }
     }
+
     .btn {
       margin-top: $padding;
     }

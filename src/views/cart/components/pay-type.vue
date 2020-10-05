@@ -19,7 +19,7 @@
         </div>
         <div v-else>
           <el-image
-            style="width: 80px; height: 80px"
+            style="width: 80px; height: 80px;"
             :src="item.img"
             fit="contain"
           ></el-image>
@@ -61,25 +61,32 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .pay-type {
     ul {
       @include center-flex(y);
+
       font-size: $text-medium;
+
       li {
-        border: 2px dashed $black;
         width: 282px;
         height: 148px;
         margin-right: $padding;
-        @include center-flex();
-        cursor: pointer;
         text-align: center;
+        cursor: pointer;
+        border: 2px dashed $black;
+
+        @include center-flex();
+
         .no-money {
-          color: #ff0000;
+          color: #f00;
         }
+
         &.active {
-          border-color: $green;
           color: $green;
+          border-color: $green;
         }
+
         &:nth-child(2),
         &:nth-child(3) {
           > div {

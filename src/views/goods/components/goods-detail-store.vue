@@ -60,56 +60,69 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .goods-detail-store {
     .store {
-      text-align: center;
       padding: 20px 0 15px;
       margin-bottom: $padding;
+      text-align: center;
+
       &__title {
-        color: $green;
         margin-bottom: 17px;
+        color: $green;
       }
+
       ul {
         @include center-flex(y);
+
         li {
           flex: 1;
+
           span {
-            color: #ff6000;
-            font-size: $text-small;
             display: block;
+            font-size: $text-small;
+            color: #ff6000;
           }
         }
       }
 
       &__info {
         padding: 30px 10px;
+
         .compare {
           @include center-flex(y);
+
           ul {
             flex: 1;
             text-align: center;
+
             li {
               margin-bottom: 17px;
               font-size: $text-small;
+
               &:first-child {
                 font-size: $text-medium;
               }
             }
           }
         }
+
         p {
           margin: 10px 0 0 11px;
         }
+
         .btns {
           @include center-flex(y);
+
           margin: 40px 0 16px 0;
+
           .el-button {
             width: 153px;
-            background: $green;
             height: 55px;
+            margin-right: 10px;
             font-size: 22px;
             color: #fff;
-            margin-right: 10px;
+            background: $green;
             border-radius: 0;
           }
         }

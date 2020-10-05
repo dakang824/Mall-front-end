@@ -46,6 +46,7 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .store-aside {
     ul {
       li {

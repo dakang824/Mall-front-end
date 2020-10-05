@@ -85,27 +85,36 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .pay-reuslt {
     font-size: $text-medium;
+
     &__title {
       color: #fff;
+
       @include center-flex(y);
+
       .el-image {
         margin: $gap 28px;
       }
     }
+
     &--error {
       .pay-reuslt {
         &__title {
           background: $error;
         }
+
         &__result {
           padding: 38px 128px;
+
           p {
             margin-bottom: 20px;
+
             &:last-child {
               margin-bottom: 0;
             }
+
             span {
               color: $green;
               text-decoration: underline;
@@ -114,39 +123,48 @@
         }
       }
     }
+
     &--success {
       .pay-reuslt {
         &__title {
           background: $green;
         }
+
         &__result {
           padding: 38px 128px;
+
           ul {
             li {
               @include center-flex(y);
+
               &::before {
-                content: "";
+                display: block;
                 width: 6px;
                 height: 6px;
-                border-radius: 50px;
-                background: $black;
-                display: block;
                 margin-right: 10px;
+                content: "";
+                background: $black;
+                border-radius: 50px;
               }
+
               margin-bottom: 20px;
+
               &:last-child {
                 margin-bottom: 0;
               }
+
               span {
                 color: $green;
               }
             }
           }
+
           p {
             margin: 50px 0 0 15px;
+
             span {
-              color: $green;
               margin-left: 40px;
+              color: $green;
               text-decoration: underline;
               cursor: pointer;
             }
@@ -154,33 +172,42 @@
         }
       }
     }
+
     .error {
       p {
         padding: 28px 30px;
       }
+
       ul {
         @include center-flex(y);
+
+        padding-bottom: $padding;
         padding-left: 75px;
         border-bottom: solid 1px #e6e6e6;
-        padding-bottom: $padding;
+
         li {
           margin-right: 122px;
+
           span {
             color: $error;
           }
         }
       }
+
       .box {
         padding: $padding;
         text-align: right;
+
         .el-image {
           margin: 83px 0 51px;
           cursor: pointer;
         }
       }
     }
+
     .el-card {
       margin: $padding 0 0;
+
       &:last-child {
         margin-bottom: $padding;
       }

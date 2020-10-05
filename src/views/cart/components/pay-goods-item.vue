@@ -9,13 +9,13 @@
           justify="space-between"
           align="middle"
         >
-          <el-col :span="4" style="width: 12.66667%">店铺商品</el-col>
-          <el-col :span="2" style="position: relative; left: 49px">
+          <el-col :span="4" style="width: 12.66667%;">店铺商品</el-col>
+          <el-col :span="2" style="position: relative; left: 49px;">
             商品属性
           </el-col>
           <el-col :span="1">单价</el-col>
           <el-col :span="1">数量</el-col>
-          <el-col :span="2" style="position: relative; left: -22px">
+          <el-col :span="2" style="position: relative; left: -22px;">
             金额（元）
           </el-col>
         </el-row>
@@ -34,7 +34,7 @@
               <el-col :span="5">
                 <div class="table__main__item__store">
                   <el-image
-                    style="width: 80px; height: 80px"
+                    style="width: 80px; height: 80px;"
                     :src="item.src"
                     fit="contain"
                   ></el-image>
@@ -126,12 +126,15 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .pay-goods-item {
     font-size: $text-medium;
+
     &__main {
       &__table {
         padding: 0 10px;
       }
+
       .table__header {
         padding: 20px 20px 0;
         text-align: center;
@@ -139,8 +142,10 @@
 
       .table__main {
         margin: 33px 0 0 0;
+
         &__box {
           border: solid 1px #e6e6e6;
+
           > .el-row {
             &:last-child {
               padding: $gap;
@@ -152,12 +157,15 @@
         &__item {
           padding: 15px $gap;
           border-bottom: solid 1px #e6e6e6;
+
           &:last-child {
             border-color: transparent;
           }
+
           .el-checkbox {
             margin-left: 20px;
           }
+
           .el-button {
             font-size: $text-medium;
             color: #969696;
@@ -180,8 +188,10 @@
 
         &__store {
           padding: 15px 0;
+
           @include center-flex(y);
         }
+
         &:last-child {
           margin-bottom: 10px;
         }
@@ -189,23 +199,28 @@
 
       .el-menu {
         ::v-deep .el-menu-item.is-active {
-          font-weight: bold;
           font-size: $text-medium;
+          font-weight: bold;
         }
       }
+
       .el-form {
         &__row {
           padding: $gap;
+
           ::v-deep {
             .el-form {
               &-item {
                 @include center-flex(y);
+
                 margin-bottom: 0;
+
                 &__label {
                   font-size: $text-medium;
                   color: #303133;
                 }
               }
+
               textarea {
                 width: 623px;
                 height: 90px;
@@ -214,17 +229,21 @@
           }
         }
       }
+
       .money {
         font-weight: bold;
         color: $green;
       }
+
       ::v-deep .el-checkbox {
         &__label {
           font-size: $text-medium;
         }
+
         &__inner {
           width: 20px;
           height: 20px;
+
           &::after {
             top: 4px;
             left: 7px;

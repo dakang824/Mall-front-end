@@ -42,30 +42,36 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .footer {
     display: flex;
     justify-content: flex-end;
+
     .box {
       &__info {
-        text-align: right;
         width: 420px;
         height: 227px;
-        border: 1px solid $green;
         padding: 35px $gap;
+        text-align: right;
+        border: 1px solid $green;
+
         p {
           span {
             i {
               font-size: $text-medium;
             }
+
             font-size: 30px;
             font-weight: bold;
             color: $green;
           }
+
           &:nth-child(2) {
             padding: $gap 0;
           }
         }
       }
+
       text-align: right;
     }
   }

@@ -28,38 +28,44 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .goods-detail-info {
     ::v-deep {
       .el-tabs {
         &__content {
           padding: $padding;
         }
+
         .el-tabs__item {
-          height: 54px;
-          line-height: 54px;
-          font-size: $text-medium;
-          padding: 0;
-          color: $black;
-          width: 297px;
-          text-align: center;
           position: relative;
+          width: 297px;
+          height: 54px;
+          padding: 0;
+          font-size: $text-medium;
+          line-height: 54px;
+          color: $black;
+          text-align: center;
+
           &:hover {
             color: $green;
           }
+
           &.is-active {
             color: $green;
+
             &::after {
-              width: 100%;
-              height: 4px;
-              background: $green;
-              content: "";
-              display: block;
               position: absolute;
               top: 0;
               left: 0;
+              display: block;
+              width: 100%;
+              height: 4px;
+              content: "";
+              background: $green;
             }
           }
         }
+
         &--border-card {
           & > .el-tabs__header {
             background-color: #d4d4d4;

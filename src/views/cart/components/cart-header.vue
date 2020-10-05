@@ -38,10 +38,14 @@
     .w {
       @include justify();
       @include center-flex(y);
+
       padding: 26px 0;
+
       .logo {
         width: auto;
+
         @include center-flex(y);
+
         &::after {
           display: block;
           width: 1px;
@@ -51,10 +55,12 @@
           background: #ebebeb;
         }
       }
+
       .el-steps {
-        width: 850px;
         position: relative;
         right: -65px;
+        width: 850px;
+
         ::v-deep {
           .el-step {
             &.is-horizontal .el-step__line {
@@ -62,17 +68,20 @@
               bottom: 0;
               margin: auto;
             }
+
             .el-step__icon {
               width: 60px;
               height: 60px;
               font-size: 20px;
             }
           }
+
           .is-finish {
             .el-step__icon {
               color: #fff;
               background: $green;
             }
+
             &.el-step__title {
               font-weight: bold;
               color: $color3;

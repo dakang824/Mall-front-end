@@ -108,21 +108,24 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .goods-detail-aside {
     ::v-deep {
       .el-tabs {
         .el-tabs__item {
           height: 54px;
-          line-height: 54px;
-          font-size: $text-medium;
           padding: 0;
-          padding-left: 0 !important;
           padding-right: 0 !important;
+          padding-left: 0 !important;
+          font-size: $text-medium;
+          line-height: 54px;
           color: $black;
+
           &:hover {
             color: $green;
           }
         }
+
         &--border-card {
           & > .el-tabs__header {
             background-color: #d4d4d4;
@@ -130,26 +133,31 @@
         }
       }
     }
+
     .store-aside {
       margin-right: $padding;
       margin-bottom: $padding;
 
       .goods-item {
         @include center-flex(y);
+
         margin-bottom: $padding;
         font-size: $text-small;
+
         &:last-child {
           margin-bottom: 0;
         }
+
         .el-image {
-          min-width: 80px;
           width: 80px;
+          min-width: 80px;
           height: 80px;
           margin-right: $padding;
         }
+
         span {
-          color: $error;
           font-weight: bold;
+          color: $error;
         }
       }
     }

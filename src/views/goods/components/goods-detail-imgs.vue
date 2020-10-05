@@ -75,19 +75,23 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .goods-detail-imgs {
     .imgs {
       width: 440px;
+
       ::v-deep {
         .magnifier-box {
           img {
             width: 440px;
           }
+
           width: 440px;
           height: 440px;
           margin-bottom: $padding;
         }
       }
+
       .small {
         .el-image {
           width: 80px;
@@ -95,9 +99,11 @@
           cursor: pointer;
         }
       }
+
       .collec {
-        text-align: right;
         padding: 3px 0 0;
+        text-align: right;
+
         .el-image {
           width: 22px;
           height: 22px;

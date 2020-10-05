@@ -74,19 +74,24 @@
 
   .pay {
     font-size: $text-medium;
+
     .el-menu {
       ::v-deep .el-menu-item.is-active {
-        font-weight: bold;
         font-size: $text-medium;
+        font-weight: bold;
       }
     }
+
     .el-card {
       margin-top: $gap-small;
+
       &__inner {
         padding: $padding;
       }
+
       &.footer {
         margin-bottom: $padding;
+
         .el-card__inner {
           padding-bottom: 0;
         }
