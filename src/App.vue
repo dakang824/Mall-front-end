@@ -8,7 +8,7 @@
   @import "assets/scss/base.scss";
 
   #app {
-    height: 100%;
     min-width: 1614px;
+    height: 100%;
   }
 </style>

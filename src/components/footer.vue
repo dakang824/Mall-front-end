@@ -28,11 +28,12 @@
 <style lang="scss" scoped>
   .footer {
     background: #fff;
+
     .el-footer {
       font-size: 18px;
+      line-height: 146px;
       color: #1b1b1b;
       text-align: center;
-      line-height: 146px;
     }
   }
 </style>
