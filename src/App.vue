@@ -9,7 +9,6 @@
 
   #app {
     height: 100%;
-    font-family: Microsoft YaHei;
-    background: $colorBg;
+    min-width: 1614px;
   }
 </style>
