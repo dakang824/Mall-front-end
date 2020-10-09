@@ -22,23 +22,23 @@
           class="el-form"
         >
           <div class="el-form__title">账号登录</div>
-          <el-form-item prop="username" label-width="auto">
+          <el-form-item prop="account" label-width="auto">
             <el-image
               :src="require('@/assets/imgs/login-user.png')"
               class="icon"
             ></el-image>
             <el-input
-              v-model="form.username"
+              v-model="form.account"
               placeholder="请输入账号"
             ></el-input>
           </el-form-item>
-          <el-form-item prop="password" label-width="auto">
+          <el-form-item prop="pwd" label-width="auto">
             <el-image
               :src="require('@/assets/imgs/login-password.png')"
               class="icon"
             ></el-image>
             <el-input
-              v-model="form.password"
+              v-model="form.pwd"
               placeholder="请输入密码"
               type="password"
             ></el-input>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+  import { login } from "@/api/user";
   import Footer from "@/components/footer.vue";
   import Logo from "@/components/logo.vue";
   import IdentifyCode from "@/components/identify-code.vue";
@@ -99,15 +100,15 @@
       return {
         identifyCode: "",
         form: {
-          username: "",
-          password: "",
+          account: "",
+          pwd: "",
           code: "",
         },
         rules: {
-          username: [
+          account: [
             { required: true, message: "请输入用户名", trigger: "blur" },
           ],
-          password: [
+          pwd: [
             {
               required: true,
               trigger: "blur",
@@ -134,8 +135,11 @@
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate(async (valid) => {
           if (valid) {
+            const res = await login(this.form);
+            console.log(res);
+            return;
             this.$router.push("/");
           } else {
             console.log("error submit!!");

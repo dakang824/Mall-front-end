@@ -1,3 +1,8 @@
+/*
+ * @Author: yukang 1172248038@qq.com
+ * @Date: 2020-09-20 20:10:07
+ * @LastEditTime: 2020-10-09 23:13:00
+ */
 module.exports = {
   // @token在Cookie中存储的天数，默认1天
   cookieExpires: 30,
@@ -7,7 +12,7 @@ module.exports = {
       ? "http://localhost:8080/"
       : "vab-mock-server",
   //配后端数据的接收方式application/json;charset=UTF-8或者application/x-www-form-urlencoded;charset=UTF-8
-  contentType: "application/json;charset=UTF-8",
+  contentType: "application/x-www-form-urlencoded;charset=UTF-8",
   //需要加loading层的请求，防止重复提交
   debounce: ["doEdit"],
   //最长请求时间
