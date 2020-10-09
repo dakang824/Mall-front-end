@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-05 23:25:52
+ * @LastEditTime: 2020-10-09 21:39:40
 -->
 <!-- 商品详情 -->
 <template>
@@ -16,7 +16,13 @@
             <div class="info__title">
               四川正宗家用烧菜烧豆腐四川正宗家用烧菜烧豆腐
             </div>
-            <div class="info__desc">四川正宗家用烧菜烧豆腐</div>
+            <div class="info__desc">
+              <span v-if="type === 1">四川正宗家用烧菜烧豆腐</span>
+              <span v-else>
+                <i>难度：有挑战</i>
+                <i>时长：10-30分钟</i>
+              </span>
+            </div>
             <div class="info__money">
               <p>
                 价格：
@@ -27,29 +33,40 @@
                 <span>¥18.90</span>
               </p>
             </div>
-            <div class="info__sku">
-              净含量：
-              <ul>
-                <li class="active">2.5kg</li>
-                <li>5kg</li>
-                <li>7.5kg</li>
-                <li>10kg</li>
-                <li class="disable">15kg</li>
-                <li class="disable">20kg</li>
-              </ul>
+            <div v-if="type === 1">
+              <div class="info__sku">
+                净含量：
+                <ul>
+                  <li class="active">2.5kg</li>
+                  <li>5kg</li>
+                  <li>7.5kg</li>
+                  <li>10kg</li>
+                  <li class="disable">15kg</li>
+                  <li class="disable">20kg</li>
+                </ul>
+              </div>
+              <div class="info__number">
+                数量：
+                <el-input-number
+                  v-model="num"
+                  controls-position="right"
+                  :min="1"
+                  :max="10"
+                  @change="handleChange"
+                ></el-input-number>
+                件
+                <span>库存1200件</span>
+              </div>
             </div>
-            <div class="info__number">
-              数量：
-              <el-input-number
-                v-model="num"
-                controls-position="right"
-                :min="1"
-                :max="10"
-                @change="handleChange"
-              ></el-input-number>
-              件
-              <span>库存1200件</span>
+            <div v-else class="info__formula">
+              <span>菜谱配方：</span>
+              <div>
+                <ul v-for="(item, index) in formula" :key="index">
+                  <li v-for="(it, ind) in item" :key="ind">{{ it }}</li>
+                </ul>
+              </div>
             </div>
+
             <div class="btns">
               <el-button>立即购买</el-button>
               <el-image :src="require('@/assets/imgs/add-cart.png')"></el-image>
@@ -86,6 +103,12 @@
     data() {
       return {
         num: 1,
+        type: this.$route.query.type,
+        formula: [
+          ["序号", 1, 2, 3, 4],
+          ["食材", "尖椒", "猪肉", "其他", "其他"],
+          ["重量(份)", "500g", "1kg", "500g", "500g"],
+        ],
       };
     },
     computed: {
@@ -93,7 +116,7 @@
         return this.$refs.mySwiper.$swiper;
       },
     },
-
+    created() {},
     methods: {
       handleChange(e) {
         console.log(e);
@@ -126,7 +149,35 @@
               font-size: 22px;
               font-weight: bold;
             }
-
+            &__desc {
+              i {
+                margin-right: 30px;
+              }
+            }
+            &__formula {
+              display: flex;
+              margin: 56px 0 44px 0;
+              ul {
+                @include center-flex(y);
+                li {
+                  width: 109px;
+                  height: 42px;
+                  line-height: 42px;
+                  text-align: center;
+                  border-top: 1px solid $colorC;
+                  border-left: 1px solid $colorC;
+                  &:last-child {
+                    border-right: 1px solid $colorC;
+                  }
+                  &:first-child {
+                    background: #e2e2e2;
+                  }
+                }
+                &:last-child {
+                  border-bottom: 1px solid $colorC;
+                }
+              }
+            }
             &__money {
               padding: 8px 5px;
               margin: 9px 0 0 0;

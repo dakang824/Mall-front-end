@@ -10,7 +10,18 @@
     <div class="box w">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>蔬菜</el-breadcrumb-item>
+        <el-breadcrumb-item>
+          <ul>
+            <li
+              v-for="(item, index) in topCategory"
+              :key="index"
+              :class="{ active: index === topCateCurrent }"
+              @click="handleChangeCurrent(index)"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </el-breadcrumb-item>
       </el-breadcrumb>
       <div class="screen el-card">
         <div v-for="(item, index) in list" :key="index" class="screen__row">
@@ -42,8 +53,16 @@
     data() {
       return {
         currentPage: 1,
-        current: 0,
-
+        topCateCurrent: 0,
+        topCategory: [
+          "蔬菜",
+          "肉蛋禽",
+          "海鲜水产",
+          "速冻食品",
+          "粮油调味",
+          "菜系",
+          "设备",
+        ],
         list: [
           {
             title: "分类",
@@ -66,8 +85,12 @@
         ],
       };
     },
-    created() {},
-    methods: {},
+
+    methods: {
+      handleChangeCurrent(e) {
+        this.topCateCurrent = e;
+      },
+    },
   };
 </script>
 <style lang="scss" scoped>
@@ -113,19 +136,34 @@
           @include center-flex(y);
 
           li {
-            margin-right: 20px;
+            margin-right: $gap;
           }
         }
       }
     }
 
-    ::v-deep .goods-card {
-      margin-bottom: 10px;
+    ::v-deep {
+      .el-breadcrumb__item {
+        ul {
+          @include center-flex(y);
+          li {
+            margin-right: $gap;
+            color: $colorC;
+            cursor: pointer;
+            &.active {
+              color: $green;
+            }
+          }
+        }
+      }
+      .goods-card {
+        margin-bottom: 10px;
 
-      .box {
-        > .goods-item {
-          &:nth-child(5n) {
-            margin-right: 0;
+        .box {
+          > .goods-item {
+            &:nth-child(5n) {
+              margin-right: 0;
+            }
           }
         }
       }

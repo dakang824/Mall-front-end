@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-10-05 18:25:55
+ * @LastEditTime: 2020-10-09 21:40:02
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -32,7 +32,7 @@ const routes = [
         component: () => import("@/views/store/index.vue"),
       },
       {
-        path: "/goods-detail",
+        path: "/goods-detail/",
         name: "GoodsDetail",
         component: () => import("@/views/goods/goods-detail.vue"),
       },
@@ -75,6 +75,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  scrollBehavior: () => ({ y: 0 }),
   routes,
 });
 

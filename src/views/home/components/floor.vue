@@ -27,7 +27,7 @@
       </el-aside>
       <el-main class="clearfix">
         <div v-for="(item, index) in list" :key="index" class="goods-item fl">
-          <GoodsItem :model="item"></GoodsItem>
+          <GoodsItem :model="item" :type="model === '菜谱' ? 2 : 1"></GoodsItem>
         </div>
       </el-main>
     </el-container>

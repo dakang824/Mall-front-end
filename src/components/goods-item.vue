@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-05 23:45:11
+ * @LastEditTime: 2020-10-09 22:57:10
 -->
 <!-- 商品item -->
 <template>
@@ -12,7 +12,6 @@
       <div class="box">
         <span class="title">{{ model.title }}</span>
         <div class="middle">
-          <span>评价{{ model.assess }}</span>
           <span>收藏{{ model.collect }}</span>
         </div>
         <div class="footer">
@@ -28,6 +27,11 @@
   export default {
     components: {},
     props: {
+      //type 1普通商品,2菜谱
+      type: {
+        type: Number,
+        default: 1,
+      },
       model: {
         type: Object,
         default: () => {
@@ -40,7 +44,10 @@
     },
     methods: {
       handleGoDetail() {
-        this.$router.push({ path: "/goods-detail" });
+        this.$router.push({
+          name: "GoodsDetail",
+          query: { type: this.type },
+        });
       },
     },
   };
