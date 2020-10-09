@@ -77,7 +77,7 @@ const install = (Vue, opts = {}) => {
       offset: 60,
       showClose: true,
       message: message,
-      type: "success",
+      type: type,
       dangerouslyUseHTMLString: true,
       duration: messageDuration,
     });
