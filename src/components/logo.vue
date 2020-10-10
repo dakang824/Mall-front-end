@@ -1,11 +1,18 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Date: 2020-10-02 22:32:19
+ * @LastEditTime: 2020-10-10 21:59:55
+-->
 <template>
   <div class="logo">
-    <el-image
-      fit="contain"
-      class="logo__img"
-      :src="require('@/assets/imgs/logo.png')"
-      :style="getStyle"
-    ></el-image>
+    <router-link to="/">
+      <el-image
+        fit="contain"
+        class="logo__img"
+        :src="require('@/assets/imgs/logo.png')"
+        :style="getStyle"
+      ></el-image>
+    </router-link>
   </div>
 </template>
 

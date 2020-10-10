@@ -2,11 +2,11 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-10-09 22:55:13
+ * @LastEditTime: 2020-10-10 22:34:43
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
-    <ul v-show="show" class="sideNav">
+    <ul v-show="show" class="sideNav" :style="'right:' + right + 'px'">
       <li
         v-for="(item, index) in list"
         :key="index"
@@ -24,6 +24,7 @@
     components: {},
     data() {
       return {
+        right: 34,
         show: false,
         list: [
           require("@/assets/imgs/side_nav-person.png"),
@@ -35,6 +36,8 @@
     },
     mounted() {
       window.addEventListener("scroll", this.handleScroll);
+      window.addEventListener("resize", this.handleResize);
+      this.handleResize();
     },
     methods: {
       hanldeClick(e) {
@@ -57,6 +60,13 @@
             clearInterval(back);
           }
         });
+      },
+      handleResize() {
+        if (window.innerWidth > 1614) {
+          this.right = (window.innerWidth - 1614) / 2 - 120;
+        } else {
+          this.right = 34;
+        }
       },
       handleScroll(e) {
         const scrollTop =

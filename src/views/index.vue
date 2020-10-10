@@ -1,15 +1,12 @@
 <!--
  * @Author: yukang 1172248038@qq.com
- * @Description: 
  * @Date: 2020-10-01 09:16:18
- * @LastEditTime: 2020-10-09 23:04:25
+ * @LastEditTime: 2020-10-10 22:03:54
 -->
 <template>
   <div class="index">
     <Header></Header>
-    <transition name="el-fade-in-linear">
-      <router-view class="main"></router-view>
-    </transition>
+    <router-view class="main"></router-view>
     <Footer></Footer>
     <SideNav></SideNav>
   </div>
