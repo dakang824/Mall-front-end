@@ -22,18 +22,18 @@
                 <el-col :span="1">
                   <el-checkbox>全选</el-checkbox>
                 </el-col>
-                <el-col :span="4" style="width: 12.66667%;">店铺商品</el-col>
-                <el-col :span="2" style="margin-right: 34px;">商品属性</el-col>
-                <el-col :span="1" style="margin-right: 34px;">单价</el-col>
-                <el-col :span="1" style="position: relative; left: 49px;">
+                <el-col :span="4" style="width: 12.66667%">店铺商品</el-col>
+                <el-col :span="2" style="margin-right: 34px">商品属性</el-col>
+                <el-col :span="1" style="margin-right: 34px">单价</el-col>
+                <el-col :span="1" style="position: relative; left: 49px">
                   数量
                 </el-col>
-                <el-col :span="2" style="position: relative; left: 30px;">
+                <el-col :span="2" style="position: relative; left: 30px">
                   金额（元）
                 </el-col>
                 <el-col
                   :span="2"
-                  style="position: relative; left: 15px; text-align: left;"
+                  style="position: relative; left: 15px; text-align: left"
                 >
                   操作
                 </el-col>
@@ -57,7 +57,7 @@
                     <el-col :span="5">
                       <div class="table__main__item__store">
                         <el-image
-                          style="width: 80px; height: 80px;"
+                          style="width: 80px; height: 80px"
                           :src="item.src"
                           fit="contain"
                         ></el-image>

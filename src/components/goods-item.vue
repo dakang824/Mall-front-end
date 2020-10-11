@@ -1,22 +1,25 @@
 <!--
  * @Author: yukang 1172248038@qq.com
- * @Description: 
+ * @Description: 商品item组件
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-09 22:57:10
+ * @LastEditTime: 2020-10-11 22:28:03
 -->
 <!-- 商品item -->
 <template>
   <div class="goods-item" @click="handleGoDetail">
     <el-card :body-style="{ padding: '0px' }" shadow="hover">
-      <el-image :src="model.img"></el-image>
+      <el-image
+        :src="model.pics[0].path | imgBaseUrl"
+        fit="scale-down"
+      ></el-image>
       <div class="box">
-        <span class="title">{{ model.title }}</span>
+        <span class="title">{{ model.name }}</span>
         <div class="middle">
-          <span>收藏{{ model.collect }}</span>
+          <span>收藏{{ model.collectCount }}</span>
         </div>
         <div class="footer">
-          <div type="text" class="money">￥{{ model.money }}</div>
-          <span>月销{{ model.sell }}笔</span>
+          <div type="text" class="money">￥{{ model.specList | minPrice }}</div>
+          <span>月销{{ model.sellCount }}笔</span>
         </div>
       </div>
     </el-card>
@@ -26,12 +29,16 @@
 <script>
   export default {
     components: {},
-    props: {
-      //type 1普通商品,2菜谱
-      type: {
-        type: Number,
-        default: 1,
+    filters: {
+      minPrice: (value) => {
+        if (value.length) {
+          return JSON.parse(JSON.stringify(value)).sort((a, b) => {
+            return a.sellPrice - b.sellPrice;
+          })[0].sellPrice;
+        }
       },
+    },
+    props: {
       model: {
         type: Object,
         default: () => {
@@ -45,8 +52,8 @@
     methods: {
       handleGoDetail() {
         this.$router.push({
-          name: "GoodsDetail",
-          query: { type: this.type },
+          path: "/goods-detail",
+          query: { type: this.model.type },
         });
       },
     },
@@ -65,7 +72,9 @@
 
       .el-image {
         width: 258px;
+        height: 258px;
         vertical-align: middle;
+        background: $imgbg;
       }
 
       .box {

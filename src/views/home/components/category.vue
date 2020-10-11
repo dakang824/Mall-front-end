@@ -4,7 +4,7 @@
     <el-container>
       <el-aside width="335px" class="category__left">
         <div
-          v-for="(item, index) in categoryList"
+          v-for="(item, index) in model"
           :key="index"
           :class="['title', { active: index === current }]"
           @mouseenter="handleMouseenter(index)"
@@ -23,8 +23,11 @@
           </el-carousel-item>
         </el-carousel>
         <ul v-if="show" class="category__right__child clearfix">
-          <li v-for="(item, index) in categoryList[current].child" :key="index">
-            {{ item }}
+          <li
+            v-for="(item, index) in model[current].subCategoryList"
+            :key="index"
+          >
+            {{ item.name }}
           </li>
         </ul>
       </el-main>
@@ -35,96 +38,18 @@
 <script>
   export default {
     components: {},
+    props: {
+      model: {
+        type: Array,
+        default: () => {
+          return [];
+        },
+      },
+    },
     data() {
       return {
         show: false,
         current: null,
-        categoryList: [
-          {
-            name: "蔬菜",
-            child: [
-              "叶菜类",
-              "豆制品",
-              "西红柿/茄果类",
-              "花菜/球茎类",
-              "土豆/根茎类",
-              "菌菇类",
-              "豆类/芽苗类",
-            ],
-          },
-          {
-            name: "肉禽蛋",
-            child: [
-              "猪肉",
-              "鸡鸭禽",
-              "鸡蛋",
-              "牛肉",
-              "羊肉",
-              "腌制/腊肉",
-              "牛排",
-            ],
-          },
-          {
-            name: "海鲜水产",
-            child: [
-              "叶菜类",
-              "豆制品",
-              "西红柿/茄果类",
-              "花菜/球茎类",
-              "土豆/根茎类",
-              "菌菇类",
-              "豆类/芽苗类",
-            ],
-          },
-          {
-            name: "速冻食品",
-            child: [
-              "猪肉",
-              "鸡鸭禽",
-              "鸡蛋",
-              "牛肉",
-              "羊肉",
-              "腌制/腊肉",
-              "牛排",
-            ],
-          },
-          {
-            name: "粮油调味",
-            child: [
-              "叶菜类",
-              "豆制品",
-              "西红柿/茄果类",
-              "花菜/球茎类",
-              "土豆/根茎类",
-              "菌菇类",
-              "豆类/芽苗类",
-            ],
-          },
-          {
-            name: "菜系",
-            child: [
-              "猪肉",
-              "鸡鸭禽",
-              "鸡蛋",
-              "牛肉",
-              "羊肉",
-              "腌制/腊肉",
-              "牛排",
-            ],
-          },
-          {
-            name: "设备",
-            child: [
-              "叶菜类",
-              "豆制品",
-              "西红柿/茄果类",
-              "花菜/球茎类",
-              "土豆/根茎类",
-              "菌菇类",
-              "豆类/芽苗类",
-            ],
-          },
-        ],
       };
     },
     methods: {

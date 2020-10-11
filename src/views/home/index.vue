@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 首页
  * @Date: 2020-09-28 21:15:23
- * @LastEditTime: 2020-10-05 23:45:00
+ * @LastEditTime: 2020-10-11 22:53:32
 -->
 <template>
   <div class="home">
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <Category></Category>
+    <Category :model="category"></Category>
     <div v-for="(item, index) in floorData" :key="index" class="goods-item">
       <Floor :model="item"></Floor>
     </div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import Logo from "@/components/logo.vue";
   import Search from "@/components/search.vue";
   import Category from "./components/category.vue";
@@ -34,11 +35,16 @@
       Logo,
     },
     data() {
-      return {
-        floorData: ["菜品", "菜谱", "菜盒", "设备"],
-      };
+      return {};
     },
-    created() {},
+    computed: mapState({
+      category: (state) => state.home.category,
+      floorData: (state) => state.home.floorData,
+    }),
+    async mounted() {
+      const res = await this.$store.dispatch("home/homePageInit");
+      console.log(res);
+    },
     methods: {},
   };
 </script>

@@ -78,7 +78,6 @@
 </template>
 
 <script>
-  import { login } from "@/api/user";
   import Footer from "@/components/footer.vue";
   import Logo from "@/components/logo.vue";
   import IdentifyCode from "@/components/identify-code.vue";
@@ -97,6 +96,18 @@
       },
     },
     data() {
+      var checkCode = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error("请输入验证码"));
+        }
+        setTimeout(() => {
+          if (value !== this.identifyCode) {
+            callback(new Error("请输入正确的验证码"));
+          } else {
+            callback();
+          }
+        }, 1000);
+      };
       return {
         identifyCode: "",
         form: {
@@ -117,9 +128,8 @@
           ],
           code: [
             {
-              required: true,
+              validator: checkCode,
               trigger: "blur",
-              message: "请输入验证码",
             },
           ],
         },
@@ -134,13 +144,14 @@
       this.refreshCode();
     },
     methods: {
-      submitForm(formName) {
+      async submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            const res = await login(this.form);
-            console.log(res);
-            return;
-            this.$router.push("/");
+            const res = await this.$store.dispatch(
+              "user/getLoginInfo",
+              this.form
+            );
+            res.code === 200 ? this.$router.replace("/") : "";
           } else {
             console.log("error submit!!");
             return false;

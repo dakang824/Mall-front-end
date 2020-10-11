@@ -3,11 +3,13 @@
   <div class="floor w el-card">
     <div class="floor__title">
       <div class="floor__title__left">
-        {{ model }}
-        <span>每日菜谱推荐</span>
+        {{ model.name }}
+        <span>每日{{ model.name }}推荐</span>
       </div>
       <div class="floor__title__right">
-        <router-link to="/goods-list">
+        <router-link
+          :to="{ path: '/goods-list', query: { type: getPreTwo[0].type } }"
+        >
           更多
           <i class="el-icon-d-arrow-right"></i>
         </router-link>
@@ -17,17 +19,23 @@
     <el-container>
       <el-aside width="468px">
         <el-image
-          :src="require('@/assets/imgs/goods1.png')"
-          fit="cover"
+          :src="getPreTwo[0].pics[0].path | imgBaseUrl"
+          fit="scale-down"
+          style="width: 468px; height: 262px"
         ></el-image>
         <el-image
-          :src="require('@/assets/imgs/goods2.png')"
-          fit="cover"
+          :src="getPreTwo[1].pics[1].path | imgBaseUrl"
+          fit="scale-down"
+          style="width: 468px; height: 480px"
         ></el-image>
       </el-aside>
       <el-main class="clearfix">
-        <div v-for="(item, index) in list" :key="index" class="goods-item fl">
-          <GoodsItem :model="item" :type="model === '菜谱' ? 2 : 1"></GoodsItem>
+        <div
+          v-for="(item, index) in getList"
+          :key="index"
+          class="goods-item fl"
+        >
+          <GoodsItem :model="item"></GoodsItem>
         </div>
       </el-main>
     </el-container>
@@ -42,80 +50,24 @@
     },
     props: {
       model: {
-        type: String,
-        default: "",
+        type: Object,
+        default: () => {
+          return {};
+        },
       },
     },
     data() {
-      return {
-        list: [
-          {
-            img: require("@/assets/imgs/goods3.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            assess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-          {
-            img: require("@/assets/imgs/goods4.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            assess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-          {
-            img: require("@/assets/imgs/goods5.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            aassess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-          {
-            img: require("@/assets/imgs/goods3.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            assess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-          {
-            img: require("@/assets/imgs/goods4.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            assess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-          {
-            img: require("@/assets/imgs/goods5.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            assess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-          {
-            img: require("@/assets/imgs/goods4.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            assess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-          {
-            img: require("@/assets/imgs/goods5.png"),
-            title: "麻婆豆腐川味麻婆豆腐",
-            assess: "1678",
-            collect: 2,
-            money: 15.6,
-            sell: 213,
-          },
-        ],
-      };
+      return {};
     },
+    computed: {
+      getPreTwo() {
+        return this.model.data.slice(0, 2);
+      },
+      getList() {
+        return this.model.data.slice(2);
+      },
+    },
+    created() {},
   };
 </script>
 
@@ -168,6 +120,7 @@
     .el-aside {
       .el-image {
         vertical-align: middle;
+        background: $imgbg;
 
         &:first-child {
           margin-bottom: 10px;

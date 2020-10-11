@@ -32,12 +32,13 @@
         </div>
       </div>
       <StoreTabs></StoreTabs>
-      <GoodsCard></GoodsCard>
+      <GoodsCard :model="goodsList"></GoodsCard>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import Logo from "@/components/logo.vue";
   import Search from "@/components/search.vue";
   import StoreTabs from "../store/components/store-tabs.vue";
@@ -85,10 +86,20 @@
         ],
       };
     },
-
+    computed: mapState({
+      postData: (state) => state.goods.postData,
+      goodsList: (state) => state.goods.goodsList,
+    }),
+    mounted() {
+      this.postData.type = this.$route.query.type;
+      this.fetchData();
+    },
     methods: {
       handleChangeCurrent(e) {
         this.topCateCurrent = e;
+      },
+      fetchData() {
+        this.$store.dispatch("goods/queryProduct", this.postData);
       },
     },
   };

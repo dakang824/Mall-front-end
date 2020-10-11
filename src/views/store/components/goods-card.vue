@@ -1,3 +1,9 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 商品列表
+ * @Date: 2020-10-02 22:32:19
+ * @LastEditTime: 2020-10-11 23:16:24
+-->
 <!-- 商品 -->
 <template>
   <div class="goods-card el-card">
@@ -31,88 +37,7 @@
       model: {
         type: Array,
         default: () => {
-          return [
-            {
-              img: require("@/assets/imgs/goods3.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods4.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods5.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              aassess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods3.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods4.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods5.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods4.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods5.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods4.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-            {
-              img: require("@/assets/imgs/goods5.png"),
-              title: "麻婆豆腐川味麻婆豆腐",
-              assess: "1678",
-              collect: 2,
-              money: 15.6,
-              sell: 213,
-            },
-          ];
+          return [];
         },
       },
     },

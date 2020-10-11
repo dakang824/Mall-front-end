@@ -9,13 +9,13 @@
           justify="space-between"
           align="middle"
         >
-          <el-col :span="4" style="width: 12.66667%;">店铺商品</el-col>
-          <el-col :span="2" style="position: relative; left: 49px;">
+          <el-col :span="4" style="width: 12.66667%">店铺商品</el-col>
+          <el-col :span="2" style="position: relative; left: 49px">
             商品属性
           </el-col>
           <el-col :span="1">单价</el-col>
           <el-col :span="1">数量</el-col>
-          <el-col :span="2" style="position: relative; left: -22px;">
+          <el-col :span="2" style="position: relative; left: -22px">
             金额（元）
           </el-col>
         </el-row>
@@ -34,7 +34,7 @@
               <el-col :span="5">
                 <div class="table__main__item__store">
                   <el-image
-                    style="width: 80px; height: 80px;"
+                    style="width: 80px; height: 80px"
                     :src="item.src"
                     fit="contain"
                   ></el-image>

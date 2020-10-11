@@ -1,33 +1,36 @@
+/*
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 用户基础信息
+ * @Date: 2020-09-16 23:29:48
+ * @LastEditTime: 2020-10-11 20:15:08
+ */
+import { login } from "@/api/user";
+import {
+  getAccessToken,
+  removeAccessToken,
+  setAccessToken,
+} from "@/utils/accessToken";
 const state = {
-  accessToken: "12345",
-  username: "",
-  avatar: "",
-  permissions: [],
+  userInfo: getAccessToken(),
 };
 const getters = {
-  accessToken: (state) => state.accessToken,
-  username: (state) => state.username,
-  avatar: (state) => state.avatar,
-  permissions: (state) => state.permissions,
+  userInfo: (state) => state.userInfo,
 };
 const mutations = {
-  setAccessToken(state, accessToken) {
-    state.accessToken = accessToken;
-    setAccessToken(accessToken);
+  setUserInfo(state, data) {
+    state.userInfo = data;
+    setAccessToken(data);
   },
-  setusername(state, username) {
-    state.username = username;
-  },
-  setAvatar(state, avatar) {
-    state.avatar = avatar;
-  },
-  setPermissions(state, permissions) {
-    state.permissions = permissions;
+  resetUserInfo(state) {
+    state.userInfo = null;
+    removeAccessToken();
   },
 };
 const actions = {
-  setPermissions({ commit }, permissions) {
-    commit("setPermissions", permissions);
+  async getLoginInfo({ commit }, params) {
+    const res = await login(params);
+    commit("setUserInfo", JSON.stringify(res.data.user));
+    return res;
   },
 };
 export default { state, getters, mutations, actions };

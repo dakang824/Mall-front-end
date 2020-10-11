@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 20:10:07
- * @LastEditTime: 2020-10-09 23:13:00
+ * @LastEditTime: 2020-10-11 21:21:53
  */
 module.exports = {
   // @token在Cookie中存储的天数，默认1天
@@ -9,7 +9,7 @@ module.exports = {
   // 默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
   baseURL:
     process.env.NODE_ENV === "development" || process.env.NODE_ENV === "preview"
-      ? "http://localhost:8080/"
+      ? "/"
       : "vab-mock-server",
   //配后端数据的接收方式application/json;charset=UTF-8或者application/x-www-form-urlencoded;charset=UTF-8
   contentType: "application/x-www-form-urlencoded;charset=UTF-8",

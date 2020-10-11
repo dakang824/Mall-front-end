@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-09 21:39:40
+ * @LastEditTime: 2020-10-11 22:30:30
 -->
 <!-- 商品详情 -->
 <template>
@@ -17,11 +17,11 @@
               四川正宗家用烧菜烧豆腐四川正宗家用烧菜烧豆腐
             </div>
             <div class="info__desc">
-              <span v-if="type === 1">四川正宗家用烧菜烧豆腐</span>
-              <span v-else>
+              <span v-if="type == 4">
                 <i>难度：有挑战</i>
                 <i>时长：10-30分钟</i>
               </span>
+              <span v-else>四川正宗家用烧菜烧豆腐</span>
             </div>
             <div class="info__money">
               <p>
@@ -33,7 +33,15 @@
                 <span>¥18.90</span>
               </p>
             </div>
-            <div v-if="type === 1">
+            <div v-if="type == 4" class="info__formula">
+              <span>菜谱配方：</span>
+              <div>
+                <ul v-for="(item, index) in formula" :key="index">
+                  <li v-for="(it, ind) in item" :key="ind">{{ it }}</li>
+                </ul>
+              </div>
+            </div>
+            <div v-else>
               <div class="info__sku">
                 净含量：
                 <ul>
@@ -56,14 +64,6 @@
                 ></el-input-number>
                 件
                 <span>库存1200件</span>
-              </div>
-            </div>
-            <div v-else class="info__formula">
-              <span>菜谱配方：</span>
-              <div>
-                <ul v-for="(item, index) in formula" :key="index">
-                  <li v-for="(it, ind) in item" :key="ind">{{ it }}</li>
-                </ul>
               </div>
             </div>
 

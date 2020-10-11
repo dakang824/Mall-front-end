@@ -2,12 +2,19 @@
   <div class="header">
     <div class="header__box w">
       <div class="header__box__left">
-        <span>嗨，欢迎来嗨厨玩味</span>
-        <el-image
-          :src="require('@/assets/imgs/header-avatar.png')"
-          class="avatar"
-        ></el-image>
-        <i><router-link to="/login">请登录</router-link></i>
+        <span>嗨，{{ userInfo ? userInfo.name : "欢迎来嗨厨玩味" }}</span>
+        <span v-if="userInfo" class="login-out" @click="handleLoginOut">
+          退出
+        </span>
+        <div v-else class="login">
+          <el-image
+            :src="require('@/assets/imgs/header-avatar.png')"
+            class="avatar"
+          ></el-image>
+          <i>
+            <router-link to="/login">请登录</router-link>
+          </i>
+        </div>
       </div>
       <div class="header__box__right">
         <ul>
@@ -33,10 +40,20 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     components: {},
     data() {
       return {};
+    },
+    computed: mapState({
+      userInfo: (state) => JSON.parse(state.user.userInfo),
+    }),
+    created() {},
+    methods: {
+      handleLoginOut() {
+        this.$store.commit("user/resetUserInfo");
+      },
     },
   };
 </script>
@@ -55,11 +72,18 @@
 
       &__left {
         @include center-flex(y);
+        @include justify();
+        min-width: 335px;
 
         span {
           margin-right: 33px;
         }
-
+        .login-out {
+          cursor: pointer;
+        }
+        .login {
+          @include center-flex(y);
+        }
         .avatar {
           width: 54px;
           min-width: 54px;
