@@ -13,21 +13,34 @@
         <el-breadcrumb-item>
           <ul>
             <li
-              v-for="(item, index) in topCategory"
+              v-for="(item, index) in category"
               :key="index"
               :class="{ active: index === topCateCurrent }"
-              @click="handleChangeCurrent(index)"
+              @click="handleTopCateCurrent(item, index)"
             >
-              {{ item }}
+              {{ item.name }}
             </li>
           </ul>
         </el-breadcrumb-item>
       </el-breadcrumb>
       <div class="screen el-card">
-        <div v-for="(item, index) in list" :key="index" class="screen__row">
-          <span>{{ item.title }}：</span>
+        <div class="screen__row">
+          <span>分类：</span>
           <ul>
-            <li v-for="(it, ind) in item.value" :key="ind">{{ it }}</li>
+            <li
+              v-for="(item, index) in category[topCateCurrent].subCategoryList"
+              :key="index"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
+        </div>
+        <div class="screen__row">
+          <span>产地：</span>
+          <ul>
+            <li v-for="(item, index) in prodAddress" :key="index">
+              {{ item.address }}
+            </li>
           </ul>
         </div>
       </div>
@@ -55,47 +68,23 @@
       return {
         currentPage: 1,
         topCateCurrent: 0,
-        topCategory: [
-          "蔬菜",
-          "肉蛋禽",
-          "海鲜水产",
-          "速冻食品",
-          "粮油调味",
-          "菜系",
-          "设备",
-        ],
-        list: [
-          {
-            title: "分类",
-            value: [
-              "叶菜类",
-              "西红柿/茄果类",
-              "花菜/球茎类",
-              "土豆/根茎类",
-              "菌菇类",
-              "豆类/芽苗类",
-              "葱姜蒜椒",
-              "豆制品",
-            ],
-          },
-
-          {
-            title: "产地",
-            value: ["中国大陆", "越南", "希腊", "泰国", "马来西亚", "不丹"],
-          },
-        ],
       };
     },
     computed: mapState({
       postData: (state) => state.goods.postData,
       goodsList: (state) => state.goods.goodsList,
+      category: (state) => state.home.category,
+      prodAddress: (state) => state.goods.prodAddress,
     }),
-    mounted() {
+    async mounted() {
+      this.category.length ? "" : this.$store.dispatch("home/homePageInit");
+      await this.$store.dispatch("goods/findAllProdAddress");
       this.postData.type = this.$route.query.type;
       this.fetchData();
     },
     methods: {
-      handleChangeCurrent(e) {
+      handleTopCateCurrent(item, e) {
+        this.postData.cate_id = item.id;
         this.topCateCurrent = e;
       },
       fetchData() {
