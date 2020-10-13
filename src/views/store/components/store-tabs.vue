@@ -1,3 +1,8 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Date: 2020-10-02 22:32:19
+ * @LastEditTime: 2020-10-14 00:04:50
+-->
 <!-- 头部筛选 -->
 <template>
   <div class="el-card store-tabs">
@@ -21,11 +26,42 @@
       return {
         current: 0,
         type: ["综合", "销量", "价格", "人气"],
+        val: {
+          orderBySellCount: "",
+          orderByPrice: "",
+          orderByViewCount: "",
+        },
       };
     },
     methods: {
       handleChange(e) {
         this.current = e;
+        if (e === 0) {
+          this.val = {
+            orderBySellCount: "",
+            orderByPrice: "",
+            orderByViewCount: "",
+          };
+        } else if (e === 1) {
+          this.val = {
+            orderBySellCount: 1,
+            orderByPrice: "",
+            orderByViewCount: "",
+          };
+        } else if (e === 2) {
+          this.val = {
+            orderBySellCount: "",
+            orderByPrice: 1,
+            orderByViewCount: "",
+          };
+        } else {
+          this.val = {
+            orderBySellCount: "",
+            orderByPrice: "",
+            orderByViewCount: 1,
+          };
+        }
+        this.$emit("change", this.val);
       },
     },
   };

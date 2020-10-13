@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:商品列表
  * @Date: 2020-10-11 22:54:55
- * @LastEditTime: 2020-10-11 23:38:02
+ * @LastEditTime: 2020-10-14 00:10:05
  */
 import { queryProduct, findAllProdAddress } from "@/api/goods";
 
@@ -19,8 +19,8 @@ const state = {
     orderBySellCount: "",
     orderByPrice: "",
     orderByViewCount: "",
-    pageNum: "",
-    pageSize: "",
+    pageNum: 1,
+    pageSize: 10,
   },
 };
 const getters = {
@@ -33,6 +33,9 @@ const mutations = {
   },
   setProdAddress(state, data) {
     state.prodAddress = data;
+  },
+  setPostData(state, data) {
+    state.postData = data;
   },
 };
 const actions = {

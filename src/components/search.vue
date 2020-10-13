@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 搜索插件
  * @Date: 2020-10-03 20:19:16
- * @LastEditTime: 2020-10-03 23:17:26
+ * @LastEditTime: 2020-10-13 23:52:23
 -->
 <template>
   <div class="search" :class="'search--style' + type">
@@ -11,6 +11,7 @@
         v-model="keyWord"
         placeholder="请输入需要搜索的商品名称"
         class="input-with-select"
+        @change="hanldeChange"
       >
         <div slot="append">
           <el-image
@@ -34,6 +35,10 @@
   export default {
     components: {},
     props: {
+      value: {
+        type: String,
+        default: "",
+      },
       type: {
         type: Number,
         default: 1,
@@ -43,6 +48,17 @@
       return {
         keyWord: "",
       };
+    },
+    computed: {
+      getValue() {
+        return this.value;
+      },
+    },
+    methods: {
+      hanldeChange(e) {
+        this.$emit("input", e);
+        this.$emit("search");
+      },
     },
   };
 </script>

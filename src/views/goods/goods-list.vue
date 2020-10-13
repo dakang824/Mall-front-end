@@ -4,7 +4,7 @@
     <div class="el-card">
       <div class="header w">
         <logo></logo>
-        <search></search>
+        <search v-model="postData.condition" @search="fetchData"></search>
       </div>
     </div>
     <div class="box w">
@@ -30,6 +30,8 @@
             <li
               v-for="(item, index) in category[topCateCurrent].subCategoryList"
               :key="index"
+              :class="{ active: index === subCateCurrent }"
+              @click="handleSubCateCurrent(item, index)"
             >
               {{ item.name }}
             </li>
@@ -38,13 +40,18 @@
         <div class="screen__row">
           <span>产地：</span>
           <ul>
-            <li v-for="(item, index) in prodAddress" :key="index">
+            <li
+              v-for="(item, index) in prodAddress"
+              :key="index"
+              :class="{ active: index === addressCurrent }"
+              @click="handleAddress(item, index)"
+            >
               {{ item.address }}
             </li>
           </ul>
         </div>
       </div>
-      <StoreTabs></StoreTabs>
+      <StoreTabs @change="handleChange"></StoreTabs>
       <GoodsCard :model="goodsList"></GoodsCard>
     </div>
   </div>
@@ -68,6 +75,8 @@
       return {
         currentPage: 1,
         topCateCurrent: 0,
+        subCateCurrent: null,
+        addressCurrent: null,
       };
     },
     computed: mapState({
@@ -86,6 +95,21 @@
       handleTopCateCurrent(item, e) {
         this.postData.cate_id = item.id;
         this.topCateCurrent = e;
+        this.fetchData();
+      },
+      handleSubCateCurrent(item, e) {
+        this.postData.sub_cate_id = item.id;
+        this.subCateCurrent = e;
+        this.fetchData();
+      },
+      handleAddress(item, e) {
+        this.postData.address_id = item.id;
+        this.addressCurrent = e;
+        this.fetchData();
+      },
+      handleChange(e) {
+        this.$store.commit("goods/setPostData", { ...this.postData, ...e });
+        this.fetchData();
       },
       fetchData() {
         this.$store.dispatch("goods/queryProduct", this.postData);
@@ -137,6 +161,10 @@
 
           li {
             margin-right: $gap;
+            cursor: pointer;
+            &.active {
+              color: $green;
+            }
           }
         }
       }
