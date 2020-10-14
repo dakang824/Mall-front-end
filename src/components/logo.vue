@@ -1,7 +1,7 @@
 <!--
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-10 21:59:55
+ * @LastEditTime: 2020-10-15 00:05:57
 -->
 <template>
   <div class="logo">
@@ -22,7 +22,7 @@
     props: {
       width: {
         type: String,
-        default: "238",
+        default: "170",
       },
       height: {
         type: String,
@@ -42,7 +42,7 @@
 
 <style lang="scss" scoped>
   .logo {
-    width: 238px;
+    width: 170px;
 
     &__img {
       vertical-align: middle;

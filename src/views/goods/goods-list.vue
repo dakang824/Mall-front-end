@@ -130,10 +130,9 @@
   .goods-list {
     .header {
       @include center-flex(y);
-
+      @include justify();
       .search {
         padding: 36px 0 39px 54px;
-        margin-left: 93px;
       }
     }
 
@@ -156,7 +155,7 @@
 
         span {
           min-width: 150px;
-          padding: 10px 0;
+          padding: 17px 0;
           color: #808080;
           text-align: center;
         }

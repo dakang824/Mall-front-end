@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店内分类
  * @Date: 2020-10-05 20:56:27
- * @LastEditTime: 2020-10-05 21:42:03
+ * @LastEditTime: 2020-10-14 23:51:23
 -->
 <template>
   <div class="store-aside">
@@ -52,7 +52,6 @@
       li {
         box-sizing: border-box;
         padding: 16px 0;
-        font-size: $text-medium;
         text-align: center;
         cursor: pointer;
         background: #fff;

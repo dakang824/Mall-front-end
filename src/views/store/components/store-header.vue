@@ -61,7 +61,7 @@
   .store-header {
     &.w {
       @include center-flex(y);
-
+      @include justify();
       position: relative;
       padding: 26px 0;
     }
@@ -80,18 +80,16 @@
 
         .title {
           margin-right: 40px;
-          font-size: $text-large;
+          font-size: $text-small;
           font-weight: bold;
           color: $green;
         }
 
         ul {
           display: flex;
-          margin-top: 7px;
 
           li {
             margin-right: 32px;
-            font-size: $text-small;
             color: #202020;
             text-align: center;
 
@@ -117,8 +115,7 @@
     }
 
     .search--style2 {
-      position: absolute;
-      right: 369px;
+      width: 609px;
     }
   }
 </style>

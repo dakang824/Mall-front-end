@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 搜索插件
  * @Date: 2020-10-03 20:19:16
- * @LastEditTime: 2020-10-14 23:15:07
+ * @LastEditTime: 2020-10-15 00:09:56
 -->
 <template>
   <div class="search" :class="'search--style' + type">
@@ -77,7 +77,6 @@
           position: relative;
           top: 1px;
           height: 73px;
-          font-size: $text-small;
           border: 2px solid $green;
         }
       }
@@ -106,7 +105,7 @@
 
     &.search--style2 {
       .search__input {
-        width: 393px;
+        width: 353px;
       }
 
       ::v-deep {
@@ -121,10 +120,9 @@
             .search {
               display: flex;
               justify-content: center;
-              width: 184px;
-              min-width: 184px;
+              width: 128px;
+              min-width: 128px;
               margin-top: 2px;
-              font-size: $text-medium;
               line-height: 73px;
               color: #fff;
               cursor: pointer;
