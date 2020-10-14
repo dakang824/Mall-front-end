@@ -12,7 +12,7 @@
             class="avatar"
           ></el-image>
           <i>
-            <router-link to="/login">请登录</router-link>
+            <router-link to="/login"><el-link>请登录</el-link></router-link>
           </i>
         </div>
       </div>
@@ -29,7 +29,7 @@
               <el-image
                 :src="require('@/assets/imgs/header-cart.png')"
               ></el-image>
-              购物车
+              <el-link>购物车</el-link>
             </router-link>
           </li>
           <li><router-link to="/login">商家登录</router-link></li>
@@ -63,9 +63,10 @@
 
   .header {
     padding: $gap;
-    font-size: $text-small;
     color: $colorA;
-
+    .el-link {
+      font-size: $text-x-small;
+    }
     &__box {
       @include justify();
       @include center-flex(y);
@@ -113,13 +114,13 @@
             }
 
             &:nth-child(2) {
-              a {
-                padding: 0 35px;
+              > a {
+                padding: 0 28px;
               }
 
               &::after,
               &::before {
-                width: 2px;
+                width: 1px;
                 height: 47px;
                 content: "";
                 background-color: #afafaf;

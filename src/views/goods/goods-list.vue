@@ -52,7 +52,7 @@
         </div>
       </div>
       <StoreTabs @change="handleChange"></StoreTabs>
-      <GoodsCard :model="goodsList"></GoodsCard>
+      <GoodsCard v-loading="loading" :model="goodsList"></GoodsCard>
     </div>
   </div>
 </template>
@@ -73,6 +73,7 @@
     },
     data() {
       return {
+        loading: true,
         currentPage: 1,
         topCateCurrent: 0,
         subCateCurrent: null,
@@ -95,6 +96,10 @@
       handleTopCateCurrent(item, e) {
         this.postData.cate_id = item.id;
         this.topCateCurrent = e;
+        this.postData.sub_cate_id = "";
+        this.subCateCurrent = "";
+        this.postData.address_id = "";
+        this.addressCurrent = "";
         this.fetchData();
       },
       handleSubCateCurrent(item, e) {
@@ -111,8 +116,10 @@
         this.$store.commit("goods/setPostData", { ...this.postData, ...e });
         this.fetchData();
       },
-      fetchData() {
-        this.$store.dispatch("goods/queryProduct", this.postData);
+      async fetchData() {
+        this.loading = true;
+        await this.$store.dispatch("goods/queryProduct", this.postData);
+        this.loading = false;
       },
     },
   };
@@ -121,8 +128,6 @@
   @import "@/assets/scss/settings";
 
   .goods-list {
-    font-size: $text-medium;
-
     .header {
       @include center-flex(y);
 
@@ -134,7 +139,7 @@
 
     .el-breadcrumb {
       padding: 20px 0;
-      font-size: $text-medium;
+      font-size: $text-x-small;
     }
 
     .screen {

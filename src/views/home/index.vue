@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 首页
  * @Date: 2020-09-28 21:15:23
- * @LastEditTime: 2020-10-11 22:53:32
+ * @LastEditTime: 2020-10-14 20:43:00
 -->
 <template>
   <div class="home">
@@ -53,10 +53,9 @@
 
   .header {
     @include center-flex(y);
-
+    @include justify();
     .search {
-      padding: 36px 0 39px 54px;
-      margin-left: 93px;
+      padding: 36px 0 39px;
     }
   }
 </style>

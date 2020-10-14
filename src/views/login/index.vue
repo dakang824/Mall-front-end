@@ -172,6 +172,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "@/assets/scss/settings";
   .login-container {
     display: flex;
     flex-direction: column;
@@ -211,15 +212,15 @@
         left: 0;
         display: flex;
         justify-content: flex-end;
-        height: 571px;
+        height: 508px;
         margin: auto;
       }
 
       .el-form {
         right: 0;
-        width: 620px;
-        padding: 0 77px;
-        background: rgba(255, 255, 255, 0.7);
+        width: 550px;
+        padding: 0 44px;
+        background: rgba(255, 255, 255, 0.9);
         border-radius: 4px;
 
         .icon {
@@ -255,7 +256,7 @@
         }
 
         &__title {
-          margin: 42px 0 33px;
+          margin: 37px 0 33px;
           font-size: 24px;
           text-align: center;
         }
@@ -272,7 +273,6 @@
         &__submit {
           width: 100%;
           height: 62px;
-          margin-top: 20px;
           font-size: 16px;
         }
 
@@ -300,8 +300,8 @@
         &__other {
           display: flex;
           justify-content: flex-end;
-          margin-top: 41px;
-          font-size: 18px;
+          margin-top: 25px;
+          font-size: $text-x-small;
 
           li {
             padding-left: 26px;

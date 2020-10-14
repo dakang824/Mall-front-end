@@ -16,3 +16,15 @@
   background-color: $green !important;
   border-color: $green !important;
 }
+
+.el-link {
+  &.el-link--default:hover {
+    color: $green !important;
+  }
+  &.is-underline:hover:after {
+    border-bottom: 1px solid $green !important;
+  }
+}
+.el-loading-spinner .path {
+  stroke: $green !important;
+}

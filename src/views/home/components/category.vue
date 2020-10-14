@@ -14,7 +14,7 @@
         </div>
       </el-aside>
       <el-main class="category__right">
-        <el-carousel trigger="click" height="452px">
+        <el-carousel trigger="click" height="430px">
           <el-carousel-item v-for="item in 4" :key="item">
             <el-image
               :src="require('@/assets/imgs/login-bg.png')"
@@ -70,23 +70,14 @@
 
   .category {
     margin-top: 10px;
-    font-size: $text-large;
+    font-size: $text-x-small;
     color: $colorA;
-
-    ::v-deep .el-carousel__arrow {
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    ::v-deep .el-carousel__arrow:hover {
-      background-color: #333;
-    }
-
     &__left {
       margin-right: 10px;
       border: 2px solid $green;
 
       .title {
-        padding: 14px;
+        padding: 19.4px;
         text-align: center;
         cursor: pointer;
         background: #fff;
@@ -102,10 +93,6 @@
         &.active {
           color: #fff;
           background: $colorBg;
-        }
-
-        .el-icon-arrow-right {
-          font-size: 22px;
         }
       }
     }
@@ -136,19 +123,36 @@
           }
         }
       }
-
-      .el-carousel__item {
-        .el-image {
-          height: 452px;
+    }
+    ::v-deep {
+      .el-carousel {
+        .el-carousel__item:nth-child(2n) {
+          background-color: #99a9bf;
         }
-      }
-
-      .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-      }
-
-      .el-carousel__item:nth-child(2n + 1) {
-        background-color: #d3dce6;
+        .el-carousel__item:nth-child(2n + 1) {
+          background-color: #d3dce6;
+        }
+        .is-active {
+          .el-carousel__button {
+            background-color: $green;
+          }
+        }
+        .el-carousel__button {
+          width: 13px;
+          height: 13px;
+          border-radius: 50px;
+        }
+        &__item {
+          .el-image {
+            height: 452px;
+          }
+        }
+        &__arrow {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+        &__arrow:hover {
+          background-color: #333;
+        }
       }
     }
   }

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-10-10 22:34:43
+ * @LastEditTime: 2020-10-14 22:14:25
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
@@ -62,8 +62,8 @@
         });
       },
       handleResize() {
-        if (window.innerWidth > 1614) {
-          this.right = (window.innerWidth - 1614) / 2 - 120;
+        if (window.innerWidth > 1200) {
+          this.right = (window.innerWidth - 1200) / 2 - 85;
         } else {
           this.right = 34;
         }
@@ -75,11 +75,9 @@
           document.body.scrollTop;
         if (scrollTop > 200 && !this.show) {
           this.show = true;
-          console.log(2);
         }
         if (scrollTop < 200 && this.show) {
           this.show = false;
-          console.log(1);
         }
       },
     },
@@ -97,20 +95,24 @@
       position: relative;
       i {
         position: absolute;
-        top: 18px;
-        right: 18px;
+        top: 10px;
+        right: 10px;
         z-index: 9;
-        width: 27px;
-        height: 27px;
-        background: #ffea00;
+        width: 20px;
+        height: 20px;
+        background: #ff6000;
+        color: #fff;
         text-align: center;
-        line-height: 30px;
+        line-height: 20px;
         border-radius: 50px;
+        font-size: 12px;
       }
       .el-image {
         vertical-align: middle;
         cursor: pointer;
         opacity: 0.85;
+        width: 70px;
+        height: 70px;
         &:hover {
           opacity: 1;
           transform: scale(1.02);

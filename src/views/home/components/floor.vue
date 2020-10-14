@@ -10,23 +10,25 @@
         <router-link
           :to="{ path: '/goods-list', query: { type: getPreTwo[0].type } }"
         >
-          更多
-          <i class="el-icon-d-arrow-right"></i>
+          <el-link>
+            更多
+            <i class="el-icon-d-arrow-right"></i>
+          </el-link>
         </router-link>
       </div>
     </div>
 
     <el-container>
-      <el-aside width="468px">
+      <el-aside width="300px">
         <el-image
           :src="getPreTwo[0].pics[0].path | imgBaseUrl"
           fit="scale-down"
-          style="width: 468px; height: 262px"
+          style="width: 300px; height: 196px"
         ></el-image>
         <el-image
           :src="getPreTwo[1].pics[1].path | imgBaseUrl"
           fit="scale-down"
-          style="width: 468px; height: 480px"
+          style="width: 300px; height: 368px"
         ></el-image>
       </el-aside>
       <el-main class="clearfix">
@@ -75,7 +77,7 @@
   @import "@/assets/scss/settings";
 
   .floor {
-    padding: 28px 36px;
+    padding: 28px 20px;
     margin: 10px auto;
 
     &__title {
@@ -88,13 +90,13 @@
       &__left {
         @include center-flex(y);
 
-        font-size: $text-large;
+        font-size: $text-small;
         font-weight: bold;
         color: $green;
 
         span {
-          margin: 10px 6px 0;
-          font-size: 14px;
+          margin: 5px 6px 0;
+          font-size: $text-x-small;
           font-weight: initial;
         }
 
@@ -109,10 +111,9 @@
       }
 
       &__right {
-        font-size: $text-large;
-
-        i {
-          font-size: $text-small;
+        .el-link {
+          font-size: $text-x-small;
+          font-weight: bold;
         }
       }
     }
@@ -132,13 +133,13 @@
       padding: 0;
 
       > .goods-item {
-        margin-left: 9px;
+        margin-left: 24px;
 
         &:nth-child(1),
         &:nth-child(2),
         &:nth-child(3),
         &:nth-child(4) {
-          margin-bottom: 9px;
+          margin-bottom: 25px;
         }
       }
     }

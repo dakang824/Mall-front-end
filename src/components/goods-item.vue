@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品item组件
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-11 22:28:03
+ * @LastEditTime: 2020-10-14 21:43:52
 -->
 <!-- 商品item -->
 <template>
@@ -65,23 +65,29 @@
 
   .goods-item {
     .el-card {
-      width: 258px;
+      width: 190px;
       font-size: 12px;
       color: $color5;
       cursor: pointer;
 
-      .el-image {
-        width: 258px;
-        height: 258px;
+      ::v-deep .el-image {
+        width: 190px;
+        height: 190px;
         vertical-align: middle;
         background: $imgbg;
+        transition: all 0.2s ease-in;
+        &__inner {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
       }
 
       .box {
-        padding: 10px;
+        padding: 5px 10px;
 
         .title {
-          font-size: $text-small;
+          font-size: $text-x-small;
         }
 
         .middle {
@@ -97,7 +103,7 @@
         }
 
         .footer {
-          margin: 20px 0 0;
+          margin: 5px 0 0;
 
           @include justify();
           @include center-flex(y);
