@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-10-04 20:36:17
+ * @LastEditTime: 2020-10-15 23:12:30
 -->
 <!--  -->
 <template>
@@ -87,10 +87,10 @@
   @import "@/assets/scss/settings";
 
   .pay-reuslt {
-    font-size: $text-medium;
-
     &__title {
       color: #fff;
+      font-size: $text-small;
+      font-weight: bold;
 
       @include center-flex(y);
 
@@ -106,7 +106,7 @@
         }
 
         &__result {
-          padding: 38px 128px;
+          padding: 28px 128px;
 
           p {
             margin-bottom: 20px;
@@ -199,8 +199,9 @@
         text-align: right;
 
         .el-image {
-          margin: 83px 0 51px;
+          margin: 53px 0 51px;
           cursor: pointer;
+          width: 200px;
         }
       }
     }

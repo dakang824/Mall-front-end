@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-04 13:36:48
+ * @LastEditTime: 2020-10-15 23:18:05
 -->
 <!--  -->
 <template>
@@ -70,12 +70,14 @@
             }
 
             .el-step__icon {
-              width: 60px;
-              height: 60px;
-              font-size: 20px;
+              width: 40px;
+              height: 40px;
+              font-size: $text-small;
             }
           }
-
+          .el-step__title {
+            font-size: $text-x-small;
+          }
           .is-finish {
             .el-step__icon {
               color: #fff;
@@ -85,6 +87,7 @@
             &.el-step__title {
               font-weight: bold;
               color: $color3;
+              font-size: $text-x-small;
             }
 
             &.el-step__head {

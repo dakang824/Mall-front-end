@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付方式
  * @Date: 2020-10-04 17:00:30
- * @LastEditTime: 2020-10-04 17:39:50
+ * @LastEditTime: 2020-10-15 23:11:35
 -->
 <template>
   <div class="pay-type">
@@ -66,11 +66,11 @@
     ul {
       @include center-flex(y);
 
-      font-size: $text-medium;
+      font-size: $text-small;
 
       li {
         width: 282px;
-        height: 148px;
+        height: 136px;
         margin-right: $padding;
         text-align: center;
         cursor: pointer;

@@ -11,11 +11,16 @@ $text-x-small: 15px;
 //-----------------------------------------------------
 $fontSize: $text-x-small !default;
 $fontLineHeight: 1.5 !default;
-$fontFamily: system-ui, -apple-system, blinkmacsystemfont, "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", roboto, "Hiragino Sans GB",  "Source Han Sans CN", fira sans, "Droid Sans", "Helvetica Neue", arial, sans-serif !default;
+$fontFamily: system-ui, -apple-system, blinkmacsystemfont, "PingFang SC",
+  "Microsoft YaHei UI", "Microsoft YaHei", roboto, "Hiragino Sans GB",
+  "Source Han Sans CN", fira sans, "Droid Sans", "Helvetica Neue", arial,
+  sans-serif !default;
 // 苹方, 冬青黑体，微软雅黑UI（win8.1+），微软雅黑，思源黑体（安卓）
-$fontCn: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans CN" sans-serif !default;
+$fontCn: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI",
+  "Microsoft YaHei", "Source Han Sans CN" sans-serif !default;
 // 前两个为safari chrome, ios4.0+, ios4.0-, Android 4.0+, Android 4.0-, windows&windows Phone,
-$fontEn: -apple-system, blinkmacsystemfont, "Helvetica Neue", helvetica, roboto, "Droid Sans", "Seogoe UI", arial !default;
+$fontEn: -apple-system, blinkmacsystemfont, "Helvetica Neue", helvetica, roboto,
+  "Droid Sans", "Seogoe UI", arial !default;
 
 // iconfont默认字体大小
 $iconfontSize: 15px;

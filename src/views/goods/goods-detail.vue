@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-11 22:30:30
+ * @LastEditTime: 2020-10-15 22:39:23
 -->
 <!-- 商品详情 -->
 <template>
@@ -73,13 +73,17 @@
             </div>
           </div>
         </el-main>
-        <el-aside width="336px">
+        <el-aside width="250px">
           <GoodsDetailStore />
         </el-aside>
       </el-container>
       <el-container class="goods-detail__info">
-        <el-aside width="278px"><GoodsDetailAside /></el-aside>
-        <el-main><GoodsDetailInfo /></el-main>
+        <el-aside v-if="type != 4" width="228px">
+          <GoodsDetailAside />
+        </el-aside>
+        <el-main>
+          <GoodsDetailInfo :model="type == 4 ? caipuDetailInfo : detailInfo" />
+        </el-main>
       </el-container>
     </div>
   </div>
@@ -109,6 +113,35 @@
           ["食材", "尖椒", "猪肉", "其他", "其他"],
           ["重量(份)", "500g", "1kg", "500g", "500g"],
         ],
+        detailInfo: [
+          {
+            name: "规格参数",
+            imgs: [
+              require("@/assets/imgs/goods1.png"),
+              require("@/assets/imgs/goods2.png"),
+              require("@/assets/imgs/goods3.png"),
+              require("@/assets/imgs/goods4.png"),
+            ],
+          },
+          {
+            name: "商品详情",
+            imgs: [
+              require("@/assets/imgs/goods5.png"),
+              require("@/assets/imgs/goods1.png"),
+            ],
+          },
+        ],
+        caipuDetailInfo: [
+          {
+            name: "烹饪步骤",
+            imgs: [
+              require("@/assets/imgs/goods1.png"),
+              require("@/assets/imgs/goods2.png"),
+              require("@/assets/imgs/goods3.png"),
+              require("@/assets/imgs/goods5.png"),
+            ],
+          },
+        ],
       };
     },
     computed: {
@@ -129,8 +162,6 @@
   @import "@/assets/scss/settings";
 
   .goods-detail {
-    font-size: $text-medium;
-
     &__main {
       margin: $padding 0 $padding;
 
@@ -143,10 +174,10 @@
 
           .info {
             flex: 1;
-            margin-left: 24px;
+            margin-left: 15px;
 
             &__title {
-              font-size: 22px;
+              font-size: 16px;
               font-weight: bold;
             }
             &__desc {
@@ -156,13 +187,13 @@
             }
             &__formula {
               display: flex;
-              margin: 56px 0 44px 0;
+              margin: 50px 0 44px 0;
               ul {
                 @include center-flex(y);
                 li {
-                  width: 109px;
-                  height: 42px;
-                  line-height: 42px;
+                  width: 80px;
+                  height: 38px;
+                  line-height: 38px;
                   text-align: center;
                   border-top: 1px solid $colorC;
                   border-left: 1px solid $colorC;
@@ -179,7 +210,7 @@
               }
             }
             &__money {
-              padding: 8px 5px;
+              padding: 8px 10px;
               margin: 9px 0 0 0;
               background: #e6e6e6;
 
@@ -188,7 +219,7 @@
               }
 
               span {
-                font-size: 28px;
+                font-size: 23px;
                 font-weight: bold;
                 color: $error;
               }
@@ -198,17 +229,17 @@
               @include center-flex(y);
 
               flex-wrap: wrap;
-              margin-top: 40px;
+              margin-top: 30px;
 
               ul {
                 display: flex;
                 flex-wrap: wrap;
 
                 li {
-                  width: 103px;
-                  height: 54px;
-                  margin-left: 12px;
-                  line-height: 54px;
+                  width: 77px;
+                  height: 40px;
+                  margin-right: 9px;
+                  line-height: 40px;
                   text-align: center;
                   cursor: pointer;
                   border: 1px solid $color3;
@@ -233,13 +264,13 @@
               margin-top: 40px;
 
               span {
-                margin-left: 60px;
+                margin-left: 30px;
               }
 
               ::v-deep {
                 .el-input-number {
-                  width: 189px;
-                  margin: 0 8px 0 30px;
+                  width: 150px;
+                  margin: 0 8px 0 15px;
 
                   &__increase,
                   &__decrease {
@@ -248,9 +279,8 @@
                   }
 
                   .el-input__inner {
-                    width: 139px;
-                    height: 54px;
-                    font-size: $text-medium;
+                    width: 104px;
+                    height: 40px;
                     border-color: $color3;
                     border-radius: 0;
                   }
@@ -264,13 +294,16 @@
               @include center-flex(y);
 
               .el-button {
-                width: 333px;
-                height: 69px;
+                width: 248px;
+                height: 52px;
                 margin-right: 10px;
                 font-size: 22px;
                 color: #fff;
                 background: $green;
                 border-radius: 0;
+              }
+              .el-image {
+                width: 248px;
               }
             }
           }

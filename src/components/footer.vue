@@ -1,11 +1,11 @@
 <!--
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-14 22:54:09
+ * @LastEditTime: 2020-10-15 23:21:51
 -->
 <template>
   <dvi class="footer">
-    <el-container class="el-card no-border-radius">
+    <el-container v-if="show" class="el-card no-border-radius">
       <div class="footer__box w">
         <ul v-for="(item, index) in list" :key="index">
           <li v-for="(it, ind) in item" :key="ind">
@@ -31,9 +31,9 @@
     name: "Footer",
     components: {},
     props: {
-      hidden: {
+      show: {
         type: Boolean,
-        default: false,
+        default: true,
       },
     },
     data() {

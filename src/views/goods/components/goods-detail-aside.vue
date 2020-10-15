@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情侧边栏
  * @Date: 2020-10-05 23:21:38
- * @LastEditTime: 2020-10-05 23:32:51
+ * @LastEditTime: 2020-10-15 22:22:18
 -->
 
 <template>
@@ -117,7 +117,7 @@
           padding: 0;
           padding-right: 0 !important;
           padding-left: 0 !important;
-          font-size: $text-medium;
+          font-size: $text-x-small;
           line-height: 54px;
           color: $black;
 

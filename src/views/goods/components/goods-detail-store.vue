@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店铺详情
  * @Date: 2020-10-05 23:03:41
- * @LastEditTime: 2020-10-05 23:07:44
+ * @LastEditTime: 2020-10-15 22:08:33
 -->
 
 <template>
@@ -42,8 +42,9 @@
       <p>掌柜：壹只菜直营店</p>
       <p>所在地：上海</p>
       <div class="btns">
-        <el-button>进店逛逛</el-button>
-        <el-image :src="require('@/assets/imgs/collec-store.png')"></el-image>
+        <el-button><router-link to="/store">进店逛逛</router-link></el-button>
+        <!-- <el-image :src="require('@/assets/imgs/collec-store.png')"></el-image> -->
+        <el-button icon="el-icon-star-off">收藏本店</el-button>
       </div>
     </div>
   </div>
@@ -63,12 +64,12 @@
 
   .goods-detail-store {
     .store {
-      padding: 20px 0 15px;
+      padding: 13px 0 13px;
       margin-bottom: $padding;
       text-align: center;
 
       &__title {
-        margin-bottom: 17px;
+        margin-bottom: 13px;
         color: $green;
       }
 
@@ -80,14 +81,14 @@
 
           span {
             display: block;
-            font-size: $text-small;
+            font-size: 14px;
             color: #ff6000;
           }
         }
       }
 
       &__info {
-        padding: 30px 10px;
+        padding: 24px 10px 17px;
 
         .compare {
           @include center-flex(y);
@@ -97,33 +98,37 @@
             text-align: center;
 
             li {
-              margin-bottom: 17px;
-              font-size: $text-small;
-
-              &:first-child {
-                font-size: $text-medium;
-              }
+              margin-bottom: 15px;
             }
           }
         }
 
         p {
-          margin: 10px 0 0 11px;
+          margin: 8px 0 0 11px;
         }
 
         .btns {
           @include center-flex(y);
 
-          margin: 40px 0 16px 0;
+          margin: 30px 0 16px 0;
 
           .el-button {
-            width: 153px;
-            height: 55px;
-            margin-right: 10px;
-            font-size: 22px;
-            color: #fff;
-            background: $green;
+            a {
+              color: #fff;
+            }
+            width: 114px;
+            height: 41px;
             border-radius: 0;
+            &:first-child {
+              background: $green;
+            }
+            &:last-child {
+              border-color: $green;
+              color: $green;
+              &:hover {
+                background-color: rgba(5, 184, 94, 0.1);
+              }
+            }
           }
         }
       }

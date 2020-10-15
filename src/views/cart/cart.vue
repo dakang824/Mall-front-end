@@ -28,7 +28,7 @@
                 <el-col :span="1" style="position: relative; left: 49px">
                   数量
                 </el-col>
-                <el-col :span="2" style="position: relative; left: 30px">
+                <el-col :span="2" style="position: relative; left: 50px">
                   金额（元）
                 </el-col>
                 <el-col
@@ -75,7 +75,7 @@
                         @change="handleChange"
                       ></el-input-number>
                     </el-col>
-                    <el-col :span="2">
+                    <el-col :span="2" style="text-align: center">
                       <div class="money">{{ item.money }}</div>
                     </el-col>
                     <el-col :span="2">
@@ -100,6 +100,7 @@
               件 合计（不含运费）:
               <div class="money">￥6098.00</div>
               <el-image
+                class="pay"
                 :src="require('@/assets/imgs/cart-pay.png')"
                 @click="handlePay"
               ></el-image>
@@ -162,8 +163,6 @@
 
   .cart {
     &__container {
-      font-size: $text-medium;
-
       &__main {
         margin: 10px 0 0;
 
@@ -174,10 +173,12 @@
         .table__header {
           padding: 20px 20px 0;
           text-align: center;
+          font-size: 16px;
+          font-weight: bold;
         }
 
         .table__main {
-          margin: 60px 0 0 0;
+          margin: 30px 0 0 0;
 
           &__box {
             border: solid 1px #e6e6e6;
@@ -201,7 +202,6 @@
             }
 
             .el-button {
-              font-size: $text-medium;
               color: #969696;
             }
 
@@ -237,14 +237,14 @@
 
         .el-menu {
           ::v-deep .el-menu-item.is-active {
-            font-size: $text-medium;
+            font-size: $text-small;
             font-weight: bold;
           }
         }
 
         ::v-deep .el-checkbox {
           &__label {
-            font-size: $text-medium;
+            font-size: $text-x-small;
           }
 
           &__inner {
@@ -260,7 +260,7 @@
       }
 
       &__footer {
-        padding: 20px 0;
+        padding: 10px 0;
         margin: 10px 0;
         color: $black;
 
@@ -273,7 +273,6 @@
 
           .del {
             margin: 0 0 0 78px;
-            font-size: $text-medium;
             color: $black;
           }
 
@@ -304,6 +303,10 @@
         .el-col {
           display: flex;
           align-items: center;
+        }
+        .pay {
+          width: 200px;
+          cursor: pointer;
         }
       }
     }

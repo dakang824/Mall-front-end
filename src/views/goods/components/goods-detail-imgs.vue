@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情轮播图片
  * @Date: 2020-10-05 22:45:14
- * @LastEditTime: 2020-10-05 23:01:42
+ * @LastEditTime: 2020-10-15 22:12:13
 -->
 <template>
   <div class="goods-detail-imgs">
@@ -22,7 +22,7 @@
         </swiper>
       </div>
       <div class="collec">
-        <el-image :src="require('@/assets/imgs/stars.png')"></el-image>
+        <i class="el-icon-star-on"></i>
         收藏商品（1223人气）
       </div>
     </div>
@@ -78,24 +78,24 @@
 
   .goods-detail-imgs {
     .imgs {
-      width: 440px;
+      width: 326px;
 
       ::v-deep {
         .magnifier-box {
           img {
-            width: 440px;
+            width: 326px;
           }
 
-          width: 440px;
-          height: 440px;
+          width: 326px;
+          height: 326px;
           margin-bottom: $padding;
         }
       }
 
       .small {
         .el-image {
-          width: 80px;
-          height: 80px;
+          width: 60px;
+          height: 60px;
           cursor: pointer;
         }
       }
@@ -103,7 +103,13 @@
       .collec {
         padding: 3px 0 0;
         text-align: right;
-
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .el-icon-star-on {
+          font-size: 25px;
+          color: $green;
+        }
         .el-image {
           width: 22px;
           height: 22px;

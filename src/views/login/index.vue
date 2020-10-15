@@ -73,7 +73,7 @@
         </el-form>
       </div>
     </div>
-    <div class="login-container__footer"><Footer hidden /></div>
+    <div class="login-container__footer"><Footer :show="false" /></div>
   </div>
 </template>
 
@@ -188,6 +188,7 @@
       .right {
         .el-image {
           margin-right: 11px;
+          vertical-align: middle;
         }
 
         display: flex;
@@ -197,8 +198,7 @@
     }
 
     &__main {
-      flex: 1;
-
+      height: calc(100vh - 230px);
       .el-image {
         width: 100%;
         height: 100%;

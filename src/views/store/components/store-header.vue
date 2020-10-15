@@ -77,6 +77,7 @@
 
       &__box {
         display: flex;
+        margin-top: 20px;
 
         .title {
           margin-right: 40px;
@@ -92,7 +93,7 @@
             margin-right: 32px;
             color: #202020;
             text-align: center;
-
+            font-size: 15px;
             span {
               display: block;
             }

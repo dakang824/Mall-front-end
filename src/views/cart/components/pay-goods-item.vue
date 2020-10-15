@@ -10,7 +10,7 @@
           align="middle"
         >
           <el-col :span="4" style="width: 12.66667%">店铺商品</el-col>
-          <el-col :span="2" style="position: relative; left: 49px">
+          <el-col :span="2" style="position: relative; left: 38px">
             商品属性
           </el-col>
           <el-col :span="1">单价</el-col>
@@ -128,8 +128,6 @@
   @import "@/assets/scss/settings";
 
   .pay-goods-item {
-    font-size: $text-medium;
-
     &__main {
       &__table {
         padding: 0 10px;
@@ -138,10 +136,12 @@
       .table__header {
         padding: 20px 20px 0;
         text-align: center;
+        font-size: 16px;
+        font-weight: bold;
       }
 
       .table__main {
-        margin: 33px 0 0 0;
+        margin: 15px 0 0 0;
 
         &__box {
           border: solid 1px #e6e6e6;
@@ -155,7 +155,7 @@
         }
 
         &__item {
-          padding: 15px $gap;
+          padding: 10px $gap;
           border-bottom: solid 1px #e6e6e6;
 
           &:last-child {
@@ -216,13 +216,12 @@
                 margin-bottom: 0;
 
                 &__label {
-                  font-size: $text-medium;
                   color: #303133;
                 }
               }
 
               textarea {
-                width: 623px;
+                width: 568px;
                 height: 90px;
               }
             }
