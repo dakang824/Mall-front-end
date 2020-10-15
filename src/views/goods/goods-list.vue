@@ -28,7 +28,9 @@
           <span>分类：</span>
           <ul>
             <li
-              v-for="(item, index) in category[topCateCurrent].subCategoryList"
+              v-for="(item, index) in category[
+                topCateCurrent === null ? 0 : topCateCurrent
+              ].subCategoryList"
               :key="index"
               :class="{ active: index === subCateCurrent }"
               @click="handleSubCateCurrent(item, index)"
@@ -75,7 +77,7 @@
       return {
         loading: true,
         currentPage: 1,
-        topCateCurrent: 0,
+        topCateCurrent: null,
         subCateCurrent: null,
         addressCurrent: null,
       };

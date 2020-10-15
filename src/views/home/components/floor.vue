@@ -7,9 +7,7 @@
         <span>每日{{ model.name }}推荐</span>
       </div>
       <div class="floor__title__right">
-        <router-link
-          :to="{ path: '/goods-list', query: { type: getPreTwo[0].type } }"
-        >
+        <router-link :to="{ path: '/goods-list', query: { type: getType } }">
           <el-link>
             更多
             <i class="el-icon-d-arrow-right"></i>
@@ -20,16 +18,30 @@
 
     <el-container>
       <el-aside width="300px">
-        <el-image
-          :src="getPreTwo[0].pics[0].path | imgBaseUrl"
-          fit="scale-down"
-          style="width: 300px; height: 196px"
-        ></el-image>
-        <el-image
-          :src="getPreTwo[1].pics[1].path | imgBaseUrl"
-          fit="scale-down"
-          style="width: 300px; height: 368px"
-        ></el-image>
+        <router-link
+          :to="{
+            path: '/goods-detail',
+            query: { type: getType },
+          }"
+        >
+          <el-image
+            :src="getPreTwo[0].pics[0].path | imgBaseUrl"
+            fit="scale-down"
+            style="width: 300px; height: 196px"
+          ></el-image>
+        </router-link>
+        <router-link
+          :to="{
+            path: '/goods-detail',
+            query: { type: getType },
+          }"
+        >
+          <el-image
+            :src="getPreTwo[1].pics[1].path | imgBaseUrl"
+            fit="scale-down"
+            style="width: 300px; height: 368px"
+          ></el-image>
+        </router-link>
       </el-aside>
       <el-main class="clearfix">
         <div
@@ -54,7 +66,7 @@
       model: {
         type: Object,
         default: () => {
-          return {};
+          data: [];
         },
       },
     },
@@ -67,6 +79,9 @@
       },
       getList() {
         return this.model.data.slice(2);
+      },
+      getType() {
+        return this.getPreTwo[0].type;
       },
     },
     created() {},
