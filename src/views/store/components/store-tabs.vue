@@ -1,7 +1,7 @@
 <!--
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-14 00:04:50
+ * @LastEditTime: 2020-10-16 23:22:45
 -->
 <!-- 头部筛选 -->
 <template>
@@ -21,6 +21,7 @@
 
 <script>
   export default {
+    name: "StoreTabs",
     components: {},
     data() {
       return {

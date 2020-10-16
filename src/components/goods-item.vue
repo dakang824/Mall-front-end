@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品item组件
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-14 21:43:52
+ * @LastEditTime: 2020-10-16 23:08:29
 -->
 <!-- 商品item -->
 <template>
@@ -51,9 +51,10 @@
     },
     methods: {
       handleGoDetail() {
+        const { id, type } = this.model;
         this.$router.push({
           path: "/goods-detail",
-          query: { type: this.model.type },
+          query: { type, id },
         });
       },
     },

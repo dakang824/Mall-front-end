@@ -26,6 +26,7 @@
   import Logo from "@/components/logo.vue";
   import Search from "@/components/search.vue";
   export default {
+    name: "StoreHeader",
     components: {
       Logo,
       Search,

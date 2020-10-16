@@ -28,9 +28,7 @@
           <span>分类：</span>
           <ul>
             <li
-              v-for="(item, index) in category[
-                topCateCurrent === null ? 0 : topCateCurrent
-              ].subCategoryList"
+              v-for="(item, index) in getSubCategoryList"
               :key="index"
               :class="{ active: index === subCateCurrent }"
               @click="handleSubCateCurrent(item, index)"
@@ -53,25 +51,34 @@
           </ul>
         </div>
       </div>
-      <StoreTabs @change="handleChange"></StoreTabs>
-      <GoodsCard v-loading="loading" :model="goodsList"></GoodsCard>
+      <storeTabs @change="handleChange"></storeTabs>
+      <goodsCard v-loading="loading" :model="goodsList">
+        <el-pagination
+          :current-page="postData.pageNum"
+          :page-size="postData.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="goodsList.length"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        ></el-pagination>
+      </goodsCard>
     </div>
   </div>
 </template>
 
 <script>
   import { mapState } from "vuex";
-  import Logo from "@/components/logo.vue";
-  import Search from "@/components/search.vue";
-  import StoreTabs from "../store/components/store-tabs.vue";
-  import GoodsCard from "../store/components/goods-card.vue";
+  import logo from "@/components/logo.vue";
+  import search from "@/components/search.vue";
+  import storeTabs from "../store/components/store-tabs.vue";
+  import goodsCard from "../store/components/goods-card.vue";
   export default {
     name: "GoodsList",
     components: {
-      Search,
-      StoreTabs,
-      GoodsCard,
-      Logo,
+      search,
+      storeTabs,
+      goodsCard,
+      logo,
     },
     data() {
       return {
@@ -82,19 +89,53 @@
         addressCurrent: null,
       };
     },
-    computed: mapState({
-      postData: (state) => state.goods.postData,
-      goodsList: (state) => state.goods.goodsList,
-      category: (state) => state.home.category,
-      prodAddress: (state) => state.goods.prodAddress,
-    }),
+    computed: {
+      ...mapState({
+        postData: (state) => state.goods.postData,
+        goodsList: (state) => state.goods.goodsList,
+        category: (state) => state.home.category,
+        prodAddress: (state) => state.goods.prodAddress,
+      }),
+      getSubCategoryList() {
+        const data = this.category[
+          this.topCateCurrent === null ? 0 : this.topCateCurrent
+        ];
+        return data ? data.subCategoryList : "";
+      },
+    },
     async mounted() {
+      this.reset();
       this.category.length ? "" : this.$store.dispatch("home/homePageInit");
       await this.$store.dispatch("goods/findAllProdAddress");
       this.postData.type = this.$route.query.type;
       this.fetchData();
     },
     methods: {
+      handleCurrentChange(e) {
+        this.reset({ pageNum: e });
+        this.fetchData();
+      },
+      handleSizeChange(e) {
+        this.reset({ pageSize: e, pageNum: 1 });
+        this.fetchData();
+      },
+      reset(params = {}) {
+        this.$store.commit("goods/setPostData", {
+          ...this.postData,
+          ...{
+            cate_id: "",
+            sub_cate_id: "",
+            address_id: "",
+            condition: "",
+            orderBySellCount: "",
+            orderByPrice: "",
+            orderByViewCount: "",
+            pageNum: 1,
+            pageSize: 10,
+          },
+          ...params,
+        });
+      },
       handleTopCateCurrent(item, e) {
         this.postData.cate_id = item.id;
         this.topCateCurrent = e;

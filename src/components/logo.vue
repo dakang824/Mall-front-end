@@ -1,7 +1,7 @@
 <!--
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-15 00:05:57
+ * @LastEditTime: 2020-10-16 23:21:41
 -->
 <template>
   <div class="logo">
@@ -18,6 +18,7 @@
 
 <script>
   export default {
+    name: "Logo",
     components: {},
     props: {
       width: {

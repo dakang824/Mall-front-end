@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-15 22:39:23
+ * @LastEditTime: 2020-10-16 23:53:53
 -->
 <!-- 商品详情 -->
 <template>
@@ -82,14 +82,17 @@
           <GoodsDetailAside />
         </el-aside>
         <el-main>
-          <GoodsDetailInfo :model="type == 4 ? caipuDetailInfo : detailInfo" />
+          <GoodsDetailInfo :model="detailInfo" />
+          {{ detailInfo }}
         </el-main>
       </el-container>
     </div>
+    {{ store }}
   </div>
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import StoreHeader from "../store/components/store-header.vue";
   import GoodsDetailAside from "./components/goods-detail-aside.vue";
   import GoodsDetailImgs from "./components/goods-detail-imgs.vue";
@@ -113,41 +116,30 @@
           ["食材", "尖椒", "猪肉", "其他", "其他"],
           ["重量(份)", "500g", "1kg", "500g", "500g"],
         ],
-        detailInfo: [
-          {
-            name: "规格参数",
-            imgs: [
-              require("@/assets/imgs/goods1.png"),
-              require("@/assets/imgs/goods2.png"),
-              require("@/assets/imgs/goods3.png"),
-              require("@/assets/imgs/goods4.png"),
-            ],
-          },
-          {
-            name: "商品详情",
-            imgs: [
-              require("@/assets/imgs/goods5.png"),
-              require("@/assets/imgs/goods1.png"),
-            ],
-          },
-        ],
-        caipuDetailInfo: [
-          {
-            name: "烹饪步骤",
-            imgs: [
-              require("@/assets/imgs/goods1.png"),
-              require("@/assets/imgs/goods2.png"),
-              require("@/assets/imgs/goods3.png"),
-              require("@/assets/imgs/goods5.png"),
-            ],
-          },
-        ],
+        detailInfo: [],
       };
     },
     computed: {
+      ...mapState({
+        store: (state) => state.goodsDetail.store,
+      }),
       swiper() {
         return this.$refs.mySwiper.$swiper;
       },
+    },
+    async mounted() {
+      await this.$store.dispatch("goodsDetail/getProductDetail", {
+        prod_id: this.$route.query.id,
+      });
+      const { product } = this.store;
+      if (this.type == 4) {
+        this.detailInfo = [
+          {
+            name: "烹饪步骤",
+            imgs: product.introPics,
+          },
+        ];
+      }
     },
     created() {},
     methods: {

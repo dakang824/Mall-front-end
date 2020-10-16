@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情说明
  * @Date: 2020-10-05 23:12:09
- * @LastEditTime: 2020-10-15 22:36:58
+ * @LastEditTime: 2020-10-16 23:39:10
 -->
 
 <template>
@@ -17,7 +17,8 @@
         <el-image
           v-for="(it, ind) in item.imgs"
           :key="ind"
-          :src="it"
+          :data-i="it.path"
+          :src="it.path | imgBaseUrl"
           fit="contain"
           class="goods-detail-info__imgs"
         ></el-image>

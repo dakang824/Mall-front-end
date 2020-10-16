@@ -15,7 +15,6 @@ const state = {
     sub_cate_id: "",
     address_id: "",
     condition: "",
-    condition: "",
     orderBySellCount: "",
     orderByPrice: "",
     orderByViewCount: "",

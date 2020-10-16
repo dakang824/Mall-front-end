@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店内分类
  * @Date: 2020-10-05 20:56:27
- * @LastEditTime: 2020-10-14 23:51:23
+ * @LastEditTime: 2020-10-16 23:24:04
 -->
 <template>
   <div class="store-aside">
@@ -24,6 +24,7 @@
 
 <script>
   export default {
+    name: "StoreAside",
     components: {},
     props: {
       title: {
