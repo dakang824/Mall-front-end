@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店内分类
  * @Date: 2020-10-05 20:56:27
- * @LastEditTime: 2020-10-16 23:24:04
+ * @LastEditTime: 2020-10-17 19:06:35
 -->
 <template>
   <div class="store-aside">
@@ -10,12 +10,12 @@
       <li class="title">{{ title }}</li>
       <slot>
         <li
-          v-for="(item, index) in 7"
+          v-for="(item, index) in model"
           :key="index"
           :class="{ active: index === current }"
           @click="handleChange(index)"
         >
-          分类{{ item }}
+          分类{{ item.name }}
         </li>
       </slot>
     </ul>
@@ -30,6 +30,12 @@
       title: {
         type: String,
         default: "店内分类",
+      },
+      model: {
+        type: Array,
+        default: () => {
+          return [];
+        },
       },
     },
     data() {

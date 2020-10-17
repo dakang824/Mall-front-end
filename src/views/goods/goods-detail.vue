@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-17 17:28:47
+ * @LastEditTime: 2020-10-17 19:16:09
 -->
 <!-- 商品详情 -->
 <template>
@@ -81,7 +81,11 @@
       </el-container>
       <el-container class="goods-detail__info">
         <el-aside v-if="type != 4" width="228px">
-          <GoodsDetailAside />
+          <GoodsDetailAside
+            :model="storeSubCate"
+            :collect-goods="collectGoods"
+            :sell-goods="sellGoods"
+          />
         </el-aside>
         <el-main>
           <GoodsDetailInfo :model="introPics" />
@@ -112,6 +116,9 @@
         type: this.$route.query.type,
         formula: [["序号"], ["食材"], ["重量(份)"]],
         introPics: [],
+        storeSubCate: [],
+        collectGoods: [],
+        sellGoods: [],
         product: {
           specList: [],
         },
@@ -138,8 +145,16 @@
       await this.$store.dispatch("goodsDetail/getProductDetail", {
         prod_id: this.$route.query.id,
       });
-      const { product } = this.store;
+      const {
+        product,
+        storeSubCate,
+        storeProdsOrderBySellCount: sellGoods,
+        storeProdsOrderByCollectCount: collectGoods,
+      } = this.store;
       this.product = product;
+      this.storeSubCate = storeSubCate;
+      this.sellGoods = sellGoods;
+      this.collectGoods = collectGoods;
       if (this.type == 4) {
         this.introPics = [
           {
@@ -320,6 +335,7 @@
               }
               .el-image {
                 width: 248px;
+                cursor: pointer;
               }
             }
           }

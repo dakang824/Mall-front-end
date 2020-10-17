@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 搜索插件
  * @Date: 2020-10-03 20:19:16
- * @LastEditTime: 2020-10-15 00:09:56
+ * @LastEditTime: 2020-10-17 18:46:05
 -->
 <template>
   <div class="search" :class="'search--style' + type">
@@ -19,11 +19,12 @@
             :src="require('@/assets/imgs/search-icon.png')"
             class="search"
             fit="cover"
+            @click="handleSearch"
           ></el-image>
 
           <div v-if="type === 2" class="append">
-            <div class="search">搜全站</div>
-            <div class="search black">搜本店</div>
+            <div class="search" @click="handleSearch">搜全站</div>
+            <div class="search black" @click="handleSearch">搜本店</div>
           </div>
         </div>
       </el-input>
@@ -49,14 +50,17 @@
         keyWord: "",
       };
     },
-    computed: {
-      getValue() {
-        return this.value;
+    watch: {
+      value(e) {
+        this.keyWord = e;
       },
     },
     methods: {
       hanldeChange(e) {
         this.$emit("input", e);
+        this.handleSearch();
+      },
+      handleSearch() {
         this.$emit("search");
       },
     },

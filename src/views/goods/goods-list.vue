@@ -3,7 +3,7 @@
   <div class="goods-list">
     <div class="el-card">
       <div class="header w">
-        <logo></logo>
+        <logo />
         <search v-model="postData.condition" @search="fetchData"></search>
       </div>
     </div>
@@ -104,7 +104,7 @@
       },
     },
     async mounted() {
-      const { type: prodType } = this.$route.query;
+      const { type: prodType, condition = "" } = this.$route.query;
       this.reset();
       await this.$store.dispatch("goods/findCategroyByProdType", {
         prodType,
@@ -112,8 +112,7 @@
       await this.$store.dispatch("goods/findAddressByProdType", {
         prodType,
       });
-      this.postData.type = prodType;
-      this.fetchData();
+      this.handleChange({ condition, ...this.$route.query });
     },
     methods: {
       handleCurrentChange(e) {

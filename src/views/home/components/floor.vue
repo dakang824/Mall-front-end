@@ -15,10 +15,10 @@
         </router-link>
       </div>
     </div>
-
     <el-container>
       <el-aside width="300px">
         <router-link
+          v-if="getPreTwo.length >= 1"
           :to="{
             path: '/goods-detail',
             query: { type: getType, id: getId },
@@ -31,6 +31,7 @@
           ></el-image>
         </router-link>
         <router-link
+          v-if="getPreTwo.length >= 2"
           :to="{
             path: '/goods-detail',
             query: { type: getType, id: getId },
@@ -66,7 +67,7 @@
       model: {
         type: Object,
         default: () => {
-          data: [];
+          return {};
         },
       },
     },
@@ -75,16 +76,16 @@
     },
     computed: {
       getPreTwo() {
-        return this.model.data.slice(0, 2);
+        return this.model.data.length ? this.model.data.slice(0, 2) : [];
       },
       getList() {
-        return this.model.data.slice(2);
+        return this.model.data.length ? this.model.data.slice(2) : [];
       },
       getType() {
-        return this.getPreTwo[0].type;
+        return this.getPreTwo.length ? this.getPreTwo[0].type : "";
       },
       getId() {
-        return this.getPreTwo[0].id;
+        return this.getPreTwo.length ? this.getPreTwo[0].id : "";
       },
     },
     created() {},

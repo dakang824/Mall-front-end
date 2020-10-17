@@ -2,26 +2,37 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情侧边栏
  * @Date: 2020-10-05 23:21:38
- * @LastEditTime: 2020-10-15 22:22:18
+ * @LastEditTime: 2020-10-17 19:33:49
 -->
 
 <template>
   <div class="goods-detail-aside">
-    <StoreAside></StoreAside>
+    <StoreAside :model="model"></StoreAside>
     <StoreAside title="店内排行">
       <el-tabs type="border-card" stretch>
         <el-tab-pane
-          v-for="(item, index) in rankingList"
+          v-for="(item, index) in getRankingList"
           :key="index"
           :label="item.title"
         >
-          <div v-for="(it, ind) in item.child" :key="ind" class="goods-item">
-            <el-image :src="it.img"></el-image>
+          <router-link
+            v-for="(it, ind) in item.child"
+            :key="ind"
+            class="goods-item"
+            :to="{
+              path: '/goods-detail',
+              query: { type: it.type, id: it.id },
+            }"
+          >
+            <el-image
+              :src="it.pics[0].path | imgBaseUrl"
+              fit="cover"
+            ></el-image>
             <div class="right">
-              <p>{{ it.title }}</p>
-              <span>￥{{ it.money }}</span>
+              <p>{{ it.name }}</p>
+              <span>￥{{ it.specList | minPrice }}</span>
             </div>
-          </div>
+          </router-link>
         </el-tab-pane>
       </el-tabs>
     </StoreAside>
@@ -32,76 +43,53 @@
   import StoreAside from "../../store/components/store-aside.vue";
   export default {
     components: { StoreAside },
+    filters: {
+      minPrice: (value) => {
+        if (value.length) {
+          return JSON.parse(JSON.stringify(value))
+            .sort((a, b) => {
+              return a.sellPrice - b.sellPrice;
+            })[0]
+            .sellPrice.toFixed(2);
+        }
+      },
+    },
+    props: {
+      model: {
+        type: Array,
+        default: () => {
+          return [];
+        },
+      },
+      collectGoods: {
+        type: Array,
+        default: () => {
+          return [];
+        },
+      },
+      sellGoods: {
+        type: Array,
+        default: () => {
+          return [];
+        },
+      },
+    },
     data() {
-      return {
-        rankingList: [
+      return {};
+    },
+    computed: {
+      getRankingList() {
+        return [
           {
             title: "销售量",
-            child: [
-              {
-                img: require("@/assets/imgs/goods2.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-            ],
+            child: [...this.collectGoods],
           },
           {
             title: "收藏数",
-            child: [
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-              {
-                img: require("@/assets/imgs/goods3.png"),
-                title: "四川正宗家用烧菜烧豆腐",
-                money: "24.50",
-              },
-            ],
+            child: [...this.sellGoods],
           },
-        ],
-      };
+        ];
+      },
     },
   };
 </script>
@@ -140,10 +128,11 @@
 
       .goods-item {
         @include center-flex(y);
-
+        cursor: pointer;
         margin-bottom: $padding;
-        font-size: $text-small;
-
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
         &:last-child {
           margin-bottom: 0;
         }
