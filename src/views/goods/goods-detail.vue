@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-16 23:53:53
+ * @LastEditTime: 2020-10-17 17:28:47
 -->
 <!-- 商品详情 -->
 <template>
@@ -11,26 +11,25 @@
     <div class="w">
       <el-container class="goods-detail__main">
         <el-main class="el-card">
-          <GoodsDetailImgs />
+          <GoodsDetailImgs v-model="store.prodCollected" :model="product" />
           <div class="info">
             <div class="info__title">
-              四川正宗家用烧菜烧豆腐四川正宗家用烧菜烧豆腐
+              {{ product.name }}
             </div>
             <div class="info__desc">
               <span v-if="type == 4">
-                <i>难度：有挑战</i>
-                <i>时长：10-30分钟</i>
+                <i>{{ product.summary }}</i>
               </span>
               <span v-else>四川正宗家用烧菜烧豆腐</span>
             </div>
             <div class="info__money">
               <p>
                 价格：
-                <i>¥25.00</i>
+                <i>¥{{ getPrice.oriPrice }}</i>
               </p>
               <p>
                 活动价：
-                <span>¥18.90</span>
+                <span>¥{{ getPrice.sellPrice }}</span>
               </p>
             </div>
             <div v-if="type == 4" class="info__formula">
@@ -69,12 +68,15 @@
 
             <div class="btns">
               <el-button>立即购买</el-button>
-              <el-image :src="require('@/assets/imgs/add-cart.png')"></el-image>
+              <el-image
+                :src="require('@/assets/imgs/add-cart.png')"
+                @click="handleAddCart"
+              ></el-image>
             </div>
           </div>
         </el-main>
         <el-aside width="250px">
-          <GoodsDetailStore />
+          <GoodsDetailStore :model="product" />
         </el-aside>
       </el-container>
       <el-container class="goods-detail__info">
@@ -82,12 +84,10 @@
           <GoodsDetailAside />
         </el-aside>
         <el-main>
-          <GoodsDetailInfo :model="detailInfo" />
-          {{ detailInfo }}
+          <GoodsDetailInfo :model="introPics" />
         </el-main>
       </el-container>
     </div>
-    {{ store }}
   </div>
 </template>
 
@@ -106,17 +106,16 @@
       GoodsDetailStore,
       GoodsDetailInfo,
     },
-
     data() {
       return {
         num: 1,
         type: this.$route.query.type,
-        formula: [
-          ["序号", 1, 2, 3, 4],
-          ["食材", "尖椒", "猪肉", "其他", "其他"],
-          ["重量(份)", "500g", "1kg", "500g", "500g"],
-        ],
-        detailInfo: [],
+        formula: [["序号"], ["食材"], ["重量(份)"]],
+        introPics: [],
+        product: {
+          specList: [],
+        },
+        oriPrice: "",
       };
     },
     computed: {
@@ -126,25 +125,50 @@
       swiper() {
         return this.$refs.mySwiper.$swiper;
       },
+      getPrice() {
+        let data = {},
+          { specList } = this.product;
+        if (specList.length) {
+          data = specList.sort((a, b) => a.sellPrice - b.sellPrice)[0];
+        }
+        return data;
+      },
     },
     async mounted() {
       await this.$store.dispatch("goodsDetail/getProductDetail", {
         prod_id: this.$route.query.id,
       });
       const { product } = this.store;
+      this.product = product;
       if (this.type == 4) {
-        this.detailInfo = [
+        this.introPics = [
           {
             name: "烹饪步骤",
             imgs: product.introPics,
           },
         ];
+        product.prodRecipes.map((item, index) => {
+          this.formula[0].push(index + 1);
+          this.formula[1].push(item.name);
+          this.formula[2].push(item.weight);
+        });
       }
     },
     created() {},
     methods: {
       handleChange(e) {
         console.log(e);
+      },
+      async handleAddCart() {
+        await this.$store.dispatch("goodsDetail/addCartItem", {
+          prodId: this.$route.query.id,
+          quantity: this.num,
+          totalAmount: this.getPrice.sellPrice,
+        });
+        this.$message({
+          message: "已加入购物车",
+          type: "success",
+        });
       },
     },
   };

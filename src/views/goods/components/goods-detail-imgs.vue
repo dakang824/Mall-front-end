@@ -2,28 +2,31 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情轮播图片
  * @Date: 2020-10-05 22:45:14
- * @LastEditTime: 2020-10-15 22:12:13
+ * @LastEditTime: 2020-10-17 17:15:34
 -->
 <template>
   <div class="goods-detail-imgs">
     <div class="imgs">
-      <pic-zoom :url="imgs[current]" :scale="2"></pic-zoom>
+      <pic-zoom
+        :url="model.pics[current].path | imgBaseUrl"
+        :scale="2"
+      ></pic-zoom>
       <div class="small">
         <swiper
           ref="swiper"
           :options="imgSwiperOptions"
           @click-slide="handleClickSlide"
         >
-          <swiper-slide v-for="(item, index) in imgs" :key="index">
-            <el-image :src="item"></el-image>
+          <swiper-slide v-for="(item, index) in model.pics" :key="index">
+            <el-image :src="item.path | imgBaseUrl"></el-image>
           </swiper-slide>
 
           <div slot="pagination" class="swiper-pagination"></div>
         </swiper>
       </div>
-      <div class="collec">
-        <i class="el-icon-star-on"></i>
-        收藏商品（1223人气）
+      <div class="collec" @click="handleCollect">
+        <i :class="value ? 'el-icon-star-on' : 'el-icon-star-off'"></i>
+        收藏商品（{{ model.collectCount }}人气）
       </div>
     </div>
   </div>
@@ -42,6 +45,18 @@
     directives: {
       swiper: directive,
     },
+    props: {
+      model: {
+        type: Object,
+        default: () => {
+          return {};
+        },
+      },
+      value: {
+        type: Boolean,
+        default: false,
+      },
+    },
     data() {
       return {
         current: 0,
@@ -50,24 +65,29 @@
           spaceBetween: 10,
           slideToClickedSlide: true,
         },
-        imgs: [
-          require("@/assets/imgs/goods2.png"),
-          require("@/assets/imgs/imgs2.png"),
-          require("@/assets/imgs/imgs3.png"),
-          require("@/assets/imgs/imgs4.png"),
-          require("@/assets/imgs/imgs5.png"),
-          require("@/assets/imgs/goods2.png"),
-          require("@/assets/imgs/imgs2.png"),
-          require("@/assets/imgs/imgs3.png"),
-          require("@/assets/imgs/imgs4.png"),
-          require("@/assets/imgs/imgs5.png"),
-        ],
       };
     },
-
     methods: {
       handleClickSlide(e) {
         this.current = e;
+      },
+      handleCollect() {
+        const { id } = this.model;
+        this.$utils.verifyLogin({
+          success: async (e) => {
+            const res = await this.$store.dispatch(
+              `goodsDetail/${this.value ? "prodUnCollect" : "prodCollect"}`,
+              {
+                prodId: id,
+              }
+            );
+            this.$emit("input", !this.value);
+            this.$message({
+              message: this.value ? "取消成功" : "收藏成功",
+              type: this.value ? "warning" : "success",
+            });
+          },
+        });
       },
     },
   };
@@ -106,10 +126,13 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        .el-icon-star-on {
-          font-size: 25px;
+        cursor: pointer;
+        i {
           color: $green;
+          font-size: 20px;
+          margin-right: 5px;
         }
+
         .el-image {
           width: 22px;
           height: 22px;

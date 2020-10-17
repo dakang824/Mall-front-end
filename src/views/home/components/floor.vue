@@ -21,7 +21,7 @@
         <router-link
           :to="{
             path: '/goods-detail',
-            query: { type: getType },
+            query: { type: getType, id: getId },
           }"
         >
           <el-image
@@ -33,7 +33,7 @@
         <router-link
           :to="{
             path: '/goods-detail',
-            query: { type: getType },
+            query: { type: getType, id: getId },
           }"
         >
           <el-image
@@ -82,6 +82,9 @@
       },
       getType() {
         return this.getPreTwo[0].type;
+      },
+      getId() {
+        return this.getPreTwo[0].id;
       },
     },
     created() {},

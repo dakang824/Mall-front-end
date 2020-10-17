@@ -153,7 +153,6 @@
             );
             res.code === 200 ? this.$router.replace("/") : "";
           } else {
-            console.log("error submit!!");
             return false;
           }
         });

@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 20:10:07
- * @LastEditTime: 2020-10-11 21:21:53
+ * @LastEditTime: 2020-10-17 10:58:00
  */
 module.exports = {
   // @token在Cookie中存储的天数，默认1天
@@ -18,7 +18,7 @@ module.exports = {
   //最长请求时间
   requestTimeout: 5000,
   //操作正常code，支持String、Array、int多种类型
-  successCode: [200, 0],
+  successCode: [200],
   //token名称
   tokenName: "accessToken",
   //是否显示在页面高亮错误

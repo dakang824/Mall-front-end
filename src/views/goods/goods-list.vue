@@ -13,7 +13,7 @@
         <el-breadcrumb-item>
           <ul>
             <li
-              v-for="(item, index) in category"
+              v-for="(item, index) in categoryList"
               :key="index"
               :class="{ active: index === topCateCurrent }"
               @click="handleTopCateCurrent(item, index)"
@@ -93,21 +93,26 @@
       ...mapState({
         postData: (state) => state.goods.postData,
         goodsList: (state) => state.goods.goodsList,
-        category: (state) => state.home.category,
+        categoryList: (state) => state.goods.categoryList,
         prodAddress: (state) => state.goods.prodAddress,
       }),
       getSubCategoryList() {
-        const data = this.category[
+        const data = this.categoryList[
           this.topCateCurrent === null ? 0 : this.topCateCurrent
         ];
         return data ? data.subCategoryList : "";
       },
     },
     async mounted() {
+      const { type: prodType } = this.$route.query;
       this.reset();
-      this.category.length ? "" : this.$store.dispatch("home/homePageInit");
-      await this.$store.dispatch("goods/findAllProdAddress");
-      this.postData.type = this.$route.query.type;
+      await this.$store.dispatch("goods/findCategroyByProdType", {
+        prodType,
+      });
+      await this.$store.dispatch("goods/findAddressByProdType", {
+        prodType,
+      });
+      this.postData.type = prodType;
       this.fetchData();
     },
     methods: {
@@ -136,23 +141,23 @@
           ...params,
         });
       },
-      handleTopCateCurrent(item, e) {
+      handleTopCateCurrent(item, index) {
         this.postData.cate_id = item.id;
-        this.topCateCurrent = e;
+        this.topCateCurrent = index;
         this.postData.sub_cate_id = "";
         this.subCateCurrent = "";
         this.postData.address_id = "";
         this.addressCurrent = "";
         this.fetchData();
       },
-      handleSubCateCurrent(item, e) {
+      handleSubCateCurrent(item, index) {
         this.postData.sub_cate_id = item.id;
-        this.subCateCurrent = e;
+        this.subCateCurrent = index;
         this.fetchData();
       },
-      handleAddress(item, e) {
+      handleAddress(item, index) {
         this.postData.address_id = item.id;
-        this.addressCurrent = e;
+        this.addressCurrent = index;
         this.fetchData();
       },
       handleChange(e) {

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 首页
  * @Date: 2020-09-28 21:15:23
- * @LastEditTime: 2020-10-14 20:43:00
+ * @LastEditTime: 2020-10-17 12:59:02
 -->
 <template>
   <div class="home">
@@ -43,7 +43,6 @@
     }),
     async mounted() {
       const res = await this.$store.dispatch("home/homePageInit");
-      console.log(res);
     },
     methods: {},
   };

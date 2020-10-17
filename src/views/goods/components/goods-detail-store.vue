@@ -2,25 +2,25 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店铺详情
  * @Date: 2020-10-05 23:03:41
- * @LastEditTime: 2020-10-15 22:08:33
+ * @LastEditTime: 2020-10-17 17:18:27
 -->
 
 <template>
   <div class="goods-detail-store">
     <div class="store el-card">
-      <div class="store__title">壹只菜直营店</div>
+      <div class="store__title">{{ getStore.name }}</div>
       <ul>
         <li>
           <i>描述</i>
-          <span>4.9</span>
+          <span>{{ getStore.desScore }}</span>
         </li>
         <li>
           <i>服务</i>
-          <span>4.9</span>
+          <span>{{ getStore.serScore }}</span>
         </li>
         <li>
           <i>物流</i>
-          <span>4.9</span>
+          <span>{{ getStore.postStore }}</span>
         </li>
       </ul>
     </div>
@@ -28,23 +28,24 @@
       <div class="compare">
         <ul>
           <li>店铺动态评分</li>
-          <li>描述相符：4.9</li>
-          <li>服务态度：4.9</li>
-          <li>物流服务：4.9</li>
+          <li>描述相符：{{ getStore.desScore }}</li>
+          <li>服务态度：{{ getStore.serScore }}</li>
+          <li>物流服务：{{ getStore.postStore }}</li>
         </ul>
         <ul>
           <li>与同行业相比</li>
-          <li>高于 11.44%</li>
-          <li>高于 11.44%</li>
-          <li>高于 11.44%</li>
+          <li>高于 {{ getStore.desCompare }}%</li>
+          <li>高于 {{ getStore.serCompare }}%</li>
+          <li>高于 {{ getStore.postCompare }}%</li>
         </ul>
       </div>
-      <p>掌柜：壹只菜直营店</p>
-      <p>所在地：上海</p>
+      <p>掌柜：{{ getStore.contact }}</p>
+      <p>所在地：{{ getStore.address }}</p>
       <div class="btns">
         <el-button><router-link to="/store">进店逛逛</router-link></el-button>
-        <!-- <el-image :src="require('@/assets/imgs/collec-store.png')"></el-image> -->
-        <el-button icon="el-icon-star-off">收藏本店</el-button>
+        <el-button icon="el-icon-star-on" @click="handleCollect">
+          <span>收藏本店</span>
+        </el-button>
       </div>
     </div>
   </div>
@@ -53,8 +54,35 @@
 <script>
   export default {
     components: {},
+    props: {
+      model: {
+        type: Object,
+        default: () => {},
+      },
+    },
     data() {
       return {};
+    },
+    computed: {
+      getStore() {
+        return "store" in this.model ? this.model.store : {};
+      },
+    },
+    methods: {
+      handleCollect() {
+        const { id } = this.getStore;
+        this.$utils.verifyLogin({
+          success: async (e) => {
+            const res = await this.$store.dispatch(`goodsDetail/storeCollect`, {
+              storeId: id,
+            });
+            this.$message({
+              message: "收藏成功",
+              type: "success",
+            });
+          },
+        });
+      },
     },
   };
 </script>
@@ -112,21 +140,28 @@
 
           margin: 30px 0 16px 0;
 
-          .el-button {
-            a {
-              color: #fff;
-            }
-            width: 114px;
-            height: 41px;
-            border-radius: 0;
-            &:first-child {
-              background: $green;
-            }
-            &:last-child {
-              border-color: $green;
-              color: $green;
-              &:hover {
-                background-color: rgba(5, 184, 94, 0.1);
+          ::v-deep {
+            .el-button {
+              display: flex;
+              align-items: center;
+              a {
+                color: #fff;
+              }
+              i {
+                font-size: 19px;
+              }
+              width: 114px;
+              height: 41px;
+              border-radius: 0;
+              &:first-child {
+                background: $green;
+              }
+              &:last-child {
+                border-color: $green;
+                color: $green;
+                &:hover {
+                  background-color: rgba(5, 184, 94, 0.1);
+                }
               }
             }
           }

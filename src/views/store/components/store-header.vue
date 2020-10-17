@@ -6,9 +6,9 @@
         <logo></logo>
         <div class="store-name">
           <div class="store-name__box">
-            <div class="title">{{ info.name }}</div>
+            <div class="title">{{ store.product.store.name }}</div>
             <ul>
-              <li v-for="(item, index) in info.data" :key="index">
+              <li v-for="(item, index) in getInfo" :key="index">
                 <span>{{ item.name }}</span>
                 <i>{{ item.value }}</i>
               </li>
@@ -16,13 +16,13 @@
           </div>
         </div>
       </div>
-
       <search :type="2"></search>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import Logo from "@/components/logo.vue";
   import Search from "@/components/search.vue";
   export default {
@@ -34,24 +34,34 @@
     data() {
       return {
         keyWord: "",
-        info: {
-          name: "壹只菜直营店",
-          data: [
-            {
-              name: "描述",
-              value: "4.9",
-            },
-            {
-              name: "服务",
-              value: "4.9",
-            },
-            {
-              name: "物流",
-              value: "4.9",
-            },
-          ],
-        },
       };
+    },
+    computed: {
+      ...mapState({
+        store: (state) => state.goodsDetail.store,
+      }),
+      getInfo() {
+        const {
+          name,
+          desScore,
+          serScore,
+          postStore,
+        } = this.store.product.store;
+        return [
+          {
+            name: "描述",
+            value: desScore,
+          },
+          {
+            name: "服务",
+            value: serScore,
+          },
+          {
+            name: "物流",
+            value: postStore,
+          },
+        ];
+      },
     },
   };
 </script>

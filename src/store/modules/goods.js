@@ -2,13 +2,18 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:商品列表
  * @Date: 2020-10-11 22:54:55
- * @LastEditTime: 2020-10-14 00:10:05
+ * @LastEditTime: 2020-10-17 18:13:47
  */
-import { queryProduct, findAllProdAddress } from "@/api/goods";
+import {
+  queryProduct,
+  findAddressByProdType,
+  findCategroyByProdType,
+} from "@/api/goods";
 
 const state = {
   goodsList: [], //商品数据
   prodAddress: [], //产地
+  categoryList: [], //分类
   postData: {
     type: "",
     cate_id: "",
@@ -33,6 +38,9 @@ const mutations = {
   setProdAddress(state, data) {
     state.prodAddress = data;
   },
+  setCategoryList(state, data) {
+    state.categoryList = data;
+  },
   setPostData(state, data) {
     state.postData = data;
   },
@@ -43,11 +51,17 @@ const actions = {
     commit("setGoodsList", data.product.list);
     return data;
   },
-  async findAllProdAddress({ commit }, params) {
+  async findAddressByProdType({ commit }, params) {
     const {
-      data: { prodAddress },
-    } = await findAllProdAddress(params);
-    commit("setProdAddress", prodAddress);
+      data: { categoryList },
+    } = await findAddressByProdType(params);
+    commit("setProdAddress", categoryList);
+  },
+  async findCategroyByProdType({ commit }, params) {
+    const {
+      data: { categoryList },
+    } = await findCategroyByProdType(params);
+    commit("setCategoryList", categoryList);
   },
 };
 export default { state, getters, mutations, actions };
