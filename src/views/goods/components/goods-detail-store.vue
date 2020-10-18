@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店铺详情
  * @Date: 2020-10-05 23:03:41
- * @LastEditTime: 2020-10-17 17:18:27
+ * @LastEditTime: 2020-10-18 13:40:01
 -->
 
 <template>
@@ -42,7 +42,9 @@
       <p>掌柜：{{ getStore.contact }}</p>
       <p>所在地：{{ getStore.address }}</p>
       <div class="btns">
-        <el-button><router-link to="/store">进店逛逛</router-link></el-button>
+        <el-button>
+          <router-link :to="'/store?id=' + getStore.id">进店逛逛</router-link>
+        </el-button>
         <el-button icon="el-icon-star-on" @click="handleCollect">
           <span>收藏本店</span>
         </el-button>

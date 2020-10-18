@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情侧边栏
  * @Date: 2020-10-05 23:21:38
- * @LastEditTime: 2020-10-17 19:33:49
+ * @LastEditTime: 2020-10-18 13:21:14
 -->
 
 <template>
@@ -15,14 +15,11 @@
           :key="index"
           :label="item.title"
         >
-          <router-link
+          <div
             v-for="(it, ind) in item.child"
             :key="ind"
             class="goods-item"
-            :to="{
-              path: '/goods-detail',
-              query: { type: it.type, id: it.id },
-            }"
+            @click="handleClick(it)"
           >
             <el-image
               :src="it.pics[0].path | imgBaseUrl"
@@ -32,7 +29,7 @@
               <p>{{ it.name }}</p>
               <span>￥{{ it.specList | minPrice }}</span>
             </div>
-          </router-link>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </StoreAside>
@@ -54,6 +51,7 @@
         }
       },
     },
+    inject: ["getData"],
     props: {
       model: {
         type: Array,
@@ -89,6 +87,16 @@
             child: [...this.sellGoods],
           },
         ];
+      },
+    },
+    methods: {
+      handleClick(e) {
+        window.open(`#/goods-detail?type=${e.type}&id=${e.id}`);
+        // this.$router.push({
+        //   path: "/goods-detail",
+        //   query: { type: e.type, id: e.id },
+        // });
+        // this.getData();
       },
     },
   };

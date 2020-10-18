@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-16 23:01:20
- * @LastEditTime: 2020-10-17 17:26:54
+ * @LastEditTime: 2020-10-18 13:54:27
  */
 import {
   getProductDetail,
@@ -11,7 +11,7 @@ import {
   storeCollect,
   addCartItem,
 } from "@/api/goods";
-const state = { store: [] };
+const state = { store: {} };
 const getters = {
   store: (state) => state.store,
 };

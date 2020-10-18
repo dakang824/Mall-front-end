@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 20:10:07
- * @LastEditTime: 2020-10-17 10:58:00
+ * @LastEditTime: 2020-10-18 14:41:02
  */
 module.exports = {
   // @token在Cookie中存储的天数，默认1天

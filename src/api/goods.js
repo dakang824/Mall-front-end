@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品接口
  * @Date: 2020-10-11 10:58:12
- * @LastEditTime: 2020-10-17 18:09:47
+ * @LastEditTime: 2020-10-18 12:22:52
  */
 import request from "@/utils/request";
 
@@ -31,7 +31,6 @@ export function findCategroyByProdType(data) {
 }
 
 export function getProductDetail(data) {
-  console.log(data);
   return request({
     url: "/service/front/web/getProductDetail",
     method: "post",

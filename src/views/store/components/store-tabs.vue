@@ -1,17 +1,17 @@
 <!--
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-16 23:22:45
+ * @LastEditTime: 2020-10-18 14:18:12
 -->
 <!-- 头部筛选 -->
 <template>
   <div class="el-card store-tabs">
     <ul>
       <li
-        v-for="(item, index) in type"
+        v-for="(item, index) in model"
         :key="index"
         :class="[{ active: index === current }]"
-        @click="handleChange(index)"
+        @click="handleChange(item, index)"
       >
         {{ item }}
       </li>
@@ -23,10 +23,15 @@
   export default {
     name: "StoreTabs",
     components: {},
+    props: {
+      model: {
+        type: Array,
+        default: () => ["综合", "销量", "新品", "价格", "人气"],
+      },
+    },
     data() {
       return {
         current: 0,
-        type: ["综合", "销量", "价格", "人气"],
         val: {
           orderBySellCount: "",
           orderByPrice: "",
@@ -35,23 +40,33 @@
       };
     },
     methods: {
-      handleChange(e) {
+      handleChange(item, e) {
         this.current = e;
-        if (e === 0) {
+        if (item === "综合") {
           this.val = {
             orderBySellCount: "",
             orderByPrice: "",
+            onlineTime: "",
             orderByViewCount: "",
           };
-        } else if (e === 1) {
+        } else if (item === "销量") {
           this.val = {
             orderBySellCount: 1,
+            onlineTime: "",
             orderByPrice: "",
             orderByViewCount: "",
           };
-        } else if (e === 2) {
+        } else if (item === "新品") {
           this.val = {
             orderBySellCount: "",
+            orderByPrice: "",
+            onlineTime: 1,
+            orderByViewCount: "",
+          };
+        } else if (item === "价格") {
+          this.val = {
+            orderBySellCount: "",
+            onlineTime: "",
             orderByPrice: 1,
             orderByViewCount: "",
           };
@@ -59,6 +74,7 @@
           this.val = {
             orderBySellCount: "",
             orderByPrice: "",
+            onlineTime: "",
             orderByViewCount: 1,
           };
         }

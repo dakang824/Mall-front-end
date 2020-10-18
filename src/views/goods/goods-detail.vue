@@ -2,11 +2,11 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-18 11:17:32
+ * @LastEditTime: 2020-10-18 13:24:08
 -->
 <!-- 商品详情 -->
 <template>
-  <div class="goods-detail">
+  <div v-if="RouterState" class="goods-detail">
     <StoreHeader />
     <div class="w">
       <el-container class="goods-detail__main">
@@ -112,11 +112,17 @@
       GoodsDetailStore,
       GoodsDetailInfo,
     },
+    provide() {
+      return {
+        getData: this.getData,
+      };
+    },
     data() {
       return {
+        RouterState: false,
         num: 1,
         specCurrent: 0,
-        type: this.$route.query.type,
+        type: "",
         formula: [["序号"], ["食材"], ["重量(份)"]],
         introPics: [],
         storeSubCate: [],
@@ -144,59 +150,75 @@
         return data;
       },
     },
-    async mounted() {
-      await this.$store.dispatch("goodsDetail/getProductDetail", {
-        prod_id: this.$route.query.id,
-      });
-      const {
-        product,
-        storeSubCate,
-        storeProdsOrderBySellCount: sellGoods,
-        storeProdsOrderByCollectCount: collectGoods,
-      } = this.store;
-      this.product = product;
-      this.storeSubCate = storeSubCate;
-      this.sellGoods = sellGoods;
-      this.collectGoods = collectGoods;
-      if (this.type == 4) {
-        this.introPics = [
-          {
-            name: "烹饪步骤",
-            imgs: product.introPics,
-          },
-        ];
-        product.prodRecipes.map((item, index) => {
-          this.formula[0].push(index + 1);
-          this.formula[1].push(item.name);
-          this.formula[2].push(item.weight);
-        });
-      } else {
-        this.introPics = [
-          {
-            name: "规格参数",
-            imgs: product.introPics,
-          },
-          {
-            name: "商品详情",
-            imgs: product.introPics,
-          },
-        ];
-      }
+    mounted() {},
+    created() {
+      this.getData();
     },
-    created() {},
+
     methods: {
       handleChange(e) {
         this.num = e;
       },
-      async handleAddCart() {
-        await this.$store.dispatch("goodsDetail/addCartItem", {
-          prodId: this.$route.query.id,
-          quantity: this.num,
-          totalAmount: this.getPrice.sellPrice,
+      async getData() {
+        await this.$store.dispatch("goodsDetail/getProductDetail", {
+          prod_id: this.$route.query.id,
         });
-        this.$message({
-          message: "已加入购物车",
-          type: "success",
+        const {
+          product,
+          storeSubCate,
+          storeProdsOrderBySellCount: sellGoods,
+          storeProdsOrderByCollectCount: collectGoods,
+        } = this.store;
+        this.product = product;
+        this.storeSubCate = storeSubCate;
+        this.sellGoods = sellGoods;
+        this.collectGoods = collectGoods;
+        this.type = product.type;
+        if (this.type == 4) {
+          this.introPics = [
+            {
+              name: "烹饪步骤",
+              imgs: product.introPics,
+            },
+          ];
+          product.prodRecipes.map((item, index) => {
+            this.formula[0].push(index + 1);
+            this.formula[1].push(item.name);
+            this.formula[2].push(item.weight);
+          });
+        } else {
+          this.introPics = [
+            {
+              name: "规格参数",
+              imgs: product.introPics,
+            },
+            {
+              name: "商品详情",
+              imgs: product.introPics,
+            },
+          ];
+        }
+        this.reload();
+      },
+      reload() {
+        this.RouterState = false;
+        this.$nextTick(() => {
+          this.RouterState = true;
+        });
+      },
+      handleAddCart() {
+        this.$utils.verifyLogin({
+          success: async (e) => {
+            await this.$store.dispatch("goodsDetail/addCartItem", {
+              prodId: this.$route.query.id,
+              quantity: this.num,
+              totalAmount: this.getPrice.sellPrice,
+            });
+            this.$message({
+              message: "已加入购物车",
+              type: "success",
+            });
+          },
         });
       },
     },

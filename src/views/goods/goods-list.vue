@@ -51,7 +51,10 @@
           </ul>
         </div>
       </div>
-      <storeTabs @change="handleChange"></storeTabs>
+      <storeTabs
+        :model="['综合', '销量', '价格', '人气']"
+        @change="handleChange"
+      />
       <goodsCard v-loading="loading" :model="goodsList">
         <el-pagination
           :current-page="postData.pageNum"

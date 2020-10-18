@@ -6,7 +6,7 @@
         <logo></logo>
         <div class="store-name">
           <div class="store-name__box">
-            <div class="title">{{ store.product.store.name }}</div>
+            <div class="title">{{ getStoreName }}</div>
             <ul>
               <li v-for="(item, index) in getInfo" :key="index">
                 <span>{{ item.name }}</span>
@@ -31,6 +31,14 @@
       Logo,
       Search,
     },
+    props: {
+      model: {
+        type: Object,
+        default: () => {
+          return {};
+        },
+      },
+    },
     data() {
       return {
         keyWord: "",
@@ -40,13 +48,12 @@
       ...mapState({
         store: (state) => state.goodsDetail.store,
       }),
+      getStoreName() {
+        return "product" in this.store ? this.store.product.store.name : "";
+      },
       getInfo() {
-        const {
-          name,
-          desScore,
-          serScore,
-          postStore,
-        } = this.store.product.store;
+        const { name, desScore, serScore, postStore } =
+          "product" in this.store ? this.store.product.store : this.model;
         return [
           {
             name: "描述",

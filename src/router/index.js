@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-10-11 22:27:55
+ * @LastEditTime: 2020-10-18 13:15:15
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -34,6 +34,11 @@ const routes = [
       {
         path: "/goods-detail",
         name: "GoodsDetail",
+        meta: {
+          keepAlive: false,
+          isBack: false,
+          requiresAuth: true,
+        },
         component: () => import("@/views/goods/goods-detail.vue"),
       },
       {

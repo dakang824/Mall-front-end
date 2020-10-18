@@ -2,20 +2,29 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-05 20:59:51
+ * @LastEditTime: 2020-10-18 14:43:36
 -->
 <!-- 商铺 -->
 <template>
-  <div class="store">
-    <StoreHeader></StoreHeader>
+  <div v-if="showPage" class="store">
+    <storeHeader :model="store" />
     <div class="box w">
       <el-container>
         <el-aside width="278px">
-          <StoreAside></StoreAside>
+          <storeAside :model="storeSubCate" />
         </el-aside>
         <el-main>
-          <StoreTabs></StoreTabs>
-          <GoodsCard></GoodsCard>
+          <storeTabs @change="handleChange" />
+          <goodsCard :model="products.list">
+            <el-pagination
+              :current-page="postData.pageNum"
+              :page-size="postData.pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="products.list.length"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+            ></el-pagination>
+          </goodsCard>
         </el-main>
       </el-container>
     </div>
@@ -37,10 +46,54 @@
       GoodsCard,
     },
     data() {
-      return {};
+      return {
+        showPage: false,
+        products: {
+          list: [],
+        },
+        store: {},
+        storeSubCate: {},
+        postData: {
+          storeId: this.$route.query.id,
+          orderbySellCount: "",
+          onlineTime: "",
+          orderByprice: "",
+          orderbyViewCount: "",
+          pageNum: 1,
+          pageSize: 10,
+        },
+      };
     },
-    created() {},
-    methods: {},
+    created() {
+      this.getData();
+    },
+    methods: {
+      handleSizeChange(e) {
+        this.postData.pageNum = e;
+        this.getData();
+      },
+      handleCurrentChange(e) {
+        this.postData.pageNum = 1;
+        this.postData.pageSize = e;
+        this.getData();
+      },
+      async getData() {
+        const { products, store, storeSubCate } = await this.$store.dispatch(
+          "store/getStoreDetail",
+          this.postData
+        );
+        this.storeSubCate = storeSubCate;
+        this.products = products;
+        this.store = store;
+        this.$nextTick(() => {
+          this.showPage = true;
+        });
+      },
+      handleChange(e) {
+        this.postData = { ...this.postData, ...e };
+        this.getData();
+      },
+    },
   };
 </script>
 <style lang="scss" scoped>
@@ -59,7 +112,8 @@
 
         .box {
           > .goods-item {
-            margin-right: 77px;
+            margin-right: 30px;
+            margin-bottom: 30px;
 
             &:nth-child(4n) {
               margin-right: 0;
