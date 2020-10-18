@@ -2,14 +2,14 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-15 23:18:05
+ * @LastEditTime: 2020-10-18 23:31:27
 -->
 <!--  -->
 <template>
   <div class="cart-header el-card no-border-radius">
     <div class="w">
-      <Logo />
-      <el-steps :active="2" align-center process-status="wait">
+      <logo />
+      <el-steps :active="active" align-center process-status="wait">
         <el-step title="我的购物车"></el-step>
         <el-step title="确认订单"></el-step>
         <el-step title="付款"></el-step>
@@ -24,6 +24,12 @@
   export default {
     components: {
       Logo,
+    },
+    props: {
+      active: {
+        type: Number,
+        default: 1,
+      },
     },
     data() {
       return {};

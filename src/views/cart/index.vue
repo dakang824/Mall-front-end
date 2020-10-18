@@ -2,16 +2,17 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 统一使用公共头部
  * @Date: 2020-10-03 23:25:04
- * @LastEditTime: 2020-10-04 20:33:37
+ * @LastEditTime: 2020-10-18 23:32:09
 -->
 <template>
   <div class="index">
-    <CartHeader></CartHeader>
+    <cartHeader :active="cartState" />
     <router-view class="w main"></router-view>
   </div>
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import CartHeader from "./components/cart-header.vue";
   export default {
     components: {
@@ -19,6 +20,11 @@
     },
     data() {
       return {};
+    },
+    computed: {
+      ...mapState({
+        cartState: (state) => state.cart.cartState,
+      }),
     },
     watch: {},
     created() {},

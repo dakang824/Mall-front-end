@@ -9,7 +9,7 @@
             mode="horizontal"
             active-text-color="#04B85D"
           >
-            <el-menu-item index="1">我的购物车 3</el-menu-item>
+            <el-menu-item index="1">我的购物车 {{ cartNum }}</el-menu-item>
           </el-menu>
           <div class="cart__container__main__table">
             <div class="table__header">
@@ -20,12 +20,17 @@
                 align="middle"
               >
                 <el-col :span="1">
-                  <el-checkbox>全选</el-checkbox>
+                  <el-checkbox
+                    v-model="getAllChecked"
+                    @change="handleAllChange"
+                  >
+                    全选
+                  </el-checkbox>
                 </el-col>
                 <el-col :span="4" style="width: 12.66667%">店铺商品</el-col>
                 <el-col :span="2" style="margin-right: 34px">商品属性</el-col>
-                <el-col :span="1" style="margin-right: 34px">单价</el-col>
-                <el-col :span="1" style="position: relative; left: 49px">
+                <el-col :span="1" style="margin-right: 47px">单价</el-col>
+                <el-col :span="1" style="position: relative; left: 21px">
                   数量
                 </el-col>
                 <el-col :span="2" style="position: relative; left: 50px">
@@ -39,36 +44,39 @@
                 </el-col>
               </el-row>
             </div>
-            <div v-for="(it, ind) in 2" :key="ind" class="table__main">
+            <div v-for="(it, ind) in cartItems" :key="ind" class="table__main">
               <div class="table__main__store">
-                <el-checkbox></el-checkbox>
-                <div class="title">店铺：壹只菜直营店</div>
+                <el-checkbox
+                  v-model="it.checked"
+                  @change="handleStoreChange(ind)"
+                ></el-checkbox>
+                <div class="title">店铺：{{ it.name }}</div>
               </div>
               <div class="table__main__box">
                 <div
-                  v-for="(item, index) in tableData"
+                  v-for="(item, index) in it.data"
                   :key="index"
                   class="table__main__item"
                 >
                   <el-row type="flex" class="row-bg" justify="space-between">
                     <el-col :span="1">
-                      <el-checkbox></el-checkbox>
+                      <el-checkbox v-model="item.checked"></el-checkbox>
                     </el-col>
                     <el-col :span="5">
                       <div class="table__main__item__store">
                         <el-image
                           style="width: 80px; height: 80px"
-                          :src="item.src"
+                          :src="item.product.pics[0].path | imgBaseUrl"
                           fit="contain"
                         ></el-image>
-                        <span>{{ item.title }}</span>
+                        <span>{{ item.product.name }}</span>
                       </div>
                     </el-col>
-                    <el-col :span="2">{{ item.price }}</el-col>
-                    <el-col :span="3">¥{{ item.name }}</el-col>
-                    <el-col :span="2">
+                    <el-col :span="3">{{ item.product.name }}</el-col>
+                    <el-col :span="2">¥{{ item.unitPrice }}</el-col>
+                    <el-col :span="3">
                       <el-input-number
-                        v-model="item.num"
+                        v-model="item.quantity"
                         :min="1"
                         :max="10"
                         size="small"
@@ -76,7 +84,9 @@
                       ></el-input-number>
                     </el-col>
                     <el-col :span="2" style="text-align: center">
-                      <div class="money">{{ item.money }}</div>
+                      <div class="money">
+                        ¥{{ item.unitPrice * item.quantity }}
+                      </div>
                     </el-col>
                     <el-col :span="2">
                       <el-button type="text">删除</el-button>
@@ -91,14 +101,16 @@
         <div class="cart__container__footer el-card">
           <el-row type="flex" class="row-bg" justify="space-between">
             <el-col :span="3">
-              <el-checkbox>全选</el-checkbox>
+              <el-checkbox v-model="getAllChecked" @change="handleAllChange">
+                全选
+              </el-checkbox>
               <el-button type="text" class="del">删除</el-button>
             </el-col>
             <el-col :span="14" class="total">
               已选商品
               <span>3</span>
               件 合计（不含运费）:
-              <div class="money">￥6098.00</div>
+              <div class="money">￥{{ getTotalMoney }}</div>
               <el-image
                 class="pay"
                 :src="require('@/assets/imgs/cart-pay.png')"
@@ -113,43 +125,55 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     name: "Cart",
     components: {},
     data() {
       return {
-        tableData: [
-          {
-            date: "2016-05-03",
-            name: "净含量：5KG",
-            price: 55.8,
-            num: 1,
-            title: "临安天目山小香薯5斤新鲜红薯正宗...",
-            src: require("@/assets/imgs/goods3.png"),
-            address: "上海市普陀区金沙江路 1518 弄",
-          },
-          {
-            date: "2016-05-03",
-            name: "净含量：5KG",
-            price: 55.8,
-            num: 1,
-            title: "临安天目山小香薯5斤新鲜红薯正宗...",
-            src:
-              "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-            address: "上海市普陀区金沙江路 1518 弄",
-          },
-        ],
         multipleSelection: [],
       };
     },
+    computed: {
+      ...mapState({
+        cartItems: (state) => state.cart.cartItems,
+        cartNum: (state) => state.cart.cartNum,
+      }),
+      getAllChecked() {
+        return this.cartItems.every((item) => item.checked === true);
+      },
+      getTotalMoney() {
+        let money = this.cartItems
+          .map((item) =>
+            item.data.map((it) => {
+              return it.checked ? it.unitPrice * it.quantity : 0;
+            })
+          )
+          .flat()
+          .reduce((a, b) => a + b, 0);
+        return money;
+      },
+    },
     watch: {},
     created() {
-      this.tableData.map((item) => {
-        item.money = this.$utils.currency(item.price * item.num);
-      });
+      this.getData();
     },
     mounted() {},
     methods: {
+      handleAllChange(e) {
+        this.cartItems.map((item) => {
+          item.checked = e;
+          item.data.map((it) => (it.checked = e));
+        });
+      },
+      handleStoreChange(e) {
+        this.cartItems[e].data.map((item) => {
+          item.checked = this.cartItems[e].checked;
+        });
+      },
+      async getData() {
+        await this.$store.dispatch("cart/getMyCartItem");
+      },
       handleChange() {},
       handlePay() {
         this.$router.push({ path: "/cart/pay" });
