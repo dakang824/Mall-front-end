@@ -2,26 +2,28 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情说明
  * @Date: 2020-10-05 23:12:09
- * @LastEditTime: 2020-10-16 23:39:10
+ * @LastEditTime: 2020-10-18 12:03:32
 -->
 
 <template>
   <div class="goods-detail-info">
-    <el-tabs type="border-card">
+    <el-tabs type="border-card" @tab-click="handleClick">
       <el-tab-pane
         v-for="(item, index) in model"
         :key="index"
         :label="item.name"
       >
         <span v-if="index === 0" slot="label">{{ item.name }}</span>
-        <el-image
-          v-for="(it, ind) in item.imgs"
-          :key="ind"
-          :data-i="it.path"
-          :src="it.path | imgBaseUrl"
-          fit="contain"
-          class="goods-detail-info__imgs"
-        ></el-image>
+        <div :id="'info_imgs' + index">
+          <el-image
+            v-for="(it, ind) in item.imgs"
+            :id="'img' + ind"
+            :key="ind"
+            :src="it.path | imgBaseUrl"
+            fit="contain"
+            class="goods-detail-info__imgs"
+          ></el-image>
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -38,6 +40,15 @@
     },
     data() {
       return {};
+    },
+    methods: {
+      handleClick(e) {
+        setTimeout(() => {
+          document
+            .querySelector(`#info_imgs${e.index} #img${e.index}`)
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 200);
+      },
     },
   };
 </script>

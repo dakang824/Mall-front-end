@@ -1,6 +1,6 @@
 <!-- 首页楼层 -->
 <template>
-  <div class="floor w el-card">
+  <div v-if="model.data.length" class="floor w el-card">
     <div class="floor__title">
       <div class="floor__title__left">
         {{ model.name }}

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-10-14 22:14:25
+ * @LastEditTime: 2020-10-18 12:06:13
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
@@ -52,14 +52,9 @@
         }
       },
       backTop() {
-        let back = setInterval(() => {
-          if (document.body.scrollTop || document.documentElement.scrollTop) {
-            document.body.scrollTop -= 15;
-            document.documentElement.scrollTop -= 15;
-          } else {
-            clearInterval(back);
-          }
-        });
+        document
+          .querySelector(`body`)
+          .scrollIntoView({ behavior: "smooth", block: "start" });
       },
       handleResize() {
         if (window.innerWidth > 1200) {

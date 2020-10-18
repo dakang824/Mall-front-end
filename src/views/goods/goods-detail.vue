@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-17 19:16:09
+ * @LastEditTime: 2020-10-18 11:17:32
 -->
 <!-- 商品详情 -->
 <template>
@@ -42,14 +42,16 @@
             </div>
             <div v-else>
               <div class="info__sku">
-                净含量：
+                规格：
                 <ul>
-                  <li class="active">2.5kg</li>
-                  <li>5kg</li>
-                  <li>7.5kg</li>
-                  <li>10kg</li>
-                  <li class="disable">15kg</li>
-                  <li class="disable">20kg</li>
+                  <li
+                    v-for="(item, index) in product.specList"
+                    :key="index"
+                    :class="{ active: index === specCurrent }"
+                  >
+                    {{ item.name }}
+                  </li>
+                  <!-- <li class="disable">20kg</li> -->
                 </ul>
               </div>
               <div class="info__number">
@@ -113,6 +115,7 @@
     data() {
       return {
         num: 1,
+        specCurrent: 0,
         type: this.$route.query.type,
         formula: [["序号"], ["食材"], ["重量(份)"]],
         introPics: [],
@@ -167,12 +170,23 @@
           this.formula[1].push(item.name);
           this.formula[2].push(item.weight);
         });
+      } else {
+        this.introPics = [
+          {
+            name: "规格参数",
+            imgs: product.introPics,
+          },
+          {
+            name: "商品详情",
+            imgs: product.introPics,
+          },
+        ];
       }
     },
     created() {},
     methods: {
       handleChange(e) {
-        console.log(e);
+        this.num = e;
       },
       async handleAddCart() {
         await this.$store.dispatch("goodsDetail/addCartItem", {
