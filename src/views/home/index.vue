@@ -2,20 +2,20 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 首页
  * @Date: 2020-09-28 21:15:23
- * @LastEditTime: 2020-10-17 23:58:34
+ * @LastEditTime: 2020-10-19 22:51:37
 -->
 <template>
   <div class="home">
-    <div class="el-card">
+    <div class="el-card no-border-radius">
       <div class="header w">
         <logo></logo>
         <search v-model="keyWord" @search="handleSearch"></search>
       </div>
     </div>
 
-    <Category :model="category"></Category>
+    <Category v-loading="loading" :model="category"></Category>
     <div v-for="(item, index) in floorData" :key="index" class="goods-item">
-      <Floor :model="item"></Floor>
+      <Floor v-loading="loading" :model="item"></Floor>
     </div>
   </div>
 </template>
@@ -37,6 +37,7 @@
     data() {
       return {
         keyWord: "",
+        loading: true,
       };
     },
     computed: mapState({
@@ -44,7 +45,11 @@
       floorData: (state) => state.home.floorData,
     }),
     async mounted() {
+      this.loading = true;
       const res = await this.$store.dispatch("home/homePageInit");
+      setTimeout(() => {
+        this.loading = false;
+      }, 200);
     },
     methods: {
       handleSearch() {

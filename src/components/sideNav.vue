@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-10-19 22:13:00
+ * @LastEditTime: 2020-10-19 22:43:16
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
@@ -54,6 +54,10 @@
           });
         } else if (e === 3) {
           this.backTop();
+        } else if (e === 0) {
+          this.$router.push({
+            name: "Profile",
+          });
         } else {
           this.$message("还没配置此页面", "warning");
         }

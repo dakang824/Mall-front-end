@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情侧边栏
  * @Date: 2020-10-05 23:21:38
- * @LastEditTime: 2020-10-18 13:21:14
+ * @LastEditTime: 2020-10-19 23:48:29
 -->
 
 <template>
@@ -135,7 +135,7 @@
       margin-bottom: $padding;
 
       .goods-item {
-        @include center-flex(y);
+        display: flex;
         cursor: pointer;
         margin-bottom: $padding;
         &:hover {

@@ -19,10 +19,12 @@
       <div class="header__box__right">
         <ul>
           <li>
-            <el-image
-              :src="require('@/assets/imgs/header-user.png')"
-            ></el-image>
-            我的嗨厨
+            <router-link to="/profile">
+              <el-image
+                :src="require('@/assets/imgs/header-user.png')"
+              ></el-image>
+              <el-link>我的嗨厨</el-link>
+            </router-link>
           </li>
           <li>
             <router-link to="/cart">

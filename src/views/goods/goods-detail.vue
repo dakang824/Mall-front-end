@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-19 21:17:49
+ * @LastEditTime: 2020-10-19 22:30:32
 -->
 <!-- 商品详情 -->
 <template>
@@ -10,7 +10,7 @@
     <StoreHeader />
     <div class="w">
       <el-container class="goods-detail__main">
-        <el-main class="el-card">
+        <el-main v-loading="loading" class="el-card">
           <GoodsDetailImgs v-model="store.prodCollected" :model="product" />
           <div class="info">
             <div class="info__title">
@@ -77,11 +77,11 @@
             </div>
           </div>
         </el-main>
-        <el-aside width="250px">
+        <el-aside v-loading="loading" width="250px">
           <GoodsDetailStore :model="product" />
         </el-aside>
       </el-container>
-      <el-container class="goods-detail__info">
+      <el-container v-loading="loading" class="goods-detail__info">
         <el-aside v-if="type != 4" width="228px">
           <GoodsDetailAside
             :model="storeSubCate"
@@ -119,6 +119,7 @@
     },
     data() {
       return {
+        loading: true,
         RouterState: false,
         num: 1,
         specCurrent: 0,
@@ -160,6 +161,7 @@
         this.num = e;
       },
       async getData() {
+        this.loading = true;
         await this.$store.dispatch("goodsDetail/getProductDetail", {
           prod_id: this.$route.query.id,
         });
@@ -204,6 +206,9 @@
         this.RouterState = false;
         this.$nextTick(() => {
           this.RouterState = true;
+          setTimeout(() => {
+            this.loading = false;
+          }, 300);
         });
       },
       handleAddCart() {
