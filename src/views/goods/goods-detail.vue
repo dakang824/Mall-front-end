@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-18 13:24:08
+ * @LastEditTime: 2020-10-19 21:17:49
 -->
 <!-- 商品详情 -->
 <template>
@@ -214,6 +214,8 @@
               quantity: this.num,
               totalAmount: this.getPrice.sellPrice,
             });
+            // 更新购物车数据
+            this.$store.dispatch("cart/getMyCartItem");
             this.$message({
               message: "已加入购物车",
               type: "success",

@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
     <div class="cart__container">
-      <div class="cart__container__main">
+      <div v-loading="loading" class="cart__container__main">
         <div class="el-card">
           <el-menu
             default-active="1"
@@ -55,8 +55,9 @@
               <div class="table__main__box">
                 <div
                   v-for="(item, index) in it.data"
-                  :key="index"
+                  :key="item.id"
                   class="table__main__item"
+                  @mouseenter="handleRow(item)"
                 >
                   <el-row type="flex" class="row-bg" justify="space-between">
                     <el-col :span="1">
@@ -73,23 +74,26 @@
                       </div>
                     </el-col>
                     <el-col :span="3">{{ item.product.name }}</el-col>
-                    <el-col :span="2">¥{{ item.unitPrice }}</el-col>
+                    <el-col :span="2">¥{{ item.unitPrice | toFixed }}</el-col>
                     <el-col :span="3">
                       <el-input-number
                         v-model="item.quantity"
                         :min="1"
                         :max="10"
                         size="small"
+                        @focus="handleFocus(item)"
                         @change="handleChange"
                       ></el-input-number>
                     </el-col>
                     <el-col :span="2" style="text-align: center">
                       <div class="money">
-                        ¥{{ item.unitPrice * item.quantity }}
+                        ¥{{ (item.unitPrice * item.quantity) | toFixed }}
                       </div>
                     </el-col>
                     <el-col :span="2">
-                      <el-button type="text">删除</el-button>
+                      <el-button type="text" @click="handleDelect(ind, index)">
+                        删除
+                      </el-button>
                     </el-col>
                   </el-row>
                 </div>
@@ -110,9 +114,10 @@
               已选商品
               <span>3</span>
               件 合计（不含运费）:
-              <div class="money">￥{{ getTotalMoney }}</div>
+              <div class="money">￥{{ getTotalMoney | toFixed }}</div>
               <el-image
-                class="pay"
+                :class="{ pay: true, disabled: !getTotalMoney }"
+                disabled="true"
                 :src="require('@/assets/imgs/cart-pay.png')"
                 @click="handlePay"
               ></el-image>
@@ -131,6 +136,8 @@
     components: {},
     data() {
       return {
+        loading: false,
+        activeRow: "",
         multipleSelection: [],
       };
     },
@@ -154,12 +161,42 @@
         return money;
       },
     },
-    watch: {},
+    watch: {
+      cartItems: {
+        handler(v) {
+          v.map((item) => {
+            item.checked = item.data.every((it) => it.checked);
+          });
+        },
+        deep: true,
+      },
+    },
     created() {
       this.getData();
     },
     mounted() {},
     methods: {
+      handleDelect(ind, index) {
+        const { id } = this.cartItems[ind].data[index];
+        this.$confirm("此操作将删除该商品, 是否继续?", "温馨提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+          .then(async () => {
+            await this.$store.dispatch("cart/deleteCartItem", { id });
+            this.cartItems[ind].data.splice(index, 1);
+            this.$store.commit(
+              "cart/setCartGoodsNum",
+              this.cartItems.reduce((a, b) => (a += b.data.length), 0)
+            );
+            this.$message({
+              type: "success",
+              message: "删除成功!",
+            });
+          })
+          .catch(() => {});
+      },
       handleAllChange(e) {
         this.cartItems.map((item) => {
           item.checked = e;
@@ -172,9 +209,21 @@
         });
       },
       async getData() {
+        this.loading = true;
         await this.$store.dispatch("cart/getMyCartItem");
+        this.loading = false;
       },
-      handleChange() {},
+      handleRow(e) {
+        this.activeRow = e;
+      },
+      async handleChange(e) {
+        let { id, quantity, unitPrice } = this.activeRow;
+        await this.$store.dispatch("cart/modifyCartItem", {
+          id,
+          quantity,
+          totalAmount: (quantity * unitPrice).toFixed(2),
+        });
+      },
       handlePay() {
         this.$router.push({ path: "/cart/pay" });
       },

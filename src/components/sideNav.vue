@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-10-18 12:06:13
+ * @LastEditTime: 2020-10-19 22:13:00
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
@@ -12,7 +12,7 @@
         :key="index"
         @click="hanldeClick(index)"
       >
-        <i v-if="index === 2">3</i>
+        <i v-if="index === 2">{{ cartNum }}</i>
         <el-image :src="item"></el-image>
       </li>
     </ul>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     components: {},
     data() {
@@ -34,10 +35,16 @@
         ],
       };
     },
+    computed: {
+      ...mapState({
+        cartNum: (state) => state.cart.cartNum,
+      }),
+    },
     mounted() {
       window.addEventListener("scroll", this.handleScroll);
       window.addEventListener("resize", this.handleResize);
       this.handleResize();
+      this.$store.dispatch("cart/getMyCartItem");
     },
     methods: {
       hanldeClick(e) {

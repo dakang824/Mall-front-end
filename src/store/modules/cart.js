@@ -2,10 +2,14 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:购物车
  * @Date: 2020-10-18 20:37:26
- * @LastEditTime: 2020-10-19 00:11:54
+ * @LastEditTime: 2020-10-19 22:14:08
  */
-import { getMyCartItem } from "@/api/cart";
-const state = { cartItems: [], cartNum: 0, cartState: 0 };
+import { getMyCartItem, deleteCartItem, modifyCartItem } from "@/api/cart";
+const state = {
+  cartItems: [],
+  cartNum: 0,
+  cartState: 0,
+};
 const getters = {
   cartItems: (state) => state.cartItems,
 };
@@ -51,6 +55,16 @@ const actions = {
     commit("setCartGoodsNum", cartItems.length);
     commit("setCartState", 1);
     return cartItems;
+  },
+
+  async deleteCartItem({ commit }, params) {
+    const res = await deleteCartItem(params);
+    return res;
+  },
+
+  async modifyCartItem({ commit }, params) {
+    const res = await modifyCartItem(params);
+    return res;
   },
 };
 export default { state, getters, mutations, actions };
