@@ -2,31 +2,109 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-10-20 00:06:58
+ * @LastEditTime: 2020-10-20 23:25:04
 -->
 <template>
   <div class="welcome">
     <el-container>
       <el-main>
         <div class="row">
-          <div class="el-card">12</div>
-          <div class="el-card">12</div>
-          <div class="block">
-            <div class="row">
-              <div class="el-card">12</div>
-              <div class="el-card">12</div>
+          <div class="el-card">
+            <el-image
+              class="user_pic"
+              :src="require('@/assets/imgs/header-avatar.png')"
+            ></el-image>
+            <div>{{ getMyInfo.name }}</div>
+            <div class="safe">
+              <span>账号安全</span>
+              <ul>
+                <li
+                  v-for="(item, index) in level"
+                  :key="index"
+                  :class="{ active: index === current }"
+                >
+                  {{ item }}
+                </li>
+              </ul>
             </div>
-            <div class="row">
-              <div class="el-card">12</div>
-              <div class="el-card">12</div>
-            </div>
+            <ol class="footer">
+              <li v-if="getMyInfo.mobile">
+                <el-image
+                  :src="require('@/assets/imgs/profile-mobile.png')"
+                ></el-image>
+                已绑定
+              </li>
+              <li v-if="getMyInfo.status !== 1">
+                <el-image
+                  :src="require('@/assets/imgs/profile-no.png')"
+                ></el-image>
+                未开启
+              </li>
+            </ol>
           </div>
+          <div class="el-card">
+            <span>我的余额</span>
+            <p>
+              <i>￥</i>
+              {{ getMyInfo.balance }}
+            </p>
+            <el-image
+              :src="require('@/assets/imgs/profile-recharge.png')"
+            ></el-image>
+          </div>
+          <div>
+            <ul class="block">
+              <li class="el-card">
+                <i>待付款</i>
+                <p>5</p>
+              </li>
+              <li class="el-card">
+                <i>待付款</i>
+                <p>5</p>
+              </li>
+              <li class="el-card">
+                <i>待付款</i>
+                <p>5</p>
+              </li>
+              <li class="el-card">
+                <i>待付款</i>
+                <p>5</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="box">
+          <i class="box__more">
+            查看更多
+            <span class="el-icon-d-arrow-right"></span>
+          </i>
+          <el-tabs type="border-card">
+            <el-tab-pane
+              v-for="(item, index) in getTabsData"
+              :key="index"
+              :label="item.name"
+            >
+              <span v-if="index === 0" slot="label">{{ item.name }}</span>
+              <ul class="block">
+                <li v-for="(it, ind) in item.data" :key="ind">
+                  <el-image
+                    :src="
+                      'pics' in it ? it.pics[0].path : it.logoPath | imgBaseUrl
+                    "
+                    fit="contain"
+                    class="goods-detail-info__imgs"
+                  />
+                  <p>{{ it.name }}</p>
+                </li>
+              </ul>
+            </el-tab-pane>
+          </el-tabs>
         </div>
       </el-main>
       <el-aside width="230px" class="el-card">
         <div class="title">我的购物车</div>
         <div
-          v-for="(it, ind) in store.cartItems"
+          v-for="(it, ind) in getCartItems"
           :key="ind"
           class="goods-item"
           @click="handleClick(it)"
@@ -63,17 +141,29 @@
     },
     data() {
       return {
-        model: "",
+        level: ["低", "中", "高"],
+        current: 0,
       };
     },
     computed: {
       ...mapState({
         store: (state) => state.profileWelcome.store,
       }),
+      getMyInfo() {
+        return this.store.myInfo;
+      },
+      getCartItems() {
+        return this.store.cartItems;
+      },
+      getTabsData() {
+        return [
+          { name: "商品收藏", data: this.store.collectProds },
+          { name: "店铺收藏", data: this.store.collectStores },
+        ];
+      },
     },
     async created() {
       await this.$store.dispatch("profileWelcome/getMyInfo", {});
-      this.model = this.store;
     },
     methods: {
       handleClick(e) {
@@ -94,23 +184,161 @@
     .el-main {
       > .row {
         > .el-card:first-child {
-          width: 260px;
+          min-width: 260px;
+          text-align: center;
+          padding: $padding;
+          padding-bottom: 5px;
+          .user_pic {
+            width: 60px;
+            height: 60px;
+          }
+          .safe {
+            @include center-flex(y);
+            justify-content: center;
+            border-top: 1px solid $colorBorder;
+            margin: $padding 0 28px 0;
+            padding: $padding 0 0;
+            ul {
+              @include justify();
+              li {
+                width: 43px;
+                height: 20px;
+                line-height: 20px;
+                border-radius: 25px;
+                border: 1px solid #333;
+                margin-left: 10px;
+                &.active {
+                  background: $green;
+                  color: #fff;
+                  border-color: $green;
+                }
+              }
+            }
+          }
+          .footer {
+            @include justify();
+            li {
+              @include center-flex(y);
+              .el-image {
+                margin: 6px;
+              }
+            }
+          }
         }
         > .el-card:nth-child(2) {
-          width: 190px;
+          min-width: 190px;
+          text-align: center;
+          margin: 0 $padding;
+          span {
+            padding: 35px 0 30px;
+            display: block;
+          }
+          p {
+            color: $green;
+            i {
+              font-size: $text-x-small;
+            }
+            font-size: $text-large;
+            font-weight: bold;
+            margin-bottom: 25px;
+          }
+          .el-image {
+            cursor: pointer;
+          }
         }
       }
       .row {
         @include justify();
         .block {
+          @include justify();
+          flex-wrap: wrap;
           .el-card {
-            width: 120px;
+            text-align: center;
+            min-width: 118px;
+            height: 100px;
+            padding-top: 25px;
+            p {
+              font-size: 20px;
+              color: $green;
+            }
+            &:first-child,
+            &:nth-child(3) {
+              margin-right: $padding;
+            }
             &:first-child,
             &:nth-child(2) {
               margin-bottom: $padding;
             }
-            &:nth-child(2n) {
-              margin-left: $padding;
+          }
+        }
+      }
+      .box {
+        position: relative;
+        &__more {
+          position: absolute;
+          right: 0;
+          z-index: 99;
+          height: 53px;
+          line-height: 53px;
+          padding-right: 10px;
+          cursor: pointer;
+          &:hover {
+            color: $green;
+          }
+        }
+        ::v-deep {
+          .el-tabs {
+            margin-top: $padding;
+            &__content {
+              padding: $padding;
+            }
+            .block {
+              li {
+                width: 89px;
+                text-align: center;
+                .el-image {
+                  width: 89px;
+                  height: 89px;
+                  border-radius: 50px;
+                }
+              }
+            }
+
+            .el-tabs__item {
+              position: relative;
+              width: 297px;
+              height: 54px;
+              padding: 0;
+              font-size: $text-x-small;
+              line-height: 54px;
+              color: $color5;
+              font-weight: bold;
+              text-align: center;
+
+              &:hover {
+                color: $green;
+              }
+
+              &.is-active {
+                color: $green;
+
+                &::after {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  display: block;
+                  width: 100%;
+                  height: 4px;
+                  content: "";
+                  background: $green;
+                }
+              }
+            }
+
+            &--border-card {
+              & > .el-tabs__header {
+                background-color: #d4d4d4;
+              }
             }
           }
         }

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-19 23:56:37
+ * @LastEditTime: 2020-10-20 23:26:30
 -->
 <template>
   <div class="profile">
@@ -74,7 +74,7 @@
       margin-right: 10px;
 
       .title {
-        padding: 15px;
+        padding: 13px;
         text-align: center;
         cursor: pointer;
         background: #fff;
