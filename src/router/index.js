@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-10-20 00:00:56
+ * @LastEditTime: 2020-10-24 20:52:29
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -35,13 +35,6 @@ const routes = [
         path: "/profile",
         name: "Profile",
         component: () => import("@/views/profile/index.vue"),
-        children: [
-          {
-            path: "/",
-            name: "Welcome",
-            component: () => import("@/views/profile/components/welcome.vue"),
-          },
-        ],
       },
       {
         path: "/goods-detail",

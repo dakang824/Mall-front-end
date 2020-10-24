@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 20:10:07
- * @LastEditTime: 2020-10-18 14:41:02
+ * @LastEditTime: 2020-10-24 20:17:50
  */
 module.exports = {
   // @token在Cookie中存储的天数，默认1天
@@ -37,4 +37,5 @@ module.exports = {
   invalidCode: 402,
   //无权限code
   noPermissionCode: 401,
+  fileUpload: "/service/common/fileUpload",
 };

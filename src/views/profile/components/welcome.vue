@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-10-20 23:25:04
+ * @LastEditTime: 2020-10-24 23:42:11
 -->
 <template>
   <div class="welcome">
@@ -11,9 +11,15 @@
         <div class="row">
           <div class="el-card">
             <el-image
+              v-if="getMyInfo.icon"
               class="user_pic"
+              :src="getMyInfo.icon | imgBaseUrl"
+            />
+            <el-image
+              v-else
               :src="require('@/assets/imgs/header-avatar.png')"
-            ></el-image>
+            />
+
             <div>{{ getMyInfo.name }}</div>
             <div class="safe">
               <span>账号安全</span>
@@ -21,7 +27,7 @@
                 <li
                   v-for="(item, index) in level"
                   :key="index"
-                  :class="{ active: index === current }"
+                  :class="{ active: index == getMyInfo.accLevel }"
                 >
                   {{ item }}
                 </li>
@@ -59,15 +65,15 @@
                 <p>5</p>
               </li>
               <li class="el-card">
-                <i>待付款</i>
+                <i>待收货</i>
                 <p>5</p>
               </li>
               <li class="el-card">
-                <i>待付款</i>
+                <i>退款</i>
                 <p>5</p>
               </li>
               <li class="el-card">
-                <i>待付款</i>
+                <i>待发货</i>
                 <p>5</p>
               </li>
             </ul>
@@ -78,7 +84,7 @@
             查看更多
             <span class="el-icon-d-arrow-right"></span>
           </i>
-          <el-tabs type="border-card">
+          <el-tabs type="border-card" class="el-card">
             <el-tab-pane
               v-for="(item, index) in getTabsData"
               :key="index"
@@ -86,7 +92,11 @@
             >
               <span v-if="index === 0" slot="label">{{ item.name }}</span>
               <ul class="block">
-                <li v-for="(it, ind) in item.data" :key="ind">
+                <li
+                  v-for="(it, ind) in item.data"
+                  :key="ind"
+                  @click="handleItem(it)"
+                >
                   <el-image
                     :src="
                       'pics' in it ? it.pics[0].path : it.logoPath | imgBaseUrl
@@ -104,7 +114,7 @@
       <el-aside width="230px" class="el-card">
         <div class="title">我的购物车</div>
         <div
-          v-for="(it, ind) in getCartItems"
+          v-for="(it, ind) in getCartItems.slice(0, maxLen)"
           :key="ind"
           class="goods-item"
           @click="handleClick(it)"
@@ -116,6 +126,19 @@
           <div class="right">
             <p>{{ it.product.name }}</p>
             <span>￥{{ it.product.specList | minPrice }}</span>
+          </div>
+        </div>
+        <div class="more" @click="handleChange">
+          <div v-if="getCartItems.length > 5 && maxLen == 5">
+            查看全部(
+            <span>{{ getCartItems.length }}</span>
+            )
+          </div>
+          <div v-else>
+            <i
+              class="el-icon-d-arrow-right"
+              style="transform: rotate(-90deg)"
+            ></i>
           </div>
         </div>
       </el-aside>
@@ -142,7 +165,7 @@
     data() {
       return {
         level: ["低", "中", "高"],
-        current: 0,
+        maxLen: 5,
       };
     },
     computed: {
@@ -166,6 +189,19 @@
       await this.$store.dispatch("profileWelcome/getMyInfo", {});
     },
     methods: {
+      handleChange(e) {
+        this.maxLen = this.maxLen === 5 ? this.getCartItems.length : 5;
+      },
+      handleItem(e) {
+        if ("pics" in e) {
+          this.handleClick(e);
+        } else {
+          this.$router.push({
+            path: "/store",
+            query: { id: e.id },
+          });
+        }
+      },
       handleClick(e) {
         window.open(`#/goods-detail?type=${e.type}&id=${e.id}`);
         // this.$router.push({
@@ -293,13 +329,21 @@
               padding: $padding;
             }
             .block {
+              @include center-flex(y);
               li {
+                margin-top: 49px;
                 width: 89px;
                 text-align: center;
+                cursor: pointer;
+                margin-right: 50px;
                 .el-image {
                   width: 89px;
                   height: 89px;
                   border-radius: 50px;
+                  border: 1px solid $colorBorder;
+                }
+                p {
+                  margin: 22px 0 46px;
                 }
               }
             }
@@ -380,6 +424,14 @@
         span {
           font-weight: bold;
           color: $error;
+        }
+      }
+      .more {
+        text-align: center;
+        padding: 3px 0 0;
+        cursor: pointer;
+        span {
+          color: $green;
         }
       }
     }

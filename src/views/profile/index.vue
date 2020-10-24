@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-23 23:03:02
+ * @LastEditTime: 2020-10-24 23:56:01
 -->
 <template>
   <div class="profile">
@@ -11,7 +11,7 @@
         <logo></logo>
       </div>
     </div>
-    <div class="w">
+    <div class="w profile__box">
       <el-container>
         <el-aside width="234px" class="el-card profile__left">
           <div
@@ -25,7 +25,9 @@
           </div>
         </el-aside>
         <el-main>
-          <router-view class="main"></router-view>
+          <el-collapse-transition>
+            <component :is="list[current].components"></component>
+          </el-collapse-transition>
         </el-main>
       </el-container>
     </div>
@@ -34,16 +36,20 @@
 
 <script>
   import Logo from "@/components/logo.vue";
+  import Profile from "./components/profile.vue";
+  import Welcome from "./components/welcome.vue";
+  import Account from "./components/account.vue";
+
   export default {
-    components: { Logo },
+    components: { Logo, Welcome, Profile, Account },
     data() {
       return {
         current: 0,
         list: [
           { name: "欢迎页", components: "welcome" },
-          { name: "个人资料", components: "welcome" },
-          { name: "账户安全", components: "welcome" },
-          { name: "收货地址", components: "welcome" },
+          { name: "个人资料", components: "Profile" },
+          { name: "账户安全", components: "account" },
+          { name: "收货地址", components: "account" },
           { name: "我的购物车", components: "welcome" },
           { name: "我的订单", components: "welcome" },
           { name: "退款退货", components: "welcome" },
@@ -72,9 +78,10 @@
     }
     &__left {
       margin-right: 10px;
-
+      background: transparent;
+      border-color: transparent;
       .title {
-        padding: 13px;
+        padding: 10.46px;
         text-align: center;
         cursor: pointer;
         background: #fff;
@@ -95,6 +102,9 @@
           border-bottom: 1px dashed $green;
         }
       }
+    }
+    &__box {
+      min-height: calc(100vh - 590px);
     }
     ::v-deep {
       .el-main {

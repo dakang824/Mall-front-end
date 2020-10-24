@@ -19,20 +19,20 @@
       <div class="header__box__right">
         <ul>
           <li>
-            <router-link to="/profile">
+            <a @click="handleClick('/profile')">
               <el-image
                 :src="require('@/assets/imgs/header-user.png')"
               ></el-image>
               <el-link>我的嗨厨</el-link>
-            </router-link>
+            </a>
           </li>
           <li>
-            <router-link to="/cart">
+            <a @click="handleClick('/cart')">
               <el-image
                 :src="require('@/assets/imgs/header-cart.png')"
               ></el-image>
               <el-link>购物车</el-link>
-            </router-link>
+            </a>
           </li>
           <li><router-link to="/login">商家登录</router-link></li>
         </ul>
@@ -53,6 +53,15 @@
     }),
     created() {},
     methods: {
+      handleClick(path) {
+        this.$utils.verifyLogin({
+          success: (e) => {
+            this.$router.push({
+              path,
+            });
+          },
+        });
+      },
       handleLoginOut() {
         this.$store.commit("user/resetUserInfo");
       },
