@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情说明
  * @Date: 2020-10-05 23:12:09
- * @LastEditTime: 2020-10-18 12:03:32
+ * @LastEditTime: 2020-10-24 14:49:28
 -->
 
 <template>
@@ -43,11 +43,13 @@
     },
     methods: {
       handleClick(e) {
-        setTimeout(() => {
-          document
-            .querySelector(`#info_imgs${e.index} #img${e.index}`)
-            .scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 200);
+        this.$nextTick(() => {
+          setTimeout(() => {
+            document
+              .querySelector(`#info_imgs${e.index} #img${e.index}`)
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 200);
+        });
       },
     },
   };

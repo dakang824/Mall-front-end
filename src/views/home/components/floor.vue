@@ -21,7 +21,7 @@
           v-if="getPreTwo.length >= 1"
           :to="{
             path: '/goods-detail',
-            query: { type: getType, id: getId },
+            query: { type: getType, id: getPreTwo[0].id },
           }"
         >
           <el-image
@@ -34,7 +34,7 @@
           v-if="getPreTwo.length >= 2"
           :to="{
             path: '/goods-detail',
-            query: { type: getType, id: getId },
+            query: { type: getType, id: getPreTwo[1].id },
           }"
         >
           <el-image
@@ -83,9 +83,6 @@
       },
       getType() {
         return this.getPreTwo.length ? this.getPreTwo[0].type : "";
-      },
-      getId() {
-        return this.getPreTwo.length ? this.getPreTwo[0].id : "";
       },
     },
     created() {},

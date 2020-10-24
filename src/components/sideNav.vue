@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-10-19 22:43:16
+ * @LastEditTime: 2020-10-24 13:07:23
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
@@ -44,7 +44,8 @@
       window.addEventListener("scroll", this.handleScroll);
       window.addEventListener("resize", this.handleResize);
       this.handleResize();
-      this.$store.dispatch("cart/getMyCartItem");
+      if (this.$store.state.user.userInfo)
+        this.$store.dispatch("cart/getMyCartItem");
     },
     methods: {
       hanldeClick(e) {
