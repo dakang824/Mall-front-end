@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确定订单
  * @Date: 2020-10-04 18:36:18
- * @LastEditTime: 2020-10-15 23:07:01
+ * @LastEditTime: 2020-10-25 17:26:11
 -->
 <template>
   <div class="box footer">
@@ -11,11 +11,11 @@
         实付款：
         <span>
           <i>¥</i>
-          90.00
+          {{ postData.pay_amount }}
         </span>
       </p>
-      <p>寄送至：上海 上海 市徐汇区龙华西路 585号15A1</p>
-      <p>收货人：张力 18917923688</p>
+      <p>寄送至：{{ postData.address }}</p>
+      <p>收货人：{{ postData.name }} {{ postData.mobile }}</p>
     </div>
     <el-image
       class="pay_image"
@@ -27,10 +27,16 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     components: {},
     data() {
       return {};
+    },
+    computed: {
+      ...mapState({
+        postData: (state) => state.pay.postData,
+      }),
     },
     methods: {
       handleSubmit() {

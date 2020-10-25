@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-25 12:12:51
+ * @LastEditTime: 2020-10-25 17:35:53
 -->
 <template>
   <div class="pay">
@@ -29,6 +29,7 @@
 
 <script>
   import { mapState } from "vuex";
+  import { findAllProvinceCode } from "@/api/profile";
   import PayAddress from "./components/pay-address.vue";
   import PayGoodsItem from "./components/pay-goods-item.vue";
   import PayType from "./components/pay-type.vue";
@@ -63,13 +64,33 @@
         postData: (state) => state.pay.postData,
       }),
     },
-
+    watch: {
+      "postData.province_code": {
+        handler: function () {
+          this.$store.commit("pay/computedPost");
+        },
+      },
+    },
+    async created() {
+      const {
+        data: { province },
+      } = await findAllProvinceCode();
+      this.province = province;
+      this.$store.commit("cart/setCartState", 2);
+      this.setStore(JSON.parse(this.$route.query.obj));
+    },
     methods: {
-      handlePay() {
+      async handlePay() {
+        await this.$store.dispatch("pay/unifityOrder", this.postData);
+
+        return;
         this.$router.push({
           path: "/cart/pay-result",
           query: { state: "error" },
         });
+      },
+      setStore(e) {
+        this.$store.commit("pay/addPostData", e);
       },
     },
   };

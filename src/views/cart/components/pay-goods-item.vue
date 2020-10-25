@@ -20,13 +20,13 @@
           </el-col>
         </el-row>
       </div>
-      <div v-for="(it, ind) in 2" :key="ind" class="table__main">
+      <div v-for="(it, ind) in postData.orders" :key="ind" class="table__main">
         <div class="table__main__store">
-          <div class="title">店铺：壹只菜直营店</div>
+          <div class="title">店铺：{{ it.store_name }}</div>
         </div>
         <div class="table__main__box">
           <div
-            v-for="(item, index) in tableData"
+            v-for="(item, index) in it.items"
             :key="index"
             class="table__main__item"
           >
@@ -35,19 +35,21 @@
                 <div class="table__main__item__store">
                   <el-image
                     style="width: 80px; height: 80px"
-                    :src="item.src"
+                    :src="item.item_pic | imgBaseUrl"
                     fit="contain"
                   ></el-image>
-                  <span>{{ item.title }}</span>
+                  <span>{{ item.name }}</span>
                 </div>
               </el-col>
-              <el-col :span="3">{{ item.name }}</el-col>
-              <el-col :span="2">{{ item.num }}</el-col>
+              <el-col :span="3">{{ item.summary }}</el-col>
+              <el-col :span="2">￥{{ item.unitPrice | toFixed }}</el-col>
               <el-col :span="2">
-                <div class="money">{{ item.price }}</div>
+                <div class="money">{{ item.quantity }}</div>
               </el-col>
               <el-col :span="2">
-                <div class="money">¥{{ item.money }}</div>
+                <div class="money">
+                  ¥{{ (item.unitPrice * item.quantity) | toFixed }}
+                </div>
               </el-col>
             </el-row>
           </div>
@@ -58,10 +60,10 @@
             class="el-form__row"
           >
             <el-col :span="14">
-              <el-form ref="form" :model="form">
+              <el-form>
                 <el-form-item label="给卖家留言" label-width="100">
                   <el-input
-                    v-model="textarea"
+                    v-model="it.buyer_common"
                     type="textarea"
                     :rows="2"
                     placeholder="选填，请先和商家协商一致"
@@ -70,7 +72,9 @@
               </el-form>
             </el-col>
             <el-col :span="1">运费：</el-col>
-            <el-col :span="2"><div class="money">¥8.00</div></el-col>
+            <el-col :span="2">
+              <div class="money">¥{{ it.post_amount | toFixed }}</div>
+            </el-col>
           </el-row>
           <el-row
             type="flex"
@@ -80,7 +84,9 @@
           >
             <el-col :span="14" class="el-form__row"></el-col>
             <el-col :span="5">店铺合计（含运费）：</el-col>
-            <el-col :span="2"><div class="money">¥8.00</div></el-col>
+            <el-col :span="2">
+              <div class="money">¥{{ postData.pay_amount | toFixed }}</div>
+            </el-col>
           </el-row>
         </div>
       </div>
@@ -89,38 +95,18 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     components: {},
     data() {
-      return {
-        tableData: [
-          {
-            date: "2016-05-03",
-            name: "净含量：5KG",
-            price: 55.8,
-            num: 1,
-            title: "临安天目山小香薯5斤新鲜红薯正宗...",
-            src: require("@/assets/imgs/goods3.png"),
-            address: "上海市普陀区金沙江路 1518 弄",
-          },
-          {
-            date: "2016-05-03",
-            name: "净含量：5KG",
-            price: 55.8,
-            num: 1,
-            title: "临安天目山小香薯5斤新鲜红薯正宗...",
-            src:
-              "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-            address: "上海市普陀区金沙江路 1518 弄",
-          },
-        ],
-      };
+      return {};
     },
-    created() {
-      this.tableData.map((item) => {
-        item.money = this.$utils.currency(item.price * item.num);
-      });
+    computed: {
+      ...mapState({
+        postData: (state) => state.pay.postData,
+      }),
     },
+    created() {},
   };
 </script>
 

@@ -2,13 +2,13 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:购物车
  * @Date: 2020-10-18 20:37:26
- * @LastEditTime: 2020-10-19 22:14:08
+ * @LastEditTime: 2020-10-25 12:43:26
  */
 import { getMyCartItem, deleteCartItem, modifyCartItem } from "@/api/cart";
 const state = {
   cartItems: [],
   cartNum: 0,
-  cartState: 0,
+  cartState: 1,
 };
 const getters = {
   cartItems: (state) => state.cartItems,
@@ -53,7 +53,6 @@ const actions = {
 
     commit("setCartItems", result);
     commit("setCartGoodsNum", cartItems.length);
-    commit("setCartState", 1);
     return cartItems;
   },
 

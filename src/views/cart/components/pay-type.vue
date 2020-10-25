@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付方式
  * @Date: 2020-10-04 17:00:30
- * @LastEditTime: 2020-10-15 23:11:35
+ * @LastEditTime: 2020-10-25 17:10:05
 -->
 <template>
   <div class="pay-type">
@@ -10,11 +10,11 @@
       <li
         v-for="(item, index) in payList"
         :key="index"
-        :class="[{ active: index === current }]"
+        :class="[{ active: item.value === postData.pay_type }]"
         @click="handleChange(index)"
       >
         <div v-if="index === 0">
-          账户余额:¥12.30
+          账户余额:¥{{ userInfo.balance | toFixed }}
           <p class="no-money">余额不足，请先充值</p>
         </div>
         <div v-else>
@@ -31,29 +31,38 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     components: {},
     data() {
       return {
-        current: 0,
         payList: [
           {
             title: "账户余额",
+            value: 4,
           },
           {
             title: "微信支付",
             img: require("@/assets/imgs/wx.png"),
+            value: 1,
           },
           {
             title: "支付宝支付",
             img: require("@/assets/imgs/alipay.png"),
+            value: 2,
           },
         ],
       };
     },
+    computed: {
+      ...mapState({
+        postData: (state) => state.pay.postData,
+        userInfo: (state) => JSON.parse(state.user.userInfo),
+      }),
+    },
     methods: {
       handleChange(e) {
-        this.current = e;
+        this.postData.pay_type = this.payList[e].value;
       },
     },
   };

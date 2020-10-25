@@ -6,14 +6,15 @@
         v-for="(item, index) in myAddress"
         :key="index"
         :class="{ card: true, active: item.def }"
+        @click="handleChange(item)"
       >
         <el-tag v-if="item.def" type="info">默认地址</el-tag>
         <div class="user">{{ item.name }}</div>
         <p>{{ item.province + item.city + item.county + item.address }}</p>
         <p>{{ item.mobile }}</p>
         <div class="footer">
-          <span @click="handleEdit(item)">修改</span>
-          <span @click="handleDelete(item)">删除</span>
+          <span @click.stop="handleEdit(item)">修改</span>
+          <span @click.stop="handleDelete(item)">删除</span>
         </div>
       </div>
     </div>
@@ -32,85 +33,28 @@
 
 <script>
   import { mapState } from "vuex";
-  import { deleteUserAddress } from "@/api/profile";
-  import { regionDataPlus } from "element-china-area-data";
+  import { deleteUserAddress, modifyUserAddress } from "@/api/profile";
   import Edit from "@/views/profile/components/address/components/addressEdit.vue";
   export default {
     components: { Edit },
     data() {
-      return {
-        show: false,
-        options: regionDataPlus,
-        selectedOptions: [],
-        formData: {
-          mobile: "",
-          field101: undefined,
-          address: undefined,
-          field114: undefined,
-          phone: undefined,
-        },
-        rules: {
-          user: [
-            {
-              required: true,
-              message: "请输入收货人",
-              trigger: "blur",
-            },
-          ],
-          field101: [
-            {
-              required: true,
-              message: "请输入收货地址",
-              trigger: "blur",
-            },
-          ],
-          address: [
-            {
-              required: true,
-              message: "请输入详细地址",
-              trigger: "blur",
-            },
-          ],
-          mobile: [
-            {
-              required: true,
-              message: "请输入手机号码",
-              trigger: "blur",
-            },
-            {
-              pattern: /^1(3|4|5|7|8|9)\d{9}$/,
-              message: "手机号格式错误",
-              trigger: "blur",
-            },
-          ],
-          phone: [
-            {
-              required: true,
-              message: "请输入固定号码",
-              trigger: "blur",
-            },
-          ],
-        },
-        model: [
-          {
-            checked: false,
-            user: "上海上海（何银辉收）",
-            address: "徐汇区龙华西路585号A座15A1",
-            phone: "15800375957",
-          },
-          {
-            checked: true,
-            user: "上海上海（何银辉收）",
-            address: "徐汇区龙华西路585号A座15A1",
-            phone: "15800375957",
-          },
-        ],
-      };
+      return {};
     },
     computed: {
       ...mapState({
         myAddress: (state) => state.profile.myAddress,
       }),
+    },
+    watch: {
+      myAddress(v) {
+        const item = v.filter((item) => item.def === 1)[0];
+        this.$store.commit("pay/addPostData", {
+          mobile: item.mobile,
+          address: item.province + item.city + item.county + item.address,
+          province_code: item.province_code,
+          name: item.name,
+        });
+      },
     },
     created() {
       this.fetchData();
@@ -129,6 +73,11 @@
           this.$baseMessage(msg, "success");
           this.fetchData();
         });
+      },
+      async handleChange(e) {
+        e.def = 1;
+        await modifyUserAddress(e);
+        this.fetchData();
       },
       fetchData() {
         this.$store.dispatch("profile/getMyPostAddress");
