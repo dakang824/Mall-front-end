@@ -45,25 +45,21 @@
         myAddress: (state) => state.profile.myAddress,
       }),
     },
-    // watch: {
-    //   myAddress(v) {
-    //     this.getAddress();
-    //   },
-    // },
-    created() {
-      this.fetchData();
-    },
-    methods: {
-      getAddress() {
-        const item = this.myAddress.filter((item) => item.def === 1)[0];
+    watch: {
+      myAddress(v) {
+        const item = v.filter((item) => item.def === 1)[0];
         this.$store.commit("pay/addPostData", {
           mobile: item.mobile,
           address: item.province + item.city + item.county + item.address,
           province_code: item.province_code,
           name: item.name,
         });
-        alert(1);
       },
+    },
+    created() {
+      this.fetchData();
+    },
+    methods: {
       handleEdit(row) {
         if (row.id) {
           this.$refs["edit"].showEdit(row);
@@ -83,9 +79,8 @@
         await modifyUserAddress(e);
         this.fetchData();
       },
-      async fetchData() {
-        const res = await this.$store.dispatch("profile/getMyPostAddress");
-        this.getAddress();
+      fetchData() {
+        this.$store.dispatch("profile/getMyPostAddress");
       },
     },
   };

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付方式
  * @Date: 2020-10-04 17:00:30
- * @LastEditTime: 2020-10-25 17:10:05
+ * @LastEditTime: 2020-10-25 21:04:38
 -->
 <template>
   <div class="pay-type">

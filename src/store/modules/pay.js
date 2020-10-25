@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-10-25 17:39:18
+ * @LastEditTime: 2020-10-25 21:03:36
  */
 import { unifityOrder } from "@/api/pay";
 const state = {
@@ -10,7 +10,7 @@ const state = {
     discount: 0,
     total_amount: 0,
     pay_amount: 0,
-    pay_type: 1,
+    pay_type: 4,
     name: "",
     address: "",
     mobile: "",
@@ -110,7 +110,6 @@ const actions = {
   async unifityOrder({ commit }, params) {
     const data = JSON.parse(JSON.stringify(params));
     data.orders = JSON.stringify(data.orders);
-    console.log(params);
     const res = await unifityOrder(data);
     return res;
   },

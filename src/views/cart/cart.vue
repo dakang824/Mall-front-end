@@ -253,7 +253,7 @@
             ),
             discount: 0,
             pay_amount: 0,
-            pay_type: 1,
+            pay_type: 4,
             store_id: item[0].product.storeId,
             store_name: item[0].product.store.name,
             post_amount: 0,

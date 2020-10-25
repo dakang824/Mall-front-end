@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-25 19:50:06
+ * @LastEditTime: 2020-10-25 20:53:55
 -->
 <template>
   <div class="pay">
@@ -64,7 +64,7 @@
       }),
     },
     watch: {
-      "postData.province_code": {
+      postData: {
         handler: function () {
           this.$store.commit("pay/computedPost");
         },
