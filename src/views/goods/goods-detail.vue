@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-25 18:33:31
+ * @LastEditTime: 2020-10-25 20:09:26
 -->
 <!-- 商品详情 -->
 <template>
@@ -132,6 +132,7 @@
         product: {
           specList: [],
         },
+        specId: "",
         oriPrice: "",
       };
     },
@@ -176,6 +177,9 @@
         this.sellGoods = sellGoods;
         this.collectGoods = collectGoods;
         this.type = product.type;
+        if (this.product.speType === 1) {
+          this.specId = this.product.specList[0].id;
+        }
         if (this.type == 4) {
           this.introPics = [
             {
@@ -218,6 +222,7 @@
               prodId: this.$route.query.id,
               quantity: this.num,
               totalAmount: this.getPrice.sellPrice,
+              specId: this.specId,
             });
             // 更新购物车数据
             this.$store.dispatch("cart/getMyCartItem");

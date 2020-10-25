@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 用户基础信息
  * @Date: 2020-09-16 23:29:48
- * @LastEditTime: 2020-10-25 10:27:03
+ * @LastEditTime: 2020-10-25 19:48:49
  */
 import { getMyPostAddress } from "@/api/profile";
 const state = {
@@ -22,6 +22,7 @@ const actions = {
       data: { myAddress },
     } = await getMyPostAddress({});
     commit("setPostAddress", myAddress);
+    return myAddress;
   },
 };
 export default { state, getters, mutations, actions };

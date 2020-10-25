@@ -262,7 +262,7 @@
           };
           item.map((i) => {
             const {
-              id: prod_id,
+              itemId: prod_id,
               unitPrice,
               quantity,
               product: { pics, specList, name, summary, postTemplate },
