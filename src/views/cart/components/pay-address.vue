@@ -1,96 +1,42 @@
 <!-- 收货地址 -->
 <template>
   <div class="pay-address">
-    {{ myAddress }}
     <div class="box">
       <div
-        v-for="(item, index) in model"
+        v-for="(item, index) in myAddress"
         :key="index"
-        class="card"
-        @click="handleChange(index)"
+        :class="{ card: true, active: item.def }"
       >
-        <el-tag v-if="item.checked" type="info">默认地址</el-tag>
-        <div class="user">{{ item.user }}</div>
-        <p>{{ item.address }}</p>
-        <p>{{ item.phone }}</p>
+        <el-tag v-if="item.def" type="info">默认地址</el-tag>
+        <div class="user">{{ item.name }}</div>
+        <p>{{ item.province + item.city + item.county + item.address }}</p>
+        <p>{{ item.mobile }}</p>
         <div class="footer">
-          <span @click="handleUpdate">修改</span>
-          <span @click="handleDel">删除</span>
+          <span @click="handleEdit(item)">修改</span>
+          <span @click="handleDelete(item)">删除</span>
         </div>
       </div>
     </div>
-    <el-button type="primary" icon="el-icon-plus" class="btn">
-      使用新地址
+    <el-button
+      type="primary"
+      icon="el-icon-plus"
+      class="btn"
+      @click="handleEdit"
+    >
+      {{ myAddress.length ? "使用新地址" : "添加地址" }}
     </el-button>
 
-    <el-dialog title="提示" :visible.sync="show" width="45%">
-      <el-form
-        ref="elForm"
-        :model="formData"
-        :rules="rules"
-        label-width="101px"
-      >
-        <el-form-item label="收货人" prop="user">
-          <el-input
-            v-model="formData.user"
-            placeholder="请输入收货人"
-            show-word-limit
-            clearable
-            :style="{ width: '100%' }"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="收货地址" prop="field101">
-          <el-cascader
-            v-model="selectedOptions"
-            size="large"
-            :options="options"
-            :style="{ width: '100%' }"
-            @change="handleChange"
-          ></el-cascader>
-        </el-form-item>
-        <el-form-item label="详细地址" prop="address">
-          <el-input
-            v-model="formData.address"
-            placeholder="请输入详细地址"
-            clearable
-            show-password
-            :style="{ width: '100%' }"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="手机号码" prop="mobile">
-          <el-input
-            v-model="formData.mobile"
-            placeholder="请输入手机号码"
-            clearable
-            maxlength="11"
-            show-word-limit
-            :style="{ width: '100%' }"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="固定号码" prop="phone">
-          <el-input
-            v-model="formData.phone"
-            placeholder="请输入固定号码"
-            clearable
-            :style="{ width: '100%' }"
-          ></el-input>
-        </el-form-item>
-        <el-form-item size="large">
-          <el-button @click="show = false">取消</el-button>
-          <el-button type="danger" @click="handleSubmit">
-            保持收货地址
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+    <edit ref="edit" @fetchData="fetchData"></edit>
   </div>
 </template>
 
 <script>
   import { mapState } from "vuex";
+  import { deleteUserAddress } from "@/api/profile";
   import { regionDataPlus } from "element-china-area-data";
+  import Edit from "@/views/profile/components/address/components/addressEdit.vue";
   export default {
-    components: {},
+    components: { Edit },
     data() {
       return {
         show: false,
@@ -163,24 +109,30 @@
     },
     computed: {
       ...mapState({
-        myAddress: (state) => state.user.myAddress,
+        myAddress: (state) => state.profile.myAddress,
       }),
     },
-    async created() {
-      await this.$store.dispatch("user/getMyPostAddress");
+    created() {
+      this.fetchData();
     },
     methods: {
-      handleSubmit() {
-        this.show = false;
+      handleEdit(row) {
+        if (row.id) {
+          this.$refs["edit"].showEdit(row);
+        } else {
+          this.$refs["edit"].showEdit();
+        }
       },
-      handleChange(e) {
-        this.model.map((item) => {
-          item.checked = false;
+      async handleDelete(e) {
+        this.$baseConfirm("你确定要删除当前项吗", null, async () => {
+          const { msg } = await deleteUserAddress({ id: e.id });
+          this.$baseMessage(msg, "success");
+          this.fetchData();
         });
-        this.model[e].checked = true;
       },
-      handleUpdate() {},
-      handleDel() {},
+      fetchData() {
+        this.$store.dispatch("profile/getMyPostAddress");
+      },
     },
   };
 </script>
@@ -199,10 +151,14 @@
         width: 240px;
         padding: 15px 10px 10px;
         margin-right: 20px;
+        height: 167px;
         cursor: pointer;
         background: #fff;
-        border: 2px dashed $green;
-
+        border: 2px dashed $colorBorder;
+        &.active {
+          border-color: $green;
+          color: #303133;
+        }
         .el-tag {
           position: absolute;
           top: 0;
@@ -224,12 +180,14 @@
 
         p {
           font-size: 14px;
+          @include ellipsis-lines(2);
         }
 
         .footer {
           font-size: $text-x-small;
           color: #c90;
-
+          position: absolute;
+          bottom: 6px;
           span {
             display: inline-block;
             padding: 10px 20px 0 0;

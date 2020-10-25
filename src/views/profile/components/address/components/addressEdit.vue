@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 添加编辑地址
  * @Date: 2020-10-25 10:08:22
- * @LastEditTime: 2020-10-25 11:41:20
+ * @LastEditTime: 2020-10-25 12:01:49
 -->
 <template>
   <div>
@@ -57,6 +57,14 @@
             :autosize="{ minRows: 2, maxRows: 4 }"
             placeholder="详细地址:如道路、门牌号、小区、楼栋号、单元室等"
           ></el-input>
+        </el-form-item>
+        <el-form-item prop="def">
+          <el-switch
+            v-model="formData.def"
+            active-text="设为默认地址"
+            :active-value="1"
+            :inactive-value="0"
+          ></el-switch>
         </el-form-item>
       </el-form>
       <div slot="footer">

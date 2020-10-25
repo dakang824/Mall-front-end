@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-25 09:24:16
+ * @LastEditTime: 2020-10-25 12:12:51
 -->
 <template>
   <div class="pay">
