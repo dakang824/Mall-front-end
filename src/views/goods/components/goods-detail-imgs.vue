@@ -2,15 +2,18 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情轮播图片
  * @Date: 2020-10-05 22:45:14
- * @LastEditTime: 2020-10-17 17:15:34
+ * @LastEditTime: 2020-10-25 19:04:18
 -->
 <template>
   <div class="goods-detail-imgs">
     <div class="imgs">
-      <pic-zoom
-        :url="model.pics[current].path | imgBaseUrl"
-        :scale="2"
-      ></pic-zoom>
+      <imgZoom
+        :src="model.pics[current].path | imgBaseUrl"
+        width="326"
+        height="326"
+        :bigsrc="model.pics[current].path | imgBaseUrl"
+        :configs="configs"
+      ></imgZoom>
       <div class="small">
         <swiper
           ref="swiper"
@@ -35,11 +38,11 @@
 <script>
   import { Swiper, SwiperSlide, directive } from "vue-awesome-swiper";
   import "swiper/swiper-bundle.css";
-  import PicZoom from "vue-piczoom";
+  import imgZoom from "vue2.0-zoom";
   export default {
     components: {
-      PicZoom,
       Swiper,
+      imgZoom,
       SwiperSlide,
     },
     directives: {
@@ -59,6 +62,14 @@
     },
     data() {
       return {
+        configs: {
+          width: 326,
+          height: 326,
+          maskWidth: 150,
+          maskHeight: 150,
+          maskColor: "#000",
+          maskOpacity: 0.4,
+        },
         current: 0,
         imgSwiperOptions: {
           slidesPerView: 5,
@@ -100,19 +111,8 @@
     .imgs {
       width: 326px;
 
-      ::v-deep {
-        .magnifier-box {
-          img {
-            width: 326px;
-          }
-
-          width: 326px;
-          height: 326px;
-          margin-bottom: $padding;
-        }
-      }
-
       .small {
+        margin-top: $padding;
         .el-image {
           width: 60px;
           height: 60px;
