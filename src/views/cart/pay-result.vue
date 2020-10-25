@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-10-15 23:12:30
+ * @LastEditTime: 2020-10-25 22:20:03
 -->
 <!--  -->
 <template>
@@ -10,7 +10,7 @@
     <div class="el-card">
       <div class="pay-reuslt__title">
         <el-image :src="getImg"></el-image>
-        尚未支付成功
+        您已成功付款
       </div>
       <div class="pay-reuslt__result">
         <div v-if="state === 'error'">
@@ -27,10 +27,15 @@
         </div>
         <div v-if="state === 'success'">
           <ul>
-            <li>收货地址: 上海 上海 徐汇区龙华西路585号15A1 张力 1891792368</li>
+            <li>
+              收货地址: {{ params.address }} {{ params.name }}
+              {{ params.mobile }}
+            </li>
             <li>
               实付款：¥
-              <span>90.00</span>
+              <span style="padding-left: 8px">
+                {{ params.pay_amount | toFixed }}
+              </span>
             </li>
           </ul>
           <p>
@@ -69,6 +74,7 @@
     data() {
       return {
         state: "error", //两种状态 error success
+        params: {},
       };
     },
     computed: {
@@ -78,7 +84,9 @@
       },
     },
     mounted() {
+      this.$router.go(-1);
       this.state = this.$route.query.state;
+      this.params = JSON.parse(this.$route.query.params);
     },
   };
 </script>

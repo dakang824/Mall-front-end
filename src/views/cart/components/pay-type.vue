@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付方式
  * @Date: 2020-10-04 17:00:30
- * @LastEditTime: 2020-10-25 21:04:38
+ * @LastEditTime: 2020-10-25 21:53:31
 -->
 <template>
   <div class="pay-type">
@@ -15,7 +15,9 @@
       >
         <div v-if="index === 0">
           账户余额:¥{{ userInfo.balance | toFixed }}
-          <p class="no-money">余额不足，请先充值</p>
+          <p v-if="userInfo.balance < postData.pay_amount" class="no-money">
+            余额不足，请先充值
+          </p>
         </div>
         <div v-else>
           <el-image

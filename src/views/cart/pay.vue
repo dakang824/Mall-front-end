@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-25 20:53:55
+ * @LastEditTime: 2020-10-25 22:10:44
 -->
 <template>
   <div class="pay">
@@ -61,6 +61,7 @@
     computed: {
       ...mapState({
         postData: (state) => state.pay.postData,
+        userInfo: (state) => JSON.parse(state.user.userInfo),
       }),
     },
     watch: {
@@ -76,12 +77,26 @@
     },
     methods: {
       async handlePay() {
+        const { pay_amount, pay_type, address, name, mobile } = this.postData;
+        if (pay_type === 1 && pay_amount > this.userInfo.balance) {
+          this.$message({
+            type: "error",
+            message: "账户余额不足,请选择其它支付方式",
+          });
+          return;
+        }
         await this.$store.dispatch("pay/unifityOrder", this.postData);
-
-        return;
         this.$router.push({
-          path: "/cart/pay-result",
-          query: { state: "error" },
+          path: `/cart/pay-result`,
+          query: {
+            state: "success",
+            params: JSON.stringify({
+              pay_amount,
+              address,
+              name,
+              mobile,
+            }),
+          },
         });
       },
       setStore(e) {
