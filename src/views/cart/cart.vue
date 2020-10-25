@@ -65,12 +65,20 @@
                     </el-col>
                     <el-col :span="5">
                       <div class="table__main__item__store">
-                        <el-image
-                          style="width: 80px; height: 80px"
-                          :src="item.product.pics[0].path | imgBaseUrl"
-                          fit="contain"
-                        ></el-image>
-                        <span>{{ item.product.name }}</span>
+                        <router-link
+                          class="link"
+                          :to="{
+                            path: '/goods-detail',
+                            query: { type: item.product.type, id: item.id },
+                          }"
+                        >
+                          <el-image
+                            style="width: 80px; height: 80px"
+                            :src="item.product.pics[0].path | imgBaseUrl"
+                            fit="contain"
+                          ></el-image>
+                          <span>{{ item.product.name }}</span>
+                        </router-link>
                       </div>
                     </el-col>
                     <el-col :span="3">{{ item.product.name }}</el-col>
@@ -306,6 +314,13 @@
           &:last-child {
             margin-bottom: 10px;
           }
+          .link {
+            display: flex;
+            align-items: center;
+            &:hover {
+              color: $green;
+            }
+          }
         }
 
         .el-menu {
@@ -382,6 +397,8 @@
           cursor: pointer;
         }
       }
+    }
+    ::v-deep {
     }
   }
 </style>

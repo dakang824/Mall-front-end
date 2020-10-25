@@ -1,6 +1,7 @@
 <!-- 收货地址 -->
 <template>
   <div class="pay-address">
+    {{ myAddress }}
     <div class="box">
       <div
         v-for="(item, index) in model"
@@ -86,6 +87,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import { regionDataPlus } from "element-china-area-data";
   export default {
     components: {},
@@ -158,6 +160,14 @@
           },
         ],
       };
+    },
+    computed: {
+      ...mapState({
+        myAddress: (state) => state.user.myAddress,
+      }),
+    },
+    async created() {
+      await this.$store.dispatch("user/getMyPostAddress");
     },
     methods: {
       handleSubmit() {

@@ -38,7 +38,7 @@
           }"
         >
           <el-image
-            :src="getPreTwo[1].pics[1].path | imgBaseUrl"
+            :src="getPreTwo[1].pics[0].path | imgBaseUrl"
             fit="scale-down"
             style="width: 300px; height: 368px"
           ></el-image>

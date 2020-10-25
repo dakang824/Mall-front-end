@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-15 23:04:34
+ * @LastEditTime: 2020-10-25 09:24:16
 -->
 <template>
   <div class="pay">
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import PayAddress from "./components/pay-address.vue";
   import PayGoodsItem from "./components/pay-goods-item.vue";
   import PayType from "./components/pay-type.vue";
@@ -57,7 +58,12 @@
         ],
       };
     },
-    created() {},
+    computed: {
+      ...mapState({
+        postData: (state) => state.pay.postData,
+      }),
+    },
+
     methods: {
       handlePay() {
         this.$router.push({

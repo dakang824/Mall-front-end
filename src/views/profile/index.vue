@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-24 23:56:01
+ * @LastEditTime: 2020-10-25 10:04:28
 -->
 <template>
   <div class="profile">
@@ -39,9 +39,10 @@
   import Profile from "./components/profile.vue";
   import Welcome from "./components/welcome.vue";
   import Account from "./components/account.vue";
+  import Address from "./components/address";
 
   export default {
-    components: { Logo, Welcome, Profile, Account },
+    components: { Logo, Welcome, Profile, Account, Address },
     data() {
       return {
         current: 0,
@@ -49,7 +50,7 @@
           { name: "欢迎页", components: "welcome" },
           { name: "个人资料", components: "Profile" },
           { name: "账户安全", components: "account" },
-          { name: "收货地址", components: "account" },
+          { name: "收货地址", components: "Address" },
           { name: "我的购物车", components: "welcome" },
           { name: "我的订单", components: "welcome" },
           { name: "退款退货", components: "welcome" },
