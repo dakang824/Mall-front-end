@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-25 22:10:44
+ * @LastEditTime: 2020-10-26 21:11:46
 -->
 <template>
   <div class="pay">
@@ -77,7 +77,21 @@
     },
     methods: {
       async handlePay() {
-        const { pay_amount, pay_type, address, name, mobile } = this.postData;
+        const {
+          pay_amount,
+          pay_type,
+          address,
+          name,
+          mobile,
+          is_buy, //检测用户是否已购买过
+        } = this.postData;
+        if (is_buy) {
+          this.$message({
+            type: "error",
+            message: "检测到该订单已支付,请勿重复支付",
+          });
+          return;
+        }
         if (pay_type === 1 && pay_amount > this.userInfo.balance) {
           this.$message({
             type: "error",
@@ -86,6 +100,9 @@
           return;
         }
         await this.$store.dispatch("pay/unifityOrder", this.postData);
+
+        // 更新用户余额
+        await this.$store.dispatch("profileWelcome/getMyInfo", {});
         this.$router.push({
           path: `/cart/pay-result`,
           query: {

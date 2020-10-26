@@ -2,11 +2,12 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-10-25 21:03:36
+ * @LastEditTime: 2020-10-26 22:28:16
  */
 import { unifityOrder } from "@/api/pay";
 const state = {
   postData: {
+    is_buy: false,
     discount: 0,
     total_amount: 0,
     pay_amount: 0,
@@ -54,6 +55,7 @@ const mutations = {
   addPostData(state, data) {
     state.postData = { ...state.postData, ...data };
   },
+  // 计算邮费
   computedPost(state) {
     const { orders, province_code, pay_amount } = state.postData;
     state.postData.total_amount = orders
@@ -111,7 +113,74 @@ const actions = {
     const data = JSON.parse(JSON.stringify(params));
     data.orders = JSON.stringify(data.orders);
     const res = await unifityOrder(data);
+    commit("addPostData", { is_buy: true });
     return res;
+  },
+  // 生成下单数据结构
+  getData(state, cartItems) {
+    const map = cartItems
+      .map((item) => item.data)
+      .flat(Infinity)
+      .filter((item) => item.checked)
+      .reduce((result, item) => {
+        result[item.product.storeId] = result[item.product.storeId] || [];
+        result[item.product.storeId].push(item);
+        return result;
+      }, {});
+
+    const orders = Object.values(map).map((item) => {
+      const obj = {
+        total_itmes: item.length,
+        total_amount: item.reduce((a, b) => (a += b.unitPrice * b.quantity), 0),
+        discount: 0,
+        pay_amount: 0,
+        pay_type: 4,
+        store_id: item[0].product.storeId,
+        store_name: item[0].product.store.name,
+        post_amount: 0,
+        buyer_common: "",
+        items: [],
+      };
+      item.map((i) => {
+        const {
+          itemId: prod_id,
+          unitPrice,
+          quantity,
+          product: { pics, specList, name, summary, postTemplate },
+        } = i;
+        obj.items.push({
+          prod_id,
+          quantity,
+          name,
+          summary,
+          unitPrice,
+          specList,
+          postTemplate,
+          spe_id: specList[0].id,
+          item_pic: pics[0].path,
+          post_temp_id: null,
+          post_temp_name: null,
+          post_temp_area_id: null,
+          post_base_weight: null,
+          post_base_price: null,
+          post_more_weight: null,
+          post_more_price: null,
+          post_amount: null,
+          total_amount: i.totalAmount,
+        });
+      });
+      obj.pay_amount = obj.total_amount - obj.discount;
+      return obj;
+    });
+
+    const postData = {
+      discount: 0,
+      total_amount: orders.reduce((a, b) => a + b.pay_amount, 0),
+      orders,
+    };
+    postData.pay_amount = postData.total_amount - postData.discount;
+
+    return postData;
   },
 };
 export default { state, getters, mutations, actions };

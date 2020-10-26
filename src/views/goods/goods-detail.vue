@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-10-25 20:09:26
+ * @LastEditTime: 2020-10-26 22:28:06
 -->
 <!-- 商品详情 -->
 <template>
@@ -69,7 +69,7 @@
             </div>
 
             <div class="btns">
-              <el-button>立即购买</el-button>
+              <el-button @click="handleBuy">立即购买</el-button>
               <el-image
                 :src="require('@/assets/imgs/add-cart.png')"
                 @click="handleAddCart"
@@ -132,7 +132,6 @@
         product: {
           specList: [],
         },
-        specId: "",
         oriPrice: "",
       };
     },
@@ -158,6 +157,20 @@
     },
 
     methods: {
+      async handleBuy() {
+        const store = JSON.parse(JSON.stringify(this.store));
+        store.product.specList = [this.product.specList[this.specCurrent]];
+        store.unitPrice = store.product.specList[0].sellPrice;
+        store.quantity = this.num;
+        store.itemId = store.product.id;
+        store.checked = true;
+        const postData = await this.$store.dispatch("pay/getData", [
+          { data: [store] },
+        ]);
+        this.$router.push({
+          path: `/cart/pay?obj=${JSON.stringify(postData)}`,
+        });
+      },
       handleChange(e) {
         this.num = e;
       },
@@ -177,9 +190,6 @@
         this.sellGoods = sellGoods;
         this.collectGoods = collectGoods;
         this.type = product.type;
-        if (this.product.speType === 1) {
-          this.specId = this.product.specList[0].id;
-        }
         if (this.type == 4) {
           this.introPics = [
             {
@@ -222,7 +232,7 @@
               prodId: this.$route.query.id,
               quantity: this.num,
               totalAmount: this.getPrice.sellPrice,
-              specId: this.specId,
+              specId: this.product.specList[this.specCurrent].id,
             });
             // 更新购物车数据
             this.$store.dispatch("cart/getMyCartItem");

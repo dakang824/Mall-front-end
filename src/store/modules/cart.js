@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:购物车
  * @Date: 2020-10-18 20:37:26
- * @LastEditTime: 2020-10-25 12:43:26
+ * @LastEditTime: 2020-10-26 22:08:01
  */
 import { getMyCartItem, deleteCartItem, modifyCartItem } from "@/api/cart";
 const state = {
@@ -32,9 +32,10 @@ const actions = {
 
     cartItems.map((item) => {
       item.checked = false;
-      item.unitPrice = item.product.specList.sort((a, b) => {
-        return a.sellPrice - b.sellPrice;
-      })[0].sellPrice;
+      item.product.specList = item.product.specList.filter(
+        (it) => it.id === item.specId
+      );
+      item.unitPrice = item.product.specList[0].sellPrice;
     });
 
     const map = cartItems.reduce((result, item) => {

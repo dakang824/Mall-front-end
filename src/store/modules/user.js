@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 用户基础信息
  * @Date: 2020-09-16 23:29:48
- * @LastEditTime: 2020-10-17 16:30:52
+ * @LastEditTime: 2020-10-26 20:58:08
  */
 import { login } from "@/api/user";
 import {
