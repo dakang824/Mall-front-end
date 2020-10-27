@@ -53,6 +53,7 @@
           address: item.province + item.city + item.county + item.address,
           province_code: item.province_code,
           name: item.name,
+          phone: item.phone,
         });
       },
     },
