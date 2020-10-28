@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-10-24 23:42:11
+ * @LastEditTime: 2020-10-28 00:03:39
 -->
 <template>
   <div class="welcome">
@@ -128,8 +128,8 @@
             <span>￥{{ it.product.specList | minPrice }}</span>
           </div>
         </div>
-        <div class="more" @click="handleChange">
-          <div v-if="getCartItems.length > 5 && maxLen == 5">
+        <div v-if="getCartItems.length > 5" class="more" @click="handleChange">
+          <div v-if="maxLen == 5">
             查看全部(
             <span>{{ getCartItems.length }}</span>
             )

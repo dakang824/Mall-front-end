@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-26 21:11:46
+ * @LastEditTime: 2020-10-29 00:32:34
 -->
 <template>
   <div class="pay">
@@ -16,7 +16,7 @@
         <el-menu-item index="1">{{ item.title }}</el-menu-item>
       </el-menu>
       <div class="el-card__inner">
-        <component :is="item.name"></component>
+        <component :is="item.name" v-model="postData.pay_type"></component>
       </div>
     </div>
     <div class="el-card footer">

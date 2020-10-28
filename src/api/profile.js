@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-10-25 11:43:00
+ * @LastEditTime: 2020-10-29 00:34:08
  */
 import request from "@/utils/request";
 
@@ -56,6 +56,14 @@ export async function findAllProvinceCode() {
 export async function deleteUserAddress(data) {
   return request({
     url: "/service/front/web/deleteUserAddress",
+    method: "post",
+    data,
+  });
+}
+
+export async function unifityRechargeOrder(data) {
+  return request({
+    url: "/service/front/web/unifityRechargeOrder",
     method: "post",
     data,
   });
