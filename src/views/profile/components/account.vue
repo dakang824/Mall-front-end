@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人资料
  * @Date: 2020-10-24 19:28:43
- * @LastEditTime: 2020-10-29 21:46:22
+ * @LastEditTime: 2020-10-29 23:47:15
 -->
 <template>
   <div class="account el-card">
@@ -32,12 +32,63 @@
           </ul>
         </div>
 
-        <el-row>
+        <el-row style="border-bottom-color: transparent">
           <el-col :span="5">
-            <div class="grid-content bg-purple-dark">登录密码</div>
+            <div class="col1">
+              <el-image
+                :src="require('@/assets/imgs/profile-right.png')"
+                style="widows: 32px"
+              ></el-image>
+              登录密码
+            </div>
           </el-col>
           <el-col :span="19">
-            <div class="grid-content bg-purple-dark">已设置登录密码</div>
+            <div class="col2">
+              <span>已设置登录密码</span>
+              <el-button type="primary" size="small">修改密码</el-button>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <div class="col1">
+              <el-image
+                :src="require('@/assets/imgs/profile-right.png')"
+                style="widows: 32px"
+              ></el-image>
+              手机验证
+            </div>
+          </el-col>
+          <el-col :span="19">
+            <div class="col2">
+              <span>
+                您绑定的手机：
+                <i>138****8888</i>
+                ，该手机可用于账号登录，快速找回登录密码、
+                支付密码，接收账户余额变动提醒等。
+              </span>
+              <el-button type="primary" size="small">修改手机</el-button>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <div class="col1">
+              <el-image
+                :src="require('@/assets/imgs/profile-error.png')"
+                style="widows: 32px"
+              ></el-image>
+              支付密码
+            </div>
+          </el-col>
+          <el-col :span="19">
+            <div class="col2">
+              <span>
+                启用支付密码后，可保障您账户余额的支付安全,在使用账户资产时，需通过支
+                付密码进行支付认证。
+              </span>
+              <el-button type="danger" size="small">开启支付密码</el-button>
+            </div>
           </el-col>
         </el-row>
       </el-tab-pane>
@@ -66,7 +117,9 @@
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
   .account {
+    min-height: 529px;
     .baseInfo {
+      margin: 20px 0;
       @include center-flex(y);
       .userImg {
         width: 60px;
@@ -81,6 +134,7 @@
       background: #d5d5d5;
       @include center-flex(y);
       padding: 22px 15px;
+      margin-bottom: $padding;
       ul {
         @include center-flex(y);
         li {
@@ -104,7 +158,44 @@
 
     ::v-deep {
       .el-tab-pane {
-        padding: 0 40px;
+        padding: 0 20px;
+      }
+      .el-row {
+        border: 1px solid $colorBorder;
+        &:last-child {
+          border-top-color: transparent;
+        }
+
+        .col1 {
+          .el-image {
+            margin-right: 30px;
+          }
+          @include center-flex(y);
+          justify-content: center;
+          padding: 22px 0;
+          position: relative;
+          &::after {
+            content: "";
+            display: block;
+            height: 48px;
+            width: 1px;
+            background: $colorBorder;
+            position: absolute;
+            right: 0;
+          }
+        }
+        .col2 {
+          @include center-flex(y);
+          justify-content: space-between;
+          align-items: center;
+          padding: 22px;
+          span {
+            max-width: 431px;
+            i {
+              color: #ff0000;
+            }
+          }
+        }
       }
       .el-tabs {
         &__item {

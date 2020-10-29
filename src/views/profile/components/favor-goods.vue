@@ -2,28 +2,31 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品收藏
  * @Date: 2020-10-29 16:20:52
- * @LastEditTime: 2020-10-29 22:00:14
+ * @LastEditTime: 2020-10-29 23:15:14
 -->
 <template>
   <div v-loading="listLoading" class="favor-goods el-card">
     <el-tabs value="first">
       <el-tab-pane label="商品收藏" name="first">
-        <el-card v-for="(item, index) in list" :key="index" class="box-card">
-          <div @click="handleGoDetail(item)">
-            <el-image
-              :src="item.pics[0].path | imgBaseUrl"
-              fit="scale-down"
-            ></el-image>
-            <div class="box-card__content">
-              <p>{{ item.name }}</p>
-              <span>
-                <i>¥</i>
-                15.60
-              </span>
+        <div class="favor-goods__box">
+          <el-card v-for="(item, index) in list" :key="index" class="box-card">
+            <div @click="handleGoDetail(item)">
+              <el-image
+                :src="item.pics[0].path | imgBaseUrl"
+                fit="scale-down"
+              ></el-image>
+              <div class="box-card__content">
+                <p>{{ item.name }}</p>
+                <span>
+                  <i>¥</i>
+                  15.60
+                </span>
+              </div>
             </div>
-          </div>
-        </el-card>
-        <!-- <el-pagination
+          </el-card>
+        </div>
+
+        <el-pagination
           background
           :current-page="pageNum"
           :page-size="pageSize"
@@ -31,7 +34,7 @@
           :total="total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-        ></el-pagination> -->
+        ></el-pagination>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -67,8 +70,12 @@
         this.listLoading = true;
         const {
           data: { collectProds },
-        } = await getMyCollectProd({});
-        this.list = collectProds;
+        } = await getMyCollectProd({
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+        });
+        this.list = collectProds.list;
+        this.total = collectProds.total;
         setTimeout(() => {
           this.listLoading = false;
         }, 300);
@@ -88,6 +95,10 @@
   @import "@/assets/scss/settings";
   .favor-goods {
     min-height: 529px;
+    &__box {
+      @include center-flex(y);
+      flex-wrap: wrap;
+    }
     .box-card {
       width: 172px;
       .el-image {
@@ -137,8 +148,6 @@
       }
       .el-tab-pane {
         padding: 0 $padding;
-        @include center-flex(y);
-        flex-wrap: wrap;
       }
     }
   }
