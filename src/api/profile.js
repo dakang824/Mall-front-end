@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-10-29 19:03:53
+ * @LastEditTime: 2020-10-29 22:10:25
  */
 import request from "@/utils/request";
 
@@ -102,6 +102,15 @@ export async function getMyCollectStore(data) {
 export async function findMyCashRecords(data) {
   return request({
     url: "/service/front/web/findMyCashRecords",
+    method: "post",
+    data,
+  });
+}
+
+// 我的账户明细
+export async function addRemittance(data) {
+  return request({
+    url: "/service/front/web/addRemittance",
     method: "post",
     data,
   });

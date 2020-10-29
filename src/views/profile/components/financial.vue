@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 财务明细
  * @Date: 2020-10-29 18:47:47
- * @LastEditTime: 2020-10-29 20:29:58
+ * @LastEditTime: 2020-10-29 22:29:09
 -->
 <template>
   <div class="financial el-card">
@@ -40,17 +40,10 @@
           </el-form>
         </div>
 
-        <el-table
-          v-loading="listLoading"
-          :data="list"
-          :element-loading-text="elementLoadingText"
-          border
-          @selection-change="setSelectRows"
-          @cell-click="handleDblclick"
-        >
+        <el-table v-loading="listLoading" :data="list" border>
           <el-table-column
             show-overflow-tooltip
-            prop="name"
+            prop="trade_no"
             label="订单号"
             align="center"
             min-width="150"
@@ -153,11 +146,11 @@
 
         this.listLoading = true;
         const {
-          data: { cashRecords, total },
+          data: { cashRecords },
         } = await findMyCashRecords(queryForm);
 
         this.list = cashRecords.list;
-        this.total = total;
+        this.total = cashRecords.total;
         setTimeout(() => {
           this.listLoading = false;
         }, 300);
@@ -170,12 +163,17 @@
   @import "@/assets/scss/settings";
   .financial {
     min-height: 529px;
+    margin-bottom: $padding;
     ::v-deep {
       .el-table {
         th {
           background: $green;
           color: #fff;
         }
+      }
+      .el-pagination {
+        text-align: center;
+        padding: 20px;
       }
       .el-tabs {
         &__item {

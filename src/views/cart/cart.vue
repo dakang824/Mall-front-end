@@ -11,7 +11,7 @@
           >
             <el-menu-item index="1">我的购物车 {{ cartNum }}</el-menu-item>
           </el-menu>
-          <div class="cart__container__main__table">
+          <div v-if="cartItems.length" class="cart__container__main__table">
             <div class="table__header">
               <el-row
                 type="flex"
@@ -110,6 +110,9 @@
               </div>
             </div>
           </div>
+          <div v-else>
+            <empty icon="car" text="暂无订单" margin-top="90"></empty>
+          </div>
         </div>
 
         <div class="cart__container__footer el-card">
@@ -118,11 +121,13 @@
               <el-checkbox v-model="getAllChecked" @change="handleAllChange">
                 全选
               </el-checkbox>
-              <el-button type="text" class="del">删除</el-button>
+              <el-button type="text" class="del" @click="handleMoreDelect">
+                删除
+              </el-button>
             </el-col>
             <el-col :span="14" class="total">
               已选商品
-              <span>3</span>
+              <span>{{ total }}</span>
               件 合计（不含运费）:
               <div class="money">￥{{ getTotalMoney | toFixed }}</div>
               <el-image
@@ -141,14 +146,16 @@
 
 <script>
   import { mapState } from "vuex";
+  import Empty from "@/components/empty.vue";
   export default {
     name: "Cart",
-    components: {},
+    components: { Empty },
     data() {
       return {
         loading: false,
         activeRow: "",
         multipleSelection: [],
+        total: 0,
       };
     },
     computed: {
@@ -176,6 +183,7 @@
         handler(v) {
           v.map((item) => {
             item.checked = item.data.every((it) => it.checked);
+            this.total = item.data.filter((it) => it.checked).length;
           });
         },
         deep: true,
@@ -187,6 +195,31 @@
     },
     mounted() {},
     methods: {
+      handleMoreDelect() {
+        const arr = this.cartItems.map((item) =>
+          item.data.filter((it) => it.checked)
+        );
+        if (arr.length) {
+          this.$confirm("此操作将删除所选商品, 是否继续?", "温馨提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          }).then(async () => {
+            await arr.flat().map(async (item) => {
+              await this.$store.dispatch("cart/deleteCartItem", {
+                id: item.id,
+              });
+            });
+            this.getData();
+          });
+        } else {
+          this.$message({
+            type: "warning",
+            message: "请选择要删除的商品!",
+          });
+        }
+      },
+
       handleDelect(ind, index) {
         const { id } = this.cartItems[ind].data[index];
         this.$confirm("此操作将删除该商品, 是否继续?", "温馨提示", {
@@ -408,6 +441,9 @@
       }
     }
     ::v-deep {
+      .empty {
+        padding-bottom: 171px;
+      }
     }
   }
 </style>

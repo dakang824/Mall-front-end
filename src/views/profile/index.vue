@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-29 18:53:03
+ * @LastEditTime: 2020-10-29 21:18:20
 -->
 <template>
   <div class="profile">
@@ -46,6 +46,8 @@
   import FavorGoods from "./components/favor-goods.vue";
   import FavorStore from "./components/favor-store.vue";
   import Financial from "./components/financial.vue";
+  import Remittance from "./components/remittance.vue";
+  import Cart from "./components/cart.vue";
 
   export default {
     components: {
@@ -60,6 +62,8 @@
       FavorGoods,
       FavorStore,
       Financial,
+      Remittance,
+      Cart,
     },
     data() {
       return {
@@ -69,12 +73,12 @@
           { name: "个人资料", components: "Profile" },
           { name: "账户安全", components: "account" },
           { name: "收货地址", components: "Address" },
-          { name: "我的购物车", components: "welcome" },
+          { name: "我的购物车", components: "Cart" },
           { name: "我的订单", components: "Orders" },
           { name: "退款退货", components: "Refund" },
           { name: "财务明细", components: "financial" },
           { name: "在线充值", components: "Recharge" },
-          { name: "汇款确认", components: "welcome" },
+          { name: "汇款确认", components: "Remittance" },
           { name: "商品收藏", components: "favorGoods" },
           { name: "店铺收藏", components: "favorStore" },
         ],

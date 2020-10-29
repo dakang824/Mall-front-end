@@ -2,10 +2,10 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品收藏
  * @Date: 2020-10-29 16:20:52
- * @LastEditTime: 2020-10-29 18:37:57
+ * @LastEditTime: 2020-10-29 22:00:14
 -->
 <template>
-  <div class="favor-goods el-card">
+  <div v-loading="listLoading" class="favor-goods el-card">
     <el-tabs value="first">
       <el-tab-pane label="商品收藏" name="first">
         <el-card v-for="(item, index) in list" :key="index" class="box-card">
@@ -23,6 +23,15 @@
             </div>
           </div>
         </el-card>
+        <!-- <el-pagination
+          background
+          :current-page="pageNum"
+          :page-size="pageSize"
+          :layout="layout"
+          :total="total"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        ></el-pagination> -->
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -35,15 +44,35 @@
     data() {
       return {
         list: [],
+        layout: "total, sizes, prev, pager, next, jumper",
+        total: 0,
+        listLoading: true,
+        pageNum: 1,
+        pageSize: 10,
       };
     },
     async created() {
-      const {
-        data: { collectProds },
-      } = await getMyCollectProd({});
-      this.list = collectProds;
+      this.fetchData();
     },
     methods: {
+      handleSizeChange(val) {
+        this.pageSize = val;
+        this.fetchData();
+      },
+      handleCurrentChange(val) {
+        this.pageNum = val;
+        this.fetchData();
+      },
+      async fetchData() {
+        this.listLoading = true;
+        const {
+          data: { collectProds },
+        } = await getMyCollectProd({});
+        this.list = collectProds;
+        setTimeout(() => {
+          this.listLoading = false;
+        }, 300);
+      },
       handleGoDetail(e) {
         const { id, type } = e;
         this.$router.push({
@@ -83,6 +112,10 @@
     height: 172px;
   }
   ::v-deep {
+    .el-pagination {
+      text-align: center;
+      padding: 20px;
+    }
     .el-card {
       margin: 0 18px 18px 0;
       cursor: pointer;
