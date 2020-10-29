@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-10-29 10:39:19
+ * @LastEditTime: 2020-10-29 19:03:53
  */
 import request from "@/utils/request";
 
@@ -22,6 +22,7 @@ export async function modifyMyInfo(data) {
   });
 }
 
+// 收货地址
 export async function getMyPostAddress(data) {
   return request({
     url: "/service/front/web/getMyPostAddress",
@@ -61,6 +62,7 @@ export async function deleteUserAddress(data) {
   });
 }
 
+// 在线充值
 export async function unifityRechargeOrder(data) {
   return request({
     url: "/service/front/web/unifityRechargeOrder",
@@ -69,9 +71,37 @@ export async function unifityRechargeOrder(data) {
   });
 }
 
+// 我的订单
 export async function findMyOrders(data) {
   return request({
     url: "/service/front/web/findMyOrders",
+    method: "post",
+    data,
+  });
+}
+
+// 我收藏的商品
+export async function getMyCollectProd(data) {
+  return request({
+    url: "/service/front/web/getMyCollectProd",
+    method: "post",
+    data,
+  });
+}
+
+// 我收藏的商铺
+export async function getMyCollectStore(data) {
+  return request({
+    url: "/service/front/web/getMyCollectStore",
+    method: "post",
+    data,
+  });
+}
+
+// 我的账户明细
+export async function findMyCashRecords(data) {
+  return request({
+    url: "/service/front/web/findMyCashRecords",
     method: "post",
     data,
   });

@@ -1,8 +1,8 @@
 <!--
  * @Author: yukang 1172248038@qq.com
- * @Description: 
+ * @Description: 空组件
  * @Date: 2020-10-29 14:48:12
- * @LastEditTime: 2020-10-29 15:29:59
+ * @LastEditTime: 2020-10-29 15:31:27
 -->
 <template>
   <div

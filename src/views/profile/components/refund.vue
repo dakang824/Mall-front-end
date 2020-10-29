@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-10-29 16:12:22
+ * @LastEditTime: 2020-10-29 16:17:35
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -27,28 +27,6 @@
               clearable
             />
           </el-form-item>
-          <el-form-item prop="status">
-            <el-select
-              v-model="queryForm.status"
-              placeholder="请选择交易状态"
-              :disabled="current !== 0"
-            >
-              <el-option
-                v-for="options in statusOptions"
-                :key="options.value"
-                :label="options.label"
-                :value="options.value"
-              ></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="from">
-            <el-date-picker
-              v-model="queryForm.from"
-              type="date"
-              placeholder="选择下单时间"
-              value-format="yyyy-MM-dd HH:mm:ss"
-            ></el-date-picker>
-          </el-form-item>
           <el-form-item>
             <el-button
               icon="el-icon-search"
@@ -72,26 +50,12 @@
             </li>
           </ul>
 
-          <p>
-            <el-checkbox v-model="allChecked" @change="handleAll">
-              全选
-            </el-checkbox>
-            <el-button
-              type="primary"
-              size="small"
-              class="orders__del__btn"
-              @click="handleDelAll"
-            >
-              批量删除订单
-            </el-button>
-          </p>
           <div
             v-for="(ite, inde) in list[current].data"
             :key="inde"
             class="orders__item"
           >
             <div class="orders__item__th">
-              <el-checkbox v-model="ite.checked" />
               <i>{{ ite.create_time }}</i>
               <i>订单号：{{ ite.trade_no }}</i>
               <i>{{ ite.store_name }}</i>
@@ -141,14 +105,9 @@
                 }"
               >
                 <div class="money">
-                  <span v-if="ite.status === 0">订单已确认,等待买家付款</span>
-                  <span v-else-if="ite.status === 2">
-                    买家已付款，等待卖家发货
-                  </span>
-                  <span v-else-if="ite.status === 5">交易关闭</span>
-                  <span v-else-if="ite.status === 4">交易成功</span>
-                  <span v-else>卖家已发货，等待买家确认收</span>
-                  <span>订单详情</span>
+                  <span>等待卖家确认</span>
+                  <span>卖家已确认</span>
+                  <span>卖家拒绝退款</span>
                 </div>
               </div>
               <div
@@ -157,53 +116,10 @@
                   width: title[5].width + 'px',
                 }"
               >
-                <div v-if="ite.status !== 4" class="money">
-                  <div v-if="ite.status === 2 || ite.post_status">
-                    <p>
-                      <el-button
-                        type="primary"
-                        size="small"
-                        @click="handleConfirm"
-                      >
-                        确认收货
-                      </el-button>
-                    </p>
-                    <p v-if="ite.post_status">
-                      <el-button
-                        size="small"
-                        type="info"
-                        @click="handleDelayed"
-                      >
-                        延迟收货时间
-                      </el-button>
-                    </p>
-                    <p>
-                      <el-button
-                        size="small"
-                        type="warning"
-                        @click="handleRefund"
-                      >
-                        我要退款
-                      </el-button>
-                    </p>
-                  </div>
-                  <div v-else>
-                    <span>还剩00天00小时59分59秒</span>
-                    <p>
-                      <el-button type="primary" size="small" @click="handlePay">
-                        立即付款
-                      </el-button>
-                    </p>
-                    <p>
-                      <el-button
-                        size="small"
-                        type="danger"
-                        @click="handleCancel"
-                      >
-                        取消订单
-                      </el-button>
-                    </p>
-                  </div>
+                <div class="money">
+                  <span>待确认</span>
+                  <span>退款完成</span>
+                  <span>退款失败</span>
                 </div>
               </div>
             </div>
@@ -221,7 +137,7 @@
           ></el-pagination>
         </div>
         <div v-else>
-          <empty icon="order" text="暂无订单" margin-top="90"></empty>
+          <empty icon="order" text="暂无退款退货订单" margin-top="90"></empty>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -237,7 +153,6 @@
     },
     data() {
       return {
-        allChecked: false,
         layout: "total, sizes, prev, pager, next, jumper",
         listLoading: true,
         total: 0,
@@ -268,7 +183,7 @@
             width: "155",
           },
           {
-            name: "交易状态",
+            name: "申请时间",
             width: "183",
           },
           {
@@ -277,7 +192,7 @@
           },
         ],
 
-        activeName: "所有订单",
+        activeName: "退款退货",
         statusOptions: [
           {
             label: "全部订单",
@@ -314,81 +229,16 @@
         ],
         list: [
           {
-            name: "所有订单",
-            data: [],
-          },
-          {
-            name: "代付款",
-            data: [],
-          },
-          {
-            name: "代发货",
-            data: [],
-          },
-          {
-            name: "待收货",
+            name: "退款退货",
             data: [],
           },
         ],
       };
     },
-    watch: {
-      list: {
-        handler: function () {
-          this.allChecked = this.list[this.current].data.every(
-            (item) => item.checked
-          );
-        },
-        deep: true,
-      },
-    },
     created() {
       this.fetchData();
     },
     methods: {
-      handleCancel() {
-        this.$message({
-          message: "取消订单" || msg,
-          type: "success",
-        });
-      },
-      handleConfirm() {
-        this.$message({
-          message: "确认收货" || msg,
-          type: "success",
-        });
-      },
-      handleDelayed() {
-        this.$message({
-          message: "延迟收货" || msg,
-          type: "success",
-        });
-      },
-      handleRefund() {
-        this.$message({
-          message: "退款" || msg,
-          type: "success",
-        });
-      },
-      handlePay() {
-        this.$message({
-          message: "再次付款" || msg,
-          type: "success",
-        });
-      },
-      handleDelAll() {
-        const items = this.list[this.current].data.filter(
-          (item) => item.checked
-        );
-        console.log(items);
-        this.$message({
-          message: "删除订单" || msg,
-          type: "success",
-        });
-      },
-      handleAll(e) {
-        this.list[this.current].data.map((item) => (item.checked = e));
-      },
       handleChange(e) {
         const ind = Number(e.index);
         this.queryForm.status = ind === 0 ? "" : ind;
@@ -403,31 +253,6 @@
         this.queryForm.pageNum = 1;
         this.queryForm.pageSize = e;
         this.fetchData();
-      },
-      getData(cartItems) {
-        cartItems.map((item) => {
-          item.checked = false;
-          item.product.specList = item.product.specList.filter(
-            (it) => it.id === item.specId
-          );
-          item.unitPrice = item.product.specList[0].sellPrice;
-        });
-
-        const map = cartItems.reduce((result, item) => {
-          result[item.product.storeId] = result[item.product.storeId] || [];
-          result[item.product.storeId].push(item);
-          return result;
-        }, {});
-
-        const result = Object.values(map).map((item) => {
-          return {
-            checked: false,
-            name: item[0].product.store.name,
-            data: item,
-          };
-        });
-
-        return result;
       },
       handleSearch() {
         this.queryForm.pageNum = 1;
@@ -472,7 +297,7 @@
       background: #d5d5d5;
       text-align: center;
       padding: 14px;
-      margin: 15px 0;
+      margin: 0 0 15px 0;
     }
     &__item {
       margin: $padding 0;

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-29 13:52:54
+ * @LastEditTime: 2020-10-29 18:53:03
 -->
 <template>
   <div class="profile">
@@ -40,11 +40,27 @@
   import Welcome from "./components/welcome.vue";
   import Account from "./components/account.vue";
   import Address from "./components/address";
-  import Recharge from "./components/recharge";
-  import Orders from "./components/orders";
+  import Recharge from "./components/recharge.vue";
+  import Orders from "./components/orders.vue";
+  import Refund from "./components/refund.vue";
+  import FavorGoods from "./components/favor-goods.vue";
+  import FavorStore from "./components/favor-store.vue";
+  import Financial from "./components/financial.vue";
 
   export default {
-    components: { Logo, Welcome, Profile, Account, Address, Recharge, Orders },
+    components: {
+      Logo,
+      Welcome,
+      Profile,
+      Account,
+      Address,
+      Recharge,
+      Orders,
+      Refund,
+      FavorGoods,
+      FavorStore,
+      Financial,
+    },
     data() {
       return {
         current: 0,
@@ -55,12 +71,12 @@
           { name: "收货地址", components: "Address" },
           { name: "我的购物车", components: "welcome" },
           { name: "我的订单", components: "Orders" },
-          { name: "退款退货", components: "welcome" },
-          { name: "财务明细", components: "welcome" },
+          { name: "退款退货", components: "Refund" },
+          { name: "财务明细", components: "financial" },
           { name: "在线充值", components: "Recharge" },
           { name: "汇款确认", components: "welcome" },
-          { name: "商品收藏", components: "welcome" },
-          { name: "店铺收藏", components: "welcome" },
+          { name: "商品收藏", components: "favorGoods" },
+          { name: "店铺收藏", components: "favorStore" },
         ],
       };
     },
