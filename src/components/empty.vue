@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-10-29 14:48:12
- * @LastEditTime: 2020-10-29 15:26:23
+ * @LastEditTime: 2020-10-29 15:29:59
 -->
 <template>
   <div
@@ -72,7 +72,6 @@
           order: "order.png",
           coupon: "没有优惠券",
           favor: "favor.png",
-          permission: "无权限",
           history: "无历史记录",
           news: "无新闻列表",
           message: "消息列表为空",
