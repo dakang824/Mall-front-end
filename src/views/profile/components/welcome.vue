@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-10-31 21:15:23
+ * @LastEditTime: 2020-10-31 21:51:13
 -->
 <template>
   <div class="welcome">
@@ -80,11 +80,15 @@
           </div>
         </div>
         <div class="box">
-          <i class="box__more">
+          <i class="box__more" @click="handleMore">
             查看更多
             <span class="el-icon-d-arrow-right"></span>
           </i>
-          <el-tabs type="border-card" class="el-card">
+          <el-tabs
+            type="border-card"
+            class="el-card"
+            @tab-click="handleTabsChange"
+          >
             <el-tab-pane
               v-for="(item, index) in getTabsData"
               :key="index"
@@ -95,7 +99,7 @@
                 <li
                   v-for="(it, ind) in item.data"
                   :key="ind"
-                  @click="handleItem(it)"
+                  @click.stop="handleItem(it)"
                 >
                   <el-image
                     :src="
@@ -107,6 +111,13 @@
                   <p>{{ it.name }}</p>
                 </li>
               </ul>
+
+              <empty
+                icon="favor"
+                :text="'暂无' + item.name"
+                margin-top="42"
+                :show="!item.data.length"
+              ></empty>
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -148,9 +159,10 @@
 
 <script>
   import { mapState } from "vuex";
+  import Empty from "@/components/empty.vue";
   export default {
     name: "Welcome",
-    components: {},
+    components: { Empty },
     filters: {
       minPrice: (value) => {
         if (value.length) {
@@ -162,10 +174,12 @@
         }
       },
     },
+    inject: ["setCurrent"],
     data() {
       return {
         level: ["低", "中", "高"],
         maxLen: 5,
+        current: 0,
       };
     },
     computed: {
@@ -189,6 +203,12 @@
       await this.$store.dispatch("profileWelcome/getMyInfo", {});
     },
     methods: {
+      handleMore() {
+        this.setCurrent(this.current === 0 ? "favorGoods" : "favorStore");
+      },
+      handleTabsChange(e) {
+        this.current = Number(e.index);
+      },
       handleChange(e) {
         this.maxLen = this.maxLen === 5 ? this.getCartItems.length : 5;
       },
@@ -391,6 +411,9 @@
               }
             }
           }
+        }
+        .empty {
+          margin-bottom: 60px;
         }
       }
     }

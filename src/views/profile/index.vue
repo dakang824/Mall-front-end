@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-31 20:30:53
+ * @LastEditTime: 2020-10-31 21:51:48
 -->
 <template>
   <div class="profile">
@@ -65,6 +65,11 @@
       Remittance,
       Cart,
     },
+    provide() {
+      return {
+        setCurrent: this.handleChange,
+      };
+    },
     data() {
       return {
         current: 0,
@@ -87,6 +92,9 @@
     methods: {
       handleClick(e) {
         this.current = e;
+      },
+      handleChange(e) {
+        this.current = this.list.findIndex((item) => item.components === e);
       },
     },
   };
