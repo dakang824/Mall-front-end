@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-10-29 16:12:22
+ * @LastEditTime: 2020-10-31 17:34:56
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -148,7 +148,7 @@
                   <span v-else-if="ite.status === 5">交易关闭</span>
                   <span v-else-if="ite.status === 4">交易成功</span>
                   <span v-else>卖家已发货，等待买家确认收</span>
-                  <span>订单详情</span>
+                  <el-link @click="handleClick(ite)">订单详情</el-link>
                 </div>
               </div>
               <div
@@ -225,18 +225,24 @@
         </div>
       </el-tab-pane>
     </el-tabs>
+    <ordersDetail v-model="showDialog" :model="currentItems" />
   </div>
 </template>
 
 <script>
+  import OrdersDetail from "./orders-detail.vue";
   import { findMyOrders } from "@/api/profile";
   import Empty from "@/components/empty.vue";
   export default {
     components: {
       Empty,
+      OrdersDetail,
     },
+
     data() {
       return {
+        currentItems: [],
+        showDialog: false,
         allChecked: false,
         layout: "total, sizes, prev, pager, next, jumper",
         listLoading: true,
@@ -346,6 +352,10 @@
       this.fetchData();
     },
     methods: {
+      handleClick(e) {
+        this.currentItems = e;
+        this.showDialog = true;
+      },
       handleCancel() {
         this.$message({
           message: "取消订单" || msg,
@@ -492,6 +502,7 @@
           @include center-flex(y);
           justify-content: center;
           flex-direction: column;
+
           .name {
             flex: 1;
             @include center-flex(y);

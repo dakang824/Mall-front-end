@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人资料
  * @Date: 2020-10-24 19:28:43
- * @LastEditTime: 2020-10-29 23:47:15
+ * @LastEditTime: 2020-10-31 15:46:07
 -->
 <template>
   <div class="account el-card">
@@ -16,7 +16,7 @@
           ></el-image>
           <div>
             <p>登录账号：{{ userInfo.account }}</p>
-            <p>绑定手机:{{ userInfo.mobile }}</p>
+            <p>绑定手机: {{ userInfo.mobile }}</p>
           </div>
         </div>
         <div class="leve">

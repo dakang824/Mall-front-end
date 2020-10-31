@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-29 21:18:20
+ * @LastEditTime: 2020-10-31 16:42:52
 -->
 <template>
   <div class="profile">
