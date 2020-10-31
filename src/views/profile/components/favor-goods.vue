@@ -2,13 +2,13 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品收藏
  * @Date: 2020-10-29 16:20:52
- * @LastEditTime: 2020-10-29 23:15:14
+ * @LastEditTime: 2020-10-31 15:40:45
 -->
 <template>
-  <div v-loading="listLoading" class="favor-goods el-card">
+  <div class="favor-goods el-card">
     <el-tabs value="first">
       <el-tab-pane label="商品收藏" name="first">
-        <div class="favor-goods__box">
+        <div v-loading="listLoading" class="favor-goods__box">
           <el-card v-for="(item, index) in list" :key="index" class="box-card">
             <div @click="handleGoDetail(item)">
               <el-image
@@ -25,8 +25,8 @@
             </div>
           </el-card>
         </div>
-
         <el-pagination
+          v-if="list.length"
           background
           :current-page="pageNum"
           :page-size="pageSize"
@@ -35,6 +35,13 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         ></el-pagination>
+
+        <empty
+          icon="favor"
+          text="暂无商品收藏"
+          margin-top="90"
+          :show="!list.length && !listLoading"
+        ></empty>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -42,8 +49,9 @@
 
 <script>
   import { getMyCollectProd } from "@/api/profile";
+  import Empty from "@/components/empty.vue";
   export default {
-    components: {},
+    components: { Empty },
     data() {
       return {
         list: [],
