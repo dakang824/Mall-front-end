@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-10-31 17:34:56
+ * @LastEditTime: 2020-10-31 18:06:20
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -104,7 +104,7 @@
                   :key="indexs"
                   class="name"
                 >
-                  <div :style="{ width: title[0].width + 'px' }">
+                  <div :style="{ width: title[0].width * 1 + 10 + 'px' }">
                     <el-image
                       :src="items.item_pic | imgBaseUrl"
                       style="width: 60px"
@@ -114,7 +114,10 @@
                   <span :style="{ width: 9 + title[1].width * 1 + 'px' }">
                     {{ items.sell_price | toFixed }}
                   </span>
-                  <i :style="{ width: title[2].width + 'px' }">
+                  <i
+                    :style="{ width: title[2].width + 'px' }"
+                    style="position: relative; left: -20px"
+                  >
                     {{ items.quantity }}
                   </i>
                 </div>
@@ -198,7 +201,7 @@
                       <el-button
                         size="small"
                         type="danger"
-                        @click="handleCancel"
+                        @click="handleCancel(ite)"
                       >
                         取消订单
                       </el-button>
@@ -220,9 +223,12 @@
             @current-change="handleCurrentChange"
           ></el-pagination>
         </div>
-        <div v-else>
-          <empty icon="order" text="暂无订单" margin-top="90"></empty>
-        </div>
+        <empty
+          icon="order"
+          text="暂无订单"
+          margin-top="90"
+          :show="!list[current].data.length && !listLoading"
+        ></empty>
       </el-tab-pane>
     </el-tabs>
     <ordersDetail v-model="showDialog" :model="currentItems" />
@@ -231,7 +237,7 @@
 
 <script>
   import OrdersDetail from "./orders-detail.vue";
-  import { findMyOrders } from "@/api/profile";
+  import { findMyOrders, deleteMyOrders, cancelMyOrders } from "@/api/profile";
   import Empty from "@/components/empty.vue";
   export default {
     components: {
@@ -267,7 +273,7 @@
           },
           {
             name: "数量",
-            width: "80",
+            width: "95",
           },
           {
             name: "金额（元）",
@@ -356,11 +362,16 @@
         this.currentItems = e;
         this.showDialog = true;
       },
-      handleCancel() {
+      async handleCancel(e) {
+        const { msg } = await cancelMyOrders({
+          id: e.id,
+        });
+
         this.$message({
-          message: "取消订单" || msg,
+          message: msg,
           type: "success",
         });
+        this.fetchData();
       },
       handleConfirm() {
         this.$message({
@@ -386,15 +397,19 @@
           type: "success",
         });
       },
-      handleDelAll() {
+      async handleDelAll() {
         const items = this.list[this.current].data.filter(
           (item) => item.checked
         );
-        console.log(items);
+        const { msg } = await deleteMyOrders({
+          ids: items.map((item) => item.id).join(),
+        });
+
         this.$message({
-          message: "删除订单" || msg,
+          message: msg,
           type: "success",
         });
+        this.fetchData();
       },
       handleAll(e) {
         this.list[this.current].data.map((item) => (item.checked = e));

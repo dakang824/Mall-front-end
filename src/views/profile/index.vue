@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-31 16:42:52
+ * @LastEditTime: 2020-10-31 20:30:53
 -->
 <template>
   <div class="profile">
@@ -38,7 +38,7 @@
   import Logo from "@/components/logo.vue";
   import Profile from "./components/profile.vue";
   import Welcome from "./components/welcome.vue";
-  import Account from "./components/account.vue";
+  import Account from "./components/account";
   import Address from "./components/address";
   import Recharge from "./components/recharge.vue";
   import Orders from "./components/orders.vue";

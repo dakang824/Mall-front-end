@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-10-29 22:10:25
+ * @LastEditTime: 2020-10-31 19:44:28
  */
 import request from "@/utils/request";
 
@@ -71,10 +71,53 @@ export async function unifityRechargeOrder(data) {
   });
 }
 
+// 发送手机验证码
+export async function sendSMS(data) {
+  return request({
+    url: "/service/common/sendSMS",
+    method: "post",
+    data,
+  });
+}
+
+// 验证手机验证码
+export async function checkMobileCodeValid(data) {
+  return request({
+    url: "/service/front/web/checkMobileCodeValid",
+    method: "post",
+    data,
+  });
+}
+
+// 绑定新手机号码
+export async function bindMobil(data) {
+  return request({
+    url: "/service/front/web/bindMobil",
+    method: "post",
+    data,
+  });
+}
+
 // 我的订单
 export async function findMyOrders(data) {
   return request({
     url: "/service/front/web/findMyOrders",
+    method: "post",
+    data,
+  });
+}
+
+export async function deleteMyOrders(data) {
+  return request({
+    url: "/service/front/web/deleteMyOrders",
+    method: "post",
+    data,
+  });
+}
+
+export async function cancelMyOrders(data) {
+  return request({
+    url: "/service/front/web/cancelMyOrders",
     method: "post",
     data,
   });

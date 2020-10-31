@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-10-29 22:58:43
+ * @LastEditTime: 2020-10-31 21:15:23
 -->
 <template>
   <div class="welcome">
@@ -58,8 +58,8 @@
               :src="require('@/assets/imgs/profile-recharge.png')"
             ></el-image>
           </div>
-          <div>
-            <ul class="block">
+          <div style="flex: 1">
+            <ul class="block" :class="{ setWidth: !getCartItems.length }">
               <li class="el-card">
                 <i>待付款</i>
                 <p>{{ getMyInfo.unpay_count }}</p>
@@ -111,7 +111,7 @@
           </el-tabs>
         </div>
       </el-main>
-      <el-aside width="230px" class="el-card">
+      <el-aside v-if="getCartItems.length" width="230px" class="el-card">
         <div class="title">我的购物车</div>
         <div
           v-for="(it, ind) in getCartItems.slice(0, maxLen)"
@@ -173,10 +173,10 @@
         store: (state) => state.profileWelcome.store,
       }),
       getMyInfo() {
-        return this.store.myInfo;
+        return this.store.myInfo || {};
       },
       getCartItems() {
-        return this.store.cartItems;
+        return this.store.cartItems || [];
       },
       getTabsData() {
         return [
@@ -287,12 +287,18 @@
         @include justify();
         .block {
           @include justify();
+          &.setWidth {
+            .el-card {
+              min-width: 48.9%;
+            }
+          }
           flex-wrap: wrap;
           .el-card {
             text-align: center;
-            min-width: 118px;
+            min-width: 47.9%;
             height: 100px;
             padding-top: 25px;
+
             p {
               font-size: 20px;
               color: $green;

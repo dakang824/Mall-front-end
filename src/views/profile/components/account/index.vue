@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人资料
  * @Date: 2020-10-24 19:28:43
- * @LastEditTime: 2020-10-31 15:46:07
+ * @LastEditTime: 2020-10-31 21:28:31
 -->
 <template>
   <div class="account el-card">
@@ -11,9 +11,15 @@
         <p class="title">您的账户信息</p>
         <div class="baseInfo">
           <el-image
+            v-if="userInfo.icon"
+            class="user_pic"
             :src="userInfo.icon | imgBaseUrl"
-            class="userImg"
-          ></el-image>
+          />
+          <el-image
+            v-else
+            :src="require('@/assets/imgs/header-avatar.png')"
+            class="user_pic"
+          />
           <div>
             <p>登录账号：{{ userInfo.account }}</p>
             <p>绑定手机: {{ userInfo.mobile }}</p>
@@ -45,7 +51,13 @@
           <el-col :span="19">
             <div class="col2">
               <span>已设置登录密码</span>
-              <el-button type="primary" size="small">修改密码</el-button>
+              <el-button
+                type="primary"
+                size="small"
+                @click="handleUpdatePassWord"
+              >
+                修改密码
+              </el-button>
             </div>
           </el-col>
         </el-row>
@@ -67,7 +79,9 @@
                 ，该手机可用于账号登录，快速找回登录密码、
                 支付密码，接收账户余额变动提醒等。
               </span>
-              <el-button type="primary" size="small">修改手机</el-button>
+              <el-button type="primary" size="small" @click="handleUpdatePhone">
+                修改手机
+              </el-button>
             </div>
           </el-col>
         </el-row>
@@ -87,30 +101,66 @@
                 启用支付密码后，可保障您账户余额的支付安全,在使用账户资产时，需通过支
                 付密码进行支付认证。
               </span>
-              <el-button type="danger" size="small">开启支付密码</el-button>
+              <el-button type="danger" size="small" @click="handlePay">
+                开启支付密码
+              </el-button>
             </div>
           </el-col>
         </el-row>
       </el-tab-pane>
     </el-tabs>
+
+    <modifyPassWord v-model="showUpdatePassWord" :type="type" />
+    <modifyPhone v-model="showUpdatePhone" />
   </div>
 </template>
 
 <script>
   import { modifyMyInfo } from "@/api/profile";
+  import ModifyPassWord from "./modifyPassWord";
+  import ModifyPhone from "./modifyPhone";
   export default {
     name: "Profile",
-    components: {},
+    components: { ModifyPassWord, ModifyPhone },
     data() {
       return {
         level: ["低", "中", "高"],
+        type: 1,
         userInfo: {},
+        showUpdatePassWord: false,
+        showUpdatePhone: false,
       };
     },
     created() {
       this.userInfo = JSON.parse(this.$store.state.user.userInfo);
     },
-    methods: {},
+    methods: {
+      handleUpdatePassWord() {
+        if (this.userInfo.mobile) {
+          this.showUpdatePassWord = true;
+          this.type = 1;
+        } else {
+          this.$message({
+            message: "请先绑定手机号码!",
+            type: "warning",
+          });
+        }
+      },
+      handleUpdatePhone() {
+        this.showUpdatePhone = true;
+      },
+      handlePay() {
+        if (this.userInfo.mobile) {
+          this.showUpdatePassWord = true;
+          this.type = 2;
+        } else {
+          this.$message({
+            message: "请先绑定手机号码!",
+            type: "warning",
+          });
+        }
+      },
+    },
   };
 </script>
 
@@ -121,9 +171,9 @@
     .baseInfo {
       margin: 20px 0;
       @include center-flex(y);
-      .userImg {
-        width: 60px;
-        height: 60px;
+      .user_pic {
+        width: 56px;
+        height: 56px;
         margin-right: 45px;
       }
       p {
