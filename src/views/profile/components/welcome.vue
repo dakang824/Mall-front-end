@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-10-31 21:51:13
+ * @LastEditTime: 2020-10-31 22:11:11
 -->
 <template>
   <div class="welcome">
@@ -136,7 +136,7 @@
           ></el-image>
           <div class="right">
             <p>{{ it.product.name }}</p>
-            <span>￥{{ it.product.specList | minPrice }}</span>
+            <span>哦哦￥{{ it.product.specList | minPrice }}</span>
           </div>
         </div>
         <div v-if="getCartItems.length > 5" class="more" @click="handleChange">
@@ -194,7 +194,10 @@
       },
       getTabsData() {
         return [
-          { name: "商品收藏", data: this.store.collectProds },
+          {
+            name: "商品收藏",
+            data: this.store.collectProds,
+          },
           { name: "店铺收藏", data: this.store.collectStores },
         ];
       },
@@ -356,12 +359,17 @@
             }
             .block {
               @include center-flex(y);
+              flex-wrap: wrap;
+              margin-left: 25px;
               li {
                 margin-top: 49px;
                 width: 89px;
                 text-align: center;
                 cursor: pointer;
-                margin-right: 50px;
+                margin-right: 49px;
+                &:nth-child(5n) {
+                  margin-right: 0;
+                }
                 .el-image {
                   width: 89px;
                   height: 89px;
