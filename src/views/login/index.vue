@@ -1,6 +1,6 @@
 <!-- 登录 -->
 <template>
-  <div class="login-container">
+  <div class="login-container" @keyup.enter="submitForm('form')">
     <div class="login-container__logo w">
       <Logo />
       <div class="right">
@@ -66,7 +66,7 @@
           ></el-image>
 
           <ul class="el-form__other">
-            <li>忘记密码</li>
+            <li @click="showUpdatePassWord = true">忘记密码</li>
             <li>忘记用户名</li>
             <li>免费注册</li>
           </ul>
@@ -74,6 +74,9 @@
       </div>
     </div>
     <div class="login-container__footer"><Footer :show="false" /></div>
+    <div v-if="showUpdatePassWord">
+      <modifyPassWord v-model="showUpdatePassWord" :type="1" :model="form" />
+    </div>
   </div>
 </template>
 
@@ -81,12 +84,14 @@
   import Footer from "@/components/footer.vue";
   import Logo from "@/components/logo.vue";
   import IdentifyCode from "@/components/identify-code.vue";
+  import ModifyPassWord from "^/profile/components/account/modifyPassWord";
   export default {
     name: "Login",
     components: {
       Footer,
       Logo,
       IdentifyCode,
+      ModifyPassWord,
     },
     directives: {
       focus: {
@@ -110,6 +115,7 @@
       };
       return {
         identifyCode: "",
+        showUpdatePassWord: false,
         form: {
           account: "",
           pwd: "",
@@ -273,6 +279,7 @@
           width: 100%;
           height: 62px;
           font-size: 16px;
+          cursor: pointer;
         }
 
         ::v-deep .el-input-group__append {

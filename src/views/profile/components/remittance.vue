@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 汇款订单
  * @Date: 2020-10-29 20:39:13
- * @LastEditTime: 2020-10-29 22:12:57
+ * @LastEditTime: 2020-11-01 10:15:58
 -->
 <template>
   <div>
@@ -205,6 +205,11 @@
         },
         pic_pathfileList: [],
       };
+    },
+    created() {
+      this.formData.user_account = JSON.parse(
+        this.$store.state.user.userInfo
+      ).account;
     },
     methods: {
       handlePicsSuccess(e) {

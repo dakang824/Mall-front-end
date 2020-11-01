@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-10-31 21:21:47
+ * @LastEditTime: 2020-11-01 11:08:36
 -->
 <template>
   <div class="modifyPassWord">
@@ -124,8 +124,8 @@
     components: { VerificationCode },
     props: {
       model: {
-        type: Array,
-        default: () => [],
+        type: Object,
+        default: () => {},
       },
       type: {
         type: Number,
@@ -141,7 +141,7 @@
         tips: "",
         seconds: 60,
         active: 1,
-        userInfo: "",
+        userInfo: {},
         step1: {
           code: "",
           sign: "",
@@ -184,7 +184,11 @@
       };
     },
     created() {
-      this.userInfo = JSON.parse(this.$store.state.user.userInfo);
+      if (this.model.account) {
+        this.userInfo.mobile = this.model.account;
+      } else {
+        this.userInfo = JSON.parse(this.$store.state.user.userInfo);
+      }
     },
     methods: {
       codeChange(text) {
