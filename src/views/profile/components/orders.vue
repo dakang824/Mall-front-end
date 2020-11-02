@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-10-31 18:06:20
+ * @LastEditTime: 2020-11-02 22:38:05
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -166,7 +166,7 @@
                       <el-button
                         type="primary"
                         size="small"
-                        @click="handleConfirm"
+                        @click="handleConfirm(ite)"
                       >
                         确认收货
                       </el-button>
@@ -175,7 +175,7 @@
                       <el-button
                         size="small"
                         type="info"
-                        @click="handleDelayed"
+                        @click="handleDelayed(ite)"
                       >
                         延迟收货时间
                       </el-button>
@@ -184,7 +184,7 @@
                       <el-button
                         size="small"
                         type="warning"
-                        @click="handleRefund"
+                        @click="handleRefund(ite)"
                       >
                         我要退款
                       </el-button>
@@ -237,7 +237,14 @@
 
 <script>
   import OrdersDetail from "./orders-detail.vue";
-  import { findMyOrders, deleteMyOrders, cancelMyOrders } from "@/api/profile";
+  import {
+    findMyOrders,
+    deleteMyOrders,
+    cancelMyOrders,
+    reciveMyOrders,
+    userExtendOrderReciveTime,
+    applyPayback,
+  } from "@/api/profile";
   import Empty from "@/components/empty.vue";
   export default {
     components: {
@@ -362,34 +369,40 @@
         this.currentItems = e;
         this.showDialog = true;
       },
-      async handleCancel(e) {
-        const { msg } = await cancelMyOrders({
-          id: e.id,
-        });
-
+      result(msg) {
         this.$message({
           message: msg,
           type: "success",
         });
         this.fetchData();
       },
-      handleConfirm() {
-        this.$message({
-          message: "确认收货" || msg,
-          type: "success",
+
+      async handleCancel(e) {
+        const { msg } = await cancelMyOrders({
+          id: e.id,
         });
+        this.result(msg);
       },
-      handleDelayed() {
-        this.$message({
-          message: "延迟收货" || msg,
-          type: "success",
+      async handleConfirm(e) {
+        const { msg } = await reciveMyOrders({
+          id: e.id,
         });
+
+        this.result(msg);
       },
-      handleRefund() {
-        this.$message({
-          message: "退款" || msg,
-          type: "success",
+      async handleDelayed(e) {
+        const { msg } = await userExtendOrderReciveTime({
+          id: e.id,
         });
+
+        this.result(msg);
+      },
+      async handleRefund(e) {
+        const { msg } = await applyPayback({
+          id: e.id,
+        });
+
+        this.result(msg);
       },
       handlePay() {
         this.$message({
@@ -405,11 +418,7 @@
           ids: items.map((item) => item.id).join(),
         });
 
-        this.$message({
-          message: msg,
-          type: "success",
-        });
-        this.fetchData();
+        this.result(msg);
       },
       handleAll(e) {
         this.list[this.current].data.map((item) => (item.checked = e));

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-10-31 19:44:28
+ * @LastEditTime: 2020-11-02 22:33:34
  */
 import request from "@/utils/request";
 
@@ -118,6 +118,30 @@ export async function deleteMyOrders(data) {
 export async function cancelMyOrders(data) {
   return request({
     url: "/service/front/web/cancelMyOrders",
+    method: "post",
+    data,
+  });
+}
+
+export async function reciveMyOrders(data) {
+  return request({
+    url: "/service/front/web/reciveMyOrders",
+    method: "post",
+    data,
+  });
+}
+
+export async function userExtendOrderReciveTime(data) {
+  return request({
+    url: "/service/front/web/userExtendOrderReciveTime",
+    method: "post",
+    data,
+  });
+}
+
+export async function applyPayback(data) {
+  return request({
+    url: "/service/front/web/applyPayback",
     method: "post",
     data,
   });
