@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-11-02 22:19:54
+ * @LastEditTime: 2020-11-03 21:46:35
 -->
 <template>
   <div class="pay">
@@ -100,8 +100,6 @@
           return;
         }
 
-        console.log(this.postData);
-        return;
         await this.$store.dispatch("pay/unifityOrder", this.postData);
 
         // 更新用户余额

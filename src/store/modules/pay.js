@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-10-26 22:28:16
+ * @LastEditTime: 2020-11-03 21:42:36
  */
 import { unifityOrder } from "@/api/pay";
 const state = {
@@ -156,6 +156,8 @@ const actions = {
           unitPrice,
           specList,
           postTemplate,
+          recipe_rate: specList[0].recipeRate,
+          weight: specList[0].weight,
           spe_id: specList[0].id,
           item_pic: pics[0].path,
           post_temp_id: null,
