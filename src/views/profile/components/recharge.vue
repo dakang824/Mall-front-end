@@ -2,19 +2,11 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 充值页面
  * @Date: 2020-10-28 23:21:12
- * @LastEditTime: 2020-10-29 09:55:57
+ * @LastEditTime: 2020-11-04 22:52:00
 -->
 <template>
   <div class="recharge el-card">
-    <el-dialog
-      :title="
-        '请打开' + (params.pay_type == 1 ? '微信' : '支付宝') + '扫码支付'
-      "
-      :visible.sync="show"
-      width="340px"
-    >
-      <canvas id="canvas"></canvas>
-    </el-dialog>
+    <qrCode ref="qrCode" v-model="show" :type="params.pay_type" />
     <el-tabs value="first">
       <el-tab-pane label="在线充值" name="first">
         <el-form ref="ruleForm" :model="params" :rules="rules">
@@ -46,12 +38,12 @@
 </template>
 
 <script>
-  var QRCode = require("qrcode");
   import { unifityRechargeOrder } from "@/api/profile";
   import PayType from "@/views/cart/components/pay-type.vue";
+  import qrCode from "./qr-code.vue";
   export default {
     name: "Recharge",
-    components: { PayType },
+    components: { PayType, qrCode },
     data() {
       return {
         show: false,
@@ -75,17 +67,7 @@
             } = await unifityRechargeOrder(this.params);
             if (pay_params.result_msg == "SUCCESS") {
               this.show = true;
-              this.$nextTick(() => {
-                var canvas = document.getElementById("canvas");
-                QRCode.toCanvas(
-                  canvas,
-                  pay_params.qr_code,
-                  { width: 300, margin: 2 },
-                  function (error) {
-                    if (error) console.error(error);
-                  }
-                );
-              });
+              this.$refs.qrCode.show(pay_params.qr_code);
             }
           } else {
             return false;

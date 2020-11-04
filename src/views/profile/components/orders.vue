@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-11-02 22:38:05
+ * @LastEditTime: 2020-11-04 23:03:11
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -193,7 +193,11 @@
                   <div v-else>
                     <span>还剩00天00小时59分59秒</span>
                     <p>
-                      <el-button type="primary" size="small" @click="handlePay">
+                      <el-button
+                        type="primary"
+                        size="small"
+                        @click="handlePay(ite)"
+                      >
                         立即付款
                       </el-button>
                     </p>
@@ -232,11 +236,14 @@
       </el-tab-pane>
     </el-tabs>
     <ordersDetail v-model="showDialog" :model="currentItems" />
+
+    <qrCode ref="qrCode" v-model="show" :type="pay_type" />
   </div>
 </template>
 
 <script>
   import OrdersDetail from "./orders-detail.vue";
+  import qrCode from "./qr-code.vue";
   import {
     findMyOrders,
     deleteMyOrders,
@@ -244,19 +251,23 @@
     reciveMyOrders,
     userExtendOrderReciveTime,
     applyPayback,
+    rePayOrder,
   } from "@/api/profile";
   import Empty from "@/components/empty.vue";
   export default {
     components: {
       Empty,
       OrdersDetail,
+      qrCode,
     },
 
     data() {
       return {
         currentItems: [],
         showDialog: false,
+        showPayDialog: false,
         allChecked: false,
+        pay_type: 1,
         layout: "total, sizes, prev, pager, next, jumper",
         listLoading: true,
         total: 0,
@@ -404,11 +415,31 @@
 
         this.result(msg);
       },
-      handlePay() {
-        this.$message({
-          message: "再次付款" || msg,
-          type: "success",
+      async handlePay(e) {
+        const {
+          id: order_id,
+          trade_no,
+          discount,
+          total_amount,
+          pay_amount,
+          pay_type,
+        } = e;
+        const {
+          data: { pay_params },
+        } = await rePayOrder({
+          order_id,
+          trade_no,
+          discount,
+          total_amount,
+          pay_amount,
+          pay_type,
         });
+        if (pay_params.result_msg == "SUCCESS") {
+          this.showPayDialog = true;
+          this.pay_type = pay_type;
+          this.$refs.qrCode.show(pay_params.qr_code);
+        }
+        this.fetchData();
       },
       async handleDelAll() {
         const items = this.list[this.current].data.filter(

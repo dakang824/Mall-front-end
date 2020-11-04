@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-11-02 22:33:34
+ * @LastEditTime: 2020-11-04 22:20:56
  */
 import request from "@/utils/request";
 
@@ -102,6 +102,14 @@ export async function bindMobil(data) {
 export async function findMyOrders(data) {
   return request({
     url: "/service/front/web/findMyOrders",
+    method: "post",
+    data,
+  });
+}
+
+export async function rePayOrder(data) {
+  return request({
+    url: "/service/front/web/rePayOrder",
     method: "post",
     data,
   });

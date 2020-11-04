@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-10-31 22:11:11
+ * @LastEditTime: 2020-11-04 22:06:41
 -->
 <template>
   <div class="welcome">
@@ -226,7 +226,15 @@
         }
       },
       handleClick(e) {
-        window.open(`#/goods-detail?type=${e.type}&id=${e.id}`);
+        let type, id;
+        if ("product" in e) {
+          type = e.product.type;
+          id = e.product.id;
+        } else {
+          type = e.type;
+          id = e.id;
+        }
+        window.open(`#/goods-detail?type=${type}&id=${id}`);
         // this.$router.push({
         //   path: "/goods-detail",
         //   query: { type: e.type, id: e.id },
