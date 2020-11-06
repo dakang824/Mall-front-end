@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-11-04 22:06:41
+ * @LastEditTime: 2020-11-06 22:55:02
 -->
 <template>
   <div class="welcome">
@@ -56,6 +56,7 @@
             </p>
             <el-image
               :src="require('@/assets/imgs/profile-recharge.png')"
+              @click="handleRecharge"
             ></el-image>
           </div>
           <div style="flex: 1">
@@ -206,6 +207,9 @@
       await this.$store.dispatch("profileWelcome/getMyInfo", {});
     },
     methods: {
+      handleRecharge() {
+        this.setCurrent("Recharge");
+      },
       handleMore() {
         this.setCurrent(this.current === 0 ? "favorGoods" : "favorStore");
       },

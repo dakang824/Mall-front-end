@@ -1,12 +1,15 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 22:25:48
- * @LastEditTime: 2020-10-29 20:18:46
+ * @LastEditTime: 2020-11-06 22:44:05
  */
 import parseTime from "@/utils/parse-time";
 import currency from "@/utils/currency";
+import { baseURL } from "@/config";
 function imgBaseUrl(val) {
-  return "/service/" + val;
+  return process.env.NODE_ENV === "development"
+    ? `/service/${val}`
+    : baseURL + val;
 }
 function slice(val, start = 0, end = val.length) {
   return val ? val.slice(start, end) : "";
