@@ -2,10 +2,11 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:商品列表
  * @Date: 2020-10-11 22:54:55
- * @LastEditTime: 2020-10-17 18:13:47
+ * @LastEditTime: 2020-11-10 22:45:21
  */
 import {
   queryProduct,
+  queryProduct2,
   findAddressByProdType,
   findCategroyByProdType,
 } from "@/api/goods";
@@ -48,6 +49,11 @@ const mutations = {
 const actions = {
   async queryProduct({ commit }, params) {
     const { data } = await queryProduct(params);
+    commit("setGoodsList", data.product.list);
+    return data;
+  },
+  async queryProduct2({ commit }, params) {
+    const { data } = await queryProduct2(params);
     commit("setGoodsList", data.product.list);
     return data;
   },

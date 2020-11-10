@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-11-03 21:46:35
+ * @LastEditTime: 2020-11-10 23:02:45
 -->
 <template>
   <div class="pay">
@@ -85,6 +85,13 @@
           mobile,
           is_buy, //检测用户是否已购买过
         } = this.postData;
+        if (address === "") {
+          this.$message({
+            type: "error",
+            message: "请添加收货地址",
+          });
+          return;
+        }
         if (is_buy) {
           this.$message({
             type: "error",
@@ -92,7 +99,7 @@
           });
           return;
         }
-        if (pay_type === 1 && pay_amount > this.userInfo.balance) {
+        if (pay_type === 4 && pay_amount > this.userInfo.balance) {
           this.$message({
             type: "error",
             message: "账户余额不足,请选择其它支付方式",

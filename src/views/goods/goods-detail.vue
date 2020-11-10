@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-11-07 21:08:42
+ * @LastEditTime: 2020-11-10 22:56:48
 -->
 <!-- 商品详情 -->
 <template>
@@ -158,18 +158,21 @@
 
     methods: {
       async handleBuy() {
-        const store = JSON.parse(JSON.stringify(this.store));
-        store.product.specList = [this.product.specList[this.specCurrent]];
-        store.unitPrice = store.product.specList[0].sellPrice;
-        store.quantity = this.num;
-        store.itemId = store.product.id;
-        store.checked = true;
-        const postData = await this.$store.dispatch("pay/getData", [
-          { data: [store] },
-        ]);
-        return;
-        this.$router.push({
-          path: `/cart/pay?obj=${JSON.stringify(postData)}`,
+        this.$utils.verifyLogin({
+          success: async (e) => {
+            const store = JSON.parse(JSON.stringify(this.store));
+            store.product.specList = [this.product.specList[this.specCurrent]];
+            store.unitPrice = store.product.specList[0].sellPrice;
+            store.quantity = this.num;
+            store.itemId = store.product.id;
+            store.checked = true;
+            const postData = await this.$store.dispatch("pay/getData", [
+              { data: [store] },
+            ]);
+            this.$router.push({
+              path: `/cart/pay?obj=${JSON.stringify(postData)}`,
+            });
+          },
         });
       },
       handleChange(e) {

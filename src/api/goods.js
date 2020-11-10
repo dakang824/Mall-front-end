@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品接口
  * @Date: 2020-10-11 10:58:12
- * @LastEditTime: 2020-10-18 12:22:52
+ * @LastEditTime: 2020-11-10 22:41:30
  */
 import request from "@/utils/request";
 
@@ -65,6 +65,14 @@ export function storeCollect(data) {
 export function addCartItem(data) {
   return request({
     url: "/service/front/web/addCartItem",
+    method: "post",
+    data,
+  });
+}
+
+export function queryProduct2(data) {
+  return request({
+    url: "/service/front/web/queryProduct2",
     method: "post",
     data,
   });

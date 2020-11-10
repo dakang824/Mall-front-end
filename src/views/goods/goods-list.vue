@@ -168,7 +168,13 @@
       },
       async fetchData() {
         this.loading = true;
-        await this.$store.dispatch("goods/queryProduct", this.postData);
+        await this.$store.dispatch(
+          `goods/${
+            this.$route.query.type === "" ? "queryProduct2" : "queryProduct"
+          }`,
+          this.postData
+        );
+
         this.loading = false;
       },
     },
