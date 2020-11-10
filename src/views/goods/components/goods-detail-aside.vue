@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情侧边栏
  * @Date: 2020-10-05 23:21:38
- * @LastEditTime: 2020-10-19 23:48:29
+ * @LastEditTime: 2020-11-07 21:13:01
 -->
 
 <template>
@@ -22,7 +22,7 @@
             @click="handleClick(it)"
           >
             <el-image
-              :src="it.pics[0].path | imgBaseUrl"
+              :src="(it.pics.length ? it.pics[0].path : '') | imgBaseUrl"
               fit="cover"
             ></el-image>
             <div class="right">

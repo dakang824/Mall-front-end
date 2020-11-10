@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-11-06 22:55:02
+ * @LastEditTime: 2020-11-07 21:18:38
 -->
 <template>
   <div class="welcome">
