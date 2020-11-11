@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-10-29 16:17:35
+ * @LastEditTime: 2020-11-11 23:42:08
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -145,7 +145,7 @@
 </template>
 
 <script>
-  import { findMyOrders } from "@/api/profile";
+  import { queryPayBackOrders } from "@/api/profile";
   import Empty from "@/components/empty.vue";
   export default {
     components: {
@@ -261,17 +261,17 @@
       async fetchData() {
         this.listLoading = true;
         const {
-          data: { orders },
-        } = await findMyOrders(this.queryForm);
-        this.total = orders.total;
-        orders.list.map((item) => {
+          data: { data },
+        } = await queryPayBackOrders(this.queryForm);
+        this.total = data.total;
+        data.list.map((item) => {
           item.checked = false;
         });
         const index = this.list.findIndex(
           (item) => item.name === this.activeName
         );
         this.current = index;
-        this.list[index].data = orders.list;
+        this.list[index].data = data.list;
         this.$nextTick(() => {
           this.listLoading = false;
         });
