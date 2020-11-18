@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-10-24 13:07:23
+ * @LastEditTime: 2020-11-18 23:32:25
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
@@ -12,7 +12,7 @@
         :key="index"
         @click="hanldeClick(index)"
       >
-        <i v-if="index === 2">{{ cartNum }}</i>
+        <i v-if="index === 1">{{ cartNum }}</i>
         <el-image :src="item"></el-image>
       </li>
     </ul>
@@ -29,7 +29,7 @@
         show: false,
         list: [
           require("@/assets/imgs/side_nav-person.png"),
-          require("@/assets/imgs/side_nav-kefu.png"),
+          // require("@/assets/imgs/side_nav-kefu.png"),
           require("@/assets/imgs/side_nav-cart.png"),
           require("@/assets/imgs/side_nav-go-top.png"),
         ],
@@ -49,15 +49,19 @@
     },
     methods: {
       hanldeClick(e) {
-        if (e === 2) {
+        if (e === 1) {
           this.$router.push({
             name: "Cart",
           });
-        } else if (e === 3) {
+        } else if (e === 2) {
           this.backTop();
         } else if (e === 0) {
-          this.$router.push({
-            name: "Profile",
+          this.$utils.verifyLogin({
+            success: async (e) => {
+              this.$router.push({
+                name: "Profile",
+              });
+            },
           });
         } else {
           this.$message("还没配置此页面", "warning");

@@ -274,7 +274,10 @@
           this.cartItems
         );
         this.$router.push({
-          path: `/cart/pay?obj=${JSON.stringify(postData)}`,
+          name: "Pay",
+          params: {
+            obj: JSON.stringify(postData),
+          },
         });
       },
     },

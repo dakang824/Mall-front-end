@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-10-31 17:42:02
+ * @LastEditTime: 2020-11-18 23:15:04
 -->
 <template>
   <div class="orders-detail">
@@ -21,9 +21,9 @@
                 model.address
               }}
             </p>
-            <p>买家留言：{{ model.pay_amount ? model.pay_amount : "-" }}</p>
+            <p>买家留言：{{ model.buyer_common ? model.buyer_common : "-" }}</p>
             <p>订单编号：{{ model.trade_no }}</p>
-            <p>支付方式：{{ model.pay_type }}</p>
+            <p>支付方式：{{ model.pay_type | getPayName }}</p>
             <p>卖家信息：{{ model.store_name }}</p>
           </div>
         </div>
@@ -123,11 +123,22 @@
           ? "已退款"
           : "";
       },
+      getPayName(v) {
+        return v === 1
+          ? "微信"
+          : v === 2
+          ? "支付宝"
+          : v === 3
+          ? "银联"
+          : v === 4
+          ? "余额"
+          : "其它";
+      },
     },
     props: {
       model: {
-        type: Array,
-        default: () => [],
+        type: Object,
+        default: () => {},
       },
       value: {
         type: Boolean,

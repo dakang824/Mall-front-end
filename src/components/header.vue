@@ -34,7 +34,9 @@
               <el-link>购物车</el-link>
             </a>
           </li>
-          <li><router-link to="/login">商家登录</router-link></li>
+          <li @click="handleJumpStore">
+            <el-link>商家登录</el-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -43,6 +45,7 @@
 
 <script>
   import { mapState } from "vuex";
+  import { baseURL } from "@/config";
   export default {
     components: {},
     data() {
@@ -64,6 +67,15 @@
       },
       handleLoginOut() {
         this.$store.commit("user/resetUserInfo");
+      },
+      handleJumpStore() {
+        window.open(
+          `${
+            process.env.NODE_ENV === "development"
+              ? "http://localhost/"
+              : baseURL
+          }storeAdmin/index.html`
+        );
       },
     },
   };

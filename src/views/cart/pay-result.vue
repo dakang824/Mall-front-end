@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-10-26 21:11:55
+ * @LastEditTime: 2020-11-18 22:49:35
 -->
 <!--  -->
 <template>
@@ -86,6 +86,7 @@
     mounted() {
       this.state = this.$route.query.state;
       this.params = JSON.parse(this.$route.query.params);
+      this.$store.commit("cart/setCartState", this.state === "success" ? 4 : 3);
     },
   };
 </script>

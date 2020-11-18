@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情轮播图片
  * @Date: 2020-10-05 22:45:14
- * @LastEditTime: 2020-10-25 19:04:18
+ * @LastEditTime: 2020-11-18 23:47:07
 -->
 <template>
   <div class="goods-detail-imgs">
@@ -92,6 +92,8 @@
                 prodId: id,
               }
             );
+            const data = this.model;
+            data.collectCount += this.value ? -1 : 1;
             this.$emit("input", !this.value);
             this.$message({
               message: this.value ? "取消成功" : "收藏成功",

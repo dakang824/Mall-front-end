@@ -79,7 +79,7 @@
         return this.model.data.length ? this.model.data.slice(0, 2) : [];
       },
       getList() {
-        return this.model.data.length ? this.model.data.slice(2) : [];
+        return this.model.data.length ? this.model.data : [];
       },
       getType() {
         return this.getPreTwo.length ? this.getPreTwo[0].type : "";

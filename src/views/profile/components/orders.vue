@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-11-04 23:03:11
+ * @LastEditTime: 2020-11-18 23:10:12
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -266,6 +266,7 @@
         currentItems: [],
         showDialog: false,
         showPayDialog: false,
+        show: false,
         allChecked: false,
         pay_type: 1,
         layout: "total, sizes, prev, pager, next, jumper",
@@ -442,14 +443,21 @@
         this.fetchData();
       },
       async handleDelAll() {
-        const items = this.list[this.current].data.filter(
-          (item) => item.checked
-        );
-        const { msg } = await deleteMyOrders({
-          ids: items.map((item) => item.id).join(),
-        });
+        const items = this.list[this.current].data
+          .filter((item) => item.checked)
+          .map((item) => item.id);
+        if (items.length) {
+          const { msg } = await deleteMyOrders({
+            ids: items.join(),
+          });
 
-        this.result(msg);
+          this.result(msg);
+        } else {
+          this.$message({
+            message: "请选择要删除的订单",
+            type: "error",
+          });
+        }
       },
       handleAll(e) {
         this.list[this.current].data.map((item) => (item.checked = e));

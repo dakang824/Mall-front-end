@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品收藏
  * @Date: 2020-10-29 16:20:52
- * @LastEditTime: 2020-10-31 15:40:45
+ * @LastEditTime: 2020-11-18 23:18:17
 -->
 <template>
   <div class="favor-goods el-card">
@@ -115,6 +115,9 @@
 
       &__content {
         padding: $padding;
+        p {
+          @include ellipsis-lines(1);
+        }
         span {
           color: $green;
           font-size: 18px;

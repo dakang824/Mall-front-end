@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-11-10 23:02:45
+ * @LastEditTime: 2020-11-18 23:12:03
 -->
 <template>
   <div class="pay">
@@ -73,7 +73,15 @@
     },
     async created() {
       this.$store.commit("cart/setCartState", 2);
-      this.setStore(JSON.parse(this.$route.query.obj));
+      let obj;
+      if (this.$route.params.obj) {
+        obj = JSON.parse(this.$route.params.obj);
+        localStorage.setItem("pay", this.$route.params.obj);
+      } else {
+        obj = JSON.parse(localStorage.getItem("pay"));
+      }
+
+      this.setStore(obj);
     },
     methods: {
       async handlePay() {
@@ -92,13 +100,13 @@
           });
           return;
         }
-        if (is_buy) {
-          this.$message({
-            type: "error",
-            message: "检测到该订单已支付,请勿重复支付",
-          });
-          return;
-        }
+        // if (is_buy) {
+        //   this.$message({
+        //     type: "error",
+        //     message: "检测到该订单已支付,请勿重复支付",
+        //   });
+        //   return;
+        // }
         if (pay_type === 4 && pay_amount > this.userInfo.balance) {
           this.$message({
             type: "error",
@@ -111,6 +119,7 @@
 
         // 更新用户余额
         await this.$store.dispatch("profileWelcome/getMyInfo", {});
+        localStorage.removeItem("pay");
         this.$router.push({
           path: `/cart/pay-result`,
           query: {

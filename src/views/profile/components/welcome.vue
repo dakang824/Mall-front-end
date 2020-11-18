@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-11-07 21:18:38
+ * @LastEditTime: 2020-11-18 23:01:28
 -->
 <template>
   <div class="welcome">
@@ -52,7 +52,7 @@
             <span>我的余额</span>
             <p>
               <i>￥</i>
-              {{ getMyInfo.balance }}
+              {{ getMyInfo.balance || 0 }}
             </p>
             <el-image
               :src="require('@/assets/imgs/profile-recharge.png')"
@@ -63,19 +63,19 @@
             <ul class="block" :class="{ setWidth: !getCartItems.length }">
               <li class="el-card">
                 <i>待付款</i>
-                <p>{{ getMyInfo.unpay_count }}</p>
+                <p>{{ getMyInfo.unpay_count || 0 }}</p>
               </li>
               <li class="el-card">
                 <i>待收货</i>
-                <p>{{ getMyInfo.unRecive_count }}</p>
+                <p>{{ getMyInfo.unRecive_count || 0 }}</p>
               </li>
               <li class="el-card">
                 <i>退款</i>
-                <p>{{ getMyInfo.payback_count }}</p>
+                <p>{{ getMyInfo.payback_count || 0 }}</p>
               </li>
               <li class="el-card">
                 <i>待发货</i>
-                <p>{{ getMyInfo.unPost_count }}</p>
+                <p>{{ getMyInfo.unPost_count || 0 }}</p>
               </li>
             </ul>
           </div>
@@ -137,7 +137,7 @@
           ></el-image>
           <div class="right">
             <p>{{ it.product.name }}</p>
-            <span>哦哦￥{{ it.product.specList | minPrice }}</span>
+            <span>￥{{ it.product.specList | minPrice }}</span>
           </div>
         </div>
         <div v-if="getCartItems.length > 5" class="more" @click="handleChange">
@@ -390,6 +390,7 @@
                 }
                 p {
                   margin: 22px 0 46px;
+                  @include ellipsis-lines(1);
                 }
               }
             }
@@ -450,6 +451,14 @@
           margin-right: 14px;
           content: "";
           background: $green;
+        }
+      }
+      .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        p {
+          @include ellipsis-lines(2);
         }
       }
       .goods-item {

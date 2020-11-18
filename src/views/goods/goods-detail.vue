@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-11-10 22:56:48
+ * @LastEditTime: 2020-11-18 22:27:46
 -->
 <!-- 商品详情 -->
 <template>
@@ -170,7 +170,10 @@
               { data: [store] },
             ]);
             this.$router.push({
-              path: `/cart/pay?obj=${JSON.stringify(postData)}`,
+              name: "Pay",
+              params: {
+                obj: JSON.stringify(postData),
+              },
             });
           },
         });

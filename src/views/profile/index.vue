@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-10-31 21:51:48
+ * @LastEditTime: 2020-11-18 23:17:09
 -->
 <template>
   <div class="profile">
@@ -74,9 +74,9 @@
       return {
         current: 0,
         list: [
-          { name: "欢迎页", components: "welcome" },
+          { name: "欢迎页", components: "Welcome" },
           { name: "个人资料", components: "Profile" },
-          { name: "账户安全", components: "account" },
+          { name: "账户安全", components: "Account" },
           { name: "收货地址", components: "Address" },
           { name: "我的购物车", components: "Cart" },
           { name: "我的订单", components: "Orders" },
@@ -84,8 +84,8 @@
           { name: "财务明细", components: "financial" },
           { name: "在线充值", components: "Recharge" },
           { name: "汇款确认", components: "Remittance" },
-          { name: "商品收藏", components: "favorGoods" },
-          { name: "店铺收藏", components: "favorStore" },
+          { name: "商品收藏", components: "FavorGoods" },
+          { name: "店铺收藏", components: "FavorStore" },
         ],
       };
     },
