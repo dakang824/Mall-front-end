@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-11-19 17:45:35
+ * @LastEditTime: 2020-11-19 19:28:09
 -->
 <template>
   <div class="profile">
@@ -72,7 +72,7 @@
     },
     data() {
       return {
-        current: 0,
+        current: "",
         list: [
           { name: "欢迎页", components: "Welcome" },
           { name: "个人资料", components: "Profile" },
@@ -81,7 +81,7 @@
           { name: "我的购物车", components: "Cart" },
           { name: "我的订单", components: "Orders" },
           { name: "退款退货", components: "Refund" },
-          { name: "财务明细", components: "financial" },
+          { name: "财务明细", components: "Financial" },
           { name: "在线充值", components: "Recharge" },
           { name: "汇款确认", components: "Remittance" },
           { name: "商品收藏", components: "FavorGoods" },
@@ -90,14 +90,11 @@
       };
     },
     created() {
-      this.handleChange(
-        this.$route.query.page || localStorage.getItem("profile") || "Welcome"
-      );
+      this.handleChange(this.$route.query.page || "Welcome");
     },
     methods: {
       handleClick(e) {
         this.current = e;
-        localStorage.setItem("profile", this.list[this.current].components);
       },
       handleChange(e) {
         this.current = this.list.findIndex((item) => item.components === e);

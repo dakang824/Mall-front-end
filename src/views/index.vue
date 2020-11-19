@@ -1,12 +1,15 @@
 <!--
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-01 09:16:18
- * @LastEditTime: 2020-10-10 22:03:54
+ * @LastEditTime: 2020-11-19 19:39:23
 -->
 <template>
   <div class="index">
     <Header></Header>
-    <router-view class="main"></router-view>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" class="main"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" class="main"></router-view>
     <Footer></Footer>
     <SideNav></SideNav>
   </div>

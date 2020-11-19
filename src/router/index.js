@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-11-19 15:26:42
+ * @LastEditTime: 2020-11-19 19:51:34
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -19,32 +19,37 @@ const routes = [
       {
         path: "home",
         name: "Home",
-        component: () => import("@/views/home/index.vue"),
+        component: () => import("@/views/home"),
+        meta: {
+          keepAlive: true,
+        },
       },
       {
         path: "/goods-list",
         name: "GoodsList",
-        component: () => import("@/views/goods/goods-list.vue"),
+        component: (resolve) => require(["@/views/goods/goods-list"], resolve),
       },
       {
         path: "/store",
         name: "Store",
-        component: () => import("@/views/store/index.vue"),
+        component: (resolve) => require(["@/views/store"], resolve),
       },
       {
         path: "/profile",
         name: "Profile",
-        component: () => import("@/views/profile/index.vue"),
+        component: (resolve) => require(["@/views/profile"], resolve),
+        meta: {
+          keepAlive: true,
+        },
       },
       {
         path: "/goods-detail",
         name: "GoodsDetail",
         meta: {
-          keepAlive: false,
-          isBack: false,
-          requiresAuth: true,
+          keepAlive: true,
         },
-        component: () => import("@/views/goods/goods-detail.vue"),
+        component: (resolve) =>
+          require(["@/views/goods/goods-detail.vue"], resolve),
       },
       {
         path: "/cart",
@@ -80,7 +85,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: () => import("@/views/login/index.vue"),
+    component: (resolve) => require(["@/views/login/index.vue"], resolve),
   },
 ];
 
