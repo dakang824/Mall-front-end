@@ -17,36 +17,17 @@
     </div>
     <el-container>
       <el-aside width="300px">
-        <router-link
-          v-if="getPreTwo.length >= 1"
-          :to="{
-            path: '/goods-detail',
-            query: { type: getType, id: getPreTwo[0].id },
-          }"
-        >
+        <a :href="model.ad.url">
           <el-image
-            :src="getPreTwo[0].pics[0].path | imgBaseUrl"
+            :src="model.ad.pic_path | imgBaseUrl"
             fit="scale-down"
-            style="width: 300px; height: 196px"
+            style="width: 300px; height: 573px"
           ></el-image>
-        </router-link>
-        <router-link
-          v-if="getPreTwo.length >= 2"
-          :to="{
-            path: '/goods-detail',
-            query: { type: getType, id: getPreTwo[1].id },
-          }"
-        >
-          <el-image
-            :src="getPreTwo[1].pics[0].path | imgBaseUrl"
-            fit="scale-down"
-            style="width: 300px; height: 368px"
-          ></el-image>
-        </router-link>
+        </a>
       </el-aside>
       <el-main class="clearfix">
         <div
-          v-for="(item, index) in getList"
+          v-for="(item, index) in model.data"
           :key="index"
           class="goods-item fl"
         >
@@ -77,9 +58,6 @@
     computed: {
       getPreTwo() {
         return this.model.data.length ? this.model.data.slice(0, 2) : [];
-      },
-      getList() {
-        return this.model.data.length ? this.model.data : [];
       },
       getType() {
         return this.getPreTwo.length ? this.getPreTwo[0].type : "";

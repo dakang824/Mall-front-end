@@ -15,11 +15,14 @@
       </el-aside>
       <el-main class="category__right">
         <el-carousel trigger="click" height="430px">
-          <el-carousel-item v-for="item in 4" :key="item">
-            <el-image
-              :src="require('@/assets/imgs/login-bg.png')"
-              fit="cover"
-            ></el-image>
+          <el-carousel-item v-for="item in banner" :key="item">
+            <a :href="item.url">
+              <el-image
+                :src="item.pic_path | imgBaseUrl"
+                fit="contain"
+                style="width: 100%"
+              ></el-image>
+            </a>
           </el-carousel-item>
         </el-carousel>
         <ul v-if="show" class="category__right__child clearfix">
@@ -36,6 +39,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     components: {},
     props: {
@@ -52,6 +56,9 @@
         current: null,
       };
     },
+    computed: mapState({
+      banner: (state) => state.home.banner,
+    }),
     methods: {
       handleMouseleave() {
         this.show = false;
