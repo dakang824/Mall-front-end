@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-11-18 22:27:46
+ * @LastEditTime: 2020-11-19 17:05:54
 -->
 <!-- 商品详情 -->
 <template>
@@ -87,6 +87,7 @@
             :model="storeSubCate"
             :collect-goods="collectGoods"
             :sell-goods="sellGoods"
+            :store-id="product.storeId"
           />
         </el-aside>
         <el-main>
@@ -138,6 +139,7 @@
     computed: {
       ...mapState({
         store: (state) => state.goodsDetail.store,
+        items: (state) => state.cart.items,
       }),
       swiper() {
         return this.$refs.mySwiper.$swiper;
@@ -235,9 +237,16 @@
       handleAddCart() {
         this.$utils.verifyLogin({
           success: async (e) => {
+            const data = this.items.find(
+              (item) => item.itemId == this.$route.query.id
+            );
+            let quantity = this.num;
+            if (data) {
+              quantity += data.quantity;
+            }
             await this.$store.dispatch("goodsDetail/addCartItem", {
               prodId: this.$route.query.id,
-              quantity: this.num,
+              quantity,
               totalAmount: this.getPrice.sellPrice,
               specId: this.product.specList[this.specCurrent].id,
             });

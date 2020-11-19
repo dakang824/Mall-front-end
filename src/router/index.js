@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-11-18 22:29:22
+ * @LastEditTime: 2020-11-19 15:26:42
  */
 import Vue from "vue";
 import VueRouter from "vue-router";

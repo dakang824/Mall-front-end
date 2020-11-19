@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-11-03 21:42:36
+ * @LastEditTime: 2020-11-19 15:44:31
  */
 import { unifityOrder } from "@/api/pay";
 const state = {
@@ -169,6 +169,7 @@ const actions = {
           post_more_price: null,
           post_amount: null,
           total_amount: i.totalAmount,
+          cartItemId: i.id,
         });
       });
       obj.pay_amount = obj.total_amount - obj.discount;

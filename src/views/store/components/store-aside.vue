@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店内分类
  * @Date: 2020-10-05 20:56:27
- * @LastEditTime: 2020-10-17 19:06:35
+ * @LastEditTime: 2020-11-19 17:11:52
 -->
 <template>
   <div class="store-aside">
@@ -13,7 +13,7 @@
           v-for="(item, index) in model"
           :key="index"
           :class="{ active: index === current }"
-          @click="handleChange(index)"
+          @click="handleChange(index, item.id)"
         >
           分类{{ item.name }}
         </li>
@@ -37,15 +37,23 @@
           return [];
         },
       },
+      currentIndex: {
+        type: [String, Number],
+        default: "",
+      },
     },
     data() {
       return {
-        current: 0,
+        current: "",
       };
     },
+    created() {
+      this.current = this.currentIndex;
+    },
     methods: {
-      handleChange(e) {
+      handleChange(e, id) {
         this.current = e;
+        this.$emit("click", id);
       },
     },
   };
@@ -71,6 +79,9 @@
 
         &:last-child {
           border-bottom: 0;
+          &.active {
+            border-bottom: 2px solid #05b85e;
+          }
         }
 
         &.title {

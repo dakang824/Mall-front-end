@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-11-18 22:49:35
+ * @LastEditTime: 2020-11-19 16:09:37
 -->
 <!--  -->
 <template>
@@ -40,8 +40,8 @@
           </ul>
           <p>
             您可以：
-            <span>查看买到的宝贝</span>
-            <span>查看交易记录</span>
+            <el-link @click="handleJump"><span>查看买到的宝贝</span></el-link>
+            <el-link @click="handleJump"><span>查看交易记录</span></el-link>
           </p>
         </div>
       </div>
@@ -87,6 +87,14 @@
       this.state = this.$route.query.state;
       this.params = JSON.parse(this.$route.query.params);
       this.$store.commit("cart/setCartState", this.state === "success" ? 4 : 3);
+    },
+    methods: {
+      handleJump() {
+        this.$router.push({
+          path: "/profile",
+          query: { page: "Orders" },
+        });
+      },
     },
   };
 </script>
@@ -170,7 +178,7 @@
           p {
             margin: 50px 0 0 15px;
 
-            span {
+            a {
               margin-left: 40px;
               color: $green;
               text-decoration: underline;

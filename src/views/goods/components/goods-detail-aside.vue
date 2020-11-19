@@ -2,12 +2,12 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情侧边栏
  * @Date: 2020-10-05 23:21:38
- * @LastEditTime: 2020-11-07 21:13:01
+ * @LastEditTime: 2020-11-19 17:08:09
 -->
 
 <template>
   <div class="goods-detail-aside">
-    <StoreAside :model="model"></StoreAside>
+    <StoreAside :model="model" @click="handleItemClick"></StoreAside>
     <StoreAside title="店内排行">
       <el-tabs type="border-card" stretch>
         <el-tab-pane
@@ -59,6 +59,10 @@
           return [];
         },
       },
+      storeId: {
+        type: [String, Number],
+        default: "",
+      },
       collectGoods: {
         type: Array,
         default: () => {
@@ -90,6 +94,9 @@
       },
     },
     methods: {
+      handleItemClick(e) {
+        window.open(`#/store?sub_cate_id=${e}&id=${this.storeId}`);
+      },
       handleClick(e) {
         window.open(`#/goods-detail?type=${e.type}&id=${e.id}`);
         // this.$router.push({

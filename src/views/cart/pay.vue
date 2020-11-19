@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-11-18 23:12:03
+ * @LastEditTime: 2020-11-19 16:00:37
 -->
 <template>
   <div class="pay">
@@ -93,6 +93,7 @@
           mobile,
           is_buy, //检测用户是否已购买过
         } = this.postData;
+
         if (address === "") {
           this.$message({
             type: "error",
@@ -120,6 +121,18 @@
         // 更新用户余额
         await this.$store.dispatch("profileWelcome/getMyInfo", {});
         localStorage.removeItem("pay");
+
+        // 如果是从购物车来的,支付成功后删除购物车里面的数据
+        this.postData.orders.map((item) =>
+          item.items.map(async (i) => {
+            if (i.cartItemId) {
+              await this.$store.dispatch("cart/deleteCartItem", {
+                id: i.cartItemId,
+              });
+            }
+          })
+        );
+
         this.$router.push({
           path: `/cart/pay-result`,
           query: {

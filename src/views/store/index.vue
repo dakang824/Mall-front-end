@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-11-19 12:08:50
+ * @LastEditTime: 2020-11-19 17:14:09
 -->
 <!-- 商铺 -->
 <template>
@@ -11,11 +11,15 @@
     <div class="box w">
       <el-container>
         <el-aside width="278px">
-          <storeAside :model="storeSubCate" />
+          <storeAside
+            :model="storeSubCate"
+            :current-index="currentIndex"
+            @click="handleItemClick"
+          />
         </el-aside>
         <el-main>
           <storeTabs @change="handleChange" />
-          <goodsCard :model="products.list">
+          <goodsCard v-loading="loading" :model="products.list">
             <el-pagination
               :current-page="postData.pageNum"
               :page-size="postData.pageSize"
@@ -51,6 +55,8 @@
         products: {
           list: [],
         },
+        currentIndex: "",
+        loading: false,
         store: {},
         storeSubCate: {},
         postData: {
@@ -61,10 +67,14 @@
           orderbyViewCount: "",
           pageNum: 1,
           pageSize: 10,
+          sub_cate_id: "",
         },
       };
     },
     created() {
+      if (this.$route.query.sub_cate_id) {
+        this.postData.sub_cate_id = this.$route.query.sub_cate_id;
+      }
       this.getData();
     },
     methods: {
@@ -78,25 +88,36 @@
         this.getData();
       },
       async getData() {
+        const { postData } = this;
+        this.loading = true;
+
         const { products, store, storeSubCate } = await this.$store.dispatch(
           "store/getStoreDetail",
-          this.postData
+          this.$baseLodash.pickBy(postData, this.$baseLodash.identity)
         );
         this.storeSubCate = storeSubCate;
         this.products = products;
         this.store = store;
         this.$nextTick(() => {
           this.showPage = true;
+          this.loading = false;
+          this.currentIndex = storeSubCate.findIndex(
+            (item) => item.id == this.$route.query.sub_cate_id
+          );
         });
       },
+      handleItemClick(id) {
+        this.postData.sub_cate_id = id;
+        this.getData();
+      },
       handleChange(e) {
-        console.log(e);
         const {
           orderBySellCount: orderbySellCount,
           onlineTime,
-          orderByprice,
+          orderByPrice: orderByprice,
           orderByViewCount: orderbyViewCount,
         } = e;
+
         this.postData = {
           ...this.postData,
           orderbySellCount,

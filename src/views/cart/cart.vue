@@ -69,7 +69,7 @@
                           class="link"
                           :to="{
                             path: '/goods-detail',
-                            query: { type: item.product.type, id: item.id },
+                            query: { type: item.product.type, id: item.itemId },
                           }"
                         >
                           <el-image
