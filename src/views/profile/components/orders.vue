@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-11-18 23:10:12
+ * @LastEditTime: 2020-11-19 18:09:35
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -109,7 +109,17 @@
                       :src="items.item_pic | imgBaseUrl"
                       style="width: 60px"
                     ></el-image>
-                    <h5>{{ items.name }}</h5>
+
+                    <el-link>
+                      <router-link
+                        :to="{
+                          path: '/goods-detail',
+                          query: { type: items.prod_type, id: items.prod_id },
+                        }"
+                      >
+                        <h5>{{ items.name }}</h5>
+                      </router-link>
+                    </el-link>
                   </div>
                   <span :style="{ width: 9 + title[1].width * 1 + 'px' }">
                     {{ items.sell_price | toFixed }}
@@ -150,7 +160,8 @@
                   </span>
                   <span v-else-if="ite.status === 5">交易关闭</span>
                   <span v-else-if="ite.status === 4">交易成功</span>
-                  <span v-else>卖家已发货，等待买家确认收</span>
+                  <span v-else-if="ite.status === 6">待退款</span>
+                  <span v-else-if="ite.status === 7">已退款</span>
                   <el-link @click="handleClick(ite)">订单详情</el-link>
                 </div>
               </div>
@@ -161,36 +172,7 @@
                 }"
               >
                 <div v-if="ite.status !== 4" class="money">
-                  <div v-if="ite.status === 2 || ite.post_status">
-                    <p>
-                      <el-button
-                        type="primary"
-                        size="small"
-                        @click="handleConfirm(ite)"
-                      >
-                        确认收货
-                      </el-button>
-                    </p>
-                    <p v-if="ite.post_status">
-                      <el-button
-                        size="small"
-                        type="info"
-                        @click="handleDelayed(ite)"
-                      >
-                        延迟收货时间
-                      </el-button>
-                    </p>
-                    <p>
-                      <el-button
-                        size="small"
-                        type="warning"
-                        @click="handleRefund(ite)"
-                      >
-                        我要退款
-                      </el-button>
-                    </p>
-                  </div>
-                  <div v-else>
+                  <div v-if="ite.status === 0">
                     <span>还剩00天00小时59分59秒</span>
                     <p>
                       <el-button
@@ -208,6 +190,36 @@
                         @click="handleCancel(ite)"
                       >
                         取消订单
+                      </el-button>
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p v-if="ite.status === 3">
+                      <el-button
+                        type="primary"
+                        size="small"
+                        @click="handleConfirm(ite)"
+                      >
+                        确认收货
+                      </el-button>
+                    </p>
+                    <p v-if="ite.status === 3">
+                      <el-button
+                        size="small"
+                        type="info"
+                        @click="handleDelayed(ite)"
+                      >
+                        延迟收货时间
+                      </el-button>
+                    </p>
+                    <p>
+                      <el-button
+                        v-if="ite.status === 3 || ite.status === 2"
+                        size="small"
+                        type="warning"
+                        @click="handleRefund(ite)"
+                      >
+                        我要退款
                       </el-button>
                     </p>
                   </div>
@@ -316,7 +328,7 @@
           },
           {
             label: "待付款",
-            value: 1,
+            value: 0,
           },
           {
             label: "待发货",
@@ -341,6 +353,10 @@
           {
             label: "已退款",
             value: 7,
+          },
+          {
+            label: "用户删除",
+            value: 8,
           },
         ],
         list: [

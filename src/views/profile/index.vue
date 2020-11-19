@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-11-19 16:06:17
+ * @LastEditTime: 2020-11-19 17:45:35
 -->
 <template>
   <div class="profile">
@@ -90,13 +90,14 @@
       };
     },
     created() {
-      if (this.$route.query.page) {
-        this.handleChange(this.$route.query.page);
-      }
+      this.handleChange(
+        this.$route.query.page || localStorage.getItem("profile") || "Welcome"
+      );
     },
     methods: {
       handleClick(e) {
         this.current = e;
+        localStorage.setItem("profile", this.list[this.current].components);
       },
       handleChange(e) {
         this.current = this.list.findIndex((item) => item.components === e);
