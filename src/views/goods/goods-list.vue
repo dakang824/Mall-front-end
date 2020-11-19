@@ -107,11 +107,28 @@
       },
     },
     async mounted() {
-      const { type: prodType, condition = "" } = this.$route.query;
+      const {
+        type: prodType,
+        condition = "",
+        cate_id = null,
+        sub_cate_id = null,
+      } = this.$route.query;
       this.reset();
       await this.$store.dispatch("goods/findCategroyByProdType", {
         prodType,
       });
+      if (cate_id !== null && sub_cate_id !== null) {
+        this.postData.cate_id = cate_id;
+        this.topCateCurrent = this.categoryList.findIndex(
+          (item) => item.id == cate_id
+        );
+
+        this.postData.sub_cate_id = sub_cate_id;
+        this.subCateCurrent = this.categoryList[
+          this.topCateCurrent
+        ].subCategoryList.findIndex((item) => item.id == sub_cate_id);
+      }
+
       await this.$store.dispatch("goods/findAddressByProdType", {
         prodType,
       });

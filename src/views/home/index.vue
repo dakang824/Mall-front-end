@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 首页
  * @Date: 2020-09-28 21:15:23
- * @LastEditTime: 2020-10-19 22:51:37
+ * @LastEditTime: 2020-11-19 12:26:28
 -->
 <template>
   <div class="home">
@@ -13,7 +13,11 @@
       </div>
     </div>
 
-    <Category v-loading="loading" :model="category"></Category>
+    <Category
+      v-loading="loading"
+      :model="category"
+      @click="handleClick"
+    ></Category>
     <div v-for="(item, index) in floorData" :key="index" class="goods-item">
       <Floor v-loading="loading" :model="item"></Floor>
     </div>
@@ -57,6 +61,14 @@
         this.$router.push({
           path: "/goods-list",
           query: { type: "", condition: keyWord },
+        });
+      },
+      handleClick(e) {
+        const { keyWord } = this;
+        const { cate_id, sub_cate_id } = e;
+        this.$router.push({
+          path: "/goods-list",
+          query: { type: "", condition: keyWord, cate_id, sub_cate_id },
         });
       },
     },

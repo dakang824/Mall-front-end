@@ -8,6 +8,7 @@
           :key="index"
           :class="['title', { active: index === current }]"
           @mouseenter="handleMouseenter(index)"
+          @click="handleItemClick(item.id)"
         >
           {{ item.name }}
           <i class="el-icon-arrow-right"></i>
@@ -15,7 +16,7 @@
       </el-aside>
       <el-main class="category__right">
         <el-carousel trigger="click" height="430px">
-          <el-carousel-item v-for="item in banner" :key="item">
+          <el-carousel-item v-for="item in banner" :key="item.id">
             <a :href="item.url">
               <el-image
                 :src="item.pic_path | imgBaseUrl"
@@ -29,6 +30,7 @@
           <li
             v-for="(item, index) in model[current].subCategoryList"
             :key="index"
+            @click="handleClick(item)"
           >
             {{ item.name }}
           </li>
@@ -60,6 +62,18 @@
       banner: (state) => state.home.banner,
     }),
     methods: {
+      handleClick(item) {
+        this.$emit("click", {
+          cate_id: this.model[this.current].id,
+          sub_cate_id: item.id,
+        });
+      },
+      handleItemClick(cate_id) {
+        this.$emit("click", {
+          cate_id,
+          sub_cate_id: "",
+        });
+      },
       handleMouseleave() {
         this.show = false;
         this.current = null;

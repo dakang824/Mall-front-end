@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 侧边导航
  * @Date: 2020-10-09 21:45:43
- * @LastEditTime: 2020-11-18 23:32:25
+ * @LastEditTime: 2020-11-19 12:11:07
 -->
 <template>
   <el-collapse-transition name="el-zoom-in-top">
@@ -50,8 +50,12 @@
     methods: {
       hanldeClick(e) {
         if (e === 1) {
-          this.$router.push({
-            name: "Cart",
+          this.$utils.verifyLogin({
+            success: async (e) => {
+              this.$router.push({
+                name: "Cart",
+              });
+            },
           });
         } else if (e === 2) {
           this.backTop();

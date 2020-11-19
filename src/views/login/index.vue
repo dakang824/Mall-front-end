@@ -157,7 +157,10 @@
               "user/getLoginInfo",
               this.form
             );
-            res.code === 200 ? this.$router.replace("/") : "";
+            if (res.code === 200) {
+              const routerPath = this.$route.query.url || "/";
+              this.$router.push(routerPath).catch(() => {});
+            }
           } else {
             return false;
           }

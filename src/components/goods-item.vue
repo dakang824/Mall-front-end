@@ -2,14 +2,14 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品item组件
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-16 23:08:29
+ * @LastEditTime: 2020-11-19 11:59:49
 -->
 <!-- 商品item -->
 <template>
   <div class="goods-item" @click="handleGoDetail">
     <el-card :body-style="{ padding: '0px' }" shadow="hover">
       <el-image
-        :src="model.pics[0].path | imgBaseUrl"
+        :src="model.pics.length ? model.pics[0].path : '' | imgBaseUrl"
         fit="scale-down"
       ></el-image>
       <div class="box">

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-10-18 22:15:02
+ * @LastEditTime: 2020-11-19 12:08:50
 -->
 <!-- 商铺 -->
 <template>
@@ -90,7 +90,20 @@
         });
       },
       handleChange(e) {
-        this.postData = { ...this.postData, ...e };
+        console.log(e);
+        const {
+          orderBySellCount: orderbySellCount,
+          onlineTime,
+          orderByprice,
+          orderByViewCount: orderbyViewCount,
+        } = e;
+        this.postData = {
+          ...this.postData,
+          orderbySellCount,
+          onlineTime,
+          orderByprice,
+          orderbyViewCount,
+        };
         this.getData();
       },
     },
