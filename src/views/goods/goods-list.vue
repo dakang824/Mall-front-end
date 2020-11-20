@@ -55,7 +55,8 @@
         :model="['综合', '销量', '价格', '人气']"
         @change="handleChange"
       />
-      <goodsCard v-loading="loading" :model="goodsList">
+
+      <goodsCard v-if="goodsList.length" v-loading="loading" :model="goodsList">
         <el-pagination
           :current-page="postData.pageNum"
           :page-size="postData.pageSize"
@@ -65,6 +66,10 @@
           @current-change="handleCurrentChange"
         ></el-pagination>
       </goodsCard>
+
+      <el-card v-else style="padding-bottom: 150px; margin-bottom: 10px">
+        <empty icon="search" text="~ 空空如也 ~" margin-top="90"></empty>
+      </el-card>
     </div>
   </div>
 </template>
@@ -75,6 +80,7 @@
   import search from "@/components/search.vue";
   import storeTabs from "../store/components/store-tabs.vue";
   import goodsCard from "../store/components/goods-card.vue";
+  import Empty from "@/components/empty.vue";
   export default {
     name: "GoodsList",
     components: {
@@ -82,6 +88,7 @@
       storeTabs,
       goodsCard,
       logo,
+      Empty,
     },
     data() {
       return {
