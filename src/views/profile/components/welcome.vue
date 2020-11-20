@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-11-18 23:01:28
+ * @LastEditTime: 2020-11-20 19:48:09
 -->
 <template>
   <div class="welcome">
@@ -211,7 +211,7 @@
         this.setCurrent("Recharge");
       },
       handleMore() {
-        this.setCurrent(this.current === 0 ? "favorGoods" : "favorStore");
+        this.setCurrent(this.current === 0 ? "FavorGoods" : "FavorGoods");
       },
       handleTabsChange(e) {
         this.current = Number(e.index);
