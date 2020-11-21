@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人资料
  * @Date: 2020-10-24 19:28:43
- * @LastEditTime: 2020-11-21 15:22:47
+ * @LastEditTime: 2020-11-21 16:48:54
 -->
 <template>
   <div class="account el-card">
@@ -104,7 +104,7 @@
                 付密码进行支付认证。
               </span>
               <el-button type="danger" size="small" @click="handlePay">
-                开启支付密码
+                {{ userInfo.payPwd ? "修改" : "开启" }}支付密码
               </el-button>
             </div>
           </el-col>

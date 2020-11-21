@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-10-31 21:22:03
+ * @LastEditTime: 2020-11-21 16:24:07
 -->
 <template>
   <div class="modifyPassWord">
@@ -111,9 +111,9 @@
         <div v-if="active === 3" class="step3">
           <p class="result">
             <i class="el-icon-success"></i>
-            新支付密码设置成功！
+            新手机号修改成功！
           </p>
-          <p>请您牢记新支付密码！</p>
+          <p>恭喜您手机号修改成功！</p>
           <el-button
             type="primary"
             style="width: 194px; margin-top: 70px"
@@ -233,6 +233,7 @@
           payPwd: "",
           pwd: "",
         };
+        this.active = 1;
         this.$emit("input", false);
       },
       submitForm() {

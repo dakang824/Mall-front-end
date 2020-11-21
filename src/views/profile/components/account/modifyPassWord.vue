@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-21 15:22:08
+ * @LastEditTime: 2020-11-21 16:51:03
 -->
 <template>
   <div class="modifyPassWord">
@@ -14,9 +14,7 @@
     >
       <el-steps :active="active" finish-status="success" simple>
         <el-step title="验证身份"></el-step>
-        <el-step
-          :title="type === 1 ? '设置登录密码' : '设置支付密码'"
-        ></el-step>
+        <el-step :title="'设置' + getTxt + '密码'"></el-step>
         <el-step title="完成"></el-step>
       </el-steps>
 
@@ -69,19 +67,27 @@
             size="medium"
             label-width="106px"
           >
-            <el-form-item v-if="type === 1" label="登录密码:" prop="pwd">
+            <el-form-item
+              v-if="type === 1"
+              :label="getTxt + '密码:'"
+              prop="pwd"
+            >
               <el-input
                 v-model="step2.pwd"
-                placeholder="请输入登录密码"
+                :placeholder="'请输入' + getTxt + '密码'"
                 clearable
                 :style="{ width: '100%' }"
               ></el-input>
             </el-form-item>
 
-            <el-form-item v-if="type === 2" label="支付密码:" prop="payPwd">
+            <el-form-item
+              v-if="type === 2"
+              :label="getTxt + '密码:'"
+              prop="payPwd"
+            >
               <el-input
                 v-model="step2.payPwd"
-                placeholder="请输入登录密码"
+                :placeholder="'请输入' + getTxt + '密码'"
                 clearable
                 :style="{ width: '100%' }"
               ></el-input>
@@ -101,9 +107,9 @@
         <div v-if="active === 3" class="step3">
           <p class="result">
             <i class="el-icon-success"></i>
-            新支付密码设置成功！
+            新{{ getTxt }}密码设置成功！
           </p>
-          <p>请您牢记新支付密码！</p>
+          <p>请您牢记新{{ getTxt }}密码！</p>
           <el-button
             type="primary"
             style="width: 194px; margin-top: 70px"
@@ -118,7 +124,7 @@
 </template>
 
 <script>
-  import { sendSMS, checkMobileCodeValid, bindMobil } from "@/api/profile";
+  import { sendSMS, checkMobileCodeValid, modifyPwd } from "@/api/profile";
   import VerificationCode from "@/components/u-verification-code.vue";
   export default {
     components: { VerificationCode },
@@ -183,12 +189,18 @@
         },
       };
     },
+    computed: {
+      getTxt() {
+        return this.type === 2 ? "支付" : "登录";
+      },
+    },
     created() {
       if (this.model && this.model.account) {
         this.userInfo.mobile = this.model.account;
       } else {
         this.userInfo = JSON.parse(this.$store.state.user.userInfo);
       }
+      this.step2.mobile = this.userInfo.mobile;
     },
     methods: {
       codeChange(text) {
@@ -215,12 +227,12 @@
           sign: "",
         };
         this.step2 = {
-          mobile: "",
           code: "",
           sign: "",
           payPwd: "",
           pwd: "",
         };
+        this.active = 1;
         this.$emit("input", false);
       },
       submitForm() {
@@ -243,13 +255,9 @@
       submitFormStep2() {
         this.$refs["formStep2"].validate(async (valid) => {
           if (valid) {
-            if (this.step2.sign === "") {
-              this.showToast("请先发送验证码", "warning");
-              return;
-            }
-            await bindMobil({
-              ...this.step1,
+            await modifyPwd({
               ...this.step2,
+              ...this.step1,
             });
             this.active = 3;
             await this.$store.dispatch("profileWelcome/getMyInfo", {});

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-11-11 23:40:20
+ * @LastEditTime: 2020-11-21 16:46:53
  */
 import request from "@/utils/request";
 
@@ -93,6 +93,14 @@ export async function checkMobileCodeValid(data) {
 export async function bindMobil(data) {
   return request({
     url: "/service/front/web/bindMobil",
+    method: "post",
+    data,
+  });
+}
+
+export async function modifyPwd(data) {
+  return request({
+    url: "/service/front/web/modifyPwd",
     method: "post",
     data,
   });
