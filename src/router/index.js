@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-11-19 19:51:34
+ * @LastEditTime: 2020-11-21 18:25:36
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -74,18 +74,23 @@ const routes = [
           },
         ],
       },
-
-      {
-        path: "/demo",
-        name: "Demo",
-        component: () => import("@/views/demo/index.vue"),
-      },
     ],
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: () => import("@/views/404"),
+    hidden: true,
   },
   {
     path: "/login",
     name: "Login",
     component: (resolve) => require(["@/views/login/index.vue"], resolve),
+  },
+  {
+    path: "*",
+    redirect: "/404",
+    hidden: true,
   },
 ];
 
