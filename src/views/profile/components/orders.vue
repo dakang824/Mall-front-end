@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-11-19 18:09:35
+ * @LastEditTime: 2020-11-20 19:52:03
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -480,7 +480,7 @@
       },
       handleChange(e) {
         const ind = Number(e.index);
-        this.queryForm.status = ind === 0 ? "" : ind;
+        this.queryForm.status = ind === 0 ? "" : ind === 1 ? 0 : ind;
         this.current = ind;
         this.fetchData();
       },

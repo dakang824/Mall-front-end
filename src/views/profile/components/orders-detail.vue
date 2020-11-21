@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-18 23:15:04
+ * @LastEditTime: 2020-11-20 19:53:55
 -->
 <template>
   <div class="orders-detail">
@@ -137,7 +137,7 @@
     },
     props: {
       model: {
-        type: Object,
+        type: [Object, Array],
         default: () => {},
       },
       value: {

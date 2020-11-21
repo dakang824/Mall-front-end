@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-01 11:08:36
+ * @LastEditTime: 2020-11-21 15:22:08
 -->
 <template>
   <div class="modifyPassWord">
@@ -184,7 +184,7 @@
       };
     },
     created() {
-      if (this.model.account) {
+      if (this.model && this.model.account) {
         this.userInfo.mobile = this.model.account;
       } else {
         this.userInfo = JSON.parse(this.$store.state.user.userInfo);

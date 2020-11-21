@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人资料
  * @Date: 2020-10-24 19:28:43
- * @LastEditTime: 2020-11-01 10:46:38
+ * @LastEditTime: 2020-11-21 15:22:47
 -->
 <template>
   <div class="account el-card">
@@ -45,6 +45,32 @@
                 :src="require('@/assets/imgs/profile-right.png')"
                 style="widows: 32px"
               ></el-image>
+              手机验证
+            </div>
+          </el-col>
+          <el-col :span="19">
+            <div class="col2">
+              <span>
+                您绑定的手机：
+                <i>
+                  {{ userInfo.mobile | hiddenTel }}
+                </i>
+                ，该手机可用于账号登录，快速找回登录密码、
+                支付密码，接收账户余额变动提醒等。
+              </span>
+              <el-button type="primary" size="small" @click="handleUpdatePhone">
+                修改手机
+              </el-button>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <div class="col1">
+              <el-image
+                :src="require('@/assets/imgs/profile-right.png')"
+                style="widows: 32px"
+              ></el-image>
               登录密码
             </div>
           </el-col>
@@ -57,30 +83,6 @@
                 @click="handleUpdatePassWord"
               >
                 修改密码
-              </el-button>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="5">
-            <div class="col1">
-              <el-image
-                :src="require('@/assets/imgs/profile-right.png')"
-                style="widows: 32px"
-              ></el-image>
-              手机验证
-            </div>
-          </el-col>
-          <el-col :span="19">
-            <div class="col2">
-              <span>
-                您绑定的手机：
-                <i>138****8888</i>
-                ，该手机可用于账号登录，快速找回登录密码、
-                支付密码，接收账户余额变动提醒等。
-              </span>
-              <el-button type="primary" size="small" @click="handleUpdatePhone">
-                修改手机
               </el-button>
             </div>
           </el-col>

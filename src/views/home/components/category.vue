@@ -2,7 +2,7 @@
 <template>
   <div class="category w" @mouseleave="handleMouseleave">
     <el-container>
-      <el-aside width="335px" class="category__left">
+      <el-aside width="264px" class="category__left">
         <div
           v-for="(item, index) in model"
           :key="index"
@@ -21,12 +21,16 @@
               <el-image
                 :src="item.pic_path | imgBaseUrl"
                 fit="contain"
-                style="width: 100%"
+                style="width: 100%; height: 430px"
               ></el-image>
             </a>
           </el-carousel-item>
         </el-carousel>
-        <ul v-if="show" class="category__right__child clearfix">
+        <ul
+          v-if="show"
+          class="category__right__child clearfix"
+          style="overflow: auto; height: 430px"
+        >
           <li
             v-for="(item, index) in model[current].subCategoryList"
             :key="index"
@@ -121,6 +125,7 @@
     &__right {
       position: relative;
       padding: 0;
+      overflow: hidden;
 
       &__child {
         position: absolute;

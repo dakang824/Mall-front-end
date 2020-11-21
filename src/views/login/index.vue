@@ -66,9 +66,9 @@
           ></el-image>
 
           <ul class="el-form__other">
-            <li @click="showUpdatePassWord = true">忘记密码</li>
-            <li>忘记用户名</li>
-            <li>免费注册</li>
+            <li v-if="false" @click="showUpdatePassWord = true">忘记密码</li>
+            <li v-if="false">忘记用户名</li>
+            <li v-if="false">免费注册</li>
           </ul>
         </el-form>
       </div>

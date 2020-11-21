@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店内分类
  * @Date: 2020-10-05 20:56:27
- * @LastEditTime: 2020-11-19 17:11:52
+ * @LastEditTime: 2020-11-21 14:29:49
 -->
 <template>
   <div class="store-aside">
@@ -15,7 +15,7 @@
           :class="{ active: index === current }"
           @click="handleChange(index, item.id)"
         >
-          分类{{ item.name }}
+          {{ item.name }}
         </li>
       </slot>
     </ul>

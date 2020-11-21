@@ -2,13 +2,16 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 首页
  * @Date: 2020-09-28 21:15:23
- * @LastEditTime: 2020-11-19 12:26:28
+ * @LastEditTime: 2020-11-21 10:57:28
 -->
 <template>
   <div class="home">
     <div class="el-card no-border-radius">
       <div class="header w">
-        <logo></logo>
+        <div class="header__logo">
+          <logo></logo>
+        </div>
+
         <search v-model="keyWord" @search="handleSearch"></search>
       </div>
     </div>
@@ -80,6 +83,11 @@
   .header {
     @include center-flex(y);
     @include justify();
+    &__logo {
+      @include center-flex(y);
+      justify-content: center;
+      width: 264px;
+    }
     .search {
       padding: 36px 0 39px;
     }

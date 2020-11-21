@@ -242,9 +242,11 @@
 
         ul {
           @include center-flex(y);
-
+          padding: 17px 0 0;
+          flex-wrap: wrap;
           li {
             margin-right: $gap;
+            padding-bottom: 17px;
             cursor: pointer;
             &.active {
               color: $green;
