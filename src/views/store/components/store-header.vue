@@ -16,7 +16,12 @@
           </div>
         </div>
       </div>
-      <search :type="2"></search>
+      <search
+        v-model="keyWord"
+        :type="2"
+        @search="handleSearchAll"
+        @search-store="handleSearchStore"
+      ></search>
     </div>
   </div>
 </template>
@@ -68,6 +73,22 @@
             value: postStore,
           },
         ];
+      },
+    },
+    methods: {
+      handleSearchAll() {
+        const { keyWord } = this;
+        this.$router.push({
+          path: "/goods-list",
+          query: { type: "", condition: keyWord },
+        });
+      },
+      handleSearchStore() {
+        const { keyWord } = this;
+        this.$router.push({
+          path: "/goods-list",
+          query: { type: "", condition: keyWord, store_id: this.model.id },
+        });
       },
     },
   };
