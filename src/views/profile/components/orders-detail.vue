@@ -82,7 +82,7 @@
           </div>
 
           <div class="right" :style="{ width: title[5].width + 'px' }">
-            <div style="text-align: center">
+            <div style="text-align: center;">
               <p>￥{{ model.post_amount | toFixed }}</p>
               （快递）
             </div>
@@ -185,93 +185,119 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .orders-detail {
     .row {
       @include center-flex(y);
+
       .box {
-        border: 1px solid $colorBorder;
         width: 465px;
         min-height: 270px;
+        border: 1px solid $colorBorder;
+
         &__title {
           padding: $padding;
           font-weight: bold;
           background: #d5d5d5;
         }
+
         &__content {
           padding: $padding;
+
           p {
             line-height: 34px;
           }
+
           &__right {
-            text-align: center;
             align-items: center;
-            min-height: 270px;
-            @include center-flex(y);
             justify-content: center;
+            min-height: 270px;
+            text-align: center;
+
+            @include center-flex(y);
+
             > div {
               .status {
                 @include center-flex(y);
+
                 justify-content: center;
                 padding-bottom: 30px;
               }
             }
+
             p {
               line-height: 34px;
             }
+
             .el-icon-warning-outline {
+              margin-right: 14px;
               font-size: 60px;
               font-weight: bold;
-              color: #ff0000;
-              margin-right: 14px;
+              color: #f00;
             }
           }
         }
+
         &:first-child {
           margin-right: $padding;
         }
       }
     }
+
     .table {
-      border: 1px solid $colorBorder;
       margin: $padding 0 0;
+      border: 1px solid $colorBorder;
+
       &__row {
         .left {
           .row {
             @include center-flex(y);
+
             border-bottom: 1px solid $colorBorder;
           }
 
           border-right: 1px solid $colorBorder;
+
           .col {
             text-align: center;
+
             .name {
               @include center-flex(y);
+
               align-items: center;
               justify-content: center;
             }
           }
+
           .el-image {
             width: 60px;
             padding: $padding;
           }
         }
+
         .right {
           @include center-flex(y);
+
           justify-content: center;
         }
+
         @include center-flex(y);
       }
+
       .head {
         padding: $padding;
         font-weight: bold;
-        background: #d5d5d5;
-        @include center-flex(y);
         text-align: center;
-      }
-      .footer {
-        text-align: right;
-        padding: $padding;
         background: #d5d5d5;
+
+        @include center-flex(y);
+      }
+
+      .footer {
+        padding: $padding;
+        text-align: right;
+        background: #d5d5d5;
+
         span {
           font-weight: bold;
           color: $green;

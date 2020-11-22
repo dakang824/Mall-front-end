@@ -21,7 +21,7 @@
               <el-image
                 :src="item.pic_path | imgBaseUrl"
                 fit="contain"
-                style="width: 100%; height: 430px"
+                style="width: 100%; height: 430px;"
               ></el-image>
             </a>
           </el-carousel-item>
@@ -29,7 +29,7 @@
         <ul
           v-if="show"
           class="category__right__child clearfix"
-          style="overflow: auto; height: 430px"
+          style=" height: 430px; overflow: auto;"
         >
           <li
             v-for="(item, index) in model[current].subCategoryList"
@@ -97,6 +97,7 @@
     margin-top: 10px;
     font-size: $text-x-small;
     color: $colorA;
+
     &__left {
       margin-right: 10px;
       border: 2px solid $green;
@@ -150,32 +151,39 @@
         }
       }
     }
+
     ::v-deep {
       .el-carousel {
         .el-carousel__item:nth-child(2n) {
           background-color: #99a9bf;
         }
+
         .el-carousel__item:nth-child(2n + 1) {
           background-color: #d3dce6;
         }
+
         .is-active {
           .el-carousel__button {
             background-color: $green;
           }
         }
+
         .el-carousel__button {
           width: 13px;
           height: 13px;
           border-radius: 50px;
         }
+
         &__item {
           .el-image {
             height: 452px;
           }
         }
+
         &__arrow {
           background-color: rgba(0, 0, 0, 0.5);
         }
+
         &__arrow:hover {
           background-color: #333;
         }

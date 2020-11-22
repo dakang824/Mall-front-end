@@ -101,13 +101,16 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .sideNav {
     position: fixed;
     right: 34px;
     bottom: 150px;
     margin: auto;
+
     li {
       position: relative;
+
       i {
         position: absolute;
         top: 10px;
@@ -115,26 +118,30 @@
         z-index: 9;
         width: 20px;
         height: 20px;
-        background: #ff6000;
+        font-size: 12px;
+        line-height: 20px;
         color: #fff;
         text-align: center;
-        line-height: 20px;
+        background: #ff6000;
         border-radius: 50px;
-        font-size: 12px;
       }
+
       .el-image {
+        width: 70px;
+        height: 70px;
         vertical-align: middle;
         cursor: pointer;
         opacity: 0.85;
-        width: 70px;
-        height: 70px;
+
         &:hover {
           opacity: 1;
-          transform: scale(1.02);
           transition: all 0.2s;
+          transform: scale(1.02);
         }
       }
+
       border-bottom: 1px solid #fff;
+
       &:last-child {
         border-bottom: 0;
       }

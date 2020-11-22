@@ -75,6 +75,7 @@
           }
         }
       }
+
       .pay_image {
         width: 200px;
         cursor: pointer;

@@ -146,21 +146,27 @@
             .el-button {
               display: flex;
               align-items: center;
+
               a {
                 color: #fff;
               }
+
               i {
                 font-size: 19px;
               }
+
               width: 114px;
               height: 41px;
               border-radius: 0;
+
               &:first-child {
                 background: $green;
               }
+
               &:last-child {
-                border-color: $green;
                 color: $green;
+                border-color: $green;
+
                 &:hover {
                   background-color: rgba(5, 184, 94, 0.1);
                 }

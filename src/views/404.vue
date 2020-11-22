@@ -78,6 +78,7 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .error-container {
     position: absolute;
     top: 40%;

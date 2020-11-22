@@ -22,23 +22,27 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .cart {
     ::v-deep {
       .el-col-14 {
         width: 68%;
       }
+
       .cart__container__main {
         min-height: 529px;
       }
+
       .cart__container__main {
         margin: 0;
       }
+
       .el-menu--horizontal > .el-menu-item {
         width: 150px !important;
         height: 46px !important;
+        font-size: $text-x-small !important;
         line-height: 46px !important;
         text-align: center;
-        font-size: $text-x-small !important;
       }
     }
   }

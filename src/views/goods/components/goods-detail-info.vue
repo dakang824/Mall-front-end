@@ -71,9 +71,9 @@
           height: 54px;
           padding: 0;
           font-size: $text-x-small;
+          font-weight: bold;
           line-height: 54px;
           color: $black;
-          font-weight: bold;
           text-align: center;
 
           &:hover {
@@ -103,6 +103,7 @@
         }
       }
     }
+
     &__imgs {
       display: block;
       width: 100%;

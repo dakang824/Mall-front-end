@@ -83,11 +83,14 @@
   .header {
     @include center-flex(y);
     @include justify();
+
     &__logo {
       @include center-flex(y);
+
       justify-content: center;
       width: 264px;
     }
+
     .search {
       padding: 36px 0 39px;
     }

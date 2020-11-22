@@ -67,7 +67,7 @@
         ></el-pagination>
       </goodsCard>
 
-      <el-card v-else style="padding-bottom: 150px; margin-bottom: 10px">
+      <el-card v-else style="padding-bottom: 150px; margin-bottom: 10px;">
         <empty icon="search" text="~ 空空如也 ~" margin-top="90"></empty>
       </el-card>
     </div>
@@ -205,6 +205,7 @@
     .header {
       @include center-flex(y);
       @include justify();
+
       .search {
         padding: 36px 0 39px 54px;
       }
@@ -236,12 +237,15 @@
 
         ul {
           @include center-flex(y);
-          padding: 17px 0 0;
+
           flex-wrap: wrap;
+          padding: 17px 0 0;
+
           li {
-            margin-right: $gap;
             padding-bottom: 17px;
+            margin-right: $gap;
             cursor: pointer;
+
             &.active {
               color: $green;
             }
@@ -254,16 +258,19 @@
       .el-breadcrumb__item {
         ul {
           @include center-flex(y);
+
           li {
             margin-right: $gap;
             color: $colorC;
             cursor: pointer;
+
             &.active {
               color: $green;
             }
           }
         }
       }
+
       .goods-card {
         margin-bottom: 10px;
 

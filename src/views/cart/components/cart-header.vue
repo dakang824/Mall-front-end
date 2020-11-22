@@ -81,9 +81,11 @@
               font-size: $text-small;
             }
           }
+
           .el-step__title {
             font-size: $text-x-small;
           }
+
           .is-finish {
             .el-step__icon {
               color: #fff;
@@ -91,9 +93,9 @@
             }
 
             &.el-step__title {
+              font-size: $text-x-small;
               font-weight: bold;
               color: $color3;
-              font-size: $text-x-small;
             }
 
             &.el-step__head {

@@ -105,15 +105,18 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .profile {
     .header {
       padding: 35px 0;
       margin-bottom: $padding;
     }
+
     &__left {
       margin-right: 10px;
       background: transparent;
       border-color: transparent;
+
       .title {
         padding: 10.46px;
         text-align: center;
@@ -137,9 +140,11 @@
         }
       }
     }
+
     &__box {
       min-height: calc(100vh - 590px);
     }
+
     ::v-deep {
       .el-main {
         padding: 0;

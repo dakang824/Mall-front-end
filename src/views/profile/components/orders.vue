@@ -98,7 +98,7 @@
             </div>
 
             <div class="orders__item__row">
-              <div class="orders__item__row__col" style="max-width: 394px">
+              <div class="orders__item__row__col" style="max-width: 394px;">
                 <div
                   v-for="(items, indexs) in ite.items"
                   :key="indexs"
@@ -107,7 +107,7 @@
                   <div :style="{ width: title[0].width * 1 + 10 + 'px' }">
                     <el-image
                       :src="items.item_pic | imgBaseUrl"
-                      style="width: 60px"
+                      style="width: 60px;"
                     ></el-image>
 
                     <el-link>
@@ -126,7 +126,7 @@
                   </span>
                   <i
                     :style="{ width: title[2].width + 'px' }"
-                    style="position: relative; left: -20px"
+                    style="position: relative; left: -20px;"
                   >
                     {{ items.quantity }}
                   </i>
@@ -550,68 +550,88 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .orders {
     min-height: 529px;
     padding-bottom: 20px;
     margin-bottom: $padding;
+
     .el-tab-pane {
       margin: 0 $padding;
     }
+
     &__del__btn {
       margin-left: $padding;
     }
+
     &__title {
       @include center-flex(y);
-      background: #d5d5d5;
-      text-align: center;
+
       padding: 14px;
       margin: 15px 0;
+      text-align: center;
+      background: #d5d5d5;
     }
+
     &__item {
       margin: $padding 0;
       border: 1px solid $colorBorder;
+
       &__th {
-        background: #d5d5d5;
         padding: $padding;
+        background: #d5d5d5;
+
         @include center-flex(y);
+
         i {
-          margin-left: 10px;
           margin-right: 60px;
+          margin-left: 10px;
         }
       }
+
       &__row {
         display: flex;
+
         &__col {
           @include center-flex(y);
-          justify-content: center;
+
           flex-direction: column;
+          justify-content: center;
 
           .name {
             flex: 1;
-            @include center-flex(y);
             padding: 20px $padding;
             border-bottom: 1px solid $colorBorder;
+
+            @include center-flex(y);
+
             h5 {
               margin: 0 30px 0 9px;
             }
+
             span {
-              color: $green;
               font-weight: bold;
+              color: $green;
             }
+
             > div {
               @include center-flex(y);
             }
+
             &:last-child {
               border-color: transparent;
             }
           }
+
           .money {
             padding: 20px $padding;
             text-align: center;
+
             span {
               display: block;
               padding-bottom: 3px;
             }
+
             i {
               font-weight: bold;
               color: $green;
@@ -620,19 +640,23 @@
 
           &:nth-child(1) {
             flex-wrap: wrap;
-            overflow: hidden;
             justify-content: inherit;
+            overflow: hidden;
           }
+
           &:nth-child(2) {
+            border-right: 1px solid $colorBorder;
             border-left: 1px solid $colorBorder;
-            border-right: 1px solid $colorBorder;
           }
+
           &:nth-child(3) {
-            border-right: 1px solid $colorBorder;
             font-size: 12px;
+            border-right: 1px solid $colorBorder;
           }
+
           &:nth-child(4) {
             font-size: 13px;
+
             p {
               margin-top: $padding;
             }
@@ -640,17 +664,19 @@
         }
       }
     }
+
     ::v-deep {
       .el-pagination {
         text-align: center;
       }
+
       .el-tabs {
         &__item {
           width: 150px !important;
           height: 46px;
+          font-size: $text-x-small;
           line-height: 46px;
           text-align: center;
-          font-size: $text-x-small;
         }
       }
     }

@@ -38,12 +38,12 @@
           </ul>
         </div>
 
-        <el-row style="border-bottom-color: transparent">
+        <el-row style="border-bottom-color: transparent;">
           <el-col :span="5">
             <div class="col1">
               <el-image
                 :src="require('@/assets/imgs/profile-right.png')"
-                style="widows: 32px"
+                style="widows: 32px;"
               ></el-image>
               手机验证
             </div>
@@ -69,7 +69,7 @@
             <div class="col1">
               <el-image
                 :src="require('@/assets/imgs/profile-right.png')"
-                style="widows: 32px"
+                style="widows: 32px;"
               ></el-image>
               登录密码
             </div>
@@ -92,7 +92,7 @@
             <div class="col1">
               <el-image
                 :src="require('@/assets/imgs/profile-error.png')"
-                style="widows: 32px"
+                style="widows: 32px;"
               ></el-image>
               支付密码
             </div>
@@ -168,40 +168,50 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .account {
     min-height: 529px;
+
     .baseInfo {
       margin: 20px 0;
+
       @include center-flex(y);
+
       .user_pic {
         width: 56px;
         height: 56px;
         margin-right: 45px;
       }
+
       p {
         margin-bottom: 5px;
       }
     }
+
     .leve {
-      background: #d5d5d5;
-      @include center-flex(y);
       padding: 22px 15px;
       margin-bottom: $padding;
+      background: #d5d5d5;
+
+      @include center-flex(y);
+
       ul {
         @include center-flex(y);
+
         li {
           width: 43px;
-          line-height: 20px;
           height: 20px;
-          border: 1px solid #282828;
-          background: #fff;
-          text-align: center;
-          border-radius: 50px;
           margin-left: 15px;
           font-size: 12px;
+          line-height: 20px;
+          text-align: center;
+          background: #fff;
+          border: 1px solid #282828;
+          border-radius: 50px;
+
           &.active {
-            background: $green;
             color: #fff;
+            background: $green;
             border-color: $green;
           }
         }
@@ -212,8 +222,10 @@
       .el-tab-pane {
         padding: 0 20px;
       }
+
       .el-row {
         border: 1px solid $colorBorder;
+
         &:last-child {
           border-top-color: transparent;
         }
@@ -222,41 +234,50 @@
           .el-image {
             margin-right: 30px;
           }
+
           @include center-flex(y);
+
+          position: relative;
           justify-content: center;
           padding: 22px 0;
-          position: relative;
+
           &::after {
-            content: "";
-            display: block;
-            height: 48px;
-            width: 1px;
-            background: $colorBorder;
             position: absolute;
             right: 0;
+            display: block;
+            width: 1px;
+            height: 48px;
+            content: "";
+            background: $colorBorder;
           }
         }
+
         .col2 {
           @include center-flex(y);
-          justify-content: space-between;
+
           align-items: center;
+          justify-content: space-between;
           padding: 22px;
+
           span {
             max-width: 431px;
+
             i {
-              color: #ff0000;
+              color: #f00;
             }
           }
         }
       }
+
       .el-tabs {
         &__item {
+          height: 46px;
           padding-right: 45px !important;
           padding-left: 45px !important;
-          height: 46px;
-          line-height: 46px;
           font-size: $text-x-small;
+          line-height: 46px;
         }
+
         &__active-bar {
           width: 100% !important;
           transform: translateX(0) !important;

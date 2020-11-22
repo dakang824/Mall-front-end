@@ -101,27 +101,35 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .favor-goods {
     min-height: 529px;
+
     &__box {
       @include center-flex(y);
+
       flex-wrap: wrap;
     }
+
     .box-card {
       width: 172px;
+
       .el-image {
         background: $imgbg;
       }
 
       &__content {
         padding: $padding;
+
         p {
           @include ellipsis-lines(1);
         }
+
         span {
-          color: $green;
           font-size: 18px;
           font-weight: bold;
+          color: $green;
+
           i {
             font-size: 14px;
           }
@@ -129,18 +137,22 @@
       }
     }
   }
+
   .el-image {
     width: 172px;
     height: 172px;
   }
+
   ::v-deep {
     .el-pagination {
-      text-align: center;
       padding: 20px;
+      text-align: center;
     }
+
     .el-card {
       margin: 0 18px 18px 0;
       cursor: pointer;
+
       &__body {
         padding: 0;
       }
@@ -149,14 +161,16 @@
         margin-right: 0;
       }
     }
+
     .el-tabs {
       &__item {
         width: 150px !important;
         height: 46px;
+        font-size: $text-x-small;
         line-height: 46px;
         text-align: center;
-        font-size: $text-x-small;
       }
+
       .el-tab-pane {
         padding: 0 $padding;
       }

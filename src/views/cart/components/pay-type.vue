@@ -25,7 +25,7 @@
           </div>
           <div v-else>
             <el-image
-              style="width: 80px; height: 80px"
+              style="width: 80px; height: 80px;"
               :src="item.img"
               fit="contain"
             ></el-image>
@@ -123,14 +123,17 @@
           border: 2px dashed $black;
 
           @include center-flex();
+
           &.active {
             color: $green;
             border-color: $green;
           }
+
           .no-money {
             color: #f00;
           }
         }
+
         &:nth-child(2),
         &:nth-child(3) {
           a > div {

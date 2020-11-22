@@ -181,6 +181,7 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .login-container {
     display: flex;
     flex-direction: column;
@@ -207,6 +208,7 @@
 
     &__main {
       height: calc(100vh - 230px);
+
       .el-image {
         width: 100%;
         height: 100%;

@@ -143,11 +143,13 @@
 
       .goods-item {
         display: flex;
-        cursor: pointer;
         margin-bottom: $padding;
+        cursor: pointer;
+
         &:hover {
           background: rgba(0, 0, 0, 0.1);
         }
+
         &:last-child {
           margin-bottom: 0;
         }

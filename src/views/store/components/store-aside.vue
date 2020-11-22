@@ -79,6 +79,7 @@
 
         &:last-child {
           border-bottom: 0;
+
           &.active {
             border-bottom: 2px solid #05b85e;
           }

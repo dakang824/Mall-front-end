@@ -80,60 +80,74 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .recharge {
     min-height: 529px;
+
     &__box {
-      text-align: center;
-      margin: 0 auto;
       width: 50%;
+      margin: 0 auto;
+      text-align: center;
+
       .el-form-item {
         position: relative;
         top: 10px;
       }
+
       p {
         @include center-flex(y);
+
         justify-content: center;
-        text-align: center;
         margin: 30px 0;
+        text-align: center;
+
         span {
-          color: $green;
-          font-weight: bold;
           font-size: $text-small;
+          font-weight: bold;
+          color: $green;
         }
+
         i {
           min-width: 100px;
         }
+
         .el-input {
           width: 258px;
           margin-right: 20px;
         }
       }
+
       .el-button {
         width: 209px;
-        margin: 32px 0;
         height: 50px;
+        margin: 32px 0;
         font-size: 16px;
       }
     }
   }
+
   ::v-deep {
     .el-tabs {
       &__item {
+        height: 46px;
         padding-right: 45px !important;
         padding-left: 45px !important;
-        height: 46px;
-        line-height: 46px;
         font-size: $text-x-small;
+        line-height: 46px;
       }
+
       &__active-bar {
         width: 100% !important;
         transform: translateX(0) !important;
       }
     }
+
     .pay-type {
       @include center-flex(y);
-      padding: 10px 0;
+
       justify-content: center;
+      padding: 10px 0;
+
       li {
         &:last-child {
           a {
@@ -141,11 +155,13 @@
           }
         }
       }
+
       a {
         width: 204px !important;
         height: 105px !important;
         font-size: $text-x-small;
       }
+
       .el-image__inner,
       .el-image {
         width: 64px !important;

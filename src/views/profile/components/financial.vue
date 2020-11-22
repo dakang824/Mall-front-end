@@ -161,31 +161,36 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .financial {
     min-height: 529px;
     margin-bottom: $padding;
+
     ::v-deep {
       .el-table {
         th {
-          background: $green;
           color: #fff;
+          background: $green;
         }
       }
+
       .el-pagination {
-        text-align: center;
         padding: 20px;
+        text-align: center;
       }
+
       .el-tabs {
         &__item {
           width: 150px !important;
           height: 46px;
+          font-size: $text-x-small;
           line-height: 46px;
           text-align: center;
-          font-size: $text-x-small;
         }
+
         .el-tab-pane {
-          padding: 0 $padding;
           flex-wrap: wrap;
+          padding: 0 $padding;
         }
       }
     }

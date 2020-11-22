@@ -33,7 +33,7 @@
             </li>
             <li>
               实付款：¥
-              <span style="padding-left: 8px">
+              <span style="padding-left: 8px;">
                 {{ params.pay_amount | toFixed }}
               </span>
             </li>
@@ -119,9 +119,9 @@
 
   .pay-reuslt {
     &__title {
-      color: #fff;
       font-size: $text-small;
       font-weight: bold;
+      color: #fff;
 
       @include center-flex(y);
 
@@ -230,9 +230,9 @@
         text-align: right;
 
         .el-image {
+          width: 200px;
           margin: 53px 0 51px;
           cursor: pointer;
-          width: 200px;
         }
       }
     }

@@ -87,9 +87,11 @@
   .header {
     padding: $gap;
     color: $colorA;
+
     .el-link {
       font-size: $text-x-small;
     }
+
     &__box {
       @include justify();
       @include center-flex(y);
@@ -97,17 +99,21 @@
       &__left {
         @include center-flex(y);
         @include justify();
+
         min-width: 335px;
 
         span {
           margin-right: 33px;
         }
+
         .login-out {
           cursor: pointer;
         }
+
         .login {
           @include center-flex(y);
         }
+
         .avatar {
           width: 54px;
           min-width: 54px;

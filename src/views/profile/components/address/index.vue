@@ -14,7 +14,7 @@
         </el-button>
         <p class="tip">已保存的收货地址</p>
 
-        <el-table :data="myAddress" style="width: 100%" border>
+        <el-table :data="myAddress" style="width: 100%;" border>
           <el-table-column
             prop="name"
             label="收货人"
@@ -115,30 +115,36 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .account {
     min-height: 529px;
+
     .tip {
       padding: 19px 0 17px;
       font-size: 14px;
     }
+
     ::v-deep {
       .el-table {
         th {
-          background: $green;
           color: #fff;
+          background: $green;
         }
       }
+
       .el-tabs {
         &__content {
           padding: 0 45px;
         }
+
         &__item {
+          height: 46px;
           padding-right: 45px !important;
           padding-left: 45px !important;
-          height: 46px;
-          line-height: 46px;
           font-size: $text-x-small;
+          line-height: 46px;
         }
+
         &__active-bar {
           width: 100% !important;
           transform: translateX(0) !important;

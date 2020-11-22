@@ -73,22 +73,27 @@
 </script>
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .footer {
     &__box {
       display: flex;
       justify-content: space-between;
       padding: 40px 30px;
+
       ul {
         li {
           margin-bottom: 20px;
+
           &:last-child {
             margin-bottom: 0;
           }
         }
       }
     }
+
     &__bg {
       background: #333;
+
       .el-footer {
         font-size: $text-x-small;
         line-height: 107px;

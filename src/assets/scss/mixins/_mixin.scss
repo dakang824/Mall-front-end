@@ -29,7 +29,9 @@
 @mixin center-block($extend: true) {
   @if $extend {
     @extend %center-block;
-  } @else {
+  }
+
+  @else {
     margin-left: auto;
     margin-right: auto;
   }
@@ -43,7 +45,9 @@
 @mixin clearfix($extend: true) {
   @if $extend {
     @extend %clearfix;
-  } @else {
+  }
+
+  @else {
     &::before,
     &::after {
       display: table;
@@ -65,7 +69,9 @@
 @mixin hidden-clip($extend: true) {
   @if $extend {
     @extend %hidden-clip;
-  } @else {
+  }
+
+  @else {
     position: absolute;
     clip: rect(1px, 1px, 1px, 1px);
   }
@@ -79,7 +85,9 @@
 @mixin ellipsis($extend: true) {
   @if $extend {
     @extend %ellipsis;
-  } @else {
+  }
+
+  @else {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -104,7 +112,9 @@
 @mixin word-break($extend: true) {
   @if $extend {
     @extend %word-break;
-  } @else {
+  }
+
+  @else {
     white-space: normal;
     word-wrap: break-word;
     word-break: break-all;
@@ -140,7 +150,9 @@
 @mixin ir($extend: true) {
   @if $extend {
     @extend %ir;
-  } @else {
+  }
+
+  @else {
     font: 0/0 a;
     text-shadow: none;
     border: 0 none;
@@ -160,10 +172,14 @@
 
   @if $pos==bottom {
     bottom: 0;
-  } @else if $pos==all {
+  }
+
+  @else if $pos==all {
     top: 0;
     bottom: 0;
-  } @else {
+  }
+
+  @else {
     top: $pos;
   }
 }
@@ -181,7 +197,9 @@
 @mixin justify($extend: true) {
   @if $extend {
     @extend %justify;
-  } @else {
+  }
+
+  @else {
     display: flex;
     justify-content: space-between;
   }
@@ -394,9 +412,13 @@
   @if $direction==both {
     justify-content: center;
     align-items: center;
-  } @else if $direction==x {
+  }
+
+  @else if $direction==x {
     justify-content: center;
-  } @else if $direction==y {
+  }
+
+  @else if $direction==y {
     align-items: center;
   }
 }
@@ -409,10 +431,14 @@
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
-  } @else if $direction==x {
+  }
+
+  @else if $direction==x {
     left: 50%;
     transform: translate3d(-50%, 0, 0);
-  } @else if $direction==y {
+  }
+
+  @else if $direction==y {
     top: 50%;
     transform: translate3d(0, -50%, 0);
   }
@@ -450,15 +476,21 @@
     border-bottom: $borderWidth solid $borderColor;
     border-left: $borderWidth dashed transparent;
     border-right: $borderWidth dashed transparent;
-  } @else if $direction==right {
+  }
+
+  @else if $direction==right {
     border-left: $borderWidth solid $borderColor;
     border-top: $borderWidth dashed transparent;
     border-bottom: $borderWidth dashed transparent;
-  } @else if $direction==bottom {
+  }
+
+  @else if $direction==bottom {
     border-top: $borderWidth solid $borderColor;
     border-left: $borderWidth dashed transparent;
     border-right: $borderWidth dashed transparent;
-  } @else if $direction==left {
+  }
+
+  @else if $direction==left {
     border-right: $borderWidth solid $borderColor;
     border-top: $borderWidth dashed transparent;
     border-bottom: $borderWidth dashed transparent;
@@ -476,11 +508,15 @@
     border-top: $borderWidth solid currentColor;
     border-right: $borderWidth solid currentColor;
     transform: rotate(-45deg);
-  } @else if $direction==right {
+  }
+
+  @else if $direction==right {
     border-top: $borderWidth solid currentColor;
     border-right: $borderWidth solid currentColor;
     transform: rotate(45deg);
-  } @else if $direction==bottom {
+  }
+
+  @else if $direction==bottom {
     border-left: $borderWidth solid currentColor;
     border-bottom: $borderWidth solid currentColor;
     transform: rotate(-45deg);
@@ -728,10 +764,14 @@
 
     @if length($colorBg) ==2 {
       background-color: nth($colorBg, 2);
-    } @else {
+    }
+
+    @else {
       @if lightness($colorBg) >40% {
         background-color: darken($colorBg, 5%);
-      } @else {
+      }
+
+      @else {
         background-color: lighten($colorBg, 5%);
       }
     }

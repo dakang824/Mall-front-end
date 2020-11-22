@@ -85,14 +85,16 @@
 
 <style scoped lang="scss">
   @import "@/assets/scss/settings";
+
   .empty {
     @include center-flex(y);
+
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100%;
-    text-align: center;
     color: #c0c4cc;
+    text-align: center;
   }
 
   .u-image {
@@ -101,8 +103,9 @@
 
   .u-slot-wrap {
     @include center-flex(y);
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
     margin-top: 20rpx;
   }
 </style>

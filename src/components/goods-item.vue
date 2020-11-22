@@ -77,6 +77,7 @@
         vertical-align: middle;
         background: $imgbg;
         transition: all 0.2s ease-in;
+
         &__inner {
           &:hover {
             transform: scale(1.2);

@@ -142,9 +142,9 @@
 
 <style lang="scss" scoped>
   .u-code-wrap {
-    width: 0;
-    height: 0;
     position: fixed;
     z-index: -1;
+    width: 0;
+    height: 0;
   }
 </style>

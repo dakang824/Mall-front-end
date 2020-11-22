@@ -167,44 +167,51 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .profile {
     .el-form {
       width: 355px;
       margin: 17px auto 36px;
       text-align: center;
     }
+
     ::v-deep {
       .el-upload {
-        border: 1px dashed #d9d9d9;
-        border-radius: 50px;
-        cursor: pointer;
         position: relative;
         overflow: hidden;
+        cursor: pointer;
+        border: 1px dashed #d9d9d9;
+        border-radius: 50px;
+
         &:hover {
           border-color: $green;
         }
+
         .avatar-uploader-icon {
-          font-size: 28px;
-          color: #8c939d;
           width: 100px;
           height: 100px;
+          font-size: 28px;
           line-height: 100px;
+          color: #8c939d;
           text-align: center;
         }
+
         .avatar {
+          display: block;
           width: 100px;
           height: 100px;
-          display: block;
         }
       }
+
       .el-tabs {
         &__item {
+          height: 46px;
           padding-right: 45px !important;
           padding-left: 45px !important;
-          height: 46px;
-          line-height: 46px;
           font-size: $text-x-small;
+          line-height: 46px;
         }
+
         &__active-bar {
           width: 100% !important;
           transform: translateX(0) !important;

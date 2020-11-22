@@ -51,7 +51,7 @@
             <el-form-item size="large">
               <el-button
                 type="primary"
-                style="width: 194px; margin-top: 70px"
+                style="width: 194px; margin-top: 70px;"
                 @click="submitForm"
               >
                 下一步
@@ -96,7 +96,7 @@
               <el-button
                 type="primary"
                 el-button
-                style="width: 194px; margin-top: 70px"
+                style="width: 194px; margin-top: 70px;"
                 @click="submitFormStep2"
               >
                 下一步
@@ -112,7 +112,7 @@
           <p>请您牢记新{{ getTxt }}密码！</p>
           <el-button
             type="primary"
-            style="width: 194px; margin-top: 70px"
+            style="width: 194px; margin-top: 70px;"
             @click="handleClose"
           >
             关闭
@@ -272,41 +272,53 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .modifyPassWord {
     .box {
       width: 50%;
       margin: 90px auto 65px;
+
       .step1 {
         p {
           margin-bottom: 20px;
+
           @include center-flex(y);
+
           i {
-            margin-left: 20px;
-            width: 85px;
             display: block;
+            width: 85px;
+            margin-left: 20px;
           }
         }
+
         .code {
-          cursor: pointer;
           width: 100%;
           height: 100%;
+          cursor: pointer;
         }
       }
     }
+
     .step3 {
       text-align: center;
+
       .result {
         @include center-flex(y);
+
         justify-content: center;
         font-size: 20px;
+
         i {
           margin-right: 20px;
         }
+
         color: $green;
+
         .el-icon-success {
           font-size: 60px;
         }
       }
+
       p {
         margin-top: 20px;
       }

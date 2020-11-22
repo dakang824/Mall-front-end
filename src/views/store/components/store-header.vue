@@ -101,6 +101,7 @@
     &.w {
       @include center-flex(y);
       @include justify();
+
       position: relative;
       padding: 26px 0;
     }
@@ -130,9 +131,10 @@
 
           li {
             margin-right: 32px;
+            font-size: 15px;
             color: #202020;
             text-align: center;
-            font-size: 15px;
+
             span {
               display: block;
             }

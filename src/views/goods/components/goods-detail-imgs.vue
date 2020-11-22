@@ -112,8 +112,10 @@
   .goods-detail-imgs {
     .imgs {
       width: 326px;
+
       .small {
         margin-top: $padding;
+
         .el-image {
           width: 60px;
           height: 60px;
@@ -122,16 +124,17 @@
       }
 
       .collec {
-        padding: 3px 0 0;
-        text-align: right;
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        padding: 3px 0 0;
+        text-align: right;
         cursor: pointer;
+
         i {
-          color: $green;
-          font-size: 20px;
           margin-right: 5px;
+          font-size: 20px;
+          color: $green;
         }
 
         .el-image {

@@ -11,7 +11,7 @@
     <div class="w">
       <el-container class="goods-detail__main">
         <el-main v-loading="loading" class="el-card">
-          <div style="width: 326px">
+          <div style="width: 326px;">
             <GoodsDetailImgs v-model="store.prodCollected" :model="product" />
           </div>
 
@@ -288,16 +288,20 @@
               font-size: 16px;
               font-weight: bold;
             }
+
             &__desc {
               i {
                 margin-right: 30px;
               }
             }
+
             &__formula {
               display: flex;
               margin: 50px 0 44px 0;
+
               ul {
                 @include center-flex(y);
+
                 li {
                   width: 80px;
                   height: 38px;
@@ -305,18 +309,22 @@
                   text-align: center;
                   border-top: 1px solid $colorC;
                   border-left: 1px solid $colorC;
+
                   &:last-child {
                     border-right: 1px solid $colorC;
                   }
+
                   &:first-child {
                     background: #e2e2e2;
                   }
                 }
+
                 &:last-child {
                   border-bottom: 1px solid $colorC;
                 }
               }
             }
+
             &__money {
               padding: 8px 10px;
               margin: 9px 0 0 0;
@@ -410,6 +418,7 @@
                 background: $green;
                 border-radius: 0;
               }
+
               .el-image {
                 width: 248px;
                 cursor: pointer;

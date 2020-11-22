@@ -249,27 +249,32 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .remittance {
     &__box {
       width: 50%;
       margin: 30px auto;
+
       .btn {
         width: 150px;
       }
     }
   }
+
   .texts {
-    background: #d4d4d4;
     padding: 16px 64px;
     margin: $padding 0;
+    background: #d4d4d4;
+
     ul {
       li {
         @include center-flex(y);
+
         &::before {
-          content: "·";
-          font-weight: bold;
           display: block;
           margin-right: 10px;
+          font-weight: bold;
+          content: "·";
         }
       }
     }
@@ -280,9 +285,9 @@
       &__item {
         width: 150px !important;
         height: 46px;
+        font-size: $text-x-small;
         line-height: 46px;
         text-align: center;
-        font-size: $text-x-small;
       }
     }
   }

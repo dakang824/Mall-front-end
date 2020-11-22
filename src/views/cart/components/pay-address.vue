@@ -99,16 +99,18 @@
       .card {
         position: relative;
         width: 240px;
+        height: 167px;
         padding: 15px 10px 10px;
         margin-right: 20px;
-        height: 167px;
         cursor: pointer;
         background: #fff;
         border: 2px dashed $colorBorder;
+
         &.active {
-          border-color: $green;
           color: #303133;
+          border-color: $green;
         }
+
         .el-tag {
           position: absolute;
           top: 0;
@@ -130,14 +132,16 @@
 
         p {
           font-size: 14px;
+
           @include ellipsis-lines(2);
         }
 
         .footer {
-          font-size: $text-x-small;
-          color: #c90;
           position: absolute;
           bottom: 6px;
+          font-size: $text-x-small;
+          color: #c90;
+
           span {
             display: inline-block;
             padding: 10px 20px 0 0;

@@ -59,7 +59,7 @@
               @click="handleRecharge"
             ></el-image>
           </div>
-          <div style="flex: 1">
+          <div style="flex: 1;">
             <ul class="block" :class="{ setWidth: !getCartItems.length }">
               <li class="el-card">
                 <i>待付款</i>
@@ -149,7 +149,7 @@
           <div v-else>
             <i
               class="el-icon-d-arrow-right"
-              style="transform: rotate(-90deg)"
+              style="transform: rotate(-90deg);"
             ></i>
           </div>
         </div>
@@ -251,97 +251,119 @@
 
 <style lang="scss" scoped>
   @import "@/assets/scss/settings";
+
   .welcome {
     .el-main {
       > .row {
         > .el-card:first-child {
           min-width: 260px;
-          text-align: center;
           padding: $padding;
           padding-bottom: 5px;
+          text-align: center;
+
           .user_pic {
             width: 60px;
             height: 60px;
           }
+
           .safe {
             @include center-flex(y);
+
             justify-content: center;
-            border-top: 1px solid $colorBorder;
-            margin: $padding 0 28px 0;
             padding: $padding 0 0;
+            margin: $padding 0 28px 0;
+            border-top: 1px solid $colorBorder;
+
             ul {
               @include justify();
+
               li {
                 width: 43px;
                 height: 20px;
-                line-height: 20px;
-                border-radius: 25px;
-                border: 1px solid #333;
                 margin-left: 10px;
+                line-height: 20px;
+                border: 1px solid #333;
+                border-radius: 25px;
+
                 &.active {
-                  background: $green;
                   color: #fff;
+                  background: $green;
                   border-color: $green;
                 }
               }
             }
           }
+
           .footer {
             @include justify();
+
             li {
               @include center-flex(y);
+
               .el-image {
                 margin: 6px;
               }
             }
           }
         }
+
         > .el-card:nth-child(2) {
           min-width: 190px;
-          text-align: center;
           margin: 0 $padding;
+          text-align: center;
+
           span {
-            padding: 35px 0 30px;
             display: block;
+            padding: 35px 0 30px;
           }
+
           p {
+            margin-bottom: 25px;
+            font-size: $text-large;
+            font-weight: bold;
             color: $green;
+
             i {
               font-size: $text-x-small;
             }
-            font-size: $text-large;
-            font-weight: bold;
-            margin-bottom: 25px;
           }
+
           .el-image {
             cursor: pointer;
           }
         }
       }
+
       .row {
         @include justify();
+
         .block {
           @include justify();
+
           &.setWidth {
             .el-card {
               min-width: 48.9%;
             }
           }
+
           flex-wrap: wrap;
+
           .el-card {
-            text-align: center;
             min-width: 47.9%;
             height: 100px;
             padding-top: 25px;
+            text-align: center;
 
             p {
               font-size: 20px;
               color: $green;
             }
+
             &:first-child,
             &:nth-child(3) {
               margin-right: $padding;
             }
+
             &:first-child,
             &:nth-child(2) {
               margin-bottom: $padding;
@@ -349,47 +371,59 @@
           }
         }
       }
+
       .box {
         position: relative;
+
         &__more {
           position: absolute;
           right: 0;
           z-index: 99;
           height: 53px;
-          line-height: 53px;
           padding-right: 10px;
+          line-height: 53px;
           cursor: pointer;
+
           &:hover {
             color: $green;
           }
         }
+
         ::v-deep {
           .el-tabs {
             margin-top: $padding;
+
             &__content {
               padding: $padding;
             }
+
             .block {
               @include center-flex(y);
+
               flex-wrap: wrap;
               margin-left: 25px;
+
               li {
-                margin-top: 49px;
                 width: 89px;
+                margin-top: 49px;
+                margin-right: 49px;
                 text-align: center;
                 cursor: pointer;
-                margin-right: 49px;
+
                 &:nth-child(5n) {
                   margin-right: 0;
                 }
+
                 .el-image {
                   width: 89px;
                   height: 89px;
-                  border-radius: 50px;
                   border: 1px solid $colorBorder;
+                  border-radius: 50px;
                 }
+
                 p {
                   margin: 22px 0 46px;
+
                   @include ellipsis-lines(1);
                 }
               }
@@ -401,9 +435,9 @@
               height: 54px;
               padding: 0;
               font-size: $text-x-small;
+              font-weight: bold;
               line-height: 54px;
               color: $color5;
-              font-weight: bold;
               text-align: center;
 
               &:hover {
@@ -433,17 +467,22 @@
             }
           }
         }
+
         .empty {
           margin-bottom: 60px;
         }
       }
     }
+
     .el-aside {
       padding: $padding 0;
       margin-left: $padding;
+
       .title {
         @include center-flex(y);
+
         margin: 0 0 $padding $padding;
+
         &::before {
           display: block;
           width: 2px;
@@ -453,21 +492,26 @@
           background: $green;
         }
       }
+
       .right {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
         p {
           @include ellipsis-lines(2);
         }
       }
+
       .goods-item {
         display: flex;
-        cursor: pointer;
         padding: 5px $padding;
+        cursor: pointer;
+
         &:hover {
           background: rgba(0, 0, 0, 0.1);
         }
+
         &:last-child {
           margin-bottom: 0;
         }
@@ -484,10 +528,12 @@
           color: $error;
         }
       }
+
       .more {
-        text-align: center;
         padding: 3px 0 0;
+        text-align: center;
         cursor: pointer;
+
         span {
           color: $green;
         }
