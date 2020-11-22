@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-11-22 18:32:57
+ * @LastEditTime: 2020-11-22 20:38:18
 -->
 <template>
   <div class="profile">
@@ -91,6 +91,11 @@
     },
     created() {
       this.handleChange(this.$route.query.page || "Welcome");
+    },
+    activated() {
+      if (this.$route.query.page == "Orders") {
+        this.handleChange(this.$route.query.page);
+      }
     },
     methods: {
       handleClick(e) {

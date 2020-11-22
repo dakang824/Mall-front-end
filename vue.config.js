@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-09 23:07:12
- * @LastEditTime: 2020-10-31 15:02:09
+ * @LastEditTime: 2020-11-22 21:13:50
  */
 const path = require("path");
 const CompressionPlugin = require("compression-webpack-plugin");
@@ -23,6 +23,7 @@ module.exports = {
   assetsDir,
   outputDir,
   lintOnSave,
+  productionSourceMap: false,
   devServer: {
     hot: true,
     port: devPort,
