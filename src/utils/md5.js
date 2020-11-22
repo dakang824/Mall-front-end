@@ -375,8 +375,8 @@ function bit_rol(num, cnt) {
   return (num << cnt) | (num >>> (32 - cnt));
 }
 
-module.exports = {
-  md5: function (str) {
-    return hex_md5(str);
-  },
-};
+function md5(str) {
+  return hex_md5(str);
+}
+
+export default md5;

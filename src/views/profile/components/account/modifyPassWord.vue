@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-22 09:45:35
+ * @LastEditTime: 2020-11-22 19:05:58
 -->
 <template>
   <div class="modifyPassWord">
@@ -254,11 +254,20 @@
       submitFormStep2() {
         this.$refs["formStep2"].validate(async (valid) => {
           if (valid) {
-            await modifyPwd({
+            const data = {
               ...this.step2,
               ...this.step1,
               mobile: this.userInfo.mobile,
-            });
+            };
+            if (this.type === 2) {
+              data.payPwd = this.$utils.md5(data.payPwd);
+              delete data.pwd;
+            } else if (this.type === 1) {
+              data.pwd = this.$utils.md5(data.pwd);
+              delete data.payPwd;
+            }
+
+            await modifyPwd(data);
             this.active = 3;
             await this.$store.dispatch("profileWelcome/getMyInfo", {});
           } else {

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付确认支付密码
  * @Date: 2020-11-22 11:04:59
- * @LastEditTime: 2020-11-22 11:10:05
+ * @LastEditTime: 2020-11-22 19:11:36
 -->
 <template>
   <div>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   export default {
     components: {},
     props: {
@@ -57,6 +58,11 @@
         },
       };
     },
+    computed: {
+      ...mapState({
+        userInfo: (state) => JSON.parse(state.user.userInfo),
+      }),
+    },
     methods: {
       onClose() {
         this.close();
@@ -68,11 +74,19 @@
       handelConfirm() {
         this.$refs["formStep2"].validate((valid) => {
           if (valid) {
-            this.$emit("confirm", this.step2.pay_pwd);
+            const pay_pwd = this.$utils.md5(this.step2.pay_pwd);
+            if (pay_pwd === this.userInfo.payPwd) {
+              this.$emit("confirm", pay_pwd);
+              this.close();
+            } else {
+              this.$message({
+                type: "error",
+                message: "支付密码错误!",
+              });
+            }
           } else {
             return;
           }
-          this.close();
         });
       },
     },

@@ -153,10 +153,9 @@
       async submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            const res = await this.$store.dispatch(
-              "user/getLoginInfo",
-              this.form
-            );
+            const form = JSON.parse(JSON.stringify(this.form));
+            form.pwd = this.$utils.md5(form.pwd);
+            const res = await this.$store.dispatch("user/getLoginInfo", form);
             if (res.code === 200) {
               const routerPath = this.$route.query.url || "/";
               this.$router.push(routerPath).catch(() => {});
