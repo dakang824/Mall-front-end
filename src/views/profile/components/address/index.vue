@@ -14,7 +14,7 @@
         </el-button>
         <p class="tip">已保存的收货地址</p>
 
-        <el-table :data="myAddress" style="width: 100%;" border>
+        <el-table :data="myAddress" style="width: 100%" border>
           <el-table-column
             prop="name"
             label="收货人"

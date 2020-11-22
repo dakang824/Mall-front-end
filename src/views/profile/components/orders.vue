@@ -98,7 +98,7 @@
             </div>
 
             <div class="orders__item__row">
-              <div class="orders__item__row__col" style="max-width: 394px;">
+              <div class="orders__item__row__col" style="max-width: 394px">
                 <div
                   v-for="(items, indexs) in ite.items"
                   :key="indexs"
@@ -107,7 +107,7 @@
                   <div :style="{ width: title[0].width * 1 + 10 + 'px' }">
                     <el-image
                       :src="items.item_pic | imgBaseUrl"
-                      style="width: 60px;"
+                      style="width: 60px"
                     ></el-image>
 
                     <el-link>
@@ -126,7 +126,7 @@
                   </span>
                   <i
                     :style="{ width: title[2].width + 'px' }"
-                    style="position: relative; left: -20px;"
+                    style="position: relative; left: -20px"
                   >
                     {{ items.quantity }}
                   </i>

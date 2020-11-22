@@ -27,18 +27,18 @@
                     全选
                   </el-checkbox>
                 </el-col>
-                <el-col :span="4" style="width: 12.66667%;">店铺商品</el-col>
-                <el-col :span="2" style="margin-right: 34px;">商品规格</el-col>
-                <el-col :span="1" style="margin-right: 47px;">单价</el-col>
-                <el-col :span="1" style="position: relative; left: 21px;">
+                <el-col :span="4" style="width: 12.66667%">店铺商品</el-col>
+                <el-col :span="2" style="margin-right: 34px">商品规格</el-col>
+                <el-col :span="1" style="margin-right: 47px">单价</el-col>
+                <el-col :span="1" style="position: relative; left: 21px">
                   数量
                 </el-col>
-                <el-col :span="2" style="position: relative; left: 50px;">
+                <el-col :span="2" style="position: relative; left: 50px">
                   金额（元）
                 </el-col>
                 <el-col
                   :span="2"
-                  style="position: relative; left: 15px; text-align: left;"
+                  style="position: relative; left: 15px; text-align: left"
                 >
                   操作
                 </el-col>
@@ -73,7 +73,7 @@
                           }"
                         >
                           <el-image
-                            style="width: 80px; height: 80px;"
+                            style="width: 80px; height: 80px"
                             :src="item.product.pics[0].path | imgBaseUrl"
                             fit="contain"
                           ></el-image>
@@ -95,7 +95,7 @@
                         @change="handleChange"
                       ></el-input-number>
                     </el-col>
-                    <el-col :span="2" style="text-align: center;">
+                    <el-col :span="2" style="text-align: center">
                       <div class="money">
                         ¥{{ (item.unitPrice * item.quantity) | toFixed }}
                       </div>

@@ -25,7 +25,7 @@
           </div>
           <div v-else>
             <el-image
-              style="width: 80px; height: 80px;"
+              style="width: 80px; height: 80px"
               :src="item.img"
               fit="contain"
             ></el-image>

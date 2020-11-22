@@ -21,7 +21,7 @@
           <el-image
             :src="model.ad.pic_path | imgBaseUrl"
             fit="scale-down"
-            style="width: 300px; height: 573px;"
+            style="width: 300px; height: 573px"
           ></el-image>
         </a>
       </el-aside>

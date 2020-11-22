@@ -51,7 +51,7 @@
             <el-form-item size="large">
               <el-button
                 type="primary"
-                style="width: 194px; margin-top: 70px;"
+                style="width: 194px; margin-top: 70px"
                 @click="submitForm"
               >
                 下一步
@@ -96,7 +96,7 @@
               <el-button
                 type="primary"
                 el-button
-                style="width: 194px; margin-top: 70px;"
+                style="width: 194px; margin-top: 70px"
                 @click="submitFormStep2"
               >
                 下一步
@@ -112,7 +112,7 @@
           <p>请您牢记新{{ getTxt }}密码！</p>
           <el-button
             type="primary"
-            style="width: 194px; margin-top: 70px;"
+            style="width: 194px; margin-top: 70px"
             @click="handleClose"
           >
             关闭

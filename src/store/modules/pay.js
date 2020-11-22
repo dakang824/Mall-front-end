@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-11-19 15:44:31
+ * @LastEditTime: 2020-11-22 16:46:10
  */
 import { unifityOrder } from "@/api/pay";
 const state = {
@@ -100,7 +100,7 @@ const mutations = {
             })
             .reduce((a, b) => a + b, 0)
             .toFixed(2) * 1;
-        return it.total_amount + it.post_amount;
+        return (it.total_amount += it.post_amount);
       })
       .reduce((a, b) => a + b, 0);
 

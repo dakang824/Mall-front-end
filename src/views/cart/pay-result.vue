@@ -33,7 +33,7 @@
             </li>
             <li>
               实付款：¥
-              <span style="padding-left: 8px;">
+              <span style="padding-left: 8px">
                 {{ params.pay_amount | toFixed }}
               </span>
             </li>

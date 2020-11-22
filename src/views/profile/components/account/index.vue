@@ -38,12 +38,12 @@
           </ul>
         </div>
 
-        <el-row style="border-bottom-color: transparent;">
+        <el-row style="border-bottom-color: transparent">
           <el-col :span="5">
             <div class="col1">
               <el-image
                 :src="require('@/assets/imgs/profile-right.png')"
-                style="widows: 32px;"
+                style="widows: 32px"
               ></el-image>
               手机验证
             </div>
@@ -69,7 +69,7 @@
             <div class="col1">
               <el-image
                 :src="require('@/assets/imgs/profile-right.png')"
-                style="widows: 32px;"
+                style="widows: 32px"
               ></el-image>
               登录密码
             </div>
@@ -92,7 +92,7 @@
             <div class="col1">
               <el-image
                 :src="require('@/assets/imgs/profile-error.png')"
-                style="widows: 32px;"
+                style="widows: 32px"
               ></el-image>
               支付密码
             </div>

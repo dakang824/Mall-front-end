@@ -82,7 +82,7 @@
           </div>
 
           <div class="right" :style="{ width: title[5].width + 'px' }">
-            <div style="text-align: center;">
+            <div style="text-align: center">
               <p>￥{{ model.post_amount | toFixed }}</p>
               （快递）
             </div>

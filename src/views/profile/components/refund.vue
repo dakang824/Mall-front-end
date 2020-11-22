@@ -62,7 +62,7 @@
             </div>
 
             <div class="orders__item__row">
-              <div class="orders__item__row__col" style="max-width: 394px;">
+              <div class="orders__item__row__col" style="max-width: 394px">
                 <div
                   v-for="(items, indexs) in ite.items"
                   :key="indexs"
@@ -71,7 +71,7 @@
                   <div :style="{ width: title[0].width + 'px' }">
                     <el-image
                       :src="items.item_pic | imgBaseUrl"
-                      style="width: 60px;"
+                      style="width: 60px"
                     ></el-image>
                     <h5>{{ items.name }}</h5>
                   </div>

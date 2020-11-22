@@ -21,7 +21,7 @@
               <el-image
                 :src="item.pic_path | imgBaseUrl"
                 fit="contain"
-                style="width: 100%; height: 430px;"
+                style="width: 100%; height: 430px"
               ></el-image>
             </a>
           </el-carousel-item>
@@ -29,7 +29,7 @@
         <ul
           v-if="show"
           class="category__right__child clearfix"
-          style=" height: 430px; overflow: auto;"
+          style="height: 430px; overflow: auto"
         >
           <li
             v-for="(item, index) in model[current].subCategoryList"

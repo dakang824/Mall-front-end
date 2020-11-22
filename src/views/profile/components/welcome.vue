@@ -59,7 +59,7 @@
               @click="handleRecharge"
             ></el-image>
           </div>
-          <div style="flex: 1;">
+          <div style="flex: 1">
             <ul class="block" :class="{ setWidth: !getCartItems.length }">
               <li class="el-card">
                 <i>待付款</i>
@@ -149,7 +149,7 @@
           <div v-else>
             <i
               class="el-icon-d-arrow-right"
-              style="transform: rotate(-90deg);"
+              style="transform: rotate(-90deg)"
             ></i>
           </div>
         </div>

@@ -11,7 +11,7 @@
     <div class="w">
       <el-container class="goods-detail__main">
         <el-main v-loading="loading" class="el-card">
-          <div style="width: 326px;">
+          <div style="width: 326px">
             <GoodsDetailImgs v-model="store.prodCollected" :model="product" />
           </div>
 

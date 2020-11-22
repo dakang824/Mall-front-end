@@ -67,7 +67,7 @@
         ></el-pagination>
       </goodsCard>
 
-      <el-card v-else style="padding-bottom: 150px; margin-bottom: 10px;">
+      <el-card v-else style="padding-bottom: 150px; margin-bottom: 10px">
         <empty icon="search" text="~ 空空如也 ~" margin-top="90"></empty>
       </el-card>
     </div>

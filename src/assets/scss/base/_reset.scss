@@ -34,7 +34,7 @@ body {
 
   @include base-scrollbar;
 
-  div {
+  * {
     @include base-scrollbar;
   }
 }
