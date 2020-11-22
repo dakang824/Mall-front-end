@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 欢迎页面
  * @Date: 2020-10-19 23:03:17
- * @LastEditTime: 2020-11-20 19:48:09
+ * @LastEditTime: 2020-11-22 10:22:38
 -->
 <template>
   <div class="welcome">
@@ -63,19 +63,19 @@
             <ul class="block" :class="{ setWidth: !getCartItems.length }">
               <li class="el-card">
                 <i>待付款</i>
-                <p>{{ getMyInfo.unpay_count || 0 }}</p>
+                <p>{{ store.unpay_count || 0 }}</p>
               </li>
               <li class="el-card">
                 <i>待收货</i>
-                <p>{{ getMyInfo.unRecive_count || 0 }}</p>
+                <p>{{ store.unRecive_count || 0 }}</p>
               </li>
               <li class="el-card">
                 <i>退款</i>
-                <p>{{ getMyInfo.payback_count || 0 }}</p>
+                <p>{{ store.payback_count || 0 }}</p>
               </li>
               <li class="el-card">
                 <i>待发货</i>
-                <p>{{ getMyInfo.unPost_count || 0 }}</p>
+                <p>{{ store.unPost_count || 0 }}</p>
               </li>
             </ul>
           </div>

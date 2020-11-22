@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-11-19 16:00:37
+ * @LastEditTime: 2020-11-22 11:27:33
 -->
 <template>
   <div class="pay">
@@ -21,9 +21,10 @@
     </div>
     <div class="el-card footer">
       <div class="el-card__inner">
-        <PayFooter @click="handlePay"></PayFooter>
+        <PayFooter @click="handleChecking"></PayFooter>
       </div>
     </div>
+    <PayPassword v-model="show" @confirm="handleConfirm" />
   </div>
 </template>
 
@@ -33,12 +34,14 @@
   import PayGoodsItem from "./components/pay-goods-item.vue";
   import PayType from "./components/pay-type.vue";
   import PayFooter from "./components/pay-footer.vue";
+  import PayPassword from "./components/pay-password.vue";
   export default {
     components: {
       PayAddress,
       PayGoodsItem,
       PayType,
       PayFooter,
+      PayPassword,
     },
     data() {
       return {
@@ -56,6 +59,8 @@
             title: "选择支付方式",
           },
         ],
+
+        show: false,
       };
     },
     computed: {
@@ -84,7 +89,7 @@
       this.setStore(obj);
     },
     methods: {
-      async handlePay() {
+      async handleChecking() {
         const {
           pay_amount,
           pay_type,
@@ -101,6 +106,7 @@
           });
           return;
         }
+
         // if (is_buy) {
         //   this.$message({
         //     type: "error",
@@ -116,23 +122,30 @@
           return;
         }
 
-        await this.$store.dispatch("pay/unifityOrder", this.postData);
+        const { accLevel, payPwd } = this.userInfo;
+        if (accLevel == 2 && payPwd != null && pay_type === 4) {
+          this.show = true;
+        } else {
+          this.handlePay();
+        }
+      },
+      async handlePay() {
+        // await this.$store.dispatch("pay/unifityOrder", this.postData);
+        // // 更新用户余额
+        // await this.$store.dispatch("profileWelcome/getMyInfo", {});
 
-        // 更新用户余额
-        await this.$store.dispatch("profileWelcome/getMyInfo", {});
-        localStorage.removeItem("pay");
-
-        // 如果是从购物车来的,支付成功后删除购物车里面的数据
-        this.postData.orders.map((item) =>
-          item.items.map(async (i) => {
-            if (i.cartItemId) {
-              await this.$store.dispatch("cart/deleteCartItem", {
-                id: i.cartItemId,
-              });
-            }
-          })
-        );
-
+        // // 如果是从购物车来的,支付成功后删除购物车里面的数据
+        // this.postData.orders.map((item) =>
+        //   item.items.map(async (i) => {
+        //     if (i.cartItemId) {
+        //       await this.$store.dispatch("cart/deleteCartItem", {
+        //         id: i.cartItemId,
+        //       });
+        //     }
+        //   })
+        // );
+        // localStorage.removeItem("pay");
+        const { pay_amount, address, name, mobile } = this.postData;
         this.$router.push({
           path: `/cart/pay-result`,
           query: {
@@ -146,6 +159,11 @@
           },
         });
       },
+      handleConfirm(e) {
+        this.postData.pay_pwd = e;
+        this.handlePay();
+      },
+
       setStore(e) {
         this.$store.commit("pay/addPostData", e);
       },

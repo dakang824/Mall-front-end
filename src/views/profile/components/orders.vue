@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-11-20 19:52:03
+ * @LastEditTime: 2020-11-22 10:30:32
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -143,7 +143,7 @@
                   <span v-if="ite.discount">
                     优惠金额:￥{{ ite.discount | toFixed }}
                   </span>
-                  <span>待付款：</span>
+                  <span>{{ ite.status | status(statusOptions) }}：</span>
                   <i>￥{{ (ite.total_amount - ite.discount) | toFixed }}</i>
                 </div>
               </div>
@@ -203,7 +203,7 @@
                         确认收货
                       </el-button>
                     </p>
-                    <p v-if="ite.status === 3">
+                    <p v-if="ite.status === 3 && ite.post_extend < 0">
                       <el-button
                         size="small"
                         type="info"
@@ -272,7 +272,11 @@
       OrdersDetail,
       qrCode,
     },
-
+    filters: {
+      status(v, val) {
+        return val.find((item) => item.value === v).label;
+      },
+    },
     data() {
       return {
         currentItems: [],
@@ -365,11 +369,11 @@
             data: [],
           },
           {
-            name: "代付款",
+            name: "待付款",
             data: [],
           },
           {
-            name: "代发货",
+            name: "待发货",
             data: [],
           },
           {

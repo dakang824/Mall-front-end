@@ -2,16 +2,19 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-11-20 17:14:33
+ * @LastEditTime: 2020-11-22 11:46:27
 -->
 <!-- 商品详情 -->
 <template>
-  <div v-if="RouterState" class="goods-detail">
+  <div class="goods-detail">
     <StoreHeader />
     <div class="w">
       <el-container class="goods-detail__main">
         <el-main v-loading="loading" class="el-card">
-          <GoodsDetailImgs v-model="store.prodCollected" :model="product" />
+          <div style="width: 326px">
+            <GoodsDetailImgs v-model="store.prodCollected" :model="product" />
+          </div>
+
           <div class="info">
             <div class="info__title">
               {{ product.name }}
@@ -121,7 +124,6 @@
     data() {
       return {
         loading: true,
-        RouterState: false,
         num: 1,
         specCurrent: 0,
         type: "",
@@ -226,9 +228,7 @@
         this.reload();
       },
       reload() {
-        this.RouterState = false;
         this.$nextTick(() => {
-          this.RouterState = true;
           setTimeout(() => {
             this.loading = false;
           }, 300);

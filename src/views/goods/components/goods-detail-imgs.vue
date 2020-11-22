@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情轮播图片
  * @Date: 2020-10-05 22:45:14
- * @LastEditTime: 2020-11-18 23:47:07
+ * @LastEditTime: 2020-11-22 11:45:39
 -->
 <template>
   <div class="goods-detail-imgs">
@@ -112,7 +112,6 @@
   .goods-detail-imgs {
     .imgs {
       width: 326px;
-
       .small {
         margin-top: $padding;
         .el-image {

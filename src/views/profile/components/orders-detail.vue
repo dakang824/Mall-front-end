@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-20 19:53:55
+ * @LastEditTime: 2020-11-22 10:17:23
 -->
 <template>
   <div class="orders-detail">
@@ -107,7 +107,7 @@
     components: {},
     filters: {
       getStatusStr(v) {
-        return v === 1
+        return v === 0
           ? "待付款"
           : v === 2
           ? "待发货"

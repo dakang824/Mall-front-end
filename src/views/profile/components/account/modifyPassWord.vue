@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-21 16:51:03
+ * @LastEditTime: 2020-11-22 09:45:35
 -->
 <template>
   <div class="modifyPassWord">
@@ -200,7 +200,6 @@
       } else {
         this.userInfo = JSON.parse(this.$store.state.user.userInfo);
       }
-      this.step2.mobile = this.userInfo.mobile;
     },
     methods: {
       codeChange(text) {
@@ -258,6 +257,7 @@
             await modifyPwd({
               ...this.step2,
               ...this.step1,
+              mobile: this.userInfo.mobile,
             });
             this.active = 3;
             await this.$store.dispatch("profileWelcome/getMyInfo", {});
