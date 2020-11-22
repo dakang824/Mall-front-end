@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-11-22 11:46:27
+ * @LastEditTime: 2020-11-22 13:28:17
 -->
 <!-- 商品详情 -->
 <template>
@@ -51,10 +51,10 @@
                     v-for="(item, index) in product.specList"
                     :key="index"
                     :class="{ active: index === specCurrent }"
+                    @click="handleChangeSpecCurrent(index)"
                   >
                     {{ item.name }}
                   </li>
-                  <!-- <li class="disable">20kg</li> -->
                 </ul>
               </div>
               <div class="info__number">
@@ -184,6 +184,9 @@
       },
       handleChange(e) {
         this.num = e;
+      },
+      handleChangeSpecCurrent(e) {
+        this.specCurrent = e;
       },
       async getData() {
         this.loading = true;
