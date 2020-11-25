@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 店铺详情
  * @Date: 2020-10-05 23:03:41
- * @LastEditTime: 2020-10-18 13:40:01
+ * @LastEditTime: 2020-11-25 22:03:34
 -->
 
 <template>
@@ -12,15 +12,15 @@
       <ul>
         <li>
           <i>描述</i>
-          <span>{{ getStore.desScore }}</span>
+          <span>{{ getStore.desScore | toFixed(1) }}</span>
         </li>
         <li>
           <i>服务</i>
-          <span>{{ getStore.serScore }}</span>
+          <span>{{ getStore.serScore | toFixed(1) }}</span>
         </li>
         <li>
           <i>物流</i>
-          <span>{{ getStore.postStore }}</span>
+          <span>{{ getStore.postStore | toFixed(1) }}</span>
         </li>
       </ul>
     </div>
@@ -28,9 +28,9 @@
       <div class="compare">
         <ul>
           <li>店铺动态评分</li>
-          <li>描述相符：{{ getStore.desScore }}</li>
-          <li>服务态度：{{ getStore.serScore }}</li>
-          <li>物流服务：{{ getStore.postStore }}</li>
+          <li>描述相符：{{ getStore.desScore | toFixed(1) }}</li>
+          <li>服务态度：{{ getStore.serScore | toFixed(1) }}</li>
+          <li>物流服务：{{ getStore.postStore | toFixed(1) }}</li>
         </ul>
         <ul>
           <li>与同行业相比</li>

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情说明
  * @Date: 2020-10-05 23:12:09
- * @LastEditTime: 2020-10-24 14:49:28
+ * @LastEditTime: 2020-11-25 21:59:06
 -->
 
 <template>
@@ -45,9 +45,17 @@
       handleClick(e) {
         this.$nextTick(() => {
           setTimeout(() => {
-            document
-              .querySelector(`#info_imgs${e.index} #img${e.index}`)
-              .scrollIntoView({ behavior: "smooth", block: "start" });
+            try {
+              document
+                .querySelector(`#info_imgs${e.index} #img${e.index}`)
+                .scrollIntoView({ behavior: "smooth", block: "start" });
+            } catch (error) {
+              this.$alert("商品详情图片未加载完成,请稍后再试!", "温馨提示", {
+                confirmButtonText: "确定",
+                type: "warning",
+                callback: (action) => {},
+              });
+            }
           }, 200);
         });
       },

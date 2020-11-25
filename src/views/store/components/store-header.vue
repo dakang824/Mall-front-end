@@ -10,7 +10,7 @@
             <ul>
               <li v-for="(item, index) in getInfo" :key="index">
                 <span>{{ item.name }}</span>
-                <i>{{ item.value }}</i>
+                <i>{{ item.value | toFixed(1) }}</i>
               </li>
             </ul>
           </div>
