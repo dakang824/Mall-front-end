@@ -1,24 +1,3 @@
-<style>
-  #_magnifier_layer {
-    position: absolute;
-    z-index: 9999;
-    background: #f9f9f9;
-  }
-  ._magnifier {
-    position: relative;
-    display: inline-block;
-  }
-  ._magnifier img {
-    vertical-align: middle;
-  }
-  ._magnifier_zoom {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    pointer-events: none;
-  }
-</style>
 <template>
   <div id="magnifier" class="_magnifier">
     <img
@@ -153,3 +132,25 @@
     },
   };
 </script>
+
+<style>
+  #_magnifier_layer {
+    position: absolute;
+    z-index: 9999;
+    background: #f9f9f9;
+  }
+  ._magnifier {
+    position: relative;
+    display: inline-block;
+  }
+  ._magnifier img {
+    vertical-align: middle;
+  }
+  ._magnifier_zoom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    pointer-events: none;
+  }
+</style>
