@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-09 23:07:12
- * @LastEditTime: 2020-11-22 21:13:50
+ * @LastEditTime: 2020-12-02 18:05:17
  */
 const path = require("path");
 const CompressionPlugin = require("compression-webpack-plugin");
@@ -40,6 +40,18 @@ module.exports = {
         changeOrigin: true,
       },
     },
+  },
+  chainWebpack: (config) => {
+    config.module
+      .rule("vue")
+      .use("vue-loader")
+      .loader("vue-loader")
+      .tap((options) => {
+        options.transformAssetUrls = {
+          avatar: "src",
+        };
+        return options;
+      });
   },
 
   configureWebpack: {

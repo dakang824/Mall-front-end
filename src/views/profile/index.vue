@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人中心
  * @Date: 2020-10-19 22:34:06
- * @LastEditTime: 2020-11-30 12:28:40
+ * @LastEditTime: 2020-12-02 23:32:20
 -->
 <template>
   <div class="profile">
@@ -25,7 +25,11 @@
           </div>
         </el-aside>
         <el-main>
-          <component :is="list[current].components"></component>
+          <transition name="fade-transform" mode="out-in">
+            <keep-alive>
+              <component :is="list[current].components"></component>
+            </keep-alive>
+          </transition>
         </el-main>
       </el-container>
     </div>
@@ -71,6 +75,7 @@
     data() {
       return {
         current: "",
+        show: true,
         list: [
           { name: "欢迎页", components: "Welcome" },
           { name: "个人资料", components: "Profile" },
@@ -97,6 +102,7 @@
     },
     methods: {
       handleClick(e) {
+        this.show = false;
         this.current = e;
       },
       handleChange(e) {
@@ -151,6 +157,7 @@
     ::v-deep {
       .el-main {
         padding: 0;
+        overflow-x: hidden;
       }
     }
   }
