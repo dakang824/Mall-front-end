@@ -65,10 +65,13 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     if (store.getters["user/userInfo"]) {
-      if (config.data) {
+      if (config.data || config.params) {
         const userId = JSON.parse(store.getters["user/userInfo"]).id;
-        config.data.userId = userId;
-        config.data.user_id = userId;
+        if (config.data) {
+          (config.data.userId = userId), (config.data.user_id = userId);
+        } else {
+          (config.params.userId = userId), (config.params.user_id = userId);
+        }
       }
       // config.headers[tokenName] = store.getters["user/accessToken"];
     }
