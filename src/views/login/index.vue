@@ -158,7 +158,7 @@
             const res = await this.$store.dispatch("user/getLoginInfo", form);
             if (res.code === 200) {
               const routerPath = this.$route.query.url || "/";
-              this.$router.push(routerPath).catch(() => {});
+              this.$router.replace(routerPath).catch(() => {});
             }
           } else {
             return false;
