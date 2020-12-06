@@ -84,7 +84,9 @@
                     <el-col :span="3">
                       {{ item.product.specList[0].name }}
                     </el-col>
-                    <el-col :span="2">¥{{ item.unitPrice | toFixed }}</el-col>
+                    <el-col :span="2">
+                      ¥{{ getUnitPrice(item) | toFixed }}
+                    </el-col>
                     <el-col :span="3">
                       <el-input-number
                         v-model="item.quantity"
@@ -97,7 +99,7 @@
                     </el-col>
                     <el-col :span="2" style="text-align: center">
                       <div class="money">
-                        ¥{{ (item.unitPrice * item.quantity) | toFixed }}
+                        ¥{{ (getUnitPrice(item) * item.quantity) | toFixed }}
                       </div>
                     </el-col>
                     <el-col :span="2">
@@ -170,7 +172,7 @@
         let money = this.cartItems
           .map((item) =>
             item.data.map((it) => {
-              return it.checked ? it.unitPrice * it.quantity : 0;
+              return it.checked ? this.getUnitPrice(it) * it.quantity : 0;
             })
           )
           .flat()
@@ -189,12 +191,19 @@
         deep: true,
       },
     },
+
     created() {
       this.getData();
       this.$store.commit("cart/setCartState", 1);
     },
     mounted() {},
     methods: {
+      getUnitPrice(e) {
+        return e.product.specList[0].w_num &&
+          e.quantity >= e.product.specList[0].w_num
+          ? e.product.specList[0].w_price
+          : e.unitPrice;
+      },
       handleMoreDelect() {
         const arr = this.cartItems.map((item) =>
           item.data.filter((it) => it.checked)
@@ -269,10 +278,12 @@
         });
       },
       async handlePay() {
-        const postData = await this.$store.dispatch(
-          "pay/getData",
-          this.cartItems
-        );
+        const cartItems = this.cartItems.map((item) => {
+          item.data.map((i) => (i.unitPrice = this.getUnitPrice(i)));
+          return item;
+        });
+
+        const postData = await this.$store.dispatch("pay/getData", cartItems);
         this.$router.push({
           name: "Pay",
           params: {

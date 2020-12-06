@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-11-22 13:28:17
+ * @LastEditTime: 2020-12-06 18:21:24
 -->
 <!-- 商品详情 -->
 <template>
@@ -166,7 +166,11 @@
           success: async (e) => {
             const store = JSON.parse(JSON.stringify(this.store));
             store.product.specList = [this.product.specList[this.specCurrent]];
-            store.unitPrice = store.product.specList[0].sellPrice;
+            store.unitPrice =
+              store.product.specList[0].w_num &&
+              store.product.specList[0].w_num <= this.num
+                ? store.product.specList[0].w_price
+                : store.product.specList[0].sellPrice;
             store.quantity = this.num;
             store.itemId = store.product.id;
             store.checked = true;
