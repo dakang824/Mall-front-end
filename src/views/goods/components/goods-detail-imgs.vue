@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情轮播图片
  * @Date: 2020-10-05 22:45:14
- * @LastEditTime: 2020-11-25 23:03:30
+ * @LastEditTime: 2020-12-15 22:48:52
 -->
 <template>
   <div class="goods-detail-imgs">
@@ -51,9 +51,7 @@
     props: {
       model: {
         type: Object,
-        default: () => {
-          return {};
-        },
+        default: () => {},
       },
       value: {
         type: Boolean,
