@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-11-22 11:39:43
+ * @LastEditTime: 2020-12-15 21:01:47
 -->
 <!--  -->
 <template>
@@ -90,18 +90,18 @@
       this.params = JSON.parse(this.$route.query.params);
       this.$store.commit("cart/setCartState", this.state === "success" ? 4 : 3);
 
-      var i = 0;
-      window.addEventListener(
-        "popstate",
-        (e) => {
-          if (i === 0) {
-            this.$router.back(1);
-            i++;
-            window.removeEventListener("popstate", () => {}, false);
-          }
-        },
-        false
-      );
+      // var i = 0;
+      // window.addEventListener(
+      //   "popstate",
+      //   (e) => {
+      //     if (i === 0) {
+      //       this.$router.back(1);
+      //       i++;
+      //       window.removeEventListener("popstate", () => {}, false);
+      //     }
+      //   },
+      //   false
+      // );
     },
     methods: {
       handleJump() {

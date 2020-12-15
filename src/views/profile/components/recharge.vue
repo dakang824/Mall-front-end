@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 充值页面
  * @Date: 2020-10-28 23:21:12
- * @LastEditTime: 2020-11-04 22:52:00
+ * @LastEditTime: 2020-12-15 21:44:24
 -->
 <template>
   <div class="recharge el-card">
@@ -65,7 +65,7 @@
             const {
               data: { pay_params },
             } = await unifityRechargeOrder(this.params);
-            if (pay_params.result_msg == "SUCCESS") {
+            if ("qr_code" in pay_params && pay_params.qr_code) {
               this.show = true;
               this.$refs.qrCode.show(pay_params.qr_code);
             }

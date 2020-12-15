@@ -1,3 +1,9 @@
+<!--
+ * @Author: yukang 1172248038@qq.com
+ * @Description: 
+ * @Date: 2020-11-04 22:43:54
+ * @LastEditTime: 2020-12-15 22:05:56
+-->
 <template>
   <div class="qr-code">
     <el-dialog
@@ -12,6 +18,8 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
+  import { fuiouPayNotify } from "@/api/profile";
   var QRCode = require("qrcode");
   export default {
     components: {},
@@ -26,11 +34,19 @@
       },
     },
     data() {
-      return {};
+      return {
+        time: "",
+      };
+    },
+    computed: {
+      ...mapState({
+        payData: (state) => state.profile.payData,
+      }),
     },
     methods: {
       handleClose() {
         this.$emit("input", false);
+        clearInterval(this.time);
       },
       show(qr_code) {
         this.$nextTick(() => {
@@ -40,7 +56,13 @@
           ) {
             if (error) console.error(error);
           });
+          this.time = setInterval(() => {
+            this.getResult();
+          }, 2000);
         });
+      },
+      async getResult() {
+        await fuiouPayNotify({ ...this.payData });
       },
     },
   };

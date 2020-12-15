@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-11-21 16:46:53
+ * @LastEditTime: 2020-12-15 21:50:56
  */
 import request from "@/utils/request";
 
@@ -202,6 +202,15 @@ export async function findMyCashRecords(data) {
 export async function addRemittance(data) {
   return request({
     url: "/service/front/web/addRemittance",
+    method: "post",
+    data,
+  });
+}
+
+// 模拟支付回调
+export async function fuiouPayNotify(data) {
+  return request({
+    url: "/service/notify/fuiouPayNotify",
     method: "post",
     data,
   });

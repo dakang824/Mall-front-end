@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:
  * @Date: 2020-09-16 23:23:12
- * @LastEditTime: 2020-11-21 18:25:36
+ * @LastEditTime: 2020-12-15 22:23:10
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -95,7 +95,14 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior(to, from, savedPosition) {
+    return (
+      savedPosition || {
+        x: 0,
+        y: 0,
+      }
+    );
+  },
   routes,
 });
 

@@ -47,6 +47,7 @@
   import { mapState } from "vuex";
   import { baseURL } from "@/config";
   export default {
+    name: "Header",
     components: {},
     data() {
       return {};

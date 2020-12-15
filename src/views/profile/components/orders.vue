@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-11-22 10:30:32
+ * @LastEditTime: 2020-12-15 21:43:55
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -92,8 +92,8 @@
           >
             <div class="orders__item__th">
               <el-checkbox v-model="ite.checked" />
-              <i>{{ ite.create_time }}</i>
-              <i>订单号：{{ ite.trade_no }}</i>
+              <i>{{ ite.create_time | slice(0, 19) }}</i>
+              <i>订单号：{{ ite.trade_no }} 支付单号：{{ ite.pay_no }}</i>
               <i>{{ ite.store_name }}</i>
             </div>
 
@@ -178,7 +178,7 @@
                       <el-button
                         type="primary"
                         size="small"
-                        @click="handlePay(ite)"
+                        @click="handleChecking(ite)"
                       >
                         立即付款
                       </el-button>
@@ -249,13 +249,19 @@
     </el-tabs>
     <ordersDetail v-model="showDialog" :model="currentItems" />
 
-    <qrCode ref="qrCode" v-model="show" :type="pay_type" />
+    <qrCode ref="qrCode" v-model="showPayDialog" :type="payMoney.pay_type" />
+    <payPassword
+      v-model="showPayPassWord"
+      @confirm="handlePayPassWordConfirm"
+    />
   </div>
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import OrdersDetail from "./orders-detail.vue";
   import qrCode from "./qr-code.vue";
+  import PayPassword from "^/cart/components/pay-password.vue";
   import {
     findMyOrders,
     deleteMyOrders,
@@ -271,6 +277,7 @@
       Empty,
       OrdersDetail,
       qrCode,
+      PayPassword,
     },
     filters: {
       status(v, val) {
@@ -283,8 +290,9 @@
         showDialog: false,
         showPayDialog: false,
         show: false,
+        showPayPassWord: false,
         allChecked: false,
-        pay_type: 1,
+
         layout: "total, sizes, prev, pager, next, jumper",
         listLoading: true,
         total: 0,
@@ -381,7 +389,15 @@
             data: [],
           },
         ],
+        payMoney: {
+          pay_type: 1,
+        },
       };
+    },
+    computed: {
+      ...mapState({
+        userInfo: (state) => JSON.parse(state.user.userInfo),
+      }),
     },
     watch: {
       list: {
@@ -436,7 +452,7 @@
 
         this.result(msg);
       },
-      async handlePay(e) {
+      async handleChecking(e) {
         const {
           id: order_id,
           trade_no,
@@ -445,19 +461,32 @@
           pay_amount,
           pay_type,
         } = e;
-        const {
-          data: { pay_params },
-        } = await rePayOrder({
+        this.payMoney = {
           order_id,
           trade_no,
           discount,
           total_amount,
           pay_amount,
           pay_type,
-        });
-        if (pay_params.result_msg == "SUCCESS") {
+        };
+        const { accLevel, payPwd } = this.userInfo;
+        // 显示支付密码
+        if (accLevel == 2 && payPwd != null && pay_type === 4) {
+          this.showPayPassWord = true;
+        } else {
+          this.handlePay();
+        }
+      },
+      handlePayPassWordConfirm(e) {
+        this.payMoney.pay_pwd = e;
+        this.handlePay();
+      },
+      async handlePay() {
+        const {
+          data: { pay_params },
+        } = await rePayOrder(this.payMoney);
+        if ("qr_code" in pay_params && pay_params.qr_code) {
           this.showPayDialog = true;
-          this.pay_type = pay_type;
           this.$refs.qrCode.show(pay_params.qr_code);
         }
         this.fetchData();

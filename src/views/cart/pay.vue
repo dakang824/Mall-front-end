@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-12-06 17:25:45
+ * @LastEditTime: 2020-12-15 22:00:18
 -->
 <template>
   <div class="pay">
@@ -25,6 +25,12 @@
       </div>
     </div>
     <PayPassword v-model="show" @confirm="handleConfirm" />
+    <qrCode
+      ref="qrCode"
+      v-model="showPayDialog"
+      :type="postData.pay_type"
+      :post-data="resultData"
+    />
   </div>
 </template>
 
@@ -35,6 +41,7 @@
   import PayType from "./components/pay-type.vue";
   import PayFooter from "./components/pay-footer.vue";
   import PayPassword from "./components/pay-password.vue";
+  import QrCode from "^/profile/components/qr-code.vue";
   export default {
     components: {
       PayAddress,
@@ -42,6 +49,7 @@
       PayType,
       PayFooter,
       PayPassword,
+      QrCode,
     },
     data() {
       return {
@@ -59,7 +67,7 @@
             title: "选择支付方式",
           },
         ],
-
+        showPayDialog: false,
         show: false,
       };
     },
@@ -125,6 +133,7 @@
         }
 
         const { accLevel, payPwd } = this.userInfo;
+        // 显示支付密码
         if (accLevel == 2 && payPwd != null && pay_type === 4) {
           this.show = true;
         } else {
@@ -132,7 +141,14 @@
         }
       },
       async handlePay() {
-        await this.$store.dispatch("pay/unifityOrder", this.postData);
+        const {
+          data: { pay_params },
+        } = await this.$store.dispatch("pay/unifityOrder", this.postData);
+
+        if ("qr_code" in pay_params && pay_params.qr_code) {
+          this.showPayDialog = true;
+          this.$refs.qrCode.show(pay_params.qr_code);
+        }
         // 更新用户余额
         await this.$store.dispatch("profileWelcome/getMyInfo", {});
 
@@ -148,7 +164,7 @@
         );
         localStorage.removeItem("pay");
         const { pay_amount, address, name, mobile } = this.postData;
-        this.$router.push({
+        this.$router.replace({
           path: `/cart/pay-result`,
           query: {
             state: "success",
