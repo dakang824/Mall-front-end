@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-12-15 22:00:18
+ * @LastEditTime: 2020-12-16 22:32:52
 -->
 <template>
   <div class="pay">
@@ -29,7 +29,7 @@
       ref="qrCode"
       v-model="showPayDialog"
       :type="postData.pay_type"
-      :post-data="resultData"
+      @result="handleSuccess"
     />
   </div>
 </template>
@@ -141,14 +141,20 @@
         }
       },
       async handlePay() {
-        const {
-          data: { pay_params },
-        } = await this.$store.dispatch("pay/unifityOrder", this.postData);
+        let { data } = await this.$store.dispatch(
+          "pay/unifityOrder",
+          this.postData
+        );
 
-        if ("qr_code" in pay_params && pay_params.qr_code) {
+        if ("qr_code" in data.pay_params && data.pay_params.qr_code) {
           this.showPayDialog = true;
-          this.$refs.qrCode.show(pay_params.qr_code);
+          data.pay_type = this.postData.pay_type;
+          this.$refs.qrCode.show(data);
+          return;
         }
+        this.handleSuccess(true);
+      },
+      async handleSuccess(e) {
         // 更新用户余额
         await this.$store.dispatch("profileWelcome/getMyInfo", {});
 
@@ -167,7 +173,7 @@
         this.$router.replace({
           path: `/cart/pay-result`,
           query: {
-            state: "success",
+            state: e ? "success" : "error",
             params: JSON.stringify({
               pay_amount,
               address,

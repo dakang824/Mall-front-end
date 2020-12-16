@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-11-04 22:43:54
- * @LastEditTime: 2020-12-15 22:05:56
+ * @LastEditTime: 2020-12-16 22:30:44
 -->
 <template>
   <div class="qr-code">
@@ -19,7 +19,7 @@
 
 <script>
   import { mapState } from "vuex";
-  import { fuiouPayNotify } from "@/api/profile";
+  import { getOrderPayResult } from "@/api/profile";
   var QRCode = require("qrcode");
   export default {
     components: {},
@@ -36,6 +36,7 @@
     data() {
       return {
         time: "",
+        success: false,
       };
     },
     computed: {
@@ -45,10 +46,16 @@
     },
     methods: {
       handleClose() {
+        !this.success ? this.$emit("result", false) : "";
         this.$emit("input", false);
         clearInterval(this.time);
       },
-      show(qr_code) {
+      show(data) {
+        const {
+          pay_params: { qr_code },
+          pay_no,
+          pay_type,
+        } = data;
         this.$nextTick(() => {
           var canvas = document.getElementById("canvas");
           QRCode.toCanvas(canvas, qr_code, { width: 300, margin: 2 }, function (
@@ -57,12 +64,23 @@
             if (error) console.error(error);
           });
           this.time = setInterval(() => {
-            this.getResult();
+            this.getResult({ pay_no, pay_type });
           }, 2000);
         });
       },
-      async getResult() {
-        await fuiouPayNotify({ ...this.payData });
+      async getResult(e) {
+        const {
+          data: { payResult },
+        } = await getOrderPayResult(e);
+        if (payResult === "SUCCESS") {
+          this.success = true;
+          this.$message({
+            type: "success",
+            message: "支付成功",
+          });
+          this.$emit("result", true);
+          this.handleClose();
+        }
       },
     },
   };
