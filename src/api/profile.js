@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:个人中心
  * @Date: 2020-10-19 22:46:31
- * @LastEditTime: 2020-12-16 21:54:50
+ * @LastEditTime: 2020-12-18 21:05:17
  */
 import request from "@/utils/request";
 
@@ -211,6 +211,15 @@ export async function addRemittance(data) {
 export async function getOrderPayResult(data) {
   return request({
     url: "/service/front/web/getOrderPayResult",
+    method: "post",
+    data,
+  });
+}
+
+// 模拟支付回调
+export async function rePayOrder2(data) {
+  return request({
+    url: "/service/front/web/rePayOrder2",
     method: "post",
     data,
   });

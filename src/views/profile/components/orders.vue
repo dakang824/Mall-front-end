@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-12-15 21:43:55
+ * @LastEditTime: 2020-12-18 20:23:02
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -173,7 +173,9 @@
               >
                 <div v-if="ite.status !== 4" class="money">
                   <div v-if="ite.status === 0">
-                    <span>还剩00天00小时59分59秒</span>
+                    <span v-if="ite.apply_payback_time">
+                      还剩00天00小时59分59秒
+                    </span>
                     <p>
                       <el-button
                         type="primary"
@@ -485,11 +487,12 @@
         const {
           data: { pay_params },
         } = await rePayOrder(this.payMoney);
-        if ("qr_code" in pay_params && pay_params.qr_code) {
+        if (data.pay_params && pay_params.qr_code) {
           this.showPayDialog = true;
           this.$refs.qrCode.show(pay_params.qr_code);
+        } else {
+          this.fetchData();
         }
-        this.fetchData();
       },
       async handleDelAll() {
         const items = this.list[this.current].data

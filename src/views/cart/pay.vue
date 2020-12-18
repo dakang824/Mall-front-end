@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-12-16 22:32:52
+ * @LastEditTime: 2020-12-18 23:04:02
 -->
 <template>
   <div class="pay">
@@ -69,6 +69,7 @@
         ],
         showPayDialog: false,
         show: false,
+        payData: "",
       };
     },
     computed: {
@@ -141,6 +142,9 @@
         }
       },
       async handlePay() {
+        this.postData.orders.forEach((item) => {
+          item.pay_type = this.postData.pay_type;
+        });
         let { data } = await this.$store.dispatch(
           "pay/unifityOrder",
           this.postData
@@ -150,6 +154,7 @@
           this.showPayDialog = true;
           data.pay_type = this.postData.pay_type;
           this.$refs.qrCode.show(data);
+          this.payData = data;
           return;
         }
         this.handleSuccess(true);
@@ -169,16 +174,13 @@
           })
         );
         localStorage.removeItem("pay");
-        const { pay_amount, address, name, mobile } = this.postData;
         this.$router.replace({
           path: `/cart/pay-result`,
           query: {
             state: e ? "success" : "error",
             params: JSON.stringify({
-              pay_amount,
-              address,
-              name,
-              mobile,
+              payData: this.payData,
+              postData: this.postData,
             }),
           },
         });

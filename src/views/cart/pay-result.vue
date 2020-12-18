@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-12-15 21:01:47
+ * @LastEditTime: 2020-12-18 21:42:35
 -->
 <!--  -->
 <template>
@@ -10,7 +10,7 @@
     <div class="el-card">
       <div class="pay-reuslt__title">
         <el-image :src="getImg"></el-image>
-        您已成功付款
+        {{ state === "error" ? "尚未支付成功" : "您已成功付款" }}
       </div>
       <div class="pay-reuslt__result">
         <div v-if="state === 'error'">
@@ -19,22 +19,26 @@
           </p>
           <p>
             您可稍后
-            <span>刷新页面</span>
+            <a href="javascript:void(0)">
+              <span @click="handleReload">刷新页面</span>
+            </a>
             或前往
-            <span>我的订单</span>
+            <a href="javascript:void(0)">
+              <span @click="handleJump">我的订单</span>
+            </a>
             查看支付情况
           </p>
         </div>
         <div v-if="state === 'success'">
           <ul>
             <li>
-              收货地址: {{ params.address }} {{ params.name }}
-              {{ params.mobile }}
+              收货地址: {{ params.postData.address }} {{ params.postData.name }}
+              {{ params.postData.mobile }}
             </li>
             <li>
               实付款：¥
               <span style="padding-left: 8px">
-                {{ params.pay_amount | toFixed }}
+                {{ params.postData.pay_amount | toFixed }}
               </span>
             </li>
           </ul>
@@ -53,43 +57,62 @@
       <ul>
         <li>
           交易单号：
-          <span>39628432832743749087</span>
+          <span>{{ params.payData.pay_no }}</span>
         </li>
         <li>
           应付金额：
-          <span>¥90.00</span>
+          <span>¥{{ params.postData.total_amount }}</span>
         </li>
       </ul>
       <div class="box">
-        <PayType></PayType>
-        <el-image :src="require('@/assets/imgs/error-pay.png')"></el-image>
+        <PayType v-model="params.postData.pay_type"></PayType>
+        <el-image
+          :src="require('@/assets/imgs/error-pay.png')"
+          @click="handleChecking"
+        ></el-image>
       </div>
     </div>
+    <PayPassword v-model="show" @confirm="handleConfirm" />
+    <qrCode
+      ref="qrCode"
+      v-model="showPayDialog"
+      :type="params.postData.pay_type"
+      @result="handleSuccess"
+    />
   </div>
 </template>
 
 <script>
+  import { mapState } from "vuex";
+  import { rePayOrder2 } from "@/api/profile";
   import PayType from "./components/pay-type.vue";
+  import PayPassword from "./components/pay-password.vue";
+  import QrCode from "^/profile/components/qr-code.vue";
   export default {
     name: "PayResult",
-    components: { PayType },
+    components: { PayType, PayPassword, QrCode },
     data() {
       return {
         state: "error", //两种状态 error success
         params: {},
+        show: false,
+        showPayDialog: false,
       };
     },
     computed: {
+      ...mapState({
+        userInfo: (state) => JSON.parse(state.user.userInfo),
+      }),
       getImg() {
         return require("@/assets/imgs/" +
           (this.state === "error" ? "pay-error.png" : "pay-success.png"));
       },
     },
+
     mounted() {
       this.state = this.$route.query.state;
       this.params = JSON.parse(this.$route.query.params);
       this.$store.commit("cart/setCartState", this.state === "success" ? 4 : 3);
-
       // var i = 0;
       // window.addEventListener(
       //   "popstate",
@@ -104,11 +127,62 @@
       // );
     },
     methods: {
+      handleReload() {
+        location.reload();
+      },
+      handleConfirm(e) {
+        this.params.postData.pay_pwd = e;
+        this.handleClick();
+      },
       handleJump() {
-        this.$router.push({
+        this.$router.replace({
           path: "/profile",
           query: { page: "Orders" },
         });
+      },
+      handleSuccess() {
+        if (e) {
+          this.state = "success";
+        }
+      },
+      handleChecking() {
+        const { accLevel, payPwd } = this.userInfo;
+        // 显示支付密码
+        if (
+          accLevel == 2 &&
+          payPwd != null &&
+          this.params.postData.pay_type === 4
+        ) {
+          this.show = true;
+        } else {
+          this.handleClick();
+        }
+      },
+      async handleClick() {
+        const { pay_no } = this.params.payData;
+        const {
+          pay_type,
+          discount,
+          total_amount,
+          pay_amount,
+          pay_pwd,
+        } = this.params.postData;
+        const { data } = await rePayOrder2({
+          pay_no,
+          discount,
+          total_amount,
+          pay_amount,
+          pay_type,
+          pay_pwd,
+        });
+        if (data.pay_params && data.pay_params.qr_code) {
+          this.showPayDialog = true;
+          data.pay_type = pay_type;
+          this.$refs.qrCode.show(data);
+          return;
+        } else {
+          this.state = "success";
+        }
       },
     },
   };
