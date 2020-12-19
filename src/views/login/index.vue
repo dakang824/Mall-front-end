@@ -151,6 +151,7 @@
     },
     methods: {
       async submitForm(formName) {
+        this.$store.commit("user/resetUserInfo");
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
             const form = JSON.parse(JSON.stringify(this.form));

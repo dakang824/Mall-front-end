@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-12-18 20:23:02
+ * @LastEditTime: 2020-12-19 18:22:40
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -93,7 +93,7 @@
             <div class="orders__item__th">
               <el-checkbox v-model="ite.checked" />
               <i>{{ ite.create_time | slice(0, 19) }}</i>
-              <i>订单号：{{ ite.trade_no }} 支付单号：{{ ite.pay_no }}</i>
+              <i>订单号：{{ ite.trade_no }}</i>
               <i>{{ ite.store_name }}</i>
             </div>
 
@@ -205,7 +205,7 @@
                         确认收货
                       </el-button>
                     </p>
-                    <p v-if="ite.status === 3 && ite.post_extend < 0">
+                    <p v-if="ite.status === 3">
                       <el-button
                         size="small"
                         type="info"
@@ -412,6 +412,9 @@
       },
     },
     created() {
+      this.fetchData();
+    },
+    activated() {
       this.fetchData();
     },
     methods: {
