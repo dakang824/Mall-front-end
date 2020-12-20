@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-12-06 18:14:35
+ * @LastEditTime: 2020-12-20 21:58:14
  */
 import { unifityOrder } from "@/api/pay";
 const state = {
@@ -60,6 +60,7 @@ const mutations = {
   },
   // 计算邮费
   computedPost(state) {
+    console.log(state.postData);
     const { orders, province_code, pay_amount } = state.postData;
     state.postData.total_amount = orders
       .map((it) => {
@@ -70,6 +71,7 @@ const mutations = {
               const posttemplateArea = item.postTemplate.areas.filter(
                 (i) => (province_code & i.area) > 0
               );
+              console.log(item.postTemplate, posttemplateArea);
 
               if (posttemplateArea.length) {
                 const {
@@ -92,9 +94,15 @@ const mutations = {
                 if (base_weight > prod_weight) {
                   item.post_amount = base_price;
                 } else {
-                  item.post_amount =
-                    base_price +
-                    ((prod_weight - base_weight) / more_weight) * more_price;
+                  if (more_weight === 0 || more_price === 0) {
+                    item.post_amount =
+                      base_price +
+                      ((prod_weight - base_weight) / base_weight) * base_price;
+                  } else {
+                    item.post_amount =
+                      base_price +
+                      ((prod_weight - base_weight) / more_weight) * more_price;
+                  }
                 }
               } else {
                 item.post_amount = 0;
@@ -103,6 +111,7 @@ const mutations = {
             })
             .reduce((a, b) => a + b, 0)
             .toFixed(2) * 1;
+
         return (it.total_amount = it.pay_amount + it.post_amount);
       })
       .reduce((a, b) => a + b, 0);
