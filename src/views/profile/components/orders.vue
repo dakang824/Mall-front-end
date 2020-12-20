@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-12-19 18:22:40
+ * @LastEditTime: 2020-12-20 23:24:00
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -205,7 +205,7 @@
                         确认收货
                       </el-button>
                     </p>
-                    <p v-if="ite.status === 3">
+                    <p v-if="ite.status === 3 && !(ite.post_extend > 0)">
                       <el-button
                         size="small"
                         type="info"
