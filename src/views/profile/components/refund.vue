@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-11-11 23:42:08
+ * @LastEditTime: 2020-12-20 23:32:18
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -56,7 +56,7 @@
             class="orders__item"
           >
             <div class="orders__item__th">
-              <i>{{ ite.create_time }}</i>
+              <i>{{ ite.create_time | slice(0, 19) }}</i>
               <i>订单号：{{ ite.trade_no }}</i>
               <i>{{ ite.store_name }}</i>
             </div>
@@ -94,7 +94,7 @@
                   <span v-if="ite.discount">
                     优惠金额:￥{{ ite.discount | toFixed }}
                   </span>
-                  <span>待付款：</span>
+                  <!-- <span>待付款：</span> -->
                   <i>￥{{ (ite.total_amount - ite.discount) | toFixed }}</i>
                 </div>
               </div>
@@ -105,9 +105,9 @@
                 }"
               >
                 <div class="money">
-                  <span>等待卖家确认</span>
-                  <span>卖家已确认</span>
-                  <span>卖家拒绝退款</span>
+                  <span v-if="ite.status === 6">等待卖家确认</span>
+                  <span v-if="ite.status === 7">卖家已确认</span>
+                  <span v-if="ite.status === 8">卖家拒绝退款</span>
                 </div>
               </div>
               <div
@@ -117,9 +117,9 @@
                 }"
               >
                 <div class="money">
-                  <span>待确认</span>
-                  <span>退款完成</span>
-                  <span>退款失败</span>
+                  <span v-if="ite.status === 6">待确认</span>
+                  <span v-if="ite.status === 7">退款完成</span>
+                  <span v-if="ite.status === 8">退款失败</span>
                 </div>
               </div>
             </div>
@@ -236,6 +236,9 @@
       };
     },
     created() {
+      this.fetchData();
+    },
+    activated() {
       this.fetchData();
     },
     methods: {
