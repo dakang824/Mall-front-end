@@ -2,18 +2,23 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 充值页面
  * @Date: 2020-10-28 23:21:12
- * @LastEditTime: 2020-12-15 21:44:24
+ * @LastEditTime: 2020-12-22 21:33:30
 -->
 <template>
   <div class="recharge el-card">
-    <qrCode ref="qrCode" v-model="show" :type="params.pay_type" />
+    <qrCode
+      ref="qrCode"
+      v-model="show"
+      :type="params.pay_type"
+      @result="handleSuccess"
+    />
     <el-tabs value="first">
       <el-tab-pane label="在线充值" name="first">
         <el-form ref="ruleForm" :model="params" :rules="rules">
           <div class="recharge__box">
             <p>
               <i>当前余额:</i>
-              <span>0.00元</span>
+              <span>{{ JSON.parse(userInfo).balance }}元</span>
             </p>
             <p>
               <i>预付金额:</i>
@@ -38,6 +43,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import { unifityRechargeOrder } from "@/api/profile";
   import PayType from "@/views/cart/components/pay-type.vue";
   import qrCode from "./qr-code.vue";
@@ -58,16 +64,30 @@
         },
       };
     },
+    computed: {
+      ...mapState({
+        userInfo: (state) => state.user.userInfo,
+      }),
+    },
     methods: {
+      handleSuccess(e) {
+        if (e) {
+          this.$store.dispatch("profileWelcome/getMyInfo", {});
+        } else {
+          this.$message({
+            message: "支付失败",
+            type: "error",
+          });
+        }
+      },
       handleComfirm() {
         this.$refs["ruleForm"].validate(async (valid) => {
           if (valid) {
-            const {
-              data: { pay_params },
-            } = await unifityRechargeOrder(this.params);
-            if ("qr_code" in pay_params && pay_params.qr_code) {
+            const { data } = await unifityRechargeOrder(this.params);
+            if ("qr_code" in data.pay_params && data.pay_params.qr_code) {
               this.show = true;
-              this.$refs.qrCode.show(pay_params.qr_code);
+              data.pay_type = this.params.pay_type;
+              this.$refs.qrCode.show(data);
             }
           } else {
             return false;
