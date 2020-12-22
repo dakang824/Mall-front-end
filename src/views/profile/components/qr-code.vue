@@ -80,6 +80,11 @@
           });
           this.$emit("result", true);
           this.handleClose();
+        } else {
+          this.$message({
+            message: "支付失败",
+            type: "error",
+          });
         }
       },
     },

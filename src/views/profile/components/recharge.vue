@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 充值页面
  * @Date: 2020-10-28 23:21:12
- * @LastEditTime: 2020-12-22 21:33:30
+ * @LastEditTime: 2020-12-22 21:42:12
 -->
 <template>
   <div class="recharge el-card">
@@ -71,14 +71,7 @@
     },
     methods: {
       handleSuccess(e) {
-        if (e) {
-          this.$store.dispatch("profileWelcome/getMyInfo", {});
-        } else {
-          this.$message({
-            message: "支付失败",
-            type: "error",
-          });
-        }
+        e ? this.$store.dispatch("profileWelcome/getMyInfo", {}) : "";
       },
       handleComfirm() {
         this.$refs["ruleForm"].validate(async (valid) => {
