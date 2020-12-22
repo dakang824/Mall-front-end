@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-12-06 18:21:24
+ * @LastEditTime: 2020-12-22 20:57:32
 -->
 <!-- 商品详情 -->
 <template>
@@ -26,14 +26,19 @@
               <span v-else>四川正宗家用烧菜烧豆腐</span>
             </div>
             <div class="info__money">
-              <p>
+              <!-- <p>
                 价格：
                 <i>¥{{ getPrice.oriPrice }}</i>
-              </p>
+              </p> -->
               <p>
-                活动价：
+                售价：
                 <span>¥{{ getPrice.sellPrice }}</span>
               </p>
+              <p>
+                批发价：
+                <b style="color: #f00">¥{{ getPrice.w_price }}</b>
+              </p>
+              <p>批发数量：{{ getPrice.w_num }}</p>
             </div>
             <div v-if="type == 4" class="info__formula">
               <span>菜谱配方：</span>
