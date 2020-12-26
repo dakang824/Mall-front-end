@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-12-26 12:06:56
+ * @LastEditTime: 2020-12-26 17:23:04
 -->
 <template>
   <div class="pay">
@@ -178,7 +178,7 @@
           this.postData
         );
 
-        if ("qr_code" in data.pay_params && data.pay_params.qr_code) {
+        if (data.pay_params && data.pay_params.qr_code) {
           this.showPayDialog = true;
           data.pay_type = this.postData.pay_type;
           this.$refs.qrCode.show(data);

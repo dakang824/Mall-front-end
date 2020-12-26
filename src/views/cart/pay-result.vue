@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-12-26 13:47:30
+ * @LastEditTime: 2020-12-26 16:51:26
 -->
 <!--  -->
 <template>
@@ -141,7 +141,7 @@
           query: { page: "Orders" },
         });
       },
-      handleSuccess() {
+      handleSuccess(e) {
         if (e) {
           this.state = "success";
         }

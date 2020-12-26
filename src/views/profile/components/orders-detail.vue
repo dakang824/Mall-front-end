@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-22 10:17:23
+ * @LastEditTime: 2020-12-26 17:30:36
 -->
 <template>
   <div class="orders-detail">
@@ -70,7 +70,10 @@
                 {{ item.spe_name }}
               </div>
               <div class="col" :style="{ width: title[2].width + 'px' }">
-                ¥ {{ item.sell_price }}
+                ¥
+                {{
+                  item.quantity >= item.w_num ? item.w_price : item.sell_price
+                }}
               </div>
               <div class="col" :style="{ width: title[3].width + 'px' }">
                 {{ item.quantity }}
@@ -89,13 +92,11 @@
           </div>
         </div>
         <div class="footer">
-          商品总额：￥{{ model.total_amount | toFixed }}+ 运费：￥{{
+          商品总额：￥{{ model.pay_amount | toFixed }}+ 运费：￥{{
             model.post_amount | toFixed
           }}
           = 订单总金额：
-          <span>
-            ￥{{ (model.total_amount + model.post_amount) | toFixed }}
-          </span>
+          <span>￥{{ (model.pay_amount + model.post_amount) | toFixed }}</span>
         </div>
       </div>
     </el-dialog>
