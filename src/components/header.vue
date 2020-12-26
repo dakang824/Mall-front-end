@@ -68,6 +68,7 @@
       },
       handleLoginOut() {
         this.$store.commit("user/resetUserInfo");
+        location.reload();
       },
       handleJumpStore() {
         window.open(

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情侧边栏
  * @Date: 2020-10-05 23:21:38
- * @LastEditTime: 2020-11-19 17:08:09
+ * @LastEditTime: 2020-12-26 15:40:19
 -->
 
 <template>
@@ -95,15 +95,15 @@
     },
     methods: {
       handleItemClick(e) {
-        window.open(`#/store?sub_cate_id=${e}&id=${this.storeId}`);
+        this.$router.push(`/store?sub_cate_id=${e}&id=${this.storeId}`);
       },
       handleClick(e) {
-        window.open(`#/goods-detail?type=${e.type}&id=${e.id}`);
-        // this.$router.push({
-        //   path: "/goods-detail",
-        //   query: { type: e.type, id: e.id },
-        // });
-        // this.getData();
+        // window.open(`#/goods-detail?type=${e.type}&id=${e.id}`);
+        this.$router.replace({
+          path: "/goods-detail",
+          query: { type: e.type, id: e.id },
+        });
+        this.getData();
       },
     },
   };

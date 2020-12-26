@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-12-22 20:57:32
+ * @LastEditTime: 2020-12-26 15:37:50
 -->
 <!-- 商品详情 -->
 <template>

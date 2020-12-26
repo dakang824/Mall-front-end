@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人资料
  * @Date: 2020-10-24 19:28:43
- * @LastEditTime: 2020-11-21 16:48:54
+ * @LastEditTime: 2020-12-26 14:42:12
 -->
 <template>
   <div class="account el-card">
@@ -91,7 +91,11 @@
           <el-col :span="5">
             <div class="col1">
               <el-image
-                :src="require('@/assets/imgs/profile-error.png')"
+                :src="
+                  userInfo.payPwd
+                    ? require('@/assets/imgs/profile-right.png')
+                    : require('@/assets/imgs/profile-error.png')
+                "
                 style="widows: 32px"
               ></el-image>
               支付密码
@@ -118,6 +122,7 @@
 </template>
 
 <script>
+  import { mapState } from "vuex";
   import { modifyMyInfo } from "@/api/profile";
   import ModifyPassWord from "./modifyPassWord";
   import ModifyPhone from "./modifyPhone";
@@ -132,6 +137,11 @@
         showUpdatePassWord: false,
         showUpdatePhone: false,
       };
+    },
+    computed: {
+      ...mapState({
+        userInfo: (state) => JSON.parse(state.user.userInfo),
+      }),
     },
     created() {
       this.userInfo = JSON.parse(this.$store.state.user.userInfo);

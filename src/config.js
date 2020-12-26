@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 20:10:07
- * @LastEditTime: 2020-11-21 13:57:44
+ * @LastEditTime: 2020-12-26 15:05:00
  */
 module.exports = {
   // 开发以及部署时的URL 如"/test/"
@@ -48,4 +48,12 @@ module.exports = {
   //无权限code
   noPermissionCode: 401,
   fileUpload: "/service/common/fileUpload",
+  routesWhiteList: [
+    "/login",
+    "/home",
+    "/404",
+    "/goods-detail",
+    "/goods-list",
+    "/store",
+  ],
 };

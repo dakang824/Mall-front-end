@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-11-22 19:05:58
+ * @LastEditTime: 2020-12-26 15:12:24
 -->
 <template>
   <div class="modifyPassWord">
@@ -113,7 +113,7 @@
           <el-button
             type="primary"
             style="width: 194px; margin-top: 70px"
-            @click="handleClose"
+            @click="handleOver"
           >
             关闭
           </el-button>
@@ -219,6 +219,11 @@
           message,
           type,
         });
+      },
+      handleOver() {
+        this.$store.commit("user/resetUserInfo");
+        this.handleClose();
+        location.reload();
       },
       handleClose() {
         this.step1 = {
