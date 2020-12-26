@@ -16,6 +16,7 @@
       <div class="w">
         <el-form
           ref="form"
+          v-loading="loading"
           :rules="rules"
           :model="form"
           label-width="80px"
@@ -151,6 +152,7 @@
     },
     methods: {
       async submitForm(formName) {
+        this.loading = true;
         this.$store.commit("user/resetUserInfo");
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
@@ -164,6 +166,7 @@
           } else {
             return false;
           }
+          this.loading = false;
         });
       },
       refreshCode() {

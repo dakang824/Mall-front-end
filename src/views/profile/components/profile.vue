@@ -2,12 +2,13 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 个人资料
  * @Date: 2020-10-24 19:28:43
- * @LastEditTime: 2020-10-24 23:49:26
+ * @LastEditTime: 2020-12-26 18:41:39
 -->
 <template>
   <div class="profile el-card">
     <el-tabs value="first">
       <el-tab-pane label="基本信息" name="first">
+        <image :src="userInfo.icon | imgBaseUrl"></image>
         <el-form
           ref="elForm"
           :model="userInfo"
@@ -152,7 +153,10 @@
         });
       },
       handleAvatarSuccess(e) {
-        this.userInfo.icon = e.data.tempUrl;
+        let data = JSON.parse(JSON.stringify(this.userInfo));
+        data.icon = e.data.tempUrl;
+        this.$store.commit("user/setUserInfo", JSON.stringify(data));
+        this.userInfo = JSON.parse(this.$store.state.user.userInfo);
       },
       beforeAvatarUpload(file) {
         let isRightSize = file.size / 1024 / 1024 < 2;
@@ -200,6 +204,9 @@
           display: block;
           width: 100px;
           height: 100px;
+          font-size: 43px;
+          line-height: 86px;
+          color: #ccc;
         }
       }
 
