@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-12-20 21:58:34
+ * @LastEditTime: 2020-12-26 12:06:56
 -->
 <template>
   <div class="pay">
@@ -42,6 +42,7 @@
   import PayFooter from "./components/pay-footer.vue";
   import PayPassword from "./components/pay-password.vue";
   import QrCode from "^/profile/components/qr-code.vue";
+  import filters from "@/filters";
   export default {
     components: {
       PayAddress,
@@ -145,6 +146,33 @@
         this.postData.orders.forEach((item) => {
           item.pay_type = this.postData.pay_type;
         });
+        this.postData.total_amount = filters.getDecimal(
+          this.postData.total_amount
+        );
+        this.postData.pay_amount = filters.getDecimal(this.postData.pay_amount);
+        const {
+          userId = this.userInfo.id,
+          total_amount,
+          pay_amount,
+          pay_type,
+          name,
+          mobile,
+          orders,
+        } = this.postData;
+
+        // 生成签名
+        this.postData.sign = await this.$store.dispatch(
+          "pay/generateSignature",
+          {
+            userId,
+            total_amount,
+            pay_amount,
+            pay_type,
+            name,
+            mobile,
+            orders,
+          }
+        );
         let { data } = await this.$store.dispatch(
           "pay/unifityOrder",
           this.postData

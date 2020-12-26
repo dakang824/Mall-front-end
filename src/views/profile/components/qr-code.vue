@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 
  * @Date: 2020-11-04 22:43:54
- * @LastEditTime: 2020-12-16 22:30:44
+ * @LastEditTime: 2020-12-26 11:55:45
 -->
 <template>
   <div class="qr-code">
@@ -46,7 +46,13 @@
     },
     methods: {
       handleClose() {
-        !this.success ? this.$emit("result", false) : "";
+        if (!this.success) {
+          this.$message({
+            message: "支付失败",
+            type: "error",
+          });
+          this.$emit("result", false);
+        }
         this.$emit("input", false);
         clearInterval(this.time);
       },
@@ -80,11 +86,6 @@
           });
           this.$emit("result", true);
           this.handleClose();
-        } else {
-          this.$message({
-            message: "支付失败",
-            type: "error",
-          });
         }
       },
     },
