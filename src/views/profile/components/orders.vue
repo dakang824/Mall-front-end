@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-12-20 23:24:00
+ * @LastEditTime: 2020-12-26 14:13:11
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -264,6 +264,7 @@
   import OrdersDetail from "./orders-detail.vue";
   import qrCode from "./qr-code.vue";
   import PayPassword from "^/cart/components/pay-password.vue";
+  import filters from "@/filters";
   import {
     findMyOrders,
     deleteMyOrders,
@@ -466,6 +467,12 @@
           pay_amount,
           pay_type,
         } = e;
+        const sign = await this.$store.dispatch("pay/generateSignature", {
+          userId: this.userInfo.id,
+          total_amount: filters.getDecimal(total_amount),
+          pay_amount: filters.getDecimal(pay_amount),
+          pay_type,
+        });
         this.payMoney = {
           order_id,
           trade_no,
@@ -473,6 +480,7 @@
           total_amount,
           pay_amount,
           pay_type,
+          sign,
         };
         const { accLevel, payPwd } = this.userInfo;
         // 显示支付密码
@@ -487,12 +495,11 @@
         this.handlePay();
       },
       async handlePay() {
-        const {
-          data: { pay_params },
-        } = await rePayOrder(this.payMoney);
-        if (data.pay_params && pay_params.qr_code) {
+        const { data } = await rePayOrder(this.payMoney);
+        if (data.pay_params && data.pay_params.qr_code) {
           this.showPayDialog = true;
-          this.$refs.qrCode.show(pay_params.qr_code);
+          data.pay_type = this.payMoney.pay_type;
+          this.$refs.qrCode.show(data);
         } else {
           this.fetchData();
         }

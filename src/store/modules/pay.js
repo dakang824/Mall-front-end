@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-12-26 11:59:48
+ * @LastEditTime: 2020-12-26 14:13:35
  */
 import { unifityOrder } from "@/api/pay";
 import sha1 from "sha1";
@@ -201,18 +201,13 @@ const actions = {
 
   // 生成签名
   generateSignature(state, ...args) {
-    let signString = ["haichusignkey"];
-    const sign = signString
+    const sign = ["haichusignkey"]
       .concat(
         Object.values(...args).map((item) =>
           Array.isArray(item) ? JSON.stringify(item).toString() : item
         )
       )
       .join("|");
-
-    console.log(sign);
-    console.log(sha1(sign));
-
     return sha1(sign);
   },
 };

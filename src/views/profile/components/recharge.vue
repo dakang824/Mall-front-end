@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 充值页面
  * @Date: 2020-10-28 23:21:12
- * @LastEditTime: 2020-12-22 21:42:12
+ * @LastEditTime: 2020-12-26 14:09:08
 -->
 <template>
   <div class="recharge el-card">
@@ -18,7 +18,7 @@
           <div class="recharge__box">
             <p>
               <i>当前余额:</i>
-              <span>{{ JSON.parse(userInfo).balance }}元</span>
+              <span>{{ userInfo.balance }}元</span>
             </p>
             <p>
               <i>预付金额:</i>
@@ -47,6 +47,7 @@
   import { unifityRechargeOrder } from "@/api/profile";
   import PayType from "@/views/cart/components/pay-type.vue";
   import qrCode from "./qr-code.vue";
+  import filters from "@/filters";
   export default {
     name: "Recharge",
     components: { PayType, qrCode },
@@ -66,7 +67,7 @@
     },
     computed: {
       ...mapState({
-        userInfo: (state) => state.user.userInfo,
+        userInfo: (state) => JSON.parse(state.user.userInfo),
       }),
     },
     methods: {
@@ -76,6 +77,14 @@
       handleComfirm() {
         this.$refs["ruleForm"].validate(async (valid) => {
           if (valid) {
+            this.params.sign = await this.$store.dispatch(
+              "pay/generateSignature",
+              {
+                userId: this.userInfo.id,
+                amount: filters.getDecimal(this.params.amount),
+                pay_type: this.params.pay_type,
+              }
+            );
             const { data } = await unifityRechargeOrder(this.params);
             if ("qr_code" in data.pay_params && data.pay_params.qr_code) {
               this.show = true;

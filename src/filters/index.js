@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 22:25:48
- * @LastEditTime: 2020-12-26 12:04:10
+ * @LastEditTime: 2020-12-26 14:04:03
  */
 import parseTime from "@/utils/parse-time";
 import currency from "@/utils/currency";
@@ -22,7 +22,7 @@ function hiddenTel(val) {
 }
 // 得到小数
 function getDecimal(val, digit = 1) {
-  return String(val).includes(".") ? val : val.toFixed(digit);
+  return String(val).includes(".") ? val : Number(val).toFixed(digit);
 }
 export default {
   parseTime,

@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-12-18 21:42:35
+ * @LastEditTime: 2020-12-26 13:47:30
 -->
 <!--  -->
 <template>
@@ -88,6 +88,7 @@
   import PayType from "./components/pay-type.vue";
   import PayPassword from "./components/pay-password.vue";
   import QrCode from "^/profile/components/qr-code.vue";
+  import filters from "@/filters";
   export default {
     name: "PayResult",
     components: { PayType, PayPassword, QrCode },
@@ -160,6 +161,7 @@
       },
       async handleClick() {
         const { pay_no } = this.params.payData;
+
         const {
           pay_type,
           discount,
@@ -167,6 +169,14 @@
           pay_amount,
           pay_pwd,
         } = this.params.postData;
+
+        const sign = await this.$store.dispatch("pay/generateSignature", {
+          userId: this.userInfo.id,
+          total_amount: filters.getDecimal(total_amount),
+          pay_amount: filters.getDecimal(pay_amount),
+          pay_type,
+        });
+
         const { data } = await rePayOrder2({
           pay_no,
           discount,
@@ -174,6 +184,7 @@
           pay_amount,
           pay_type,
           pay_pwd,
+          sign,
         });
         if (data.pay_params && data.pay_params.qr_code) {
           this.showPayDialog = true;
