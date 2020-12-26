@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-12-26 17:30:36
+ * @LastEditTime: 2020-12-26 18:55:20
 -->
 <template>
   <div class="orders-detail">
@@ -41,7 +41,11 @@
               <p>关闭原因：订单超时未支付，系统自动关闭</p>
             </div>
             <div v-else-if="model.status === 4">交易成功</div>
-            <div v-else>卖家已发货，等待买家确认收</div>
+            <div v-else-if="model.status === 6">
+              退款申请已提交,等待卖家退款
+            </div>
+            <div v-else-if="model.status === 7">已退款</div>
+            <div v-else-if="model.status === 3">卖家已发货，等待买家确认收</div>
           </div>
         </div>
       </div>
