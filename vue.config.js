@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-10-09 23:07:12
- * @LastEditTime: 2020-12-02 18:05:17
+ * @LastEditTime: 2021-01-12 13:34:03
  */
 const path = require("path");
 const CompressionPlugin = require("compression-webpack-plugin");
@@ -36,7 +36,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       "/service": {
-        target: "http://47.101.210.167/",
+        target: "http://106.14.36.72/",
         changeOrigin: true,
       },
     },

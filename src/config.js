@@ -1,7 +1,7 @@
 /*
  * @Author: yukang 1172248038@qq.com
  * @Date: 2020-09-20 20:10:07
- * @LastEditTime: 2020-12-26 15:05:00
+ * @LastEditTime: 2021-01-12 13:33:54
  */
 module.exports = {
   // 开发以及部署时的URL 如"/test/"
@@ -20,7 +20,7 @@ module.exports = {
   baseURL:
     process.env.NODE_ENV === "development"
       ? "/"
-      : "http://47.101.210.167/" || "vab-mock-server",
+      : "http://106.14.36.72/" || "vab-mock-server",
   //配后端数据的接收方式application/json;charset=UTF-8或者application/x-www-form-urlencoded;charset=UTF-8
   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
   //需要加loading层的请求，防止重复提交
