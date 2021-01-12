@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2020-12-26 16:11:32
+ * @LastEditTime: 2021-01-12 22:31:09
 -->
 <!-- 商品详情 -->
 <template>
@@ -34,11 +34,13 @@
                 售价：
                 <span>¥{{ getPrice.sellPrice }}</span>
               </p>
-              <p>
-                批发价：
-                <b style="color: #f00">¥{{ getPrice.w_price }}</b>
-              </p>
-              <p>批发数量：{{ getPrice.w_num }}</p>
+              <div v-if="type !== 4">
+                <p>
+                  批发价：
+                  <b style="color: #f00">¥{{ getPrice.w_price }}</b>
+                </p>
+                <p>起批数量：{{ getPrice.w_num }}</p>
+              </div>
             </div>
             <div v-if="type == 4" class="info__formula">
               <span>菜谱配方：</span>
@@ -72,7 +74,7 @@
                   @change="handleChange"
                 ></el-input-number>
                 件
-                <span>库存{{ product.specList[0].stock }}件</span>
+                <span>库存{{ product.specList[specCurrent].stock }}件</span>
               </div>
             </div>
 
@@ -170,12 +172,16 @@
         this.$utils.verifyLogin({
           success: async (e) => {
             const store = JSON.parse(JSON.stringify(this.store));
-            store.product.specList = [this.product.specList[this.specCurrent]];
+            const {
+              specCurrent,
+              product: { specList },
+            } = this;
+            store.product.specList = [specList[specCurrent]];
             store.unitPrice =
-              store.product.specList[0].w_num &&
-              store.product.specList[0].w_num <= this.num
-                ? store.product.specList[0].w_price
-                : store.product.specList[0].sellPrice;
+              specList[specCurrent].w_num &&
+              specList[specCurrent].w_num <= this.num
+                ? specList[specCurrent].w_price
+                : specList[specCurrent].sellPrice;
             store.quantity = this.num;
             store.itemId = store.product.id;
             store.checked = true;

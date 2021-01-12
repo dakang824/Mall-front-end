@@ -17,7 +17,7 @@
       <el-main class="category__right">
         <el-carousel trigger="click" height="430px">
           <el-carousel-item v-for="item in banner" :key="item.id">
-            <a :href="item.url">
+            <a :href="item.url ? item.url : 'javascript:void(0)'">
               <el-image
                 :src="item.pic_path | imgBaseUrl"
                 fit="contain"

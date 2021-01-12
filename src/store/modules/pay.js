@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2020-12-26 14:13:35
+ * @LastEditTime: 2021-01-12 22:55:39
  */
 import { unifityOrder } from "@/api/pay";
 import sha1 from "sha1";
@@ -61,7 +61,6 @@ const mutations = {
   },
   // 计算邮费
   computedPost(state) {
-    console.log(state.postData);
     const { orders, province_code, pay_amount } = state.postData;
     state.postData.total_amount = orders
       .map((it) => {
@@ -72,7 +71,6 @@ const mutations = {
               const posttemplateArea = item.postTemplate.areas.filter(
                 (i) => (province_code & i.area) > 0
               );
-              console.log(item.postTemplate, posttemplateArea);
 
               if (posttemplateArea.length) {
                 const {
@@ -115,10 +113,14 @@ const mutations = {
 
         return (it.total_amount = it.pay_amount + it.post_amount);
       })
-      .reduce((a, b) => a + b, 0);
+      .reduce((a, b) => {
+        return a + b;
+      }, 0);
 
     state.postData.pay_amount =
       state.postData.total_amount - state.postData.discount;
+
+    console.log(state.postData);
   },
 };
 const actions = {

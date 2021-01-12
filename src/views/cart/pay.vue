@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2020-12-26 17:23:04
+ * @LastEditTime: 2021-01-12 22:54:26
 -->
 <template>
   <div class="pay">
@@ -70,7 +70,7 @@
         ],
         showPayDialog: false,
         show: false,
-        payData: "",
+        payData: null,
       };
     },
     computed: {
@@ -87,18 +87,19 @@
       },
     },
     destroyed() {
-      this.$store.commit("pay/clearPostData");
+      // this.$store.commit("pay/clearPostData");
+      localStorage.removeItem("pay");
     },
     async created() {
       this.$store.commit("cart/setCartState", 2);
-      let obj = null;
       if (this.$route.params.obj) {
-        obj = JSON.parse(this.$route.params.obj);
+        const obj = JSON.parse(this.$route.params.obj);
         localStorage.setItem("pay", this.$route.params.obj);
+        this.setStore(obj);
       } else {
-        obj = JSON.parse(localStorage.getItem("pay"));
+        const obj = JSON.parse(localStorage.getItem("pay"));
+        this.setStore(obj);
       }
-      this.setStore(obj);
     },
     methods: {
       async handleChecking() {
