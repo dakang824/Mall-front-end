@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确定订单
  * @Date: 2020-10-04 18:36:18
- * @LastEditTime: 2020-10-25 17:26:11
+ * @LastEditTime: 2021-01-13 21:04:57
 -->
 <template>
   <div class="box footer">
@@ -11,7 +11,7 @@
         实付款：
         <span>
           <i>¥</i>
-          {{ postData.pay_amount }}
+          {{ postData.pay_amount | toFixed }}
         </span>
       </p>
       <p>寄送至：{{ postData.address }}</p>

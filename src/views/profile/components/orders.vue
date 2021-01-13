@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2020-12-26 14:13:11
+ * @LastEditTime: 2021-01-13 21:09:32
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -122,7 +122,11 @@
                     </el-link>
                   </div>
                   <span :style="{ width: 9 + title[1].width * 1 + 'px' }">
-                    {{ items.sell_price | toFixed }}
+                    {{
+                      items.quantity >= items.w_num
+                        ? items.w_price
+                        : items.sell_price | toFixed
+                    }}
                   </span>
                   <i
                     :style="{ width: title[2].width + 'px' }"

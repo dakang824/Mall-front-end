@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2021-01-12 22:31:09
+ * @LastEditTime: 2021-01-13 20:32:43
 -->
 <!-- 商品详情 -->
 <template>
@@ -143,6 +143,7 @@
           specList: [],
         },
         oriPrice: "",
+        id: null,
       };
     },
     computed: {
@@ -165,7 +166,13 @@
     mounted() {},
     created() {},
     activated() {
-      this.getData();
+      if (this.id !== this.$route.query.id) {
+        this.formula = [["序号"], ["食材"], ["重量(份)"]];
+        this.num = 1;
+        this.specCurrent = 0;
+        this.id = this.$route.query.id;
+        this.getData();
+      }
     },
     methods: {
       async handleBuy() {

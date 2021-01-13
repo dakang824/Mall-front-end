@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:下单页面
  * @Date: 2020-10-25 09:09:40
- * @LastEditTime: 2021-01-12 22:55:39
+ * @LastEditTime: 2021-01-13 20:42:17
  */
 import { unifityOrder } from "@/api/pay";
 import sha1 from "sha1";

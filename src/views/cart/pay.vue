@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2021-01-12 22:54:26
+ * @LastEditTime: 2021-01-13 20:53:08
 -->
 <template>
   <div class="pay">
@@ -148,9 +148,13 @@
           item.pay_type = this.postData.pay_type;
         });
         this.postData.total_amount = filters.getDecimal(
-          this.postData.total_amount
+          this.postData.total_amount,
+          2
         );
-        this.postData.pay_amount = filters.getDecimal(this.postData.pay_amount);
+        this.postData.pay_amount = filters.getDecimal(
+          this.postData.pay_amount,
+          2
+        );
         const {
           userId = this.userInfo.id,
           total_amount,
