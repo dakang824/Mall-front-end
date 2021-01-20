@@ -17,7 +17,7 @@
     </div>
     <el-container>
       <el-aside width="300px">
-        <a :href="model.ad.url">
+        <a :href="model.ad.url ? model.ad.url : 'javascript:void(0)'">
           <el-image
             :src="model.ad.pic_path | imgBaseUrl"
             fit="scale-down"

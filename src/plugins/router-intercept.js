@@ -2,9 +2,9 @@
  * @Author: yukang 1172248038@qq.com
  * @Description:路由守卫
  * @Date: 2020-12-26 14:50:46
- * @LastEditTime: 2020-12-26 15:09:44
+ * @LastEditTime: 2021-01-20 17:37:19
  */
-
+import getPageTitle from "@/utils/pageTitle";
 import router from "@/router";
 import store from "@/store";
 import { routesWhiteList } from "@/config";
@@ -20,4 +20,5 @@ router.beforeResolve(async (to, from, next) => {
       next(`/login?redirect=${to.path}`);
     }
   }
+  document.title = getPageTitle(to.meta.title);
 });

@@ -152,21 +152,25 @@
     },
     methods: {
       async submitForm(formName) {
-        this.loading = true;
         this.$store.commit("user/resetUserInfo");
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
+            this.loading = true;
             const form = JSON.parse(JSON.stringify(this.form));
             form.pwd = this.$utils.md5(form.pwd);
-            const res = await this.$store.dispatch("user/getLoginInfo", form);
-            if (res.code === 200) {
-              const routerPath = this.$route.query.url || "/";
-              this.$router.replace(routerPath).catch(() => {});
+            try {
+              const res = await this.$store.dispatch("user/getLoginInfo", form);
+              if (res.code === 200) {
+                const routerPath = this.$route.query.url || "/";
+                this.$router.replace(routerPath).catch(() => {});
+              }
+              this.loading = false;
+            } catch (error) {
+              this.loading = false;
             }
           } else {
             return false;
           }
-          this.loading = false;
         });
       },
       refreshCode() {
