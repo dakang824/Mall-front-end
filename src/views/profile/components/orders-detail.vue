@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 订单详情
  * @Date: 2020-10-31 15:51:17
- * @LastEditTime: 2020-12-26 18:55:20
+ * @LastEditTime: 2021-03-05 23:13:05
 -->
 <template>
   <div class="orders-detail">
@@ -66,7 +66,7 @@
               <div class="col">
                 <div :style="{ width: title[0].width + 'px' }" class="name">
                   <el-image :src="item.item_pic | imgBaseUrl"></el-image>
-                  <span>四川正宗家用烧菜烧豆腐</span>
+                  <span>{{ item.name }}</span>
                 </div>
               </div>
 

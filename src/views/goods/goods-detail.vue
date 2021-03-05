@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 商品详情
  * @Date: 2020-10-02 18:39:59
- * @LastEditTime: 2021-01-13 20:32:43
+ * @LastEditTime: 2021-03-05 23:14:13
 -->
 <!-- 商品详情 -->
 <template>
@@ -23,7 +23,7 @@
               <span v-if="type == 4">
                 <i>{{ product.summary }}</i>
               </span>
-              <span v-else>四川正宗家用烧菜烧豆腐</span>
+              <span v-else>{{ product.summary }}</span>
             </div>
             <div class="info__money">
               <!-- <p>
