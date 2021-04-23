@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 确认订单
  * @Date: 2020-10-02 22:32:19
- * @LastEditTime: 2021-01-13 20:53:08
+ * @LastEditTime: 2021-04-23 21:55:47
 -->
 <template>
   <div class="pay">
@@ -147,14 +147,14 @@
         this.postData.orders.forEach((item) => {
           item.pay_type = this.postData.pay_type;
         });
-        this.postData.total_amount = filters.getDecimal(
-          this.postData.total_amount,
-          2
-        );
-        this.postData.pay_amount = filters.getDecimal(
-          this.postData.pay_amount,
-          2
-        );
+
+        const postData = JSON.parse(JSON.stringify(this.postData));
+        // 金额转为分
+        postData.total_amount =
+          filters.getDecimal(this.postData.total_amount, 2) * 100;
+        postData.pay_amount =
+          filters.getDecimal(this.postData.pay_amount, 2) * 100;
+
         const {
           userId = this.userInfo.id,
           total_amount,
@@ -163,36 +163,31 @@
           name,
           mobile,
           orders,
-        } = this.postData;
+        } = postData;
 
         // 生成签名
-        this.postData.sign = await this.$store.dispatch(
-          "pay/generateSignature",
-          {
-            userId,
-            total_amount,
-            pay_amount,
-            pay_type,
-            name,
-            mobile,
-            orders,
-          }
-        );
-        let { data } = await this.$store.dispatch(
-          "pay/unifityOrder",
-          this.postData
-        );
+        postData.sign = await this.$store.dispatch("pay/generateSignature", {
+          userId,
+          total_amount: total_amount,
+          pay_amount: pay_amount,
+          pay_type,
+          name,
+          mobile,
+          orders,
+        });
+        let { data } = await this.$store.dispatch("pay/unifityOrder", postData);
 
         if (data.pay_params && data.pay_params.qr_code) {
           this.showPayDialog = true;
-          data.pay_type = this.postData.pay_type;
+          data.pay_type = postData.pay_type;
           this.$refs.qrCode.show(data);
           this.payData = data;
           return;
         }
-        this.handleSuccess(true);
+        this.handleSuccess(true, postData);
       },
-      async handleSuccess(e) {
+      async handleSuccess(e, postData = {}) {
+        this.postData = { ...this.postData, ...postData };
         // 更新用户余额
         await this.$store.dispatch("profileWelcome/getMyInfo", {});
 

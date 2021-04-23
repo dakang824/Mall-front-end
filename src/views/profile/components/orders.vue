@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 我的订单
  * @Date: 2020-10-29 09:56:44
- * @LastEditTime: 2021-01-13 21:09:32
+ * @LastEditTime: 2021-04-23 22:29:57
 -->
 <template>
   <div v-loading="listLoading" class="orders el-card">
@@ -184,7 +184,7 @@
                       <el-button
                         type="primary"
                         size="small"
-                        @click="handleChecking(ite)"
+                        @click="confirmDialog(ite)"
                       >
                         立即付款
                       </el-button>
@@ -462,7 +462,21 @@
 
         this.result(msg);
       },
+      confirmDialog(e) {
+        this.$confirm("确认是否继续付款?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        })
+          .then(() => {
+            this.handleChecking(e);
+          })
+          .catch(() => {});
+      },
       async handleChecking(e) {
+        const postData = JSON.parse(JSON.stringify(e));
+        postData.total_amount = postData.total_amount * 100;
+        postData.pay_amount = postData.pay_amount * 100;
         const {
           id: order_id,
           trade_no,
@@ -470,11 +484,11 @@
           total_amount,
           pay_amount,
           pay_type,
-        } = e;
+        } = postData;
         const sign = await this.$store.dispatch("pay/generateSignature", {
           userId: this.userInfo.id,
-          total_amount: filters.getDecimal(total_amount),
-          pay_amount: filters.getDecimal(pay_amount),
+          total_amount: total_amount,
+          pay_amount: pay_amount,
           pay_type,
         });
         this.payMoney = {

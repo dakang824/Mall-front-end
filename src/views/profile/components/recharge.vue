@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 充值页面
  * @Date: 2020-10-28 23:21:12
- * @LastEditTime: 2020-12-26 14:09:08
+ * @LastEditTime: 2021-04-23 22:37:11
 -->
 <template>
   <div class="recharge el-card">
@@ -81,11 +81,14 @@
               "pay/generateSignature",
               {
                 userId: this.userInfo.id,
-                amount: filters.getDecimal(this.params.amount),
+                amount: this.params.amount * 100,
                 pay_type: this.params.pay_type,
               }
             );
-            const { data } = await unifityRechargeOrder(this.params);
+            const { data } = await unifityRechargeOrder({
+              ...this.params,
+              amount: this.params.amount * 100,
+            });
             if ("qr_code" in data.pay_params && data.pay_params.qr_code) {
               this.show = true;
               data.pay_type = this.params.pay_type;

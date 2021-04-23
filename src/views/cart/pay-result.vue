@@ -2,7 +2,7 @@
  * @Author: yukang 1172248038@qq.com
  * @Description: 支付状态页
  * @Date: 2020-09-28 21:12:51
- * @LastEditTime: 2020-12-26 16:51:26
+ * @LastEditTime: 2021-04-23 22:19:07
 -->
 <!--  -->
 <template>
@@ -162,18 +162,23 @@
       async handleClick() {
         const { pay_no } = this.params.payData;
 
+        const postData = JSON.parse(JSON.stringify(this.params.postData));
+
+        postData.total_amount = postData.total_amount * 100;
+        postData.pay_amount = postData.pay_amount * 100;
+
         const {
           pay_type,
           discount,
           total_amount,
           pay_amount,
           pay_pwd,
-        } = this.params.postData;
+        } = postData;
 
         const sign = await this.$store.dispatch("pay/generateSignature", {
           userId: this.userInfo.id,
-          total_amount: filters.getDecimal(total_amount),
-          pay_amount: filters.getDecimal(pay_amount),
+          total_amount: total_amount,
+          pay_amount: pay_amount,
           pay_type,
         });
 
